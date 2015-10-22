@@ -2,12 +2,51 @@
 
 \subsection{Goals of the thesis}
 
-We describe that we wish to compare CE and CMA-ES.
+The aim of this thesis is to compare the performance 
+difference, if any exists, between the to highly regarded 
+stochastic optimization algorithms CMA-ES \citep{hansen2011} and Cross-Entropy
+\citep{cetut:14}.
+The two algorithms is in this case each used to optimize 
+a policy for playing the classic video game Tetris. As both CE and
+CMA-ES are regarded as state-of-the-art stochastic optimizations, and that
+their nature is quite similar, the experiment yields some more information
+on weather one outperforms the other. Comparing the algorithms in performance
+when playing Tetris is chosen for several reasons. One of the reasons for 
+choosing Tetris is that Tetris as stochastic by nature. Following a certin 
+policy when playing Tetris, one cannot predict how the game progresses. Another
+reason why Tetris is a suitable choice is the very large state space of the game.
+approaching the problem with Dynamic Programming, and exhaustively 
+determine the expected value of each actions in the game is simply far too
+large for modern computers to process.
+
+
 
 \subsection{Scope}
 
-We aim to compare just CMA-ES vs. CE thoroughly in few 
-configurations.
+When using the mentioned optimization algorithms,
+is encoded as a real-valued optimization. This is necessary
+because the CE and CMA-ES both evaluate the performance of solutions
+as the value of a fitness function $f : \mathbb{R}^n \rightarrow \mathbb{R}$.
+thus for the experiment, to thoroughly compare the two optimization algorithms,
+only few policy/agent encoding are chosen. The ones chosen are
+what is also scribed in \citep{scherrer2015}. In this case, 
+when the agent takes an action, all possible actions on the current 
+board are evaluated and the best action is chosen. This means that the agent 
+is exposed to a state of the board, and a method of deciding how desirable 
+this state is, and thereby choose actions that yield the best states. 
+Deciding which states are the best, usually a function 
+that yields a value based on features of the board 
+(such as column hight, gaps or holes in the board). The optimization process
+is then to adjust weight constant in the feature function such that 
+a policy is expressed as $\theta \in \mathbb{R}^n$ with feature 
+function $ f( \cdot ) = \phi ( \cdot )^{T}\theta$ as
+described in \citep{scherrer2015}.\\
+
+Aiming to only thoroughly experiment with the feature function excludes 
+exploration of other policies/agents. Another candidate for agent were a neural
+network as have proven effective in other reinforcement learning 
+problems for games.
+
 
 \subsection{Limitations}
 
