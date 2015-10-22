@@ -144,7 +144,7 @@ include_directories(mdptetris/include)
 add_executable(ExampleProject HelloWorld.cpp)
 target_link_libraries(ExampleProject ${SHARK_LIBRARIES})
 target_link_libraries(ExampleProject tetris)
-target_link_libraries(ExampleProject gsl)
+target_link_libraries(ExampleProject gsl -lgslcblas)
 
 
 
