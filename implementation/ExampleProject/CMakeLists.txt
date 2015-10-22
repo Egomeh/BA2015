@@ -136,15 +136,25 @@ AUX_SOURCE_DIRECTORY(mdptetris/include MDPTETRIS_INCLUDE)
 add_library(tetris ${MDPTETRIS_SRC})
 target_link_libraries(tetris ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} )
 
-MESSAGE(STATUS "glut lib " ${GLUT_INCLUDE_DIRS} " end")
+add_library(tetris_objective_fun MDPTetris.cpp MDPTetris.h)
+target_link_libraries(tetris_objective_fun ${SHARK_LIBRARIES})
+target_link_libraries(tetris_objective_fun tetris)
 
 include_directories(mdptetris/include)
+
+SET(MDPTETRIS_DATA_FOLDER ${CMAKE_CURRENT_SOURCE_DIR}/data)
+
+configure_file(cconfig.h.in cconfig.h @ONLY)
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+
 
 # Executable
 add_executable(ExampleProject HelloWorld.cpp)
 target_link_libraries(ExampleProject ${SHARK_LIBRARIES})
 target_link_libraries(ExampleProject tetris)
 target_link_libraries(ExampleProject gsl -lgslcblas)
+target_link_libraries(ExampleProject tetris_objective_fun)
 
 
 
