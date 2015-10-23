@@ -56,7 +56,46 @@ int main( int argc, char ** argv )
 {
 
 
+    /* init this at first, just to make sure! */
+    /* Initialize the gls random generator (42 is arbitrary) */
+    int seed;
+    seed = (int) time(0);
+    initialize_random_generator( seed );
+
+    /* File path for the starting policy
+     * NOTE: this can be done much nicer with
+     * boost!
+     * */
+    std::string start_policy = std::string(MDPTETRIS_DATA_FOLDER)
+                                + std::string("/starting_policy00.dat");
+
+    /* File path for the pieces data file, see note above. */
+    std::string piece_file = std::string(MDPTETRIS_DATA_FOLDER)
+                               + std::string("/pieces4.dat");
+
     shark::CMA cma;
+
+    MDPTetris objFun(10,20, 10, start_policy, piece_file);
+
+    cma.init(objFun);
+    cma.setSigma(0.1);
+
+
+    int t = 1;
+    double bestScore = 0.0;
+
+
+    while (cma.solution().value > 0.0 && t < 1000)
+    {
+        cma.step(objFun);
+        if (10000000.0 - cma.solution().value > bestScore)
+        {
+            bestScore = 10000000.0 - cma.solution().value;
+            std::cout << "Best score: " << bestScore << std::endl;
+        }
+    }
+
+    return 0;
 
     std::cout << MDPTETRIS_DATA_FOLDER << std::endl;
 
@@ -71,11 +110,6 @@ int main( int argc, char ** argv )
     /* number of games to play */
     int nb_games;
     nb_games = 1;
-
-    /* Initialize the gls random generator (42 is arbitrary) */
-    int seed;
-    seed = (int) time(0);
-    initialize_random_generator( seed );
 
     /* The filename of the feature file */
     std::string feature_file_name;

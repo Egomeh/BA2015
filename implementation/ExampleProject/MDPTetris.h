@@ -8,6 +8,7 @@
 #include <iostream>
 #include <typeinfo>
 #include <string>
+#include <limits>
 
 #include <shark/ObjectiveFunctions/AbstractObjectiveFunction.h>
 
@@ -32,6 +33,16 @@ public:
     MDPTetris(int board_width, int board_height, int nb_games,
               std::string feature_file, std::string piece_file);
 
+    /* Propoase a starting point, so far, just 0,0,...,0 */
+    SearchPointType proposeStartingPoint() const;
+
+    /* Number of variables, which is equal to number
+     * of dimensions from the feature policy */
+    std::size_t numberOfVariables() const;
+
+    /* The function for evaluating a single feature policy */
+    ResultType eval(const SearchPointType &input) const;
+
 private:
 
     /* The struct from the mdptetris
@@ -39,13 +50,13 @@ private:
      */
     FeaturePolicy m_featurePolicy;
 
-    /* The struct that holds info about the
-     * tetris game
-     */
-    Game *tetris_game;
-
     //! Degrees of freedom
     std::size_t m_dimensions;
+
+    /* The file that holds the pieces' information */
+    std::string m_pieceFile;
+
+    int m_boardWidth, m_boardHeight, m_nbGames;
 
 };
 
