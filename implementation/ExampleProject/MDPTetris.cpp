@@ -5,14 +5,14 @@
 #include "MDPTetris.h"
 
 MDPTetris::MDPTetris(int board_width, int board_height, int nb_games,
-                     std::string feature_file, std::string piece_file) {
+                     Game *game, GamesStatistics * stats, std::string feature_file) {
 
     /* Load the feature policy */
     load_feature_policy(feature_file.c_str(), &m_featurePolicy);
     features_initialize(&m_featurePolicy);
 
     /* Store the location of the piece file */
-    m_pieceFile = piece_file;
+    //m_pieceFile = piece_file;
 
     /* Store board height and width and number of games to play */
     m_boardHeight = board_height;
@@ -28,6 +28,9 @@ MDPTetris::MDPTetris(int board_width, int board_height, int nb_games,
 
     /* Allow proposal of starting point in search space */
     m_features |= CAN_PROPOSE_STARTING_POINT;
+
+    m_game = game;
+    m_stats = stats;
 
 }
 
@@ -61,8 +64,8 @@ double MDPTetris::eval(const SearchPointType &input) const {
     //std::cout << "evaluation on: " << input << std::endl;
 
     /* init a game and statistics object */
-    Game *game = new_game(0, m_boardWidth, m_boardHeight, 0, m_pieceFile.c_str(), NULL);
-    GamesStatistics *stats = games_statistics_new("stat.dat", m_nbGames, NULL);
+    //Game *game = new_game(0, m_boardWidth, m_boardHeight, 0, m_pieceFile.c_str(), NULL);
+    //GamesStatistics *stats = games_statistics_new("stat.dat", m_nbGames, NULL);
 
     FeaturePolicy attemptPolicy = m_featurePolicy;
 
@@ -75,7 +78,7 @@ double MDPTetris::eval(const SearchPointType &input) const {
 
     /* run the game and see the score! */
     double points;
-    points = feature_policy_play_games(&attemptPolicy, m_nbGames, game, stats, 0);
+    points = feature_policy_play_games(&attemptPolicy, m_nbGames, m_game, m_stats, 0);
 
     return 10000000.0 - points;
 }

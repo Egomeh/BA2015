@@ -31,7 +31,7 @@ class MDPTetris : public shark::SingleObjectiveFunction {
 
 public:
     MDPTetris(int board_width, int board_height, int nb_games,
-              std::string feature_file, std::string piece_file);
+              Game *game, GamesStatistics *stats, std::string featureFile);
 
     /* Propoase a starting point, so far, just 0,0,...,0 */
     SearchPointType proposeStartingPoint() const;
@@ -57,6 +57,12 @@ private:
     std::string m_pieceFile;
 
     int m_boardWidth, m_boardHeight, m_nbGames;
+
+    /* Game object to use for evaluation */
+    Game *m_game;
+
+    /* Statistics object to store game stats */
+    GamesStatistics *m_stats;
 
 };
 

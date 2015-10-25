@@ -71,18 +71,24 @@ int main( int argc, char ** argv )
 
     /* File path for the pieces data file, see note above. */
     std::string piece_file = std::string(MDPTETRIS_DATA_FOLDER)
-                               + std::string("/pieces4.dat");
+                               + std::string("/STpieces4.dat");
+
+    Game *game = new_game(0, 10, 20, 0, piece_file.c_str(), NULL);
+    GamesStatistics *stats = games_statistics_new("stat.dat", 10, NULL);
+
 
     shark::CMA cma;
 
-    MDPTetris objFun(10,20, 10, start_policy, piece_file);
+    MDPTetris objFun(10,20, 10, game, stats, start_policy);
 
     cma.init(objFun);
+
     cma.setSigma(0.1);
 
 
     int t = 1;
     double bestScore = 0.0;
+
 
 
     while (cma.solution().value > 0.0 && t < 1000)
@@ -95,60 +101,6 @@ int main( int argc, char ** argv )
         }
     }
 
-    return 0;
-
-    std::cout << MDPTETRIS_DATA_FOLDER << std::endl;
-
-    shark::Shark::info( std::cout );
-
-    /* Board dimensions */
-    int board_width;
-    board_width = 10;
-    int board_height;
-    board_height = 20;
-
-    /* number of games to play */
-    int nb_games;
-    nb_games = 1;
-
-    /* The filename of the feature file */
-    std::string feature_file_name;
-    feature_file_name = std::string(MDPTETRIS_DATA_FOLDER) +
-                                        std::string("/features/bertsekas_initial.dat");
-
-    /* filename to load the piece information */
-    std::string piece_file_str;
-    piece_file_str = std::string(MDPTETRIS_DATA_FOLDER) +
-                                       std::string("/pieces4.dat");
-
-    /* The filename of the statistics file */
-    std::string statistics_file_name;
-    statistics_file_name = "stat.dat";
-
-    /* The struct that holds the policy */
-    FeaturePolicy feature_policy;
-
-    /* The game object/struct */
-    Game            *game;
-
-    /* The struct holding stats about the game */
-    GamesStatistics *stats;
-
-    /* Load in the sample feature policy from pre-made file */
-    load_feature_policy(feature_file_name.c_str(), &feature_policy);
-    features_initialize(&feature_policy);
-
-    /* Init the game and game statistics */
-    game = new_game(0, board_width, board_height, 0, piece_file_str.c_str(), NULL);
-    stats = games_statistics_new(statistics_file_name.c_str(), nb_games, NULL);
-
-
-    /* run the game and see the score! */
-    double points;
-    points = feature_policy_play_games(&feature_policy, nb_games, game, stats, 0);
-
-    /* Print the resulting score */
-    std::cout << "seed: " << seed << ", " << "points: " << points << std::endl;
 }
 
 
