@@ -66,12 +66,10 @@ int main( int argc, char ** argv )
      * NOTE: this can be done much nicer with
      * boost!
      * */
-    std::string start_policy = std::string(MDPTETRIS_DATA_FOLDER)
-                                + std::string("/starting_policy00.dat");
+    std::string start_policy = MDPTETRIS_DATA_PATH("starting_policy00.dat");
 
     /* File path for the pieces data file, see note above. */
-    std::string piece_file = std::string(MDPTETRIS_DATA_FOLDER)
-                               + std::string("/STpieces4.dat");
+    std::string piece_file = MDPTETRIS_DATA_PATH("STpieces4.dat");
 
     Game *game = new_game(0, 10, 20, 0, piece_file.c_str(), NULL);
     GamesStatistics *stats = games_statistics_new("stat.dat", 10, NULL);
@@ -83,17 +81,16 @@ int main( int argc, char ** argv )
 
     cma.init(objFun);
 
-    cma.setSigma(0.1);
+    cma.setSigma(10);
 
 
     int t = 1;
     double bestScore = 0.0;
-
-
-
-    while (cma.solution().value > 0.0 && t < 1000)
+    
+    while (cma.solution().value > 0.0 && t < 50000)
     {
         cma.step(objFun);
+        t += cma.lambda();
         if (10000000.0 - cma.solution().value > bestScore)
         {
             bestScore = 10000000.0 - cma.solution().value;
