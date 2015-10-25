@@ -94,7 +94,8 @@ int main( int argc, char ** argv )
         if (10000000.0 - cma.solution().value > bestScore)
         {
             bestScore = 10000000.0 - cma.solution().value;
-            std::cout << "Best score: " << bestScore << std::endl;
+            _DUMP(bestScore);
+            _DUMP(t);
         }
     }
 

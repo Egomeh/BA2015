@@ -2,8 +2,15 @@
 
 \subsection{Setup}
 
-Enviroment, software, how the experiments are run.
-Implementation of the experiment.
+In the Tetris emulation, the agent playing is 
+very much similar to the one described in \citep{scherrer2015}.
+In this setup, the tetris game has a state consisting of the 
+board layout $b$ and the current piece $p$ controlled by the agent.
+The tetris emulator \cite{mdptetris} exposes the agent to all 
+possible locations to place the piece. The agent then uses the 
+feature function \ref{section:scope} to evaluate the immediate
+reward each move would yield, and finally chooses the one offering 
+the highest value.
 
 \subsection{Results}
 

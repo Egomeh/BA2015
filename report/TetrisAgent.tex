@@ -2,13 +2,30 @@
 
 \subsection{The game}
 
-How the game plays and why it seems suitable for 
-comparing CA and CMA-ES?
 
-\subsection{The agent}
+\comment{Might merge with next section?}
 
-How will our agent behave, and what will our optimizers impact 
-in the agent. Also, will we have multiple 'types' of agents?
+Tetris is chosen as it should be a game that can be formulated as 
+a real-valued problem as further described in \ref{section:theagent}.
+
+
+
+\subsection{The agent \label{section:theagent}}
+
+\comment{Formalize this. perhaps introduce relation to regular RL problems?}
+
+In the experiment, the policy that the agent is following must be 
+expressed as a real-valued vector. This is done by encoding the 
+agents behaviour as a feature policy as documented in \citep{mdptetris}.
+Such a feature policy holds a set of features that the agent will be aware
+of, as well as a weight that describes how each feature affects the 
+immediate reward of the possible actions. The features each express
+properties of the board state, such as how many holes the board holds
+or what the difference in column heights are. The weights associated 
+to each feature describes how much reward (often negative) each feature
+should yield. The full list of features available to the emulator is found 
+at \hyperref[]{http://mdptetris.gforge.inria.fr/doc/feature\_\_functions\_8h.html}.
+
 
 \subsection{Comparison}
 
