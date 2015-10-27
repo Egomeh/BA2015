@@ -34,23 +34,15 @@
 
 #include <shark/Core/Shark.h>
 #include <shark/Algorithms/DirectSearch/CMA.h>
+#include <shark/ObjectiveFunctions/AbstractObjectiveFunction.h>
 #include <iostream>
 #include <string>
 #include <ctime>
 
-#include "MDPTetris.h"
-
-extern "C"
-{
-#include "feature_functions.h"
-#include "feature_policy.h"
-#include "games_statistics.h"
-#include "game.h"
-#include "cmaes_interface.h"
-#include "common_parameters.h"
-#include "random.h"
 #include "cconfig.h"
-}
+#include "MDPTetris.h"
+#include "CrossEntropy.h"
+
 
 int main( int argc, char ** argv ) 
 {
@@ -74,26 +66,25 @@ int main( int argc, char ** argv )
     Game *game = new_game(0, 10, 20, 0, piece_file.c_str(), NULL);
     GamesStatistics *stats = games_statistics_new("stat.dat", 10, NULL);
 
-
-    shark::CMA cma;
+    shark::CMA optimizer;
 
     MDPTetris objFun(10,20, 10, game, stats, start_policy);
 
-    cma.init(objFun);
+    optimizer.init(objFun);
 
-    cma.setSigma(10);
+    //optimizer.setSigma(10);
 
 
     int t = 1;
     double bestScore = 0.0;
     
-    while (cma.solution().value > 0.0 && t < 50000)
+    while (optimizer.solution().value > 0.0 && t < 5000)
     {
-        cma.step(objFun);
-        t += cma.lambda();
-        if (10000000.0 - cma.solution().value > bestScore)
+        optimizer.step(objFun);
+        t += optimizer.lambda();
+        if (10000000.0 - optimizer.solution().value > bestScore)
         {
-            bestScore = 10000000.0 - cma.solution().value;
+            bestScore = 10000000.0 - optimizer.solution().value;
             _DUMP(bestScore);
             _DUMP(t);
         }

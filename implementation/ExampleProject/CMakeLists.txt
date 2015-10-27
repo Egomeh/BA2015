@@ -130,6 +130,13 @@ endif(NOT OPENGL_FOUND)
 find_package(Shark REQUIRED)
 include(${SHARK_USE_FILE})
 
+SET(CE_SRC CrossEntropy/CrossEntropy.cpp)
+SET(CE_INCLUDE CrossEntropy/CrossEntropy.h)
+add_library(crossentropy ${CE_SRC} ${CE_INCLUDE})
+target_link_libraries(crossentropy ${SHARK_LIBRARIES})
+
+include_directories(CrossEntropy)
+
 AUX_SOURCE_DIRECTORY(mdptetris/src MDPTETRIS_SRC) 
 AUX_SOURCE_DIRECTORY(mdptetris/include MDPTETRIS_INCLUDE) 
 
@@ -155,6 +162,7 @@ target_link_libraries(ExampleProject ${SHARK_LIBRARIES})
 target_link_libraries(ExampleProject tetris)
 target_link_libraries(ExampleProject gsl -lgslcblas)
 target_link_libraries(ExampleProject tetris_objective_fun)
+target_link_libraries(ExampleProject crossentropy)
 
 
 
