@@ -47,6 +47,7 @@
 #define OPT_START_POL_FILE     "-startPolicy"
 #define OPT_PIECE_FILE         "-pieceFile"
 #define OPT_OPTIMIZER          "-optimizer"
+#define OPT_INITIAL_SIGMA      "-sigma"
 
 void useCMA(std::string startPolicyFile,
             std::string piecesFile,
@@ -136,6 +137,8 @@ void useCE(std::string startPolicyFile,
 
     ce.init(objFun);
 
+    ce.setSigma(initialSigma);
+
     // Still need to set the initial sigma vector
 
 
@@ -215,12 +218,18 @@ int main( int argc, char ** argv )
         piece_file = MDPTETRIS_DATA_PATH("STpieces4.dat");
     }
 
+    double initialSigma = 1.0;
+    if (options.count(OPT_INITIAL_SIGMA) == 1)
+    {
+        initialSigma = atof ( options[OPT_INITIAL_SIGMA].c_str() );
+    }
+
     std::string statFile = "stat.dat";
 
     unsigned int nbGames = 10;
     unsigned int boardWidth = 10;
     unsigned int boardHeight = 20;
-    double initialSigma = 1.0;
+
     unsigned int maxIterations = 5000;
 
     if ( options.count(OPT_OPTIMIZER) == 1 )
