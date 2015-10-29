@@ -93,7 +93,7 @@ CrossEntropy::CrossEntropy()
 :m_recombinationType( SUPERLINEAR )
 , m_sigma( 0 )
 , m_zeta( 0 )
-, m_noise( 0 )
+, m_samplingNoise( 0 )
 , m_lowerBound( 1E-20)
 , m_counter( 0 ) {
 	m_features |= REQUIRES_VALUE;
@@ -221,7 +221,7 @@ void CrossEntropy::init(
 void CrossEntropy::updateStrategyParameters( const std::vector<Individual<RealVector, double, RealVector> > & offspring ) {
 	RealVector m = weightedSum( offspring, m_weights, PointExtractor() );
 
-	//mean update
+	// mean update
 	m_mean = m;
 
 	// Sigma update
@@ -241,7 +241,19 @@ void CrossEntropy::updateStrategyParameters( const std::vector<Individual<RealVe
         m_sigma(j) = std::sqrt(innerSum);
 	}
 
-    std::cout << m_mean << std::endl;
+    // Update covariance matrix of distribution
+    // such that it becomes diag(sigma)
+    RealMatrix & updateCMatrix = m_mutationDistribution.covarianceMatrix();
+    for (int i = 0; i < updateCMatrix.size1(); i++)
+    {
+        updateCMatrix(i,i) = m_sigma(i);
+    }
+
+
+	m_mutationDistribution.update();
+
+    //std::cout << m_mutationDistribution.covarianceMatrix() << std::endl;
+    //std::cout << m_mean << std::endl;
 
 }
 
@@ -256,7 +268,7 @@ void CrossEntropy::step(ObjectiveFunctionType const& function){
 	for( unsigned int i = 0; i < offspring.size(); i++ ) {
 		MultiVariateNormalDistribution::result_type sample = m_mutationDistribution();
 		offspring[i].chromosome() = sample.second;
-		offspring[i].searchPoint() = m_mean + m_sigma * sample.first;
+		offspring[i].searchPoint() = m_mean + sample.first;
 	}
 	penalizingEvaluator( function, offspring.begin(), offspring.end() );
 

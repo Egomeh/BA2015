@@ -71,6 +71,14 @@ namespace shark {
 		};
 
 		/**
+		 * \brief Mdoels the noise when sampling
+		 */
+		enum SamplingNoise {
+			UNIFORM = 0,
+			NORMAL = 1
+		};
+
+		/**
 		* \brief Default c'tor.
 		*/
 		SHARK_EXPORT_SYMBOL CrossEntropy();
@@ -212,7 +220,7 @@ namespace shark {
 		}
 		
 		/**
-		 * \brief Returns a mutabl rference to the size of the parent population \f$\mu\f$.
+		 * \brief Returns a mutable reference to the size of the parent population \f$\mu\f$.
 		 */
 		unsigned int& mu(){
 			return m_mu;
@@ -266,10 +274,11 @@ namespace shark {
 		unsigned int m_lambda; ///< The size of the offspring population, needs to be larger than mu.
 
 		double m_zeta;      // Proportion of offspring to select
-		double m_noise;     // Noise to add diversity to sample parametres
+		double m_samplingNoise;     // Noise to add diversity to sample parametres
 		RealVector m_sigma; // Variace for sample parameters
 
 		RecombinationType m_recombinationType; ///< Stores the recombination type.
+		SamplingNoise m_samplingNoiseType; ///< Stores the type of sampling noise.
 
 
 		/*
