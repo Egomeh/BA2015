@@ -144,6 +144,13 @@ namespace shark {
 		*/
 		SHARK_EXPORT_SYMBOL void step(ObjectiveFunctionType const& function);
 
+
+
+        /**
+         * \brief Update the multivariateNormalDistributiopon accoring to internal sigma
+         */
+        void updateDistribution();
+
 		/** \brief Accesses the current step size. */
 		RealVector sigma() const {
 			return m_sigma;
@@ -154,6 +161,23 @@ namespace shark {
 			m_sigma = sigma;
 		}
 
+        /** \brief set all sigma values with single double */
+        void setSigma(double sigma){
+            for(int i = 0; i < m_sigma.size(); i++)
+                m_sigma(i) = sigma;
+            updateDistribution();
+
+        }
+
+        /** \brief Access the type of noise used when sampling offspring */
+        SamplingNoise samplingNoiseType(){
+            return m_samplingNoiseType;
+        }
+
+        /** \brief Set the type of noise to when sampling ofspring */
+        void setSamplingNoisetype( SamplingNoise samplingNoiseType ) {
+            m_samplingNoiseType = samplingNoiseType;
+        }
 
 		/** \brief Accesses the current population mean. */
 		RealVector const& mean() const {
@@ -225,8 +249,24 @@ namespace shark {
 		unsigned int& mu(){
 			return m_mu;
 		}
-		
-		/**
+
+        /**
+		 * \brief Returns the proportion of offspring to use as parents \f$\Zeta\f$.
+		 */
+        double zeta() const {
+            return m_zeta;
+        }
+
+        /**
+		 * \brief Returns a mutable reference to the proportion of offspring to use as parents \f$\Zeta\f$.
+		 */
+        double& zeta(){
+            return m_zeta;
+        }
+
+
+
+        /**
 		 * \brief Returns a immutable reference to the size of the offspring population \f$\mu\f$.
 		 */
 		unsigned int lambda()const{
@@ -274,7 +314,7 @@ namespace shark {
 		unsigned int m_lambda; ///< The size of the offspring population, needs to be larger than mu.
 
 		double m_zeta;      // Proportion of offspring to select
-		double m_samplingNoise;     // Noise to add diversity to sample parametres
+		double m_samplingNoise;     // Noise to add diversity to sample parametre;
 		RealVector m_sigma; // Variace for sample parameters
 
 		RecombinationType m_recombinationType; ///< Stores the recombination type.

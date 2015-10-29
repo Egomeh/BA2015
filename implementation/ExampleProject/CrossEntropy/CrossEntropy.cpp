@@ -94,6 +94,7 @@ CrossEntropy::CrossEntropy()
 , m_sigma( 0 )
 , m_zeta( 0 )
 , m_samplingNoise( 0 )
+, m_samplingNoiseType( UNIFORM )
 , m_lowerBound( 1E-20)
 , m_counter( 0 ) {
 	m_features |= REQUIRES_VALUE;
@@ -241,13 +242,7 @@ void CrossEntropy::updateStrategyParameters( const std::vector<Individual<RealVe
         m_sigma(j) = std::sqrt(innerSum);
 	}
 
-    // Update covariance matrix of distribution
-    // such that it becomes diag(sigma)
-    RealMatrix & updateCMatrix = m_mutationDistribution.covarianceMatrix();
-    for (int i = 0; i < updateCMatrix.size1(); i++)
-    {
-        updateCMatrix(i,i) = m_sigma(i);
-    }
+    updateDistribution();
 
 
 	m_mutationDistribution.update();
@@ -291,5 +286,13 @@ void CrossEntropy::init(ObjectiveFunctionType& function ){
 }
 
 
-
-
+void CrossEntropy::updateDistribution() {
+	// Update covariance matrix of distribution
+	// such that it becomes diag(sigma)
+	RealMatrix & updateCMatrix = m_mutationDistribution.covarianceMatrix();
+	for (int i = 0; i < updateCMatrix.size1(); i++)
+	{
+		updateCMatrix(i,i) = m_sigma(i);
+	}
+	m_mutationDistribution.update();
+}
