@@ -71,6 +71,7 @@ void useCMA(std::string startPolicyFile,
     out << "MaxIterations      : " << maxIterations << std::endl;
 
     initialize_random_generator( randomSeed );
+    shark::Rng::seed( randomSeed );
     shark::CMA cma;
 
     Game *game = new_game(0, 10, 20, 0, piecesFile.c_str(), NULL);
@@ -125,6 +126,7 @@ void useCE(std::string startPolicyFile,
     out << "MaxIterations      : " << maxIterations << std::endl;
 
     initialize_random_generator( randomSeed );
+    shark::Rng::seed( randomSeed );
     shark::CrossEntropy ce;
 
     Game *game = new_game(0, 10, 20, 0, piecesFile.c_str(), NULL);
