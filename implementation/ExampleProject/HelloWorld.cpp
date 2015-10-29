@@ -43,51 +43,221 @@
 #include "MDPTetris.h"
 #include "CrossEntropy.h"
 
+#define OPT_SEED               "-seed"
+#define OPT_START_POL_FILE     "-startPolicy"
+#define OPT_PIECE_FILE         "-pieceFile"
+#define OPT_OPTIMIZER          "-optimizer"
 
-int main( int argc, char ** argv ) 
+void useCMA(std::string startPolicyFile,
+            std::string piecesFile,
+            std::string statsFile,
+            unsigned int nbGames,
+            unsigned int boardWidth,
+            unsigned int boardHeight,
+            int randomSeed,
+            double initialSigma,
+            unsigned int maxIterations,
+            std::ostream & out)
 {
+    out << "Running CMA-ES with following configurations" << std::endl;
+    out << "Start policy       : " << startPolicyFile << std::endl;
+    out << "Pieces             : " << piecesFile << std::endl;
+    out << "Stats file         : " << statsFile << std::endl;
+    out << "Game evaluatioons  : " << nbGames << std::endl;
+    out << "Game board with    : " << boardWidth << std::endl;
+    out << "Game board height  : " << boardHeight << std::endl;
+    out << "Random seed        : " << randomSeed << std::endl;
+    out << "initialSigma       : " << initialSigma << std::endl;
+    out << "MaxIterations      : " << maxIterations << std::endl;
 
+    initialize_random_generator( randomSeed );
+    shark::CMA cma;
 
-    /* init this at first, just to make sure! */
-    /* Initialize the gls random generator (42 is arbitrary) */
-    int seed;
-    seed = (int) time(0);
-    initialize_random_generator( seed );
+    Game *game = new_game(0, 10, 20, 0, piecesFile.c_str(), NULL);
+    GamesStatistics *stats = games_statistics_new(statsFile.c_str(), 10, NULL);
 
-    /* File path for the starting policy
-     * NOTE: this can be done much nicer with
-     * boost!
-     * */
-    std::string start_policy = MDPTETRIS_DATA_PATH("starting_policy00.dat");
+    MDPTetris objFun(10,20, 10, game, stats, startPolicyFile);
 
-    /* File path for the pieces data file, see note above. */
-    std::string piece_file = MDPTETRIS_DATA_PATH("STpieces4.dat");
+    cma.init(objFun);
 
-    Game *game = new_game(0, 10, 20, 0, piece_file.c_str(), NULL);
-    GamesStatistics *stats = games_statistics_new("stat.dat", 10, NULL);
-
-    shark::CMA optimizer;
-
-    MDPTetris objFun(10,20, 10, game, stats, start_policy);
-
-    optimizer.init(objFun);
-
-    //optimizer.setSigma(10);
+    cma.setSigma(initialSigma);
 
 
     int t = 1;
     double bestScore = 0.0;
-    
-    while (optimizer.solution().value > 0.0 && t < 5000)
+
+    while (cma.solution().value > 0.0 && t < maxIterations)
     {
-        optimizer.step(objFun);
-        t += optimizer.lambda();
-        if (10000000.0 - optimizer.solution().value > bestScore)
+        cma.step(objFun);
+        t += cma.lambda();
+        if (10000000.0 - cma.solution().value > bestScore)
         {
-            bestScore = 10000000.0 - optimizer.solution().value;
+            bestScore = 10000000.0 - cma.solution().value;
             _DUMP(bestScore);
             _DUMP(t);
         }
+    }
+
+
+}
+
+
+void useCE(std::string startPolicyFile,
+           std::string piecesFile,
+           std::string statsFile,
+           unsigned int nbGames,
+           unsigned int boardWidth,
+           unsigned int boardHeight,
+           int randomSeed,
+           double initialSigma,
+           unsigned int maxIterations,
+           std::ostream & out)
+{
+    out << "Running Cross Entropy with following configurations" << std::endl;
+    out << "Start policy       : " << startPolicyFile << std::endl;
+    out << "Pieces             : " << piecesFile << std::endl;
+    out << "Stats file         : " << statsFile << std::endl;
+    out << "Game evaluatioons  : " << nbGames << std::endl;
+    out << "Game board with    : " << boardWidth << std::endl;
+    out << "Game board height  : " << boardHeight << std::endl;
+    out << "Random seed        : " << randomSeed << std::endl;
+    out << "initialSigma       : " << initialSigma << std::endl;
+    out << "MaxIterations      : " << maxIterations << std::endl;
+
+    initialize_random_generator( randomSeed );
+    shark::CrossEntropy ce;
+
+    Game *game = new_game(0, 10, 20, 0, piecesFile.c_str(), NULL);
+    GamesStatistics *stats = games_statistics_new(statsFile.c_str(), 10, NULL);
+
+    MDPTetris objFun(10,20, 10, game, stats, startPolicyFile);
+
+    ce.init(objFun);
+
+    // Still need to set the initial sigma vector
+
+
+    int t = 1;
+    double bestScore = 0.0;
+
+    while (ce.solution().value > 0.0 && t < maxIterations)
+    {
+        ce.step(objFun);
+        t += ce.lambda();
+        if (10000000.0 - ce.solution().value > bestScore)
+        {
+            bestScore = 10000000.0 - ce.solution().value;
+            _DUMP(bestScore);
+            _DUMP(t);
+        }
+    }
+
+
+}
+
+int main( int argc, char ** argv ) 
+{
+
+    std::map<std::string, std::string> options;
+    for (int i = 1; i < argc; i++)
+    {
+        std::string opt       = argv[i];
+        std::string delimiter = "=";
+
+        size_t del_pos =  opt.find(delimiter);
+        if (del_pos == std::string::npos || del_pos+1 == opt.size())
+        {
+            std::cerr << "Ill posed command line argument: " << argv[i] << std::endl;
+            return 64;
+        }
+
+        std::string key       = opt.substr(0, opt.find(delimiter));
+        std::string value     = opt.substr(opt.find(delimiter)+1, opt.size());
+        options[key] = value;
+        std::cout << "Registering option " << key << " : " << value << std::endl;
+    }
+
+
+    /* Set the random seed for the gsl random generator */
+    int seed;
+    if (options.count(OPT_SEED) == 1)
+    {
+       seed = atoi ( options[OPT_SEED].c_str() );
+    }
+    else
+    {
+        seed = (int) time(0);
+    }
+
+
+    /* Set the initial policy file */
+    std::string start_policy;
+    if (options.count(OPT_START_POL_FILE) == 1)
+    {
+        start_policy = options[OPT_START_POL_FILE];
+    }
+    else
+    {
+        start_policy = MDPTETRIS_DATA_PATH("starting_policy00.dat");
+    }
+
+
+    /* Set the initial policy file */
+    std::string piece_file;
+    if (options.count(OPT_PIECE_FILE) == 1)
+    {
+        piece_file = options[OPT_PIECE_FILE];
+    }
+    else
+    {
+        piece_file = MDPTETRIS_DATA_PATH("STpieces4.dat");
+    }
+
+    std::string statFile = "stat.dat";
+
+    unsigned int nbGames = 10;
+    unsigned int boardWidth = 10;
+    unsigned int boardHeight = 20;
+    double initialSigma = 1.0;
+    unsigned int maxIterations = 5000;
+
+    if ( options.count(OPT_OPTIMIZER) == 1 )
+    {
+        if ( options[OPT_OPTIMIZER].compare("cma") == 0 )
+        {
+            useCMA(
+                    start_policy,
+                    piece_file,
+                    statFile,
+                    nbGames,
+                    boardWidth,
+                    boardHeight,
+                    seed,
+                    initialSigma,
+                    maxIterations,
+                    std::cout
+            );
+        }
+        else if ( options[OPT_OPTIMIZER].compare("ce") == 0 )
+        {
+            useCE(
+                    start_policy,
+                    piece_file,
+                    statFile,
+                    nbGames,
+                    boardWidth,
+                    boardHeight,
+                    seed,
+                    initialSigma,
+                    maxIterations,
+                    std::cout
+            );
+        }
+    }
+    else
+    {
+        std::cerr << "Optimizer not recognized!" << std::endl;
+        return 64;
     }
 
 }
