@@ -95,8 +95,10 @@ void useCMA(std::string startPolicyFile,
         if (10000000.0 - cma.solution().value > bestScore)
         {
             bestScore = 10000000.0 - cma.solution().value;
+            shark::RealVector solution = cma.solution().point;
             _DUMP(bestScore);
             _DUMP(t);
+            _DUMP(solution);
         }
     }
 
@@ -152,8 +154,10 @@ void useCE(std::string startPolicyFile,
         if (10000000.0 - ce.solution().value > bestScore)
         {
             bestScore = 10000000.0 - ce.solution().value;
+            shark::RealVector solution = ce.solution().point;
             _DUMP(bestScore);
             _DUMP(t);
+            _DUMP(solution);
         }
     }
 
