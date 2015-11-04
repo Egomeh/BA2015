@@ -48,10 +48,10 @@
 #define OPT_PIECE_FILE         "-pieceFile"
 #define OPT_OPTIMIZER          "-optimizer"
 #define OPT_INITIAL_SIGMA      "-sigma"
+#define OPT_NB_GAMES           "-nbgames"
 
 void useCMA(std::string startPolicyFile,
             std::string piecesFile,
-            std::string statsFile,
             unsigned int nbGames,
             unsigned int boardWidth,
             unsigned int boardHeight,
@@ -63,8 +63,7 @@ void useCMA(std::string startPolicyFile,
     out << "Running CMA-ES with following configurations" << std::endl;
     out << "Start policy       : " << startPolicyFile << std::endl;
     out << "Pieces             : " << piecesFile << std::endl;
-    out << "Stats file         : " << statsFile << std::endl;
-    out << "Game evaluatioons  : " << nbGames << std::endl;
+    out << "Game evaluations   : " << nbGames << std::endl;
     out << "Game board with    : " << boardWidth << std::endl;
     out << "Game board height  : " << boardHeight << std::endl;
     out << "Random seed        : " << randomSeed << std::endl;
@@ -76,9 +75,9 @@ void useCMA(std::string startPolicyFile,
     shark::CMA cma;
 
     Game *game = new_game(0, 10, 20, 0, piecesFile.c_str(), NULL);
-    GamesStatistics *stats = games_statistics_new(statsFile.c_str(), 10, NULL);
+    GamesStatistics *stats = games_statistics_new(NULL, 10, NULL);
 
-    MDPTetris objFun(10,20, 10, game, stats, startPolicyFile);
+    MDPTetris objFun(10,20, nbGames, game, stats, startPolicyFile);
 
     cma.init(objFun);
 
@@ -108,7 +107,6 @@ void useCMA(std::string startPolicyFile,
 
 void useCE(std::string startPolicyFile,
            std::string piecesFile,
-           std::string statsFile,
            unsigned int nbGames,
            unsigned int boardWidth,
            unsigned int boardHeight,
@@ -120,8 +118,7 @@ void useCE(std::string startPolicyFile,
     out << "Running Cross Entropy with following configurations" << std::endl;
     out << "Start policy       : " << startPolicyFile << std::endl;
     out << "Pieces             : " << piecesFile << std::endl;
-    out << "Stats file         : " << statsFile << std::endl;
-    out << "Game evaluatioons  : " << nbGames << std::endl;
+    out << "Game evaluations   : " << nbGames << std::endl;
     out << "Game board with    : " << boardWidth << std::endl;
     out << "Game board height  : " << boardHeight << std::endl;
     out << "Random seed        : " << randomSeed << std::endl;
@@ -133,9 +130,9 @@ void useCE(std::string startPolicyFile,
     shark::CrossEntropy ce;
 
     Game *game = new_game(0, 10, 20, 0, piecesFile.c_str(), NULL);
-    GamesStatistics *stats = games_statistics_new(statsFile.c_str(), 10, NULL);
+    GamesStatistics *stats = games_statistics_new(NULL, nbGames, NULL);
 
-    MDPTetris objFun(10,20, 10, game, stats, startPolicyFile);
+    MDPTetris objFun(10,20, nbGames, game, stats, startPolicyFile);
 
     ce.init(objFun);
 
@@ -228,9 +225,14 @@ int main( int argc, char ** argv )
         initialSigma = atof ( options[OPT_INITIAL_SIGMA].c_str() );
     }
 
-    std::string statFile = "stat.dat";
 
     unsigned int nbGames = 10;
+    if (options.count(OPT_NB_GAMES) == 1)
+    {
+        nbGames = atoi ( options[OPT_NB_GAMES].c_str() );
+    }
+
+
     unsigned int boardWidth = 10;
     unsigned int boardHeight = 20;
 
@@ -243,7 +245,6 @@ int main( int argc, char ** argv )
             useCMA(
                     start_policy,
                     piece_file,
-                    statFile,
                     nbGames,
                     boardWidth,
                     boardHeight,
@@ -258,7 +259,6 @@ int main( int argc, char ** argv )
             useCE(
                     start_policy,
                     piece_file,
-                    statFile,
                     nbGames,
                     boardWidth,
                     boardHeight,
