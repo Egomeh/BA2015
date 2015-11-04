@@ -321,16 +321,6 @@ namespace shark {
 		SamplingNoise m_samplingNoiseType; ///< Stores the type of sampling noise.
 
 
-		/*
-		double m_sigma;
-		double m_cC; 
-		double m_c1; 
-		double m_cMu; 
-		double m_cSigma;
-		double m_dSigma;
-		double m_muEff;
-		 */
-
 		double m_lowerBound;
 
 		RealVector m_mean;

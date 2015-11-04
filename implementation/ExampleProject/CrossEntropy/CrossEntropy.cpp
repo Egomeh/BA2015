@@ -229,7 +229,7 @@ void CrossEntropy::updateStrategyParameters( const std::vector<Individual<RealVe
 	unsigned int nOffspring = offspring.size();
 	double normalizationFactor = 1.0 / nOffspring;
 
-    Normal< Rng::rng_type > normal( Rng::globalRng, 0, 2.0 );
+    Normal< Rng::rng_type > normal( Rng::globalRng, 0, m_samplingNoise );
 
 	for (int j = 0; j < m_mean.size(); j++)
 	{
