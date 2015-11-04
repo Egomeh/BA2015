@@ -229,6 +229,8 @@ void CrossEntropy::updateStrategyParameters( const std::vector<Individual<RealVe
 	unsigned int nOffspring = offspring.size();
 	double normalizationFactor = 1.0 / nOffspring;
 
+    Normal< Rng::rng_type > normal( Rng::globalRng, 0, 2.0 );
+
 	for (int j = 0; j < m_mean.size(); j++)
 	{
         double innerSum = 0.0;
@@ -239,13 +241,13 @@ void CrossEntropy::updateStrategyParameters( const std::vector<Individual<RealVe
 		}
         innerSum *= normalizationFactor;
         // Make some noise!
-        m_sigma(j) = std::sqrt(innerSum);
+        m_sigma(j) = std::sqrt(innerSum) + std::abs(normal());
 	}
 
-    updateDistribution();
+    //updateDistribution();
 
 
-	m_mutationDistribution.update();
+	//m_mutationDistribution.update();
 
     //std::cout << m_mutationDistribution.covarianceMatrix() << std::endl;
     //std::cout << m_mean << std::endl;
@@ -261,9 +263,15 @@ void CrossEntropy::step(ObjectiveFunctionType const& function){
 
 	PenalizingEvaluator penalizingEvaluator;
 	for( unsigned int i = 0; i < offspring.size(); i++ ) {
-		MultiVariateNormalDistribution::result_type sample = m_mutationDistribution();
-		offspring[i].chromosome() = sample.second;
-		offspring[i].searchPoint() = m_mean + sample.first;
+        Normal< Rng::rng_type > normal( Rng::globalRng, 0, 1.0 );
+        RealVector sample(m_numberOfVariables);
+        for (int j = 0; j < m_numberOfVariables; j++)
+        {
+            sample(j) = m_sigma(j) * normal();
+        }
+		//MultiVariateNormalDistribution::result_type sample = m_mutationDistribution();
+		//offspring[i].chromosome() = sample.second;
+		offspring[i].searchPoint() = m_mean + sample;
 	}
 	penalizingEvaluator( function, offspring.begin(), offspring.end() );
 
