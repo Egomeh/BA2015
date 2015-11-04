@@ -78,7 +78,22 @@ double MDPTetris::eval(const SearchPointType &input) const {
 
     /* run the game and see the score! */
     double points;
-    points = feature_policy_play_games(&attemptPolicy, m_nbGames, m_game, m_stats, 0);
+    GamesStatistics *stats = games_statistics_new(NULL, m_nbGames, NULL);
+    points = feature_policy_play_games(&attemptPolicy, m_nbGames, m_game, stats, 0);
+
+    /* This was for debugging, remove later or use fgor ref.
+    std::cout << "weight set: " << input << " " << stats->best_mean << std::endl;
+    std::cout << "scores ";
+    for (int i = 0; i < m_nbGames; i++)
+    {
+        std::cout << stats->scores[i] << ",";
+    }
+    std::cout << std::endl;
+     */
+
+
+    games_statistics_end_episode(stats, NULL);
+    games_statistics_free(stats);
 
     return 10000000.0 - points;
 }
