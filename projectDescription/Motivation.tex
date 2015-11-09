@@ -1,0 +1,25 @@
+\section*{Motivation}
+In many challenging applications of machine learning systems, the
+learning signals are sparse, unspecific, and/or delayed, for instance
+in autonomous robotics or in man-machine interaction, but also when
+learning to play games. Supervised
+learning cannot be used directly in such a case, but the task can be
+cast into a reinforcement learning (RL) problem \citep{littman:15}. Reinforcement
+learning is learning from the consequences of interactions with an
+environment without being explicitly taught. Because the performance
+of standard RL techniques is falling short of expectations, there is a
+need to explore new RL algorithms. In this project, we will look at
+evolutionary direct policy search for RL.
+
+
+In particular, we will employ the covariance matrix adaptation
+evolution strategy (CMA-ES, \citep{hansen:01,hansen2011}). The CMA-ES has been shown to be highly efficient for episodic RL
+(e.g., by \cite{heidrich-meisner:09}).
+
+The cross-entropy method is regarded as state-of-the-art for learning
+to play the game of Tetris \citep{szita:06,thiery:09}. The goal of
+this project is to perform an unbiased comparison of the cross-entropy
+method and CMA-ES for learning Tetris.
+
+
+
