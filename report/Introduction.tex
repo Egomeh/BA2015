@@ -1,53 +1,97 @@
-\section{Introduction}
+\section{Introduction \label{sec:intro}}
+
+On the topic of reinforcement learning, a widely used benchmark
+for learning algorithms are designing agents 
+for playing the classical game of Tetris. Tetris is an 
+appealing benchmarking problem due to it's complexity. The 
+standard games plays on a board made from a grid that is
+10 cells wide and 20 cells heigh. As the game plays, differently
+shaped pieces fall from the top of the board. 
+When a row on the board is fully occupied by pieces, the line
+is removed, all lines above it moved one line down and a score
+point is given to the player. If a cell above the 20 first is
+occupied, the game ends. The task of the player is to move
+and rotate the falling pieces in a way that yields the highest 
+score before the game ends.\\
+\\
+This game is indeed a hard task to computationally optimize, as
+the game has a very high number of board configurations, 
+$10^{59}$ estimated in \cite{scherrer2009}. A common approach 
+in the literature is to use 
+\textit{one-piece controllers}\footnote{Agents and controllers
+both refer to artificial players.}, such as described in 
+\cite{scherrer2009:b}. These controllers are aware of only 
+the current board state and the currently falling piece. The 
+game used for the banchmark is a simplified version of Tetris,
+as the 
+controllers may only decide in what column to drop the current
+piece, and what orientation the piece should have when dropped.
+This disallows the controller to move the piece while 
+the piece is falling, however, in the literature, this 
+is not regarded a significant limitation.\\
+\\
+When the controllers decide which action to take, it will
+simulate each of the possible actions and choose the one that
+leads to the most favourable board state. To evaluate the board 
+state, the controller uses a set of features that defines 
+various qualities of the board, and associate a weight to each 
+feature. This means that the efficiency of the controller 
+is determined by which features of the board are considered by
+and how heavily they are weighted. This allows
+the controller with $n$ features to be expressed as an 
+$n$ dimensional real-valued vector, with one dimension 
+per feature, and the value in that dimension the weight.
+
+
+\subsection{Previous work}
+
+Over the time, many researchers has tried various feature 
+sets and applied various optimizers to find the best 
+possible Tetris controllers. The features used are typically
+ones that attempt to mimic the board conditions that would
+normally catch the attention of a human player, such as
+how high the overall pile of pieces is and how many holes 
+the board has. In \cite{scherrer2009:b} table 1, a table 
+presents some feature sets used throughout various publications
+on the subject. In later works, using evolutionary stochastic 
+search methods for tuning the weights of the feature sets towards
+efficient controllers. A widely used method is the 
+Cross-Entropy method described in detail in \citep{cetut2014}. 
+Especially a noisy version has proven to be quite effective in the
+domain of learning of learning Tetris as 
+described in \cite{szita:06}.\\
+\\
+Another optimization
+method introduced to the domain  is the Covariance Matrix
+Adaption Evolution Strategy (CMA-ES) described in detail in 
+\cite{hansen2011}. This method is used in learning Tetris in 
+\cite{boumaza2011:a}.
 
 \subsection{Goals of the thesis}
 
-The aim of this thesis is to compare the performance 
-difference, if any exists, between the to highly regarded 
-stochastic optimization algorithms CMA-ES \citep{hansen2011} and Cross-Entropy
-\citep{cetut2014}.
-The two algorithms is in this case each used to optimize 
-a policy for playing the classic video game Tetris. As both CE and
-CMA-ES are regarded as state-of-the-art stochastic optimizations, and that
-their nature is quite similar, the experiment yields some more information
-on weather one outperforms the other. Comparing the algorithms in performance
-when playing Tetris is chosen for several reasons. One of the reasons for 
-choosing Tetris is that Tetris as stochastic by nature. Following a certin 
-policy when playing Tetris, one cannot predict how the game progresses. Another
-reason why Tetris is a suitable choice is the very large state space of the game.
-approaching the problem with Dynamic Programming, and exhaustively 
-determine the expected value of each actions in the game is simply far too
-large for modern computers to process.
 
+Both the Cross-Entropy and the CMA-ES methods has been used 
+in learning Tetris with \textit{one piece controllers}, but as 
+to our knowledge, only little effort has been put into 
+comparing the two methods. Therefore, this thesis will explore
+how the two methods compare against each other under similar
+conditions. Therefore, we will use a set of features among those
+commonly used, and compare how the two optimizing algorithms 
+differ.
 
 
 \subsection{Scope\label{section:scope}}
 
-\comment{This might fit better somewhere else in the report?}
-
-When using the mentioned optimization algorithms,
-is encoded as a real-valued optimization. This is necessary
-because the CE and CMA-ES both evaluate the performance of solutions
-as the value of a fitness function $f : \mathbb{R}^n \rightarrow \mathbb{R}$.
-thus for the experiment, to thoroughly compare the two optimization algorithms,
-only few policy/agent encoding are chosen. The ones chosen are
-what is also scribed in \citep{scherrer2015}. In this case, 
-when the agent takes an action, all possible actions on the current 
-board are evaluated and the best action is chosen. This means that the agent 
-is exposed to a state of the board, and a method of deciding how desirable 
-this state is, and thereby choose actions that yield the best states. 
-Deciding which states are the best, usually a function 
-that yields a value based on features of the board 
-(such as column hight, gaps or holes in the board). The optimization process
-is then to adjust weight constant in the feature function such that 
-a policy is expressed as $\theta \in \mathbb{R}^n$ with feature 
-function $ f( \cdot ) = \phi ( \cdot )^{T}\theta$ as
-described in \citep{scherrer2015}.\\
-
-Aiming to only thoroughly experiment with the feature function excludes 
-exploration of other policies/agents. Another candidate for agent were a neural
-network as have proven effective in other reinforcement learning 
-problems for games.
+The experiments will be carried out on the simplified version of
+Tetris using the MDPTetris software found at \cite{mdptetris},
+which is the same emulator used in \cite{scherrer2009:b}.
+This software already have the well known feature sets
+implemented, so we will not ourselves extend any of the features.
+For comparing the optimizers, the Shark\footnote{See \url{http://image.diku.dk/shark/} or  \cite{shark08}
+} library will be used. This library already contains an
+implementation of the CMA-ES optimizer, but lack the 
+Cross-Entropy. Therefore, a part of this thesis will
+be to implement and document the Cross-Entropy method in Shark.
 
 
 \subsection{Limitations}
