@@ -91,9 +91,9 @@ void useCMA(std::string startPolicyFile,
     {
         cma.step(objFun);
         t += cma.lambda();
-        if (10000000.0 - cma.solution().value > bestScore)
+        if (TETRIS_MAX_SCORE - cma.solution().value > bestScore)
         {
-            bestScore = 10000000.0 - cma.solution().value;
+            bestScore = 100000000.0 - cma.solution().value;
             shark::RealVector solution = cma.solution().point;
             _DUMP(bestScore);
             _DUMP(t);
@@ -136,6 +136,9 @@ void useCE(std::string startPolicyFile,
 
     ce.init(objFun);
 
+    ce.lambda() = 100;
+    ce.mu() = 10;
+
     ce.setSigma(initialSigma);
 
     // Still need to set the initial sigma vector
@@ -148,9 +151,9 @@ void useCE(std::string startPolicyFile,
     {
         ce.step(objFun);
         t += ce.lambda();
-        if (10000000.0 - ce.solution().value > bestScore)
+        if (TETRIS_MAX_SCORE - ce.solution().value > bestScore)
         {
-            bestScore = 10000000.0 - ce.solution().value;
+            bestScore = TETRIS_MAX_SCORE - ce.solution().value;
             shark::RealVector solution = ce.solution().point;
             _DUMP(bestScore);
             _DUMP(t);
@@ -216,7 +219,7 @@ int main( int argc, char ** argv )
     }
     else
     {
-        piece_file = MDPTETRIS_DATA_PATH("STpieces4.dat");
+        piece_file = MDPTETRIS_DATA_PATH("pieces4.dat");
     }
 
     double initialSigma = 1.0;

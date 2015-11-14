@@ -12,6 +12,7 @@
 
 #include <shark/ObjectiveFunctions/AbstractObjectiveFunction.h>
 
+#define TETRIS_MAX_SCORE 100000000.0
 
 extern "C"{
 #include "feature_functions.h"

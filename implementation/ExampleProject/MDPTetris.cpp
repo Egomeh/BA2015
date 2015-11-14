@@ -95,5 +95,5 @@ double MDPTetris::eval(const SearchPointType &input) const {
     games_statistics_end_episode(stats, NULL);
     games_statistics_free(stats);
 
-    return 10000000.0 - points;
+    return TETRIS_MAX_SCORE - points;
 }

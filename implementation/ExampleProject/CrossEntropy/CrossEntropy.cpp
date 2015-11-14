@@ -94,7 +94,7 @@ CrossEntropy::CrossEntropy()
 , m_sigma( 0 )
 , m_zeta( 0 )
 , m_samplingNoise( 0 )
-, m_samplingNoiseType( UNIFORM )
+, m_samplingNoiseType( NONE )
 , m_lowerBound( 1E-20)
 , m_counter( 0 ) {
 	m_features |= REQUIRES_VALUE;
@@ -230,6 +230,7 @@ void CrossEntropy::updateStrategyParameters( const std::vector<Individual<RealVe
 	double normalizationFactor = 1.0 / nOffspring;
 
     Normal< Rng::rng_type > normal( Rng::globalRng, 0, m_samplingNoise );
+    std::cout << m_samplingNoise;
 
 	for (int j = 0; j < m_mean.size(); j++)
 	{
@@ -240,8 +241,20 @@ void CrossEntropy::updateStrategyParameters( const std::vector<Individual<RealVe
 			innerSum += temp * temp;
 		}
         innerSum *= normalizationFactor;
-        // Make some noise!
-        m_sigma(j) = std::sqrt(innerSum) + std::abs(normal());
+
+        // Different noise types
+        if ( m_samplingNoiseType == NONE )
+        {
+            m_sigma(j) = std::sqrt(innerSum);
+        }
+        else if ( m_samplingNoiseType == UNIFORM )
+        {
+            m_sigma(j) = std::sqrt(innerSum); // Add uniform noise here
+        }
+        else if ( m_samplingNoiseType == NORMAL )
+        {
+            m_sigma(j) = std::sqrt(innerSum) + normal();
+        }
 	}
 
     //updateDistribution();
