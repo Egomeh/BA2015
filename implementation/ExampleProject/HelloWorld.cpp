@@ -49,6 +49,7 @@
 #define OPT_OPTIMIZER          "-optimizer"
 #define OPT_INITIAL_SIGMA      "-sigma"
 #define OPT_NB_GAMES           "-nbgames"
+#define OPT_OUTPUTNAME         "-output"
 
 void useCMA(std::string startPolicyFile,
             std::string piecesFile,
@@ -58,7 +59,8 @@ void useCMA(std::string startPolicyFile,
             int randomSeed,
             double initialSigma,
             unsigned int maxIterations,
-            std::ostream & out)
+            std::ostream & out,
+            std::string outname)
 {
     out << "Running CMA-ES with following configurations" << std::endl;
     out << "Start policy       : " << startPolicyFile << std::endl;
@@ -78,27 +80,38 @@ void useCMA(std::string startPolicyFile,
     GamesStatistics *stats = games_statistics_new(NULL, 10, NULL);
 
     MDPTetris objFun(10,20, nbGames, game, stats, startPolicyFile);
+    if ( outname.size() > 0 )
+    {
+        objFun.setGamedataFilename(outname);
+    }
 
     cma.init(objFun);
 
     cma.setSigma(initialSigma);
 
-
     int t = 1;
+    int generation = 0;
     double bestScore = 0.0;
 
     while (cma.solution().value > 0.0 && t < maxIterations)
     {
+        if ( outname.size() > 0 )
+        {
+            std::ofstream fs;
+            fs.open (outname.c_str(), std::ios::app);
+            fs << "generation:" << generation << std::endl;
+        }
         cma.step(objFun);
         t += cma.lambda();
         if (TETRIS_MAX_SCORE - cma.solution().value > bestScore)
         {
-            bestScore = 100000000.0 - cma.solution().value;
+            bestScore = TETRIS_MAX_SCORE - cma.solution().value;
             shark::RealVector solution = cma.solution().point;
             _DUMP(bestScore);
             _DUMP(t);
             _DUMP(solution);
         }
+        generation++;
     }
 
 
@@ -113,7 +126,8 @@ void useCE(std::string startPolicyFile,
            int randomSeed,
            double initialSigma,
            unsigned int maxIterations,
-           std::ostream & out)
+           std::ostream & out,
+           std::string outname)
 {
     out << "Running Cross Entropy with following configurations" << std::endl;
     out << "Start policy       : " << startPolicyFile << std::endl;
@@ -133,6 +147,11 @@ void useCE(std::string startPolicyFile,
     GamesStatistics *stats = games_statistics_new(NULL, nbGames, NULL);
 
     MDPTetris objFun(10,20, nbGames, game, stats, startPolicyFile);
+    if ( outname.size() > 0 )
+    {
+        objFun.setGamedataFilename(outname);
+    }
+
 
     ce.init(objFun);
 
@@ -145,10 +164,17 @@ void useCE(std::string startPolicyFile,
 
 
     int t = 1;
+    int generation = 0;
     double bestScore = 0.0;
 
     while (ce.solution().value > 0.0 && t < maxIterations)
     {
+        if ( outname.size() > 0 )
+        {
+            std::ofstream fs;
+            fs.open (outname.c_str(), std::ios::app);
+            fs << "generation:" << generation << std::endl;
+        }
         ce.step(objFun);
         t += ce.lambda();
         if (TETRIS_MAX_SCORE - ce.solution().value > bestScore)
@@ -159,6 +185,7 @@ void useCE(std::string startPolicyFile,
             _DUMP(t);
             _DUMP(solution);
         }
+        generation++;
     }
 
 
@@ -241,6 +268,47 @@ int main( int argc, char ** argv )
 
     unsigned int maxIterations = 5000;
 
+    std::string outputfile = std::string("");
+    if (options.count(OPT_OUTPUTNAME) == 1)
+    {
+        outputfile = std::string(options[OPT_OUTPUTNAME]) + ".txt";
+
+        std::ofstream fs;
+        fs.open (outputfile.c_str());
+
+        fs << "Start-Experiment" << std::endl;
+        fs << "optimizer:" << options[OPT_OPTIMIZER] << std::endl;
+        fs << "game-width:" << boardWidth << std::endl;
+        fs << "game-height:" << boardHeight << std::endl;
+        fs << "game-height:" << boardHeight << std::endl;
+        fs << "game-evaluations:" << nbGames << std::endl;
+        fs << "seed:" << seed << std::endl;
+        fs << "End-Experiment" << std::endl;
+
+        std::ifstream ifs;
+        ifs.open(start_policy.c_str());
+
+        fs << "Start-Policy" << std::endl;
+
+        std::string line;
+        while (!ifs.eof()) {
+            std::getline(ifs, line);
+            fs << line;
+            if (!ifs.eof())
+            {
+                fs << std::endl;
+            }
+        }
+        ifs.close();
+
+        fs << "End-Policy" << std::endl;
+
+
+        fs.close();
+
+
+    }
+
     if ( options.count(OPT_OPTIMIZER) == 1 )
     {
         if ( options[OPT_OPTIMIZER].compare("cma") == 0 )
@@ -254,7 +322,8 @@ int main( int argc, char ** argv )
                     seed,
                     initialSigma,
                     maxIterations,
-                    std::cout
+                    std::cout,
+                    outputfile
             );
         }
         else if ( options[OPT_OPTIMIZER].compare("ce") == 0 )
@@ -268,7 +337,8 @@ int main( int argc, char ** argv )
                     seed,
                     initialSigma,
                     maxIterations,
-                    std::cout
+                    std::cout,
+                    outputfile
             );
         }
     }

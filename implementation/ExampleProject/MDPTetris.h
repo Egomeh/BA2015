@@ -44,6 +44,10 @@ public:
     /* The function for evaluating a single feature policy */
     ResultType eval(const SearchPointType &input) const;
 
+    /* Set the game data file */
+    void setGamedataFilename(std::string filename)
+    { m_gamedataFilename = filename; }
+
 private:
 
     /* The struct from the mdptetris
@@ -64,6 +68,9 @@ private:
 
     /* Statistics object to store game stats */
     GamesStatistics *m_stats;
+
+    /* A filename to which game data is written */
+    std::string m_gamedataFilename;
 
 };
 
