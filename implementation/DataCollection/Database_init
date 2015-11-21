@@ -1,12 +1,11 @@
 CREATE DATABASE IF NOT EXISTS tetris_data ;
 USE tetris_data;
 
-
+DROP TABLE IF EXISTS `Policy_Feature_map`;
 DROP TABLE IF EXISTS `Feature`;
-DROP TABLE IF EXISTS `Policy`;
-dROP TABLE IF EXISTS `Policy_Feature_map`;
 DROP TABLE IF EXISTS `Game`;
 DROP TABLE IF EXISTS `Experiment`;
+DROP TABLE IF EXISTS `Policy`;
 DROP TABLE IF EXISTS `Optimizer`;
 
 CREATE TABLE IF NOT EXISTS `Feature`
