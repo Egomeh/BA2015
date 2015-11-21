@@ -76,33 +76,6 @@ the board wells.\\
 \end{figure}
 
 
-\subsection{Previous work}
-
-Over the time, many researchers has tried various feature 
-sets and applied various optimizers to find the best 
-possible Tetris controllers. The features used are typically
-ones that attempt to mimic the board conditions that would
-normally catch the attention of a human player, such as
-how high the overall pile of pieces is and how many holes 
-the board has. In \cite{scherrer2009:b} table 1, a table 
-presents some feature sets used throughout various publications
-on the subject. In later works, using evolutionary stochastic 
-search methods for tuning the weights of the feature sets towards
-efficient controllers. A widely used method is the 
-Cross-Entropy method described in detail in \citep{cetut2014}. 
-Especially a noisy version has proven to be quite effective in the
-domain of learning of learning Tetris as 
-described in \cite{szita:06}.\\
-\\
-Another optimization
-method introduced to the domain  is the Covariance Matrix
-Adaption Evolution Strategy (CMA-ES) described in detail in 
-\cite{hansen2011}. This method is used in learning Tetris in 
-\cite{boumaza2011:a}. The Cross-Entropy and the CMA-ES are
-both considered state-of-the-art algorithms for this kind 
-of problem, but to our knowledge, not many attempts to 
-compare the two directly has been made.
-
 \subsection{Goals of the thesis}
 
 
@@ -117,24 +90,4 @@ differ. The goal however is not to find a controller that
 outperforms existing controllers, but only to investigate 
 how the Cross-Entropy and CMA-ES differs when learning Tetris
 with similar controllers.
-
-
-\subsection{Scope\label{section:scope}}
-
-The experiments will be carried out on the simplified version of
-Tetris using the MDPTetris software found at \cite{mdptetris},
-which is the same emulator used in \cite{scherrer2009:b}.
-This software already have the well known feature sets
-implemented, so we will not ourselves extend any of the features.
-For comparing the optimizers, the Shark\footnote{See \url{http://image.diku.dk/shark/} or  \cite{shark08}
-} library will be used. This library already contains an
-implementation of the CMA-ES optimizer, but lack the 
-Cross-Entropy. Therefore, a part of this thesis will
-be to implement and document the Cross-Entropy method in Shark.
-
-
-\subsection{Limitations}
-
-What we will not do, and what limitations and constrains
-we figure out during the project.
 

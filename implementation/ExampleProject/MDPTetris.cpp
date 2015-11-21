@@ -86,10 +86,8 @@ double MDPTetris::eval(const SearchPointType &input) const {
         std::ofstream fs;
         fs.open (m_gamedataFilename.c_str(), std::ios::app);
 
-        fs << "Start-Game" << std::endl;
 
-        fs << "weights:" << input << std::endl;
-        fs << "scores:";
+        fs << "weights:" << input << ":";
         for (int i = 0; i < m_nbGames; i++)
         {
             fs << stats->scores[i];
@@ -99,8 +97,6 @@ double MDPTetris::eval(const SearchPointType &input) const {
             };
         }
         fs << std::endl;
-
-        fs << "End-Game" << std::endl;
         fs.close();
     }
 
