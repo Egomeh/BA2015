@@ -1,4 +1,63 @@
 \section{Optimizers}
 
+In this thesis, the Cross-Entropy method and the Covariance MAtrix Evolution 
+Strategy are compared. Both of the methods fall into the category of 
+\textit{stochastic optimization}\footnote{\url{https://en.wikipedia.org/wiki/Stochastic_optimization}}
+methods. These methods are useful for optimization problems that have no gradient.
+The optimization functions aim to optimize the parmeter set $\textbf{x}$
+for the objective function $f$.
+
+\begin{align*}
+\hat{\textbf{x}} &= arg \  \underset{\textbf{x}}{max} \  f(\textbf{x}) \ f : \mathbb{R}^{n} \rightarrow \mathbb{R}
+\end{align*}
+
+In these methods, the optimizing algorithm uses a family of parametric distributions,
+and maintain a mean $m$ along with other parameters
+to search for likely good candidates for the objective function.  In the case studied in this thesis
+both the CMA-ES and Cross-entropy methods use a gaussian distribution to sample solutions to the objective function.
+Hence, both of the functions aim to find a mean $m$ and an $n \times n$ matrix 
+$M$\footnote{In \citep{hansen2011}, $\sigma$ is used for step-size in CMA-ES, so $M$ is instead introduced
+as an arbitrary $n \times n$ matrix in its place.}, such that when
+a vector $\textbf{x}$ is sampled by $\textbf{x} \sim \mathcal{N}\left( m, M \right)$, then $f(\textbf{x})$ 
+is likely to yield preferable results.\\
+\\
+The algorithms work iteratively, such that the mean and standartdeviation of the distribution 
+as altered for each iteration $t$.
+The algorithms start by initializing the parameters either random or at some fixed point. A common 
+configuration is setting the mean at the to all zeros and the standart deviation to the identity matrix.
+Thus, for the first iteration $t = 0$, a configuration could be:
+
+\begin{align*}
+m_{0} =
+\begin{bmatrix}
+0\\
+\vdots\\
+0
+\end{bmatrix},\ \ 
+M_{0} = 
+\begin{bmatrix}
+1 & \hdots & 0\\
+\vdots & \ddots & \vdots\\
+0 & \hdots & 1
+\end{bmatrix}
+\end{align*}
+
+Where the subscript anotes that the values occur in iteration 0.\\
+\\
+In each iteration, the algorithms sample $\lambda$ vectors and evaluate their fitness
+against the objective function. When each of the solutions are evaluated,
+they are ordered according to their fitness such that:
+
+\begin{align*}
+\{\textbf{x}_{1}, \hdots, \textbf{x}_{\lambda}\}\ \ \text{Such that}\ \ 
+f(\textbf{x}_1) \geq f(\textbf{x}_2), \hdots, f(\textbf{x}_{\lambda - 1}) \geq f(\textbf{x}_{\lambda})
+\end{align*}
+
+The mean and standart evation for the next iteration, that is $m_{t+1}$ and $M_{t+1}$
+is then updated usually by considering the best of the ordered solutions. How exactly
+these parameters are updated is individual for each method and can be seen in the following
+sections.
+
+
 
 

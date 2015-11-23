@@ -19,12 +19,16 @@ in \cite{hansen2011}. For the Cross-Entropy method,
 a certin variant described in \cite{szita:06} using noise
 is the one we will apply in the experiments.\\
 \\
-Currently, many feature sets, as well as optimizations for those have been
-investigated. A controller ofetn refered to is the Dellacherie controller 
+Currently, many feature sets exists, as well as optimizations for those have been
+investigated. A controller often refered to is the Dellacherie controller 
 (fahey 2003 \citep{fahey}). This controller was hand tuned by trial and error,
 and did originally, on a regular non-simplified Tetris game, acheive an average of
 660 000 lines. The same feature set (see figure \ref{table:dellfeat}) is 
 often incoorporated in later works when optimizing controllers. An earlyer
-featureset is the set proposed by  \citep{Bertsekas}
+featureset is the set proposed by \citep{Bertsekas} refered to as Bertsekas and
+Tsitsiklis features. In 2006, Szita and L\H{o}rincz (\citep{szita:06}) applied the Cross-Entropy
+method using the Bertsekas and Tsitsiklis features. They report that using no noise,
+their controller converged at 300 000 lines on average. The best result reported in \citep{szita:06}
+is when decreasing noise is applied, which results in the controller exceeding 800 000 lines.
 
 
