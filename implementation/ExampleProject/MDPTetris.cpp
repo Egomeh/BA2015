@@ -81,6 +81,7 @@ double MDPTetris::eval(const SearchPointType &input) const {
     GamesStatistics *stats = games_statistics_new(NULL, m_nbGames, NULL);
     points = feature_policy_play_games(&attemptPolicy, m_nbGames, m_game, stats, 0);
 
+    /* Store the results about the game */
     if (m_gamedataFilename.size() > 0)
     {
         std::ofstream fs;
