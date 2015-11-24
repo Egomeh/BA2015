@@ -1,0 +1,32 @@
+\section{Objective function}
+
+When the Tetris simulator plays Tetris, the internal decission process
+of the tetris controller is configured with a set of parameters that remain
+fixed across the entire game. These parameters are the weights associated 
+with each feature function that is considered by the controller. The features $f_{i}$
+each map a state of the game $s$ to a real value. An overview of the exact mappings
+can be seen in table 1 in \citep{scherrer2009:b}. How much each of these mappings
+sould count in on the final evaluation of the board is determined by $w_{i}$
+denoting the weight of the $i$-th feature. Finally, the function to assess the value 
+of current board state $V$, with $N$ features functions present, can be expressed as:
+
+\begin{align*}
+V(s) &= \sum_{i=1}^{N} w_{i}f_{i}(s)
+\end{align*}
+
+For each possible action the controller may take, it simulates 
+the action and evaluate the value of the board for the new state. 
+The final action is the one that yields the state of the highest value.
+The performance of the controller is hence directly tied to the 
+features and weights in the evaluation function. To adjust these controllers,
+one can either change the set of used feature functions, or as the 
+optimization algorithms will do, change the weighting of the features.
+For the experiments, the feature sets remain fixed, and the task of the
+optimization algorithm applied is to tune the set of weights in order 
+to maximize the performnce of the controller.\\
+\\
+The obective function then accepts a vector of values for each weight
+and returns a sinlge real number that represents how well the controller
+performed while influenced by the input weighting.
+
+
