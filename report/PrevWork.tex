@@ -1,0 +1,34 @@
+\section{Previous work}
+
+Over the time, various researchers has tried various feature 
+sets and applied various optimizers to find the best 
+possible Tetris controllers. The features used are typically
+ones that attempt to mimic the board conditions that would
+normally catch the attention of a human player, such as
+how high the overall pile of pieces is and how many holes 
+the board has. In \cite{scherrer2009:b} table 1, a table 
+presents some feature sets used throughout various publications
+on the subject. In later works, many authors have had success
+with applying evolutionary stochastic search methods for tuning 
+the weights of the feature sets towards
+efficient controllers. For the purpose of this thesis,
+we are in particular concerned with the 
+Cross-Entropy method described in detail in \citep{cetut2014} and the
+Covariance MAtrix Adaption Evolution Strategy (CMA-ES), described 
+in \cite{hansen2011}. For the Cross-Entropy method,
+a certin variant described in \cite{szita:06} using noise
+is the one we will apply in the experiments.\\
+\\
+Currently, many feature sets exists, as well as optimizations for those have been
+investigated. A controller often refered to is the Dellacherie controller 
+(fahey 2003 \citep{fahey}). This controller was hand tuned by trial and error,
+and did originally, on a regular non-simplified Tetris game, acheive an average of
+660 000 lines. The same feature set (see figure \ref{table:dellfeat}) is 
+often incoorporated in later works when optimizing controllers. An earlyer
+featureset is the set proposed by \citep{Bertsekas} refered to as Bertsekas and
+Tsitsiklis features. In 2006, Szita and L\H{o}rincz (\citep{szita:06}) applied the Cross-Entropy
+method using the Bertsekas and Tsitsiklis features. They report that using no noise,
+their controller converged at 300 000 lines on average. The best result reported in \citep{szita:06}
+is when decreasing noise is applied, which results in the controller exceeding 800 000 lines.
+
+
