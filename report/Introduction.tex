@@ -15,8 +15,8 @@ and rotate the falling pieces in a way that yields the highest
 score before the game ends.\\
 \\
 This game is indeed a hard task to computationally optimize, as
-the game has a very high number of board configurations, 
-$10^{59}$ estimated in \cite{scherrer2009}. Bacause of this
+the game has a very high number of board configurations estimated to be
+$10^{59}$ (\cite{scherrer2009}). Bacause of this
 complexity, a common approach 
 in the literature is to use 
 \textit{one-piece controllers}\footnote{Agents and controllers
@@ -30,9 +30,15 @@ game used for the banchmark is a simplified version of Tetris,
 in which 
 controllers need only to decide in what column to drop the current
 piece, and what orientation the piece should have when dropped.
-This disallows the controller to move the piece while 
-the piece is falling, however, in the literature, this 
-is not regarded a significant limitation.\\
+Thus, the simplified version of Tetris differs from the 
+original game in two main ways. One is that the controller is 
+disallowed to move the piece horizontally while the piece 
+is falling. The other is that the controller has 'infinite'
+time to make its decision on where to drop the current piece.
+Thus, the controller cannot take advantage of moving the piece 
+during the fall, but is not restricted by the time limitations.
+This is however a common way of benchmarking Tetris controllers 
+(\citep{scherrer2009})\\
 \\
 When the controllers decide which action to take, it will
 simulate each of the possible actions and choose the one that
