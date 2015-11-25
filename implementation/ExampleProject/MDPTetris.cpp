@@ -81,7 +81,28 @@ double MDPTetris::eval(const SearchPointType &input) const {
     GamesStatistics *stats = games_statistics_new(NULL, m_nbGames, NULL);
     points = feature_policy_play_games(&attemptPolicy, m_nbGames, m_game, stats, 0);
 
-    /* This was for debugging, remove later or use fgor ref.
+    /* Store the results about the game */
+    if (m_gamedataFilename.size() > 0)
+    {
+        std::ofstream fs;
+        fs.open (m_gamedataFilename.c_str(), std::ios::app);
+
+
+        fs << "weights:" << input << ":";
+        for (int i = 0; i < m_nbGames; i++)
+        {
+            fs << stats->scores[i];
+            if (i < m_nbGames-1)
+            {
+                fs << ",";
+            };
+        }
+        fs << std::endl;
+        fs.close();
+    }
+
+    /* This was for debugging, remove later or use fgor ref.*/
+    /*
     std::cout << "weight set: " << input << " " << stats->best_mean << std::endl;
     std::cout << "scores ";
     for (int i = 0; i < m_nbGames; i++)
@@ -92,8 +113,9 @@ double MDPTetris::eval(const SearchPointType &input) const {
      */
 
 
+
     games_statistics_end_episode(stats, NULL);
     games_statistics_free(stats);
 
-    return 10000000.0 - points;
+    return TETRIS_MAX_SCORE - points;
 }

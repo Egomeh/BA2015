@@ -74,8 +74,9 @@ namespace shark {
 		 * \brief Mdoels the noise when sampling
 		 */
 		enum SamplingNoise {
-			UNIFORM = 0,
-			NORMAL = 1
+			NONE    = 0,
+			UNIFORM = 1,
+			NORMAL = 2
 		};
 
 		/**
@@ -170,7 +171,12 @@ namespace shark {
         }
 
         /** \brief Access the type of noise used when sampling offspring */
-        SamplingNoise samplingNoiseType(){
+        SamplingNoise& samplingNoiseType(){
+            return m_samplingNoiseType;
+        }
+
+        /** \brief Access the type of noise used when sampling offspring */
+        const SamplingNoise & samplingNoiseType() const{
             return m_samplingNoiseType;
         }
 
@@ -188,20 +194,6 @@ namespace shark {
 		RealVector const& weights() const {
 			return m_weights;
 		}
-
-		/** \brief Accesses the evolution path for the covariance matrix update. */
-		/*
-		RealVector const& evolutionPath() const {
-			return m_evolutionPathC;
-		}
-		 */
-
-		/** \brief Accesses the evolution path for the step size update. */
-		/*
-		RealVector const& evolutionPathSigma() const {
-			return m_evolutionPathSigma;
-		}
-		 */
 
 		/** \brief Accesses the covariance matrix of the normal distribution used for generating offspring individuals. */
 		RealMatrix const& covarianceMatrix() const {
@@ -223,14 +215,14 @@ namespace shark {
 		}
 
 		/**
-		 * \brief Returns a const reference tothe lower bound on sigma times smalles eigenvalue.
+		 * \brief Returns a const reference to the lower bound on sigma times smallest eigenvalue.
 		 */
 		const double & lowerBound() const {
 			return m_lowerBound;
 		}
 
 		/**
-		 * \brief Returns a mutable reference to the lower bound on sigma times smalles eigenvalue.
+		 * \brief Returns a mutable reference to the lower bound on sigma times smallest eigenvalue.
 		 */
 		double& lowerBound() {
 			return m_lowerBound;

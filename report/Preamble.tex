@@ -5,10 +5,15 @@
 \usepackage{wrapfig}
 \usepackage{amsfonts}
 
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 \usepackage{xcolor}
 \usepackage[tikz]{bclogo}
 \usepackage[framemethod=tikz]{mdframed}
+
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+\usepackage{amsmath}
 
 \usepackage{hyperref}
 
@@ -22,6 +27,25 @@
   bottomline=false,
   skipabove=\topsep,
   skipbelow=\topsep
+}
+
+
+\newcommand{\drawTetrisGrid}[0]
+{
+ \foreach \y in {1,...,20}{
+    \pgfmathsetmacro\yoffset{\y +1};
+  	\foreach \x in {1,...,10}{
+   	\pgfmathsetmacro\xoffset{\x +1};
+  		\filldraw[fill=none, draw=black] (\x , \y ) 
+  		  rectangle (\xoffset , \yoffset);
+  	}
+  }
+}
+
+\newcommand{\drawTetrisBlock}[3]
+{
+	\filldraw[fill=#3, draw=black] (#1 , #2) 
+  		  rectangle (4 , 4);
 }
 
 \setlength{\parindent}{0cm}

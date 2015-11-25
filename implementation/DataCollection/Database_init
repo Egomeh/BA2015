@@ -1,0 +1,65 @@
+CREATE DATABASE IF NOT EXISTS tetris_data ;
+USE tetris_data;
+
+DROP TABLE IF EXISTS `Policy_Feature_map`;
+DROP TABLE IF EXISTS `Feature`;
+DROP TABLE IF EXISTS `Game`;
+DROP TABLE IF EXISTS `Experiment`;
+DROP TABLE IF EXISTS `Policy`;
+DROP TABLE IF EXISTS `Optimizer`;
+
+CREATE TABLE IF NOT EXISTS `Feature`
+(
+	pk_ID INTEGER PRIMARY KEY,
+    ftName VARCHAR(128)
+);
+
+CREATE TABLE IF NOT EXISTS `Policy`
+(
+	pk_ID INTEGER AUTO_INCREMENT PRIMARY KEY
+);
+
+CREATE TABLE IF NOT EXISTS `Policy_Feature_map`
+(
+	fk_Policy_ID INTEGER NOT NULL,
+    fk_Feature_ID INTEGER NOT NULL,
+	FOREIGN KEY (fk_Policy_ID) REFERENCES Policy(pk_ID),
+	FOREIGN KEY (fk_Feature_ID) REFERENCES Feature(pk_ID)
+);
+
+CREATE TABLE IF NOT EXISTS `Optimizer`
+(
+	pk_ID INTEGER UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    optimizerType INTEGER,  -- 0 for CMA, 1 for CE
+    genSampleSize INTEGER,  -- How many vectors each generation sample
+    genOffspring  INTEGER,  -- How many of the best samples that carries over
+    initialSigma  double    -- For CE: initial distribution variance. 
+                            -- For CMA: initial setp size
+);
+
+CREATE TABLE IF NOT EXISTS `Experiment`
+(
+	pk_ID INTEGER UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    fk_policy INTEGER, -- File holding the start policy
+	piecesFile  VARCHAR(512), -- File containing data about the pieces
+	gameEvaluations INTEGER UNSIGNED, -- How many games to play for each offspring
+	gameWidth INTEGER UNSIGNED, -- Width of the game board
+	gameHeight INTEGER UNSIGNED, -- height of the game
+	randomSeed INTEGER, -- The seed used to init the random numbers generator
+    fk_optimizer INTEGER UNSIGNED, -- The optimizer used in the experiment
+    FOREIGN KEY (fk_optimizer) REFERENCES Optimizer(pk_ID),
+    FOREIGN KEY (fk_policy) REFERENCES Policy(pk_ID)
+);
+
+CREATE TABLE IF NOT EXISTS `Game`
+(
+	fk_experiment INTEGER UNSIGNED,
+	gameNumber       INTEGER,             -- The game number
+    generationNumber INTEGER,             -- Generation in which the game is played
+	score            INTEGER,             -- The score of the game
+    featureWeights   VARCHAR(128),        -- A serialized array of weights for the policy
+	FOREIGN KEY (fk_experiment) REFERENCES Experiment(pk_ID)
+);
+
+
+
