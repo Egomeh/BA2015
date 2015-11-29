@@ -246,7 +246,7 @@ int main( int argc, char ** argv )
     }
     else
     {
-        piece_file = MDPTETRIS_DATA_PATH("pieces4.dat");
+        piece_file = MDPTETRIS_DATA_PATH("STpieces4.dat");
     }
 
     double initialSigma = 1.0;
