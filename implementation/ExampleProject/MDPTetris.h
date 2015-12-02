@@ -42,7 +42,7 @@ public:
     std::size_t numberOfVariables() const;
 
     /* The function for evaluating a single feature policy */
-    ResultType eval(const SearchPointType &input) const;
+    ResultType eval(const SearchPointType &input) const; 
 
     /* Set the game data file */
     void setGamedataFilename(std::string filename)

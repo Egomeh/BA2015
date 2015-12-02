@@ -143,7 +143,7 @@ void CrossEntropy::init( ObjectiveFunctionType & function, SearchPointType const
 	RealVector initialSigma(lambda);
 	for(int i = 0; i < lambda; i++)
 	{
-		initialSigma(i) = std::sqrt(100);
+		initialSigma(i) = 100;
 	}
 	init( function,
 		p,
@@ -220,7 +220,19 @@ void CrossEntropy::init(
 * \brief Updates the strategy parameters based on the supplied offspring population.
 */
 void CrossEntropy::updateStrategyParameters( const std::vector<Individual<RealVector, double, RealVector> > & offspring ) {
-	RealVector m = weightedSum( offspring, m_weights, PointExtractor() );
+
+	/* TODO: Do not use weighted sum, instead use simple for loop! */
+	int nDims = offspring[0].searchPoint().size();
+	RealVector m(nDims);// = weightedSum( offspring, m_weights, PointExtractor() );
+	for (int i = 0; i < nDims; i++)
+	{
+        m(i) = 0;
+        for (int j = 0; j < offspring.size(); j++)
+        {
+        	m(i) += offspring[j].searchPoint()(i);
+        }
+        m(i) /= double(offspring.size());
+	}
 
 	// mean update
 	m_mean = m;
@@ -276,11 +288,11 @@ void CrossEntropy::step(ObjectiveFunctionType const& function){
 
 	PenalizingEvaluator penalizingEvaluator;
 	for( unsigned int i = 0; i < offspring.size(); i++ ) {
-        Normal< Rng::rng_type > normal( Rng::globalRng, 0, 1.0 );
+        Normal< Rng::rng_type > normal( Rng::globalRng, 0, 1.0f );
         RealVector sample(m_numberOfVariables);
         for (int j = 0; j < m_numberOfVariables; j++)
         {
-            sample(j) = m_sigma(j) * normal();
+            sample(j) = std::sqrt(m_sigma(j)) * normal();
         }
 		//MultiVariateNormalDistribution::result_type sample = m_mutationDistribution();
 		//offspring[i].chromosome() = sample.second;

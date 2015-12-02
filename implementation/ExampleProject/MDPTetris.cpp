@@ -74,11 +74,19 @@ double MDPTetris::eval(const SearchPointType &input) const {
         attemptPolicy.features[i].weight = input(i);
     }
 
+    /* MDPTetris specific */
     features_initialize(&attemptPolicy);
 
     /* run the game and see the score! */
     double points;
     GamesStatistics *stats = games_statistics_new(NULL, m_nbGames, NULL);
+
+             /* MDPTetris function for playing tetris:
+                attemptPolicy: policy to use when playing.
+                m_nbGames    : How many games to play.
+                m_game       : The game object, holding board dimensions etc.
+                stats        : The object to hold game statistics.
+              */
     points = feature_policy_play_games(&attemptPolicy, m_nbGames, m_game, stats, 0);
 
     /* Store the results about the game */
