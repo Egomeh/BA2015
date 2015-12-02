@@ -14,21 +14,54 @@ the weights of the feature sets towards
 efficient controllers. For the purpose of this thesis,
 we are in particular concerned with the 
 Cross-Entropy method described in detail in \citep{cetut2014} and the
-Covariance MAtrix Adaption Evolution Strategy (CMA-ES), described 
+Covariance Matrix Adaption Evolution Strategy (CMA-ES), described 
 in \cite{hansen2011}. For the Cross-Entropy method,
-a certin variant described in \cite{szita:06} using noise
+a certain variant described in \cite{szita:06} using noise
 is the one we will apply in the experiments.\\
-\\
+
+\begin{figure}[h!]
+\begin{center}
+\begin{tabular}{| l | p{8cm} |}
+\hline
+\textbf{Feature} & \textbf{Description}\\
+\hline
+Landing height & The height of the piece when it lands\\
+\hline
+Eroded piece cells & Number of rows cleared in the last move
+times the number of bricks cleared from the last move\\
+\hline
+Row transitions & Number of horizontal cell transitions\\
+\hline
+Column transitions & Number of vertical cell transitions \\
+\hline
+Holes & Number of empty cells covered by a full cell\\
+\hline
+Board wells & cumulative sum of cells to the depth of
+the board wells.\\
+\hline
+\end{tabular}
+\end{center}
+\caption{features of the Dellacherie controller \label{table:dellfeat}}
+\end{figure}
+
 Currently, many feature sets exists, as well as optimizations for those have been
-investigated. A controller often refered to is the Dellacherie controller 
-(fahey 2003 \citep{fahey}). This controller was hand tuned by trial and error,
-and did originally, on a regular non-simplified Tetris game, acheive an average of
+investigated. A controller often referred to is the Dellacherie controller 
+\citep{fahey}. This controller was hand tuned by trial and error,
+and did originally, on a regular non-simplified Tetris game, achieve an average of
 660 000 lines. The same feature set (see figure \ref{table:dellfeat}) is 
-often incoorporated in later works when optimizing controllers. An earlyer
-featureset is the set proposed by \citep{Bertsekas} refered to as Bertsekas and
-Tsitsiklis features. In 2006, Szita and L\H{o}rincz (\citep{szita:06}) applied the Cross-Entropy
+often incoorporated in later works when optimizing controllers. An earlier
+feature set is the set proposed by \citep{Bertsekas} referred to as Bertsekas and
+Tsitsiklis features. In 2006, Szita and L\H{o}rincz \citep{szita:06} applied the Cross-Entropy
 method using the Bertsekas and Tsitsiklis features. They report that using no noise,
 their controller converged at 300 000 lines on average. The best result reported in \citep{szita:06}
-is when decreasing noise is applied, which results in the controller exceeding 800 000 lines.
+is when decreasing noise is applied, in which the controller's score exceeded 800 000 lines. However, in a later paper, using Dellacherie, Bertsekas and two selfdefined features achieved 35.000.000 lines $\pm 20\%$  \citep{scherrer2009}.\\
+\\
+Creating a Tetris-controller is a NP-complete problem, where we want to find a strategy which maximizes the average score. Most researchers utilize three general approaches to create policies.
 
+\begin{itemize}
+\item Handwritten controllers
+\item Reinforcement learning approaches
+\item Optimization algorithms
+\end{itemize}
 
+But as seen in \citep{scherrer2009}, a combination of the methods can yield good results, where Thiery and Scherrer employed Dellacherie's handwritten policy and used CE to optimize it.
