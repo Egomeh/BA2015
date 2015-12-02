@@ -50,6 +50,7 @@
 #define OPT_INITIAL_SIGMA      "-sigma"
 #define OPT_NB_GAMES           "-nbgames"
 #define OPT_OUTPUTNAME         "-output"
+#define OPT_MAXITER            "-maxiter"
 
 void useCMA(std::string startPolicyFile,
             std::string piecesFile,
@@ -93,7 +94,7 @@ void useCMA(std::string startPolicyFile,
     int generation = 0;
     double bestScore = 0.0;
 
-    while (cma.solution().value > 0.0 && t < maxIterations)
+    while (cma.solution().value > 0.0 && generation < maxIterations)
     {
         if ( outname.size() > 0 )
         {
@@ -167,7 +168,7 @@ void useCE(std::string startPolicyFile,
     int generation = 0;
     double bestScore = 0.0;
 
-    while (ce.solution().value > 0.0 && t < maxIterations)
+    while (ce.solution().value > 0.0 && generation < maxIterations)
     {
         if ( outname.size() > 0 )
         {
@@ -267,6 +268,10 @@ int main( int argc, char ** argv )
     unsigned int boardHeight = 20;
 
     unsigned int maxIterations = 5000;
+    if (options.count(OPT_MAXITER) == 1)
+    {
+        maxIterations = atoi ( options[OPT_MAXITER].c_str() );
+    }
 
     std::string outputfile = std::string("");
     if (options.count(OPT_OUTPUTNAME) == 1)
