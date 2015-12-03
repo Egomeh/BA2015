@@ -33,6 +33,7 @@
  */
  #define SHARK_COMPILE_DLL
 #include "CrossEntropy.h"
+#include "cconfig.h"
 
 #include <shark/Core/Exception.h>
 #include <shark/Algorithms/DirectSearch/Operators/Evaluation/PenalizingEvaluator.h>
@@ -221,10 +222,8 @@ void CrossEntropy::init(
 */
 void CrossEntropy::updateStrategyParameters( const std::vector<Individual<RealVector, double, RealVector> > & offspring ) {
 
-	/* TODO: Do not use weighted sum, instead use simple for loop! */
-	int nDims = offspring[0].searchPoint().size();
-	RealVector m(nDims);// = weightedSum( offspring, m_weights, PointExtractor() );
-	for (int i = 0; i < nDims; i++)
+	RealVector m(m_numberOfVariables);// = weightedSum( offspring, m_weights, PointExtractor() );
+	for (int i = 0; i < m_numberOfVariables; i++)
 	{
         m(i) = 0;
         for (int j = 0; j < offspring.size(); j++)
@@ -234,17 +233,17 @@ void CrossEntropy::updateStrategyParameters( const std::vector<Individual<RealVe
         m(i) /= double(offspring.size());
 	}
 
+
 	// mean update
 	m_mean = m;
 
 	// Sigma update
 	unsigned int nOffspring = offspring.size();
-	double normalizationFactor = 1.0 / nOffspring;
+	double normalizationFactor = 1.0 / double(nOffspring);
 
     Normal< Rng::rng_type > normal( Rng::globalRng, 0, m_samplingNoise );
-    std::cout << m_samplingNoise;
 
-	for (int j = 0; j < m_mean.size(); j++)
+	for (int j = 0; j < m_numberOfVariables; j++)
 	{
         double innerSum = 0.0;
 		for (int i = 0; i < offspring.size(); i++)
@@ -257,15 +256,15 @@ void CrossEntropy::updateStrategyParameters( const std::vector<Individual<RealVe
         // Different noise types
         if ( m_samplingNoiseType == NONE )
         {
-            m_sigma(j) = std::sqrt(innerSum);
+            m_sigma(j) = innerSum;
         }
         else if ( m_samplingNoiseType == CONSTANT )
         {
-            m_sigma(j) = std::sqrt(innerSum) + m_samplingNoise; // Add uniform noise here
+            m_sigma(j) = innerSum + m_samplingNoise; // Add uniform noise here
         }
         else if ( m_samplingNoiseType == LINEAR_DECREASING )
         {
-            m_sigma(j) = std::sqrt(innerSum) + std::max( (5.0 - m_counter/10.0) , 0.0); // Should not be hard coded
+            m_sigma(j) = innerSum + std::max( (5.0 - m_counter/10.0) , 0.0); // Should not be hard coded
         }
 	}
 

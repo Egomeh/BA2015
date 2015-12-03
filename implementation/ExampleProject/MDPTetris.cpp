@@ -95,7 +95,7 @@ double MDPTetris::eval(const SearchPointType &input) const {
         std::ofstream fs;
         fs.open (m_gamedataFilename.c_str(), std::ios::app);
 
-
+        /* Do not report each individual
         fs << "weights:" << input << ":";
         for (int i = 0; i < m_nbGames; i++)
         {
@@ -107,6 +107,7 @@ double MDPTetris::eval(const SearchPointType &input) const {
         }
         fs << std::endl;
         fs.close();
+         */
     }
 
     /* This was for debugging, remove later or use fgor ref.*/

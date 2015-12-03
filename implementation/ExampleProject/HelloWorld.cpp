@@ -51,6 +51,8 @@
 #define OPT_NB_GAMES           "-nbgames"
 #define OPT_OUTPUTNAME         "-output"
 #define OPT_MAXITER            "-maxiter"
+#define OPT_NOISETYPE          "-noiseType"
+#define OPT_NOISE              "-noise"
 
 void useCMA(std::string startPolicyFile,
             std::string piecesFile,
@@ -96,14 +98,20 @@ void useCMA(std::string startPolicyFile,
 
     while (cma.solution().value > 0.0 && generation < maxIterations)
     {
-        if ( outname.size() > 0 )
-        {
-            std::ofstream fs;
-            fs.open (outname.c_str(), std::ios::app);
-            fs << "generation:" << generation << std::endl;
-        }
+
         cma.step(objFun);
         t += cma.lambda();
+
+        if ( outname.size() > 0 )
+        {
+
+            double mean_score = TETRIS_MAX_SCORE - objFun.eval(cma.mean());
+
+            std::ofstream fs;
+            fs.open (outname.c_str(), std::ios::app);
+            fs << generation << "," << mean_score << std::endl;
+        }
+
         if (TETRIS_MAX_SCORE - cma.solution().value > bestScore)
         {
             bestScore = TETRIS_MAX_SCORE - cma.solution().value;
@@ -128,7 +136,9 @@ void useCE(std::string startPolicyFile,
            double initialSigma,
            unsigned int maxIterations,
            std::ostream & out,
-           std::string outname)
+           std::string outname,
+           shark::CrossEntropy::SamplingNoise noiseType,
+           double noise)
 {
     out << "Running Cross Entropy with following configurations" << std::endl;
     out << "Start policy       : " << startPolicyFile << std::endl;
@@ -158,6 +168,12 @@ void useCE(std::string startPolicyFile,
 
     ce.lambda() = 100;
     ce.mu() = 10;
+    ce.setSamplingNoisetype(noiseType);
+    ce.SamplingNoiseTerm() = noise;
+
+    out << "NoiseType          : " << noiseType << std::endl;
+    out << "Noise              : " << noise << std::endl;
+
 
     ce.setSigma(initialSigma);
 
@@ -170,14 +186,20 @@ void useCE(std::string startPolicyFile,
 
     while (ce.solution().value > 0.0 && generation < maxIterations)
     {
-        if ( outname.size() > 0 )
-        {
-            std::ofstream fs;
-            fs.open (outname.c_str(), std::ios::app);
-            fs << "generation:" << generation << std::endl;
-        }
+        _DUMP(generation);
         ce.step(objFun);
         t += ce.lambda();
+
+        if ( outname.size() > 0 )
+        {
+
+            double mean_score = TETRIS_MAX_SCORE - objFun.eval(ce.mean());
+
+            std::ofstream fs;
+            fs.open (outname.c_str(), std::ios::app);
+            fs << generation << "," << mean_score << std::endl;
+        }
+
         if (TETRIS_MAX_SCORE - ce.solution().value > bestScore)
         {
             bestScore = TETRIS_MAX_SCORE - ce.solution().value;
@@ -263,6 +285,39 @@ int main( int argc, char ** argv )
         nbGames = atoi ( options[OPT_NB_GAMES].c_str() );
     }
 
+    shark::CrossEntropy::SamplingNoise noiseType = shark::CrossEntropy::NONE;
+    if (options.count(OPT_NOISETYPE) == 1)
+    {
+        switch (atoi( options[OPT_NOISETYPE].c_str() ))
+        {
+            case 0:
+            {
+                noiseType = shark::CrossEntropy::NONE;
+                break;
+            }
+            case 1:
+            {
+                noiseType = shark::CrossEntropy::CONSTANT;
+                break;
+            }
+            case 2:
+            {
+                noiseType = shark::CrossEntropy::LINEAR_DECREASING;
+                break;
+            }
+            default:
+            {
+                break;
+            }
+        }
+    }
+
+
+    double noise = 0;
+    if (options.count(OPT_NOISE) == 1)
+    {
+        noise = atof( options[OPT_NOISE].c_str() );
+    }
 
     unsigned int boardWidth = 10;
     unsigned int boardHeight = 20;
@@ -343,7 +398,9 @@ int main( int argc, char ** argv )
                     initialSigma,
                     maxIterations,
                     std::cout,
-                    outputfile
+                    outputfile,
+                    noiseType,
+                    noise
             );
         }
     }

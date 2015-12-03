@@ -175,7 +175,7 @@ namespace shark {
             return m_samplingNoiseType;
         }
 
-        /** \brief Access the type of noise used when sampling offspring */
+        /** \brief Unmutable access the type of noise used when sampling offspring */
         const SamplingNoise & samplingNoiseType() const{
             return m_samplingNoiseType;
         }
@@ -184,6 +184,16 @@ namespace shark {
         void setSamplingNoisetype( SamplingNoise samplingNoiseType ) {
             m_samplingNoiseType = samplingNoiseType;
         }
+
+		/** \brief Access sampling noise term */
+		double & SamplingNoiseTerm(){
+			return m_samplingNoise;
+		}
+
+		/** \brief Unmutable access sampling noise term */
+		const double & SamplingNoiseTerm() const{
+			return m_samplingNoise;
+		}
 
 		/** \brief Accesses the current population mean. */
 		RealVector const& mean() const {
