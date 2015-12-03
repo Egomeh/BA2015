@@ -1,5 +1,29 @@
-\section{Cross Entropy Method}
+\section{CE (Cross Entropy)}
+CE is described through many papers in slightly different ways. Using similar format as in the paper \citep{thiery:09}, the implemented CE as psuedo-algorithm can be written as
 
+\begin{figure}[ht]
+\hrule
+\vspace{0.2cm}
+{\centering  \textit{Noisy cross-entropy method}}
+\vspace{0.2cm}
+\hrule
+\begin{algorithmic}
+\State{\textbf{Input:}}
+\State{\fitnessFunction : the function that estimates the performance of a vector \individual}
+\State{(\mean, \varianceMatrix): The mean and variance of the initial distribution}
+\State{\populationSize : The number of agents sampled per generation/iteration}
+\State{$\offspringNumber$: The number of offspring selected for the new mean}
+\State{$\noise_{\generation}$: The noise added to each generation/iteration}
+\\
 
-
+\Loop
+\State{Generate $\populationSize$ agents $\individual_{1}, \individual_{2}, \dots, \individual_{\populationSize}$ from $\mathcal{N}(\mean, \varianceMatrix^2)$}
+\State{Evaluate each agent using \fitnessFunction}
+\State{Select the $\offspringNumber$ with the highest evaluation}
+\State{Update \mean of the $\offspringNumber$ best agents}
+\State{Update $\varianceMatrix^2$ of the $\offspringNumber$ best agents + $\noise_{\generation}$}
+\EndLoop
+\end{algorithmic}
+\hrule
+\end{figure}
 
