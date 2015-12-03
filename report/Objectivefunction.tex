@@ -3,15 +3,15 @@
 When the Tetris simulator plays Tetris, the internal decision process
 of the tetris controller is configured with a set of parameters that remain
 fixed across the entire game. These parameters are the weights associated 
-with each feature function that is considered by the controller. The features $f_{i}$
-each map a state of the game $s$ to a real value. An overview of the exact mappings
+with each feature function that is considered by the controller. The features $\feature _{i}$
+each map a state of the game $\gameState$ to a real value. An overview of the exact mappings
 can be seen in table 1 in \citep{scherrer2009:b}. How much each of these mappings
-should count in on the final evaluation of the board is determined by $w_{i}$
+should count in on the final evaluation of the board is determined by $\weight _{i}$
 denoting the weight of the $i$-th feature. Finally, the function to assess the value 
-of current board state $V$, with $N$ features functions present, can be expressed as:
+of current board state $\valueFunction$, with $\dimensions$ features functions present, can be expressed as:
 
 \begin{align*}
-V(s) &= \sum_{i=1}^{N} w_{i}f_{i}(s)
+\valueFunction (\gameState ) &= \sum_{i=1}^{\dimensions} \weight _{i}\feature _{i}(\gameState )
 \end{align*}
 
 For each possible action the controller may take, it simulates 

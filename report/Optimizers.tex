@@ -4,37 +4,37 @@ In this thesis, the Cross-Entropy method and the Covariance Matrix Evolution
 Strategy are compared. Both of the methods fall into the category of 
 \textit{stochastic optimization}\footnote{\url{https://en.wikipedia.org/wiki/Stochastic_optimization}}
 methods. These methods are useful for optimization problems that have no gradient.
-The optimization functions aim to optimize the parameter set $\textbf{x}$
-for the objective function $f$.
+The optimization functions aim to optimize the parameter set $\textbf{ \individual }$
+for the objective function $\fitnessFunction$.
 
 \begin{align*}
-\hat{\textbf{x}} &= arg \  \underset{\textbf{x}}{max} \  f(\textbf{x}) \ f : \mathbb{R}^{n} \rightarrow \mathbb{R}
+\hat{\textbf{\individual }} &= arg \  \underset{\textbf{\individual }}{max} \  f(\textbf{\individual }) \ f : \mathbb{R}^{\dimensions } \rightarrow \mathbb{R}
 \end{align*}
 
 In these methods, the optimizing algorithm uses a family of parametric distributions,
-and maintain a mean $m$ along with other parameters
+and maintain a mean $\mean $ along with other parameters
 to search for likely good candidates for the objective function.  In the case studied in this thesis
 both the CMA-ES and Cross-entropy methods use a Gaussian distribution to sample solutions to the objective function.
-Hence, both of the functions aim to find a mean $m$ and an $n \times n$ matrix 
-$M$\footnote{In \citep{hansen2011}, $\sigma$ is used for step-size in CMA-ES, so $M$ is instead introduced
-as an arbitrary $n \times n$ matrix in its place.}, such that when
-a vector $\textbf{x}$ is sampled by $\textbf{x} \sim \mathcal{N}\left( m, M \right)$, then $f(\textbf{x})$ 
+Hence, both of the functions aim to find a mean $\mean $ and an $\dimensions \times \dimensions$ matrix 
+$\varianceMatrix $\footnote{In \citep{hansen2011}, $\sigma$ is used for step-size in CMA-ES, so $\varianceMatrix $ is instead introduced
+as an arbitrary $\dimensions \times \dimensions$ matrix in its place.}, such that when
+a vector $\textbf{\individual }$ is sampled by $\textbf{\individual } \sim \mathcal{N}\left( \mean, \varianceMatrix \right)$, then $\fitnessFunction (\textbf{\individual })$ 
 is likely to yield preferable results.\\
 \\
 The algorithms work iteratively, such that the mean and standard deviation of the distribution 
-as altered for each iteration $t$.
+as altered for each iteration $\generation $.
 The algorithms start by initializing the parameters either at random or some fixed point. A common 
 configuration is setting the mean at the to all zeros and the standard deviation to the identity matrix.
-Thus, for the first iteration $t = 0$, a configuration could be:
+Thus, for the first iteration $\generation = 0$, a configuration could be:
 
 \begin{align*}
-m_{0} =
+\mean_{0} =
 \begin{bmatrix}
 0\\
 \vdots\\
 0
 \end{bmatrix},\ \ 
-M_{0} = 
+\varianceMatrix _{0} = 
 \begin{bmatrix}
 1 & \hdots & 0\\
 \vdots & \ddots & \vdots\\
@@ -49,8 +49,8 @@ against the objective function. When each of the solutions are evaluated,
 they are ordered according to their fitness such that:
 
 \begin{align*}
-\{\textbf{x}_{1}, \hdots, \textbf{x}_{\lambda}\}\ \ \text{Such that}\ \ 
-f(\textbf{x}_1) \geq f(\textbf{x}_2), \hdots, f(\textbf{x}_{\lambda - 1}) \geq f(\textbf{x}_{\lambda})
+\{\textbf{\individual }_{1}, \hdots, \textbf{\individual }_{\populationSize }\}\ \ \text{Such that}\ \ 
+f(\textbf{x}_1) \geq f(\textbf{\individual }_2), \hdots, f(\textbf{\individual }_{\populationSize  - 1}) \geq f(\textbf{\individual }_{\populationSize })
 \end{align*}
 
 The mean and standard deviation for the next iteration, that is $m_{t+1}$ and $M_{t+1}$

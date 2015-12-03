@@ -75,8 +75,8 @@ namespace shark {
 		 */
 		enum SamplingNoise {
 			NONE    = 0,
-			UNIFORM = 1,
-			NORMAL = 2
+			CONSTANT = 1,
+			LINEAR_DECREASING = 2
 		};
 
 		/**

@@ -259,13 +259,13 @@ void CrossEntropy::updateStrategyParameters( const std::vector<Individual<RealVe
         {
             m_sigma(j) = std::sqrt(innerSum);
         }
-        else if ( m_samplingNoiseType == UNIFORM )
+        else if ( m_samplingNoiseType == CONSTANT )
         {
-            m_sigma(j) = std::sqrt(innerSum); // Add uniform noise here
+            m_sigma(j) = std::sqrt(innerSum) + m_samplingNoise; // Add uniform noise here
         }
-        else if ( m_samplingNoiseType == NORMAL )
+        else if ( m_samplingNoiseType == LINEAR_DECREASING )
         {
-            m_sigma(j) = std::sqrt(innerSum) + normal();
+            m_sigma(j) = std::sqrt(innerSum) + std::max( (5.0 - m_counter/10.0) , 0.0); // Should not be hard coded
         }
 	}
 
