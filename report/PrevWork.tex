@@ -53,10 +53,18 @@ often incoorporated in later works when optimizing controllers. An earlier
 feature set is the set proposed by \citep{Bertsekas} referred to as Bertsekas and
 Tsitsiklis features. In 2006, Szita and L\H{o}rincz \citep{szita:06} applied the Cross-Entropy
 method using the Bertsekas and Tsitsiklis features. They report that using no noise,
-their controller converged at 300 000 lines on average. The best result reported in \citep{szita:06}
-is when decreasing noise is applied, in which the controller's score exceeded 800 000 lines. However, in a later paper, using Dellacherie, Bertsekas and two selfdefined features achieved 35.000.000 lines $\pm 20\%$  \citep{scherrer2009}.\\
+their controller converged at 300 000 lines on average. 
+The best result reported in \citep{szita:06}
+is when decreasing noise is applied, 
+in which the controller's score exceeded 800 000 lines. 
+However, in a later paper, using Dellacherie, 
+Bertsekas and two selfdefined features achieved 
+35.000.000 lines $\pm 20\%$  \citep{scherrer2009}.\\
 \\
-Creating a Tetris-controller is a NP-complete problem, where we want to find a strategy which maximizes the average score. Most researchers utilize three general approaches to create policies.
+Creating a Tetris-controller is a NP-complete problem, 
+where we want to find a strategy which maximizes 
+the average score. Most researchers utilize three 
+general approaches to create policies.
 
 \begin{itemize}
 \item Handwritten controllers
@@ -64,4 +72,7 @@ Creating a Tetris-controller is a NP-complete problem, where we want to find a s
 \item Optimization algorithms
 \end{itemize}
 
-But as seen in \citep{scherrer2009}, a combination of the methods can yield good results, where Thiery and Scherrer employed Dellacherie's handwritten policy and used CE to optimize it.
+But as seen in \citep{scherrer2009}, 
+a combination of the methods can yield good results, 
+where Thiery and Scherrer employed Dellacherie's 
+handwritten policy and used CE to optimize it.

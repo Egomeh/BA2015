@@ -8,17 +8,26 @@ The optimization functions aim to optimize the parameter set $\textbf{ \individu
 for the objective function $\fitnessFunction$.
 
 \begin{align*}
-\hat{\textbf{\individual }} &= arg \  \underset{\textbf{\individual }}{max} \  f(\textbf{\individual }) \ f : \mathbb{R}^{\dimensions } \rightarrow \mathbb{R}
+\hat{\textbf{\individual }} &= 
+arg \  \underset{\textbf{\individual }}{max} \  
+f(\textbf{\individual }) \ 
+f : \mathbb{R}^{\dimensions } \rightarrow \mathbb{R}
 \end{align*}
 
 In these methods, the optimizing algorithm uses a family of parametric distributions,
 and maintain a mean $\mean $ along with other parameters
-to search for likely good candidates for the objective function.  In the case studied in this thesis
-both the CMA-ES and Cross-entropy methods use a Gaussian distribution to sample solutions to the objective function.
-Hence, both of the functions aim to find a mean $\mean $ and an $\dimensions \times \dimensions$ matrix 
-$\varianceMatrix $\footnote{In \citep{hansen2011}, $\sigma$ is used for step-size in CMA-ES, so $\varianceMatrix $ is instead introduced
+to search for likely good candidates for the objective function.  
+In the case studied in this thesis
+both the CMA-ES and Cross-entropy methods use a 
+Gaussian distribution to sample solutions to the objective function.
+Hence, both of the functions aim to find a mean 
+$\mean $ and an $\dimensions \times \dimensions$ matrix 
+$\varianceMatrix $\footnote{In \citep{hansen2011}, 
+$\sigma$ is used for step-size in CMA-ES, so $\varianceMatrix $ is instead introduced
 as an arbitrary $\dimensions \times \dimensions$ matrix in its place.}, such that when
-a vector $\textbf{\individual }$ is sampled by $\textbf{\individual } \sim \mathcal{N}\left( \mean, \varianceMatrix \right)$, then $\fitnessFunction (\textbf{\individual })$ 
+a vector $\textbf{\individual }$ is sampled by 
+$\textbf{\individual } \sim \mathcal{N}\left( \mean, \varianceMatrix \right)$, 
+then $\fitnessFunction (\textbf{\individual })$ 
 is likely to yield preferable results.\\
 \\
 The algorithms work iteratively, such that the mean and standard deviation of the distribution 

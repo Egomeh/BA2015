@@ -2,11 +2,28 @@
 
 
 \subsection{Verification of CE}
-Because the \shark library already contains an implementation of CMA-ES, but not an implementation of CE, we extended the library with our own implementation of the algorithm. This ensures as many similar conditions as possible for the two optimization algorithms as possible.\\
-In order to verify the correctness of the implementation, we used the same experiments as used by Christophe Thiery and Bruno Scherrer \citep{thiery:09}. These experiments were used be Thiery and Scherrer to verify their own CE implementation with various types of noise correction. Therefore, we will utilize the same experiments to verify our own contribution to the \shark library, by trying to achieve the same results.\\
+Because the \shark library already contains an implementation of 
+CMA-ES, but not an implementation of CE, we extended the library 
+with our own implementation of the algorithm. 
+This ensures as many similar conditions as possible for 
+the two optimization algorithms as possible.\\
+In order to verify the correctness of the implementation, 
+we used the same experiments as used by 
+Christophe Thiery and Bruno Scherrer \citep{thiery:09}. 
+These experiments were used be Thiery and Scherrer to 
+verify their own CE implementation with various types of noise correction. 
+Therefore, we will utilize the same experiments to verify our 
+own contribution to the \shark library, by trying to achieve the same results.\\
 \\
-The setup is mirrored as in the paper \citep{thiery:09}, with 100 agents ($\populationSize = 100$) per iteration. The 10 best agents ($\offspringNumber = 10$) will be used to generate the new gaussian distribution. After each iteration, an agent with the mean weights from the $\offspringNumber$ best agents, play 30 games.\\
-The paper does not specify the number of games played with each agent in an iteration to evaluate their fitness. Thus it is assumed they also play 30 games.\\
+The setup is mirrored as in the paper \citep{thiery:09}, 
+with 100 agents ($\populationSize = 100$) per iteration. 
+The 10 best agents ($\offspringNumber = 10$) will be used 
+to generate the new gaussian distribution. After each iteration, 
+an agent with the mean weights from the $\offspringNumber$ best agents, 
+play 30 games.\\
+The paper does not specify the number of games 
+played with each agent in an iteration to evaluate their fitness. 
+Thus it is assumed they also play 30 games.\\
 \\
 \comment{GRAPHS - graps?}\\
 \\
