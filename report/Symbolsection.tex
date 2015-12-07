@@ -9,26 +9,34 @@ CE, Cross-Entropy
 
 $\mean$, the mean of a distribution.\\
 \\
-$\varianceMatrix$, the matix used as second argument to the gaussian distribution, which describes the shape of the distribution.\\
+$\varianceMatrix$, the matix used as second argument to the gaussian distribution, which describes the shape of the distribution. Ususaly, when a sample from a gaussian distribution 
+is drawn, it's written as: $x \sim \mathcal{N} \left( \mu, \sigma^{2} \right)$, however in \citep{hansen2011},
+$\mu$ and $\sigma$ is used for other purposes, and therefore these symbols are kept for this.\\
 \\
 $\populationSize$, number of agents generated per generation/iteration.\\
 \\
 $\numberOfEvaluations$, number of games played by each agent for evaluation.\\
 \\
-$\offspringNumber$, number of the population samples that carries over.\\
+$\offspringNumber$, number of the population samples is included in the next generation.\\
 \\
-$\fitnessFunction$, the function that estimates the performance of an agent.\\
+$\fitnessFunction$, the function that estimates the performance of an agent/sample point.\\
 \\
-$\noise$, noise term added to the variance.\\
+$\noise$, noise term added to the variance, specific to Cross-Entropy.\\
 \\
 $\generation$, counter indicating the current generation/iteration.\\
 \\
-$\weight$, the weights of a single agent ($1 \times \dimensions$ vector).\\
+$\weight$, the weight configuration of a Tetri playing agent($\dimensions $-dimensional vector).\\
 \\
-$\feature$, an information the agent is aware of. This is a function that yields a single number.\\
+$\feature$, A feature of the Tetris game state. This is a function that maps a 
+feature of the Tetris board to a real value.\\
 \\
-$\valueFunction$, the linear function of feature weights. The function used for evaluating a state.\\
+$\valueFunction$, A linear combination of feature functions and weight. 
+The function used for evaluating a Tetris game state. The function is composed of feature sets and thier
+asociated weights, accepts a game state, and yields a single real-value.\\
 \\
 $\gameState$, the state of the Tetris game.\\
 \\
-$\individual$, an individual agent from a generation/iteration. Represented with an $\dimensions$ dimensional vector.
+$\individual$, an individual agent/search point from a generation/iteration. 
+Represented with an $\dimensions$-dimensional vector.
+
+
