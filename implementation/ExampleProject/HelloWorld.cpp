@@ -333,9 +333,11 @@ int main( int argc, char ** argv )
     {
         outputfile = std::string(options[OPT_OUTPUTNAME]) + ".txt";
 
+
         std::ofstream fs;
         fs.open (outputfile.c_str());
 
+        /*
         fs << "Start-Experiment" << std::endl;
         fs << "optimizer:" << options[OPT_OPTIMIZER] << std::endl;
         fs << "game-width:" << boardWidth << std::endl;
@@ -362,7 +364,7 @@ int main( int argc, char ** argv )
         ifs.close();
 
         fs << "End-Policy" << std::endl;
-
+        */
 
         fs.close();
 

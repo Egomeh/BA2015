@@ -259,11 +259,6 @@ void CrossEntropy::step(ObjectiveFunctionType const& function){
 	m_counter++; // increase generation counter
 	updateStrategyParameters( parents );
 
-    for (std::vector< Individual<RealVector, double, RealVector> >::iterator it = offspring.begin(); it != offspring.end(); it++)
-    {
-        //std::cout << (*it).unpenalizedFitness() << ",";
-    }
-
 	m_best.point= parents[ 0 ].searchPoint();
 	m_best.value= parents[ 0 ].unpenalizedFitness();
 }
