@@ -62,15 +62,6 @@ namespace shark {
 	{
 	public:
 		/**
-		* \brief Models the recombination type.
-		*/
-		enum RecombinationType {
-			EQUAL = 0,
-			LINEAR = 1,
-			SUPERLINEAR = 2
-		};
-
-		/**
 		 * \brief Mdoels the noise when sampling
 		 */
 		enum SamplingNoise {
@@ -91,7 +82,7 @@ namespace shark {
 		/**
 		* \brief Calculates the center of gravity of the given population \f$ \in \mathbb{R}^d\f$.
 		*
-		* 
+		*
 		*/
 		template<typename Container, typename Extractor>
 		RealVector weightedSum( const Container & container, const RealVector & weights, const Extractor & e ) {
@@ -112,7 +103,7 @@ namespace shark {
 		/**
 		* \brief Calculates mu for the supplied lambda and the recombination strategy.
 		*/
-		SHARK_EXPORT_SYMBOL static unsigned suggestMu( unsigned int lambda, RecombinationType recomb = SUPERLINEAR ) ;
+		SHARK_EXPORT_SYMBOL static unsigned suggestMu( unsigned int lambda ) ;
 
 		void read( InArchive & archive );
 		void write( OutArchive & archive ) const;
@@ -131,13 +122,12 @@ namespace shark {
 		/**
 		* \brief Initializes the algorithm for the supplied objective function.
 		*/
-		SHARK_EXPORT_SYMBOL void init( 
-			ObjectiveFunctionType& function, 
+		SHARK_EXPORT_SYMBOL void init(
+			ObjectiveFunctionType& function,
 			SearchPointType const& initialSearchPoint,
-			unsigned int lambda, 
+			unsigned int lambda,
 			unsigned int mu,
-			RealVector initialSigma,
-			const boost::optional< RealMatrix > & initialCovarianceMatrix = boost::optional< RealMatrix >()
+			RealVector initialSigma
 		);
 
 		/**
@@ -200,30 +190,6 @@ namespace shark {
 			return m_mean;
 		}
 
-		/** \brief Accesses the current weighting vector. */
-		RealVector const& weights() const {
-			return m_weights;
-		}
-
-		/** \brief Accesses the covariance matrix of the normal distribution used for generating offspring individuals. */
-		RealMatrix const& covarianceMatrix() const {
-			return m_mutationDistribution.covarianceMatrix();
-		}
-
-		/** 
-		 * \brief Accesses the recombination type.
-		 */
-		RecombinationType recombinationType() const {
-			return m_recombinationType;
-		}
-
-		/** 
-		 * \brief Returns a mutable reference to the recombination type.
-		 */
-		RecombinationType & recombinationType() {
-			return m_recombinationType;
-		}
-
 		/**
 		 * \brief Returns a const reference to the lower bound on sigma times smallest eigenvalue.
 		 */
@@ -244,29 +210,13 @@ namespace shark {
 		unsigned int mu() const {
 			return m_mu;
 		}
-		
+
 		/**
 		 * \brief Returns a mutable reference to the size of the parent population \f$\mu\f$.
 		 */
 		unsigned int& mu(){
 			return m_mu;
 		}
-
-        /**
-		 * \brief Returns the proportion of offspring to use as parents \f$\Zeta\f$.
-		 */
-        double zeta() const {
-            return m_zeta;
-        }
-
-        /**
-		 * \brief Returns a mutable reference to the proportion of offspring to use as parents \f$\Zeta\f$.
-		 */
-        double& zeta(){
-            return m_zeta;
-        }
-
-
 
         /**
 		 * \brief Returns a immutable reference to the size of the offspring population \f$\mu\f$.
@@ -282,60 +232,29 @@ namespace shark {
 			return m_lambda;
 		}
 
-		/**
-		 * \brief Returns eigenvectors of covariance matrix (not considering step size)
-		 */
-		RealMatrix const& eigenVectors() const {
-			return m_mutationDistribution.eigenVectors();
-		}
-
-		/**
-		 * \brief Returns a eigenvectors of covariance matrix (not considering step size)
-		 */
-		RealVector const& eigenValues() const {
-			return m_mutationDistribution.eigenValues();
-		}
-
-		/**
-		 * \brief Returns condition of covariance matrix
-		 */
-		double condition() const {
-			RealVector const& eigenValues = m_mutationDistribution.eigenValues();
-			return max(eigenValues)/min(eigenValues); 
-		}
-
 
 	protected:
 		/**
 		* \brief Updates the strategy parameters based on the supplied offspring population.
 		*/
 		SHARK_EXPORT_SYMBOL void updateStrategyParameters( const std::vector<Individual<RealVector, double, RealVector> > & offspring ) ;
-	
+
 		std::size_t m_numberOfVariables; ///< Stores the dimensionality of the search space.
 		unsigned int m_mu; ///< The size of the parent population.
 		unsigned int m_lambda; ///< The size of the offspring population, needs to be larger than mu.
 
-		double m_zeta;      // Proportion of offspring to select
 		double m_samplingNoise;     // Noise to add diversity to sample parametre;
 		RealVector m_sigma; // Variace for sample parameters
 
-		RecombinationType m_recombinationType; ///< Stores the recombination type.
 		SamplingNoise m_samplingNoiseType; ///< Stores the type of sampling noise.
 
 
 		double m_lowerBound;
 
 		RealVector m_mean;
-		RealVector m_weights;
-
-		/*
-		RealVector m_evolutionPathC;
-		RealVector m_evolutionPathSigma;
-		 */
 
 		unsigned m_counter; ///< counter for generations
 
-		MultiVariateNormalDistribution m_mutationDistribution;
 	};
 }
 

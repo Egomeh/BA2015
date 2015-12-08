@@ -257,7 +257,7 @@ int main( int argc, char ** argv )
     }
     else
     {
-        start_policy = MDPTETRIS_DATA_PATH("starting_policy00.dat");
+        start_policy = MDPTETRIS_DATA_PATH("starting_policy01.dat");
     }
 
 
