@@ -25,7 +25,6 @@ MDPTetris::MDPTetris(int board_width, int board_height, int nb_games,
      */
     m_dimensions = m_featurePolicy.nb_features;
 
-
     /* Allow proposal of starting point in search space */
     m_features |= CAN_PROPOSE_STARTING_POINT;
 
