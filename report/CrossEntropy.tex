@@ -12,21 +12,95 @@ the implemented CE as psuedo-algorithm can be written as
 \hrule
 \begin{algorithmic}
 \State{\textbf{Input:}}
-\State{\fitnessFunction : the function that estimates the performance of a vector \individual}
-\State{(\mean, \varianceMatrix): The mean and variance of the initial distribution}
-\State{\populationSize : The number of agents sampled per generation/iteration}
+\State{\fitnessFunction : the function that estimates the performance of a vector $\individual$}
+\State{($\mean$, $\varianceMatrix^2$): The mean and variance of the initial distribution}
+\State{$\populationSize$ : The number of vectors sampled per generation/iteration}
 \State{$\offspringNumber$: The number of offspring selected for the new mean}
 \State{$\noise_{\generation}$: The noise added to each generation/iteration}
 \\
 
 \Loop
-\State{Generate $\populationSize$ agents $\individual_{1}, \individual_{2}, \dots, \individual_{\populationSize}$ from $\mathcal{N}(\mean, \varianceMatrix^2)$}
-\State{Evaluate each agent using \fitnessFunction}
-\State{Select the $\offspringNumber$ with the highest evaluation}
-\State{Update \mean of the $\offspringNumber$ best agents}
-\State{Update $\varianceMatrix^2$ of the $\offspringNumber$ best agents + $\noise_{\generation}$}
+\State{Generate $\populationSize$ vectors $\individual_{1}, \individual_{2}, \dots, \individual_{\populationSize}$ from $\mathcal{N}(\mean, \varianceMatrix^2)$}
+\State{Evaluate each vector using \fitnessFunction}
+\State{Select the $\offspringNumber$ vectors with the highest evaluation}
+\State{Update $\mean$ of the $\offspringNumber$ best vectors}
+\State{Update $\varianceMatrix^2$ of the $\offspringNumber$ best vectors + $\noise_{\generation}$}
 \EndLoop
 \end{algorithmic}
 \hrule
 \end{figure}
 
+\subsection{Input}
+
+\textbf{The objective function} \\
+As described in the 'Optimizers' section, CE is a general stochastic 
+iterative algorithm that tries to solve an optimization problem of 
+the form \citep{thiery:09}:
+\begin{align*}
+\hat{\textbf{\individual }} &= 
+arg \  \underset{\textbf{\individual }}{max} \  
+\fitnessFunction (\textbf{\individual }) \ 
+\end{align*}
+Where $x$ corresponds to a given vector, and S is our actual objective function. 
+\\
+
+\textbf{The mean and variance of the gaussian distribution} \\
+Here $\mean$ is the mean and  $\varianceMatrix^2$ is the variance 
+of the gaussian distribution ($\mean$,$\varianceMatrix^2$). 
+More specifically this gaussian distribution is defined as 
+\begin{align*}
+\mathcal{N}(\mean,\varianceMatrix^2)
+\end{align*}
+
+\textbf{The number of vectors}\\
+$\populationSize$ is the number of vectors sampled in each generation.
+\\
+
+\textbf{The number of offspring}\\
+$\offspringNumber$ is the number of vectors which are used to compute 
+the new mean, $\mean$, and variance, $\varianceMatrix^2$, for next generation/iteration. 
+These offspring vectors gets selected directly by taking $\offspringNumber$ vectors
+which got the best evaluation.
+\\
+
+\textbf{The noise factor}\\
+The noise factor, $\noise_{\generation}$, is the amount of noise which 
+is applied to the variance $\varianceMatrix^2$ in iteration/generation 
+$\generation$. In general, noise is used to avoid the risk of local optimum.
+There are different kind of noise settings, such as: no noise, constant noise 
+and linear decreasing noise \citep{szita:06}. When using no noise, $\noise_{\generation}$ 
+is obviously set to zero. When using constant noise, the same value is 
+added to the variance $\varianceMatrix^2$ in each iteration/generation. 
+When using linear decreasing noise, $\noise_{\generation}$ is defined as, 
+$\noise_{\generation}=max(5- \generation /10,0)$.
+\\
+
+\subsection{Loop}
+
+\textbf{Sampling the population}\\
+The first step of the loop is to create the new generation consisting of $\populationSize$ vectors. These vectors are created randomly within the distribution $\individual_{i}\sim \mathcal{N}(\mean,\varianceMatrix^2)$.
+\\
+
+\textbf{Evaluating the population}\\
+After sampling the population, the algorithm needs to order the vectors to find the $\offspringNumber$ best vectors, each vector $\individual_{i}\ ,\ i \in \{1, \dots, \lambda\}$ is evaluated using \fitnessFunction. The value from the fitness function then yields the estimated performance of each individual.
+\\
+
+\textbf{Selecting the offspring}\\
+Now each $\individual_{i}$ has an assigned evaluation value, and the $\offspringNumber$ best vectors gets selected by taking the $\individual_{i}$ vectors with the highest evaluation value.
+\\
+
+\textbf{Updating the distribution parameters}\\
+When updating the distribution parameters ($\mean$,$\varianceMatrix^2$), we first update
+the mean $\mean$ by computing a total mean evaluation value of the $\offspringNumber$ best vectors. This is formally defined as:
+\begin{align*}
+\mean_{\generation +1}:=\frac{\sum_{i}^{\offspringNumber} \individual_{i}}{\offspringNumber}
+\end{align*}
+The variance $\varianceMatrix^2$ is updated to match the variance of $\offspringNumber$ best
+values, such that the variance in dimension $i$ matches the variance of the $\offspringNumber$
+in dimension $i$.
+This is formally defined as:
+\begin{align*}
+\varianceMatrix^2_{\generation +1}:=\frac{\sum_{i}^{\offspringNumber}
+(\individual_{i} - \mean_{\generation +1})^T(\individual_{i} - \mean_{\generation +1})}{\offspringNumber} + \noise_{\generation + 1}
+\end{align*}
+\\
