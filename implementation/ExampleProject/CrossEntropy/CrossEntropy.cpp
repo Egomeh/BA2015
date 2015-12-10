@@ -174,7 +174,8 @@ void CrossEntropy::init(
 */
 void CrossEntropy::updateStrategyParameters( const std::vector<Individual<RealVector, double, RealVector> > & offspring ) {
 
-	RealVector m(m_numberOfVariables);// = weightedSum( offspring, m_weights, PointExtractor() );
+    /* Calculate the centroid of the offspring */
+	RealVector m(m_numberOfVariables);
 	for (int i = 0; i < m_numberOfVariables; i++)
 	{
         m(i) = 0;
@@ -190,8 +191,10 @@ void CrossEntropy::updateStrategyParameters( const std::vector<Individual<RealVe
 	m_mean = m;
 
 	// Sigma update
-	unsigned int nOffspring = offspring.size();
+	size_t nOffspring = offspring.size();
 	double normalizationFactor = 1.0 / double(nOffspring);
+
+
 
 	for (int j = 0; j < m_numberOfVariables; j++)
 	{
@@ -234,8 +237,6 @@ void CrossEntropy::updateStrategyParameters( const std::vector<Individual<RealVe
 void CrossEntropy::step(ObjectiveFunctionType const& function){
 
 	std::vector< Individual<RealVector, double, RealVector> > offspring( m_lambda );
-
-	std::cout << m_sigma << std::endl;
 
 	PenalizingEvaluator penalizingEvaluator;
 	for( unsigned int i = 0; i < offspring.size(); i++ ) {

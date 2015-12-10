@@ -18,13 +18,19 @@ high, more policies are evaluated per iteration, and leads to a more thorough
 exploration of the search space. Thus the higher $\populationSize$ increases the
 chances of finding a better mean for the next iteration.
 However, higher $\populationSize$ also results in the
-need for more evaluations per iteration. The goal for tuning this parameter is then
-to set $\populationSize$ high enough to ensure exploration of good solutions, and yet 
+need for more evaluations per iteration. The goal for 
+tuning this parameter is then
+to set $\populationSize$ high enough to ensure 
+exploration of good solutions, and yet 
 low enough to avoid unnecessary evaluations.\\
-In the implementation of CMA-ES used in \shark , the algorithm  itself determines
-the value of $\populationSize$ according to the size of the search space. 
-Cross-Entropy however, does not seem to have a general rule for this parameter,
-so this value is manually adjusted to fit the problem as well as possible.\\
+In the implementation of CMA-ES used in \shark , 
+the algorithm  itself determines
+the value of $\populationSize$ according to the 
+size of the search space. 
+Cross-Entropy however, does not seem to have a 
+general rule for this parameter,
+so this value is manually adjusted to fit the 
+problem as well as possible.\\
 \\
 % offspring
 As both of the optimizing algorithm uses a subset of the sampled vectors
@@ -49,31 +55,40 @@ We want this value low as possible, because as with the number of
 agents, $\populationSize$, The number of games, $\numberOfEvaluations$, 
 is another major factor which 
 impacts the run-time of the algorithm.
-As Tetris is stochastic by nature, the score deviates a lot, even when the
-same agent with the same policy plays multiple games. Hence, when assessing the true
+As Tetris is stochastic by nature, the score deviates a lot, 
+even when the
+same agent with the same policy plays multiple games. 
+Hence, when assessing the true
 performance of a policy it's rarely enough to play just few games. Thus, setting 
 $\numberOfEvaluations$ high increases the likelihood of correctly choosing the best 
 agents, yet, it also causes longer run times of the experiments.\\
 \\
 % Noise factor
-Specific to the Cross-Entropy method, most authors report that the performance of the 
-algorithm increases dramatically when the sampling distribution is associated with
-a random noise. The different types of noise are described in section \ref{CrossEntropy}.
-The noise term is adjusted in order to prevent the algorithm from reaching a local optimum.
+Specific to the Cross-Entropy method, 
+most authors report that the performance of the 
+algorithm increases dramatically when the sampling 
+distribution is associated with
+a random noise. The different types of 
+noise are described in section \ref{CrossEntropy}.
+The noise term is adjusted in order to 
+prevent the algorithm from reaching a local optimum.
 The current research shows that noise terms of $\noise_\generation = 4$ and 
 $\noise_\generation = max \left( 5 - \generation / 10 \right)$ \citep{thiery:09}.
 The constant noise (such as $\noise_\generation = 4$) ensures that the algorithm
 never settles in a too small area from which it samples, and forces it to explore
 solutions that are further away from the mean. The further the algorithm gets, 
 the less noise is assumed needed, as the mean should approach a global optimum. to
-address this, the linear decreasing noise is applied as it will lower the noise term
+address this, the linear decreasing noise 
+is applied as it will lower the noise term
 as the algorithm progresses.\\
 \\
-For the various experiments, these parameters will be tuned for the specific purpose 
+For the various experiments, these 
+parameters will be tuned for the specific purpose 
 at hand. In the verification of the Cross-Entropy, the parameters are set 
 to match those reported in similar papers (\cite{thiery:09}, \cite{szita:06}).
 In the comparison of the two algorithms, the parameters will be set such that 
-the Cross-Entropy operates under as similar conditions as CMA-ES, to ensure an unbiased 
+the Cross-Entropy operates under as 
+similar conditions as CMA-ES, to ensure an unbiased 
 comparison.
 
 
