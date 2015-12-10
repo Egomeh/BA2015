@@ -193,8 +193,6 @@ void CrossEntropy::updateStrategyParameters( const std::vector<Individual<RealVe
 	unsigned int nOffspring = offspring.size();
 	double normalizationFactor = 1.0 / double(nOffspring);
 
-    Normal< Rng::rng_type > normal( Rng::globalRng, 0, 1.0 );
-
 	for (int j = 0; j < m_numberOfVariables; j++)
 	{
         double innerSum = 0.0;
@@ -237,13 +235,15 @@ void CrossEntropy::step(ObjectiveFunctionType const& function){
 
 	std::vector< Individual<RealVector, double, RealVector> > offspring( m_lambda );
 
+	std::cout << m_sigma << std::endl;
+
 	PenalizingEvaluator penalizingEvaluator;
 	for( unsigned int i = 0; i < offspring.size(); i++ ) {
-        Normal< Rng::rng_type > normal( Rng::globalRng, 0, 1.0f );
         RealVector sample(m_numberOfVariables);
         for (int j = 0; j < m_numberOfVariables; j++)
         {
-            sample(j) = std::sqrt(m_sigma(j)) * normal();
+            Normal< Rng::rng_type > normal( Rng::globalRng, 0, m_sigma(j) );
+            sample(j) = normal(); // N (0, 100)
         }
 		//MultiVariateNormalDistribution::result_type sample = m_mutationDistribution();
 		//offspring[i].chromosome() = sample.second;

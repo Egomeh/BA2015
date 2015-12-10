@@ -48,6 +48,11 @@ public:
     void setGamedataFilename(std::string filename)
     { m_gamedataFilename = filename; }
 
+
+    /* Change the number of games played when evaulating */
+    void setNbGames(unsigned int nbGames)
+    { m_nbGames = nbGames; }
+
 private:
 
     /* The struct from the mdptetris

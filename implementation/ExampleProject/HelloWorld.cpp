@@ -48,7 +48,12 @@
 #define OPT_PIECE_FILE         "-pieceFile"
 #define OPT_OPTIMIZER          "-optimizer"
 #define OPT_INITIAL_SIGMA      "-sigma"
+
+/* Number of games to play when sorting vectors for performance */
 #define OPT_NB_GAMES           "-nbgames"
+
+/* Number of games to play when asserting the performance of the mean */
+#define OPT_NB_LEARNING_GAMES  "-nblearnames"
 #define OPT_OUTPUTNAME         "-output"
 #define OPT_MAXITER            "-maxiter"
 #define OPT_NOISETYPE          "-noiseType"
@@ -57,6 +62,7 @@
 void useCMA(std::string startPolicyFile,
             std::string piecesFile,
             unsigned int nbGames,
+            unsigned int nbLearnGames,
             unsigned int boardWidth,
             unsigned int boardHeight,
             int randomSeed,
@@ -69,6 +75,7 @@ void useCMA(std::string startPolicyFile,
     out << "Start policy       : " << startPolicyFile << std::endl;
     out << "Pieces             : " << piecesFile << std::endl;
     out << "Game evaluations   : " << nbGames << std::endl;
+    out << "Game learning games: " << nbLearnGames << std::endl;
     out << "Game board with    : " << boardWidth << std::endl;
     out << "Game board height  : " << boardHeight << std::endl;
     out << "Random seed        : " << randomSeed << std::endl;
@@ -105,7 +112,11 @@ void useCMA(std::string startPolicyFile,
         if ( outname.size() > 0 )
         {
 
+            /* Set the number of games for the learning curve */
+            objFun.setNbGames(nbLearnGames);
             double mean_score = TETRIS_MAX_SCORE - objFun.eval(cma.mean());
+            objFun.setNbGames(nbGames);
+
 
             std::ofstream fs;
             fs.open (outname.c_str(), std::ios::app);
@@ -130,6 +141,7 @@ void useCMA(std::string startPolicyFile,
 void useCE(std::string startPolicyFile,
            std::string piecesFile,
            unsigned int nbGames,
+           unsigned int nbLearnGames,
            unsigned int boardWidth,
            unsigned int boardHeight,
            int randomSeed,
@@ -144,6 +156,7 @@ void useCE(std::string startPolicyFile,
     out << "Start policy       : " << startPolicyFile << std::endl;
     out << "Pieces             : " << piecesFile << std::endl;
     out << "Game evaluations   : " << nbGames << std::endl;
+    out << "Game learning games: " << nbLearnGames << std::endl;
     out << "Game board with    : " << boardWidth << std::endl;
     out << "Game board height  : " << boardHeight << std::endl;
     out << "Random seed        : " << randomSeed << std::endl;
@@ -193,7 +206,11 @@ void useCE(std::string startPolicyFile,
         if ( outname.size() > 0 )
         {
 
+            /* Set the number of games for the learning curve */
+            objFun.setNbGames(nbLearnGames);
             double mean_score = TETRIS_MAX_SCORE - objFun.eval(ce.mean());
+            objFun.setNbGames(nbGames);
+
 
             std::ofstream fs;
             fs.open (outname.c_str(), std::ios::app);
@@ -279,10 +296,16 @@ int main( int argc, char ** argv )
     }
 
 
-    unsigned int nbGames = 10;
+    unsigned int nbGames = 1;
     if (options.count(OPT_NB_GAMES) == 1)
     {
         nbGames = atoi ( options[OPT_NB_GAMES].c_str() );
+    }
+
+    unsigned int nbLearnGames = 30;
+    if (options.count(OPT_NB_LEARNING_GAMES) == 1)
+    {
+        nbLearnGames = atoi ( options[OPT_NB_LEARNING_GAMES].c_str() );
     }
 
     shark::CrossEntropy::SamplingNoise noiseType = shark::CrossEntropy::NONE;
@@ -379,6 +402,7 @@ int main( int argc, char ** argv )
                     start_policy,
                     piece_file,
                     nbGames,
+                    nbLearnGames,
                     boardWidth,
                     boardHeight,
                     seed,
@@ -394,6 +418,7 @@ int main( int argc, char ** argv )
                     start_policy,
                     piece_file,
                     nbGames,
+                    nbLearnGames,
                     boardWidth,
                     boardHeight,
                     seed,
