@@ -164,5 +164,12 @@ target_link_libraries(ExampleProject gsl -lgslcblas)
 target_link_libraries(ExampleProject tetris_objective_fun)
 target_link_libraries(ExampleProject crossentropy)
 
+add_executable(ScaleTest scaleTest.cpp)
+target_link_libraries(ScaleTest ${SHARK_LIBRARIES})
+target_link_libraries(ScaleTest tetris)
+target_link_libraries(ScaleTest gsl -lgslcblas)
+target_link_libraries(ScaleTest tetris_objective_fun)
+target_link_libraries(ScaleTest crossentropy)
+
 
 
