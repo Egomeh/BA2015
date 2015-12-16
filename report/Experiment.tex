@@ -9,17 +9,78 @@ When running the experiments, the source code of the MDP-Tetris
 \citep{mdptetris} was used to emulate the Tetris games.
 The source code is accompanied with files that describe the
 various existing features. These files contains the identifiers of 
-each feature to use, as well as two numbers respectivly describing 
+each feature to use, as well as two numbers respectively describing 
 the agents reward function and how to evaluate a game over state. 
 The number for the reward function has remained unchanged at $0$ 
 during all experiments. The "game-over" evaluation was for the
-Bertsekas featureset initially set to $0$. Setting the 
-"game-over" evaluation to $0$ means that the agnet will not 
-destinguish between regular moves and moves that results in losing
+Bertsekas feature set initially set to $0$. Setting the 
+"game-over" evaluation to $0$ means that the agent will not 
+distinguish between regular moves and moves that results in losing
 the game. When running the experiments with this setting, a large portion
 of the agents never exceeded a zero mean score. However, setting the value
-to $-1$, meaning that a "game-over" move yieds $-\infty$ reward, 
+to $-1$, meaning that a "game-over" move yields $-\infty$ reward, 
 none of the experiments got stuck on only zero scores.
+
+ 
+\subsection{Normalization of samples}
+As mentioned by some authors \citep{boumaza2009}, the vector that
+describes the agent can very well be normalized such that the vector
+is a point that lies on the $\dimensions$-dimensional hypersphere.\\
+\\
+The reason for this lies in the nature of the evaluation function.
+When the controller chooses an action, it will evaluate all the 
+possible actions possible with the current piece. It will use the 
+value function $\valueFunction$ of each state $\gameState_i$ and 
+choose the state with the highest value from the value function.
+Thus, if the states are ordered such that:
+
+\begin{align*}
+\valueFunction \left(  \gameState_1 \right) 
+> \dots 
+> \valueFunction \left( \gameState_\populationSize \right)
+\end{align*}
+
+The agent chooses the action that leads from the current state 
+to state $\gameState_1$.\\
+Since the value function assess the state by the following:
+
+\begin{align*}
+\valueFunction (\gameState ) &= 
+\sum_{i=1}^{\dimensions} \weight _{i}\feature _{i}(\gameState )
+\end{align*}
+
+Then scaling the input of the agent, the weight vector $\weight$, by a
+number $a \in \mathbb{R}, \ a > 0$ the assessment is changed by:
+
+\begin{align*}
+\sum_{i=1}^{\dimensions} a \weight _{i}\feature _{i}(\gameState ) &= 
+a\sum_{i=1}^{\dimensions} \weight _{i}\feature _{i}(\gameState )
+\end{align*}
+
+And the ordering remains:
+
+\begin{align*}
+a \valueFunction \left(  \gameState_1 \right) 
+> \dots 
+> a \valueFunction \left( \gameState_\populationSize \right)
+\end{align*}
+
+Thus the order of the value functions of 
+each state does not change, and the same $\gameState_1$
+is still chosen for any $a \in \mathbb{R}, \ a > 0$.\\
+\\
+To verify this, the Tetris objective function was run using with the
+same vector and the same seed for the random generator with a scale
+$a \in \{0.1, 0.2,0.3, \dots, 9.8,9.9,10.0\}$, and the agent scored 
+exactly the same for each scale.\\
+\\
+This can be used in experiments for various reasons. As reported 
+by A. Boumaza, this will prevent CMA-ES from diverging step size,
+and it can prevent loosing precision if the magnitude weight 
+vector becomes larger than feasible for the used floating 
+point number and avoids size limitations.
+
+
 
 \subsection{Setup}
 
@@ -132,29 +193,33 @@ an agent with the mean weights from the $\offspringNumber$ best agents,
 play 30 games.\\
 Each agent is during evaluation plays one game, that is $\numberOfEvaluations = 1$.\\
 \\
-\begin{figure}[h]
-\comment{FIGURE MISSING}
+\begin{figure}[h!]
+\begin{tikzpicture}
+\meansPlot 
+\end{tikzpicture}
 \caption{Cross-Entropy mean performance \label{fig:cemean}}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[h!]
+\begin{tikzpicture}
+\noNoisePlot
+\end{tikzpicture}
 \caption{No noise \label{fig:ceNoNoise}}
 \end{figure}
 
 
-\begin{figure}[h]
+\begin{figure}[h!]
 \begin{tikzpicture}
-\begin{axis}[%
-    xlabel={xlabel},
-    ylabel={ylabel}]
-\end{axis}
+\constantNoisePlot 
 \end{tikzpicture}
 \caption{Constant noise \label{fig:ceCnstantNoise}}
 \end{figure}
 
 
-\begin{figure}[h]
-\comment{FIGURE MISSING}
+\begin{figure}[h!]
+\begin{tikzpicture}
+\linearNoisePlot 
+\end{tikzpicture}
 \caption{Linear decreasing noise \label{fig:ceLinNoise}}
 \end{figure}
 
@@ -163,18 +228,21 @@ Figure \ref{fig:ceNoNoise}, \ref{fig:ceCnstantNoise} and
 \ref{fig:cemean} shows the mean graph for each of the noise types.
 The goal of these experiments were to replicate the experiments 
 reported in \citep{thiery:09}. As the results seen from our experiments
-to a high degree resemble those reported by Theiery et. al, we conclude
+to a high degree resemble those reported by Thiery et. al, we conclude
 that our Cross-Entropy implementation works similar to theirs.
-\\
-\comment{Conclusion - is CE good enough? cyka blyat}
+
+\comment{Technical reason for why the results are accepted.}
+
+
+\subsection{Comparison between CMA-ES and CE}
+
+\comment{add experiments that compare CMA-ES to cross entropy}
 
 \subsection{Results}
 
-What were the results of the experiment? This section will
-present theoutcome of the experiment, or refer to data.
+\comment{Show results from comparison experiments}
 
-\subsection{Analysis}
+\subsection{Analysis and discussion}
 
-How do CE and CMA-ES compare from our data? Can we say anything 
-which performs better?
+\comment{Discuss the results of the comparison experiments}
 
