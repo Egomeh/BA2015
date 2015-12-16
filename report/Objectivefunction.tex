@@ -1,5 +1,14 @@
 \section{Objective function}
 
+The optimizing algorithms used in this thesis all attempts to 
+optimize a certain function. In this case, the optimization 
+function aims to develop the best possible Tetris playing agent.
+Thus, the value of the objecive funtion describes and estimated 
+performance of input agent. The objective function is then 
+an abstraction to the Tetris emulator that will evaluate 
+the agent by letting the agent play a pre-configured number 
+of games.\\
+\\
 When the Tetris simulator plays Tetris, the internal decision process
 of the tetris controller is configured with a set of parameters that remain
 fixed across the entire game. These parameters are the weights associated 
@@ -26,20 +35,43 @@ optimization algorithm applied is to tune the set of weights in order
 to maximize the performance of the controller.\\
 \\
 The objective function then accepts a vector of values for each weight
-and returns a single real number that represents how well the controller
-performed while influenced by the input weighting.
+and configures an agent with the weights corresponding to the entries in
+the input vector. It then plays $\numberOfEvaluations$ games with the
+agent and reports the mean score.
 
 
 
 
 % evaluating a specific agent
-Now that the new generation has been created, it's time for each agent to play g games of Tetris.\\
-For a given Tetris game, we say that a game consists of a range of states. A state is defined as, when an agent has to place a given piece, and it has to choose where to place the piece on the board. Placing the piece is called an action, and since there are multiple ways to place the piece on the board, we have a range of possible of actions. In a given state the agent has to try each possible action, and the action with the highest evaluation, is the action the agent executes in the current state. 
-When evaluating each possible action, the objective function S is used. As shown in the input-section, the objective function is defined as:
+Now that the new generation has been created, 
+it's time for each agent to play g games of Tetris.\\
+For a given Tetris game, we say that a game consists 
+of a range of states. A state is defined as, when an 
+agent has to place a given piece, and it has to choose 
+where to place the piece on the board. Placing the 
+piece is called an action, and since there are multiple 
+ways to place the piece on the board, we have a range 
+of possible of actions. In a given state the agent 
+has to try each possible action, and the action 
+with the highest evaluation, is the action the 
+agent executes in the current state. 
+When evaluating each possible action, the 
+objective function S is used. As shown in the 
+input-section, the objective function is 
+defined as:
 
 \begin{align*}
 \valueFunction (\gameState ) &= \sum_{i=1}^{\dimensions} \weight _{i}\feature _{i}(\gameState )
 \end{align*}
 
-Where $F_i$ is the i'th feature function and w\_i is the i'th weight associated with the corresponding i'th feature function. More specifically w\_i is the value of the i'th dimension of the agent's vector.
-A specific action then gets evaluated by computing S(x). The main factor of the evaluation value is how the action changed the board layout , since each feature function F\_i (x) looks at different "types" of board layouts (insert ref. to feature policy table).
+Where $F_i$ is the i'th feature function 
+and w\_i is the i'th weight associated 
+with the corresponding i'th feature function. 
+More specifically w\_i is the value of 
+the i'th dimension of the agent's vector.
+A specific action then gets evaluated 
+by computing S(x). The main factor of 
+the evaluation value is how the action 
+changed the board layout , since each 
+feature function F\_i (x) looks at different 
+"types" of board layouts (insert ref. to feature policy table).

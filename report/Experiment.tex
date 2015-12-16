@@ -3,6 +3,24 @@
 This section will explore our experimental setup, our verification of CE and 
 and a analysis/discussion of the results.
 
+\subsection{MDP-Tetris}
+
+When running the experiments, the source code of the MDP-Tetris
+\citep{mdptetris} was used to emulate the Tetris games.
+The source code is accompanied with files that describe the
+various existing features. These files contains the identifiers of 
+each feature to use, as well as two numbers respectivly describing 
+the agents reward function and how to evaluate a game over state. 
+The number for the reward function has remained unchanged at $0$ 
+during all experiments. The "game-over" evaluation was for the
+Bertsekas featureset initially set to $0$. Setting the 
+"game-over" evaluation to $0$ means that the agnet will not 
+destinguish between regular moves and moves that results in losing
+the game. When running the experiments with this setting, a large portion
+of the agents never exceeded a zero mean score. However, setting the value
+to $-1$, meaning that a "game-over" move yieds $-\infty$ reward, 
+none of the experiments got stuck on only zero scores.
+
 \subsection{Setup}
 
 When executing the experiments, various parameters each have 
@@ -109,16 +127,44 @@ own contribution to the \shark library, by trying to achieve the same results.\\
 The setup is mirrored as in the paper \citep{thiery:09}, 
 with 100 agents ($\populationSize = 100$) per iteration. 
 The 10 best agents ($\offspringNumber = 10$) will be used 
-to generate the new gaussian distribution. After each iteration, 
+to update gaussian distribution. After each iteration, 
 an agent with the mean weights from the $\offspringNumber$ best agents, 
 play 30 games.\\
-The paper does not specify the number of games 
-played with each agent in an iteration to evaluate their fitness. 
-Thus it is assumed they also play 30 games.\\
+Each agent is during evaluation plays one game, that is $\numberOfEvaluations = 1$.\\
 \\
-\comment{GRAPHS - graps?}\\
-\\
-\comment{ANALYSIS/COMPARE - does graphs compare good?}\\
+\begin{figure}[h]
+\comment{FIGURE MISSING}
+\caption{Cross-Entropy mean performance \label{fig:cemean}}
+\end{figure}
+
+\begin{figure}[h]
+\caption{No noise \label{fig:ceNoNoise}}
+\end{figure}
+
+
+\begin{figure}[h]
+\begin{tikzpicture}
+\begin{axis}[%
+    xlabel={xlabel},
+    ylabel={ylabel}]
+\end{axis}
+\end{tikzpicture}
+\caption{Constant noise \label{fig:ceCnstantNoise}}
+\end{figure}
+
+
+\begin{figure}[h]
+\comment{FIGURE MISSING}
+\caption{Linear decreasing noise \label{fig:ceLinNoise}}
+\end{figure}
+
+Figure \ref{fig:ceNoNoise}, \ref{fig:ceCnstantNoise} and
+\ref{fig:ceLinNoise} shows 10 runs of each noise type. Figure
+\ref{fig:cemean} shows the mean graph for each of the noise types.
+The goal of these experiments were to replicate the experiments 
+reported in \citep{thiery:09}. As the results seen from our experiments
+to a high degree resemble those reported by Theiery et. al, we conclude
+that our Cross-Entropy implementation works similar to theirs.
 \\
 \comment{Conclusion - is CE good enough? cyka blyat}
 
