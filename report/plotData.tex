@@ -1,0 +1,252 @@
+% Plots
+
+
+
+% Plot for constant noise
+\def \constantNoisePlot 
+{
+\begin{axis}[%
+	xmin=0,
+	xmax=80,
+    xlabel={Iteration/Generation},
+    ylabel={Mean score},
+    ymode=log,
+    log basis y={10},
+    width=\textwidth,
+    height=12cm,
+    clip bounding box=upper bound]
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0},
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/ConstantNoise/ce_sigma100_cnoise4_0.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/ConstantNoise/ce_sigma100_cnoise4_1.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/ConstantNoise/ce_sigma100_cnoise4_2.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/ConstantNoise/ce_sigma100_cnoise4_3.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/ConstantNoise/ce_sigma100_cnoise4_4.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/ConstantNoise/ce_sigma100_cnoise4_5.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/ConstantNoise/ce_sigma100_cnoise4_6.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/ConstantNoise/ce_sigma100_cnoise4_7.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/ConstantNoise/ce_sigma100_cnoise4_8.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/ConstantNoise/ce_sigma100_cnoise4_9.txt};
+\end{axis}
+}
+
+
+
+
+% Plot for linear decreasing noise
+\def \linearNoisePlot 
+{
+\begin{axis}[%
+	xmin=0,
+	xmax=80,
+    xlabel={Iteration/Generation},
+    ylabel={Mean score},
+    ymode=log,
+    log basis y={10},
+    width=\textwidth,
+    height=12cm,
+    clip bounding box=upper bound]
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0},
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/LinearNoise/ce_sigma100_lnoise4_0.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/LinearNoise/ce_sigma100_lnoise4_1.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/LinearNoise/ce_sigma100_lnoise4_2.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/LinearNoise/ce_sigma100_lnoise4_3.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/LinearNoise/ce_sigma100_lnoise4_4.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/LinearNoise/ce_sigma100_lnoise4_5.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/LinearNoise/ce_sigma100_lnoise4_6.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/LinearNoise/ce_sigma100_lnoise4_7.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/LinearNoise/ce_sigma100_lnoise4_8.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/LinearNoise/ce_sigma100_lnoise4_9.txt};
+\end{axis}
+}
+
+
+
+
+% Plot for no noise
+\def \noNoisePlot 
+{
+\begin{axis}[%
+	xmin=0,
+	xmax=80,
+    xlabel={Iteration/Generation},
+    ylabel={Mean score},
+    ymode=log,
+    log basis y={10},
+    width=\textwidth,
+    height=12cm,
+    clip bounding box=upper bound]
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/NoNoise/ce_sigma100_0.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/NoNoise/ce_sigma100_1.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/NoNoise/ce_sigma100_2.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/NoNoise/ce_sigma100_3.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/NoNoise/ce_sigma100_4.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/NoNoise/ce_sigma100_5.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/NoNoise/ce_sigma100_6.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/NoNoise/ce_sigma100_7.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/NoNoise/ce_sigma100_8.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/NoNoise/ce_sigma100_9.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0},
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/NoNoise/ce_sigma100_10.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/NoNoise/ce_sigma100_11.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/NoNoise/ce_sigma100_12.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/NoNoise/ce_sigma100_13.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/NoNoise/ce_sigma100_14.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/NoNoise/ce_sigma100_15.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/NoNoise/ce_sigma100_16.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/NoNoise/ce_sigma100_17.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/NoNoise/ce_sigma100_18.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/NoNoise/ce_sigma100_19.txt};
+\addplot[color=black,mark=none] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/NoNoise/ce_sigma100_20.txt};
+\end{axis}
+}
+
+
+% Plot for means
+\def \meansPlot 
+{
+\begin{axis}[%
+	xmin=0,
+	xmax=80,
+    xlabel={Iteration/Generation},
+    ylabel={Mean score},
+    ymode=log,
+    log basis y={10},
+    width=\textwidth,
+    height=12cm,
+    legend pos=south east]
+\addplot[color=black,mark=none, dotted, thick] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/Cemeans/noNoise.txt};
+\addplot[color=black,mark=none, thick] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/Cemeans/constantNoise.txt};
+\addplot[color=black,mark=none,dashed, thick] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/Cemeans/linearNoise.txt};
+\legend{No noise, constant noise, Linear decreasing noise}
+\end{axis}
+}
+
