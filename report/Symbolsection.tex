@@ -9,15 +9,21 @@ CE, Cross-Entropy
 
 $\mean$, the mean of a distribution.\\
 \\
-$\varianceMatrix$, the matix used as second argument to the gaussian distribution, which describes the shape of the distribution. Ususaly, when a sample from a gaussian distribution 
-is drawn, it's written as: $x \sim \mathcal{N} \left( \mu, \sigma^{2} \right)$, however in \citep{hansen2011},
-$\mu$ and $\sigma$ is used for other purposes, and therefore these symbols are kept for this.\\
+$\varianceMatrix$, the matix used as 
+second argument to the gaussian distribution, 
+which describes the shape of the distribution. 
+Usually, when a sample from a gaussian distribution 
+is drawn, it's written as: 
+$x \sim \mathcal{N} \left( \mu, \sigma^{2} \right)$, 
+however in \citep{hansen2011},
+$\mu$ and $\sigma$ is used for other 
+purposes, and therefore these symbols are reserved for this.\\
 \\
 $\populationSize$, number of agents generated per generation/iteration.\\
 \\
 $\numberOfEvaluations$, number of games played by each agent for evaluation.\\
 \\
-$\offspringNumber$, number of the population samples is included in the next generation.\\
+$\offspringNumber$, number of the population samples included in the next generation.\\
 \\
 $\fitnessFunction$, the function that estimates the performance of an agent/sample point.\\
 \\
@@ -25,18 +31,19 @@ $\noise$, noise term added to the variance, specific to Cross-Entropy.\\
 \\
 $\generation$, counter indicating the current generation/iteration.\\
 \\
-$\weight$, the weight configuration of a Tetri playing agent($\dimensions $-dimensional vector).\\
+$\weight$, the weight configuration of a Tetris playing agent($\dimensions $-dimensional vector).\\
 \\
-$\feature$, A feature of the Tetris game state. This is a function that maps a 
+$\feature$, a feature of the Tetris game state. This is a function that maps a 
 feature of the Tetris board to a real value.\\
 \\
-$\valueFunction$, A linear combination of feature functions and weight. 
-The function used for evaluating a Tetris game state. The function is composed of feature sets and thier
-asociated weights, accepts a game state, and yields a single real-value.\\
+$\valueFunction$, a linear combination of feature functions and weight. 
+The function used for evaluating a Tetris game state. 
+The function is composed of a linear combination of feature sets and their
+associated weights, accepts a game state, and yields a single real-value.\\
 \\
-$\gameState$, the state of the Tetris game.\\
+$\gameState$, a state of the Tetris game board.\\
 \\
-$\individual$, an individual agent/search point from a generation/iteration. 
+$\individual$, an individual vector from a generation/iteration. 
 Represented with an $\dimensions$-dimensional vector.
 
 

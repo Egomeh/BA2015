@@ -1,23 +1,22 @@
 \section{Previous work}
 
-Over the time, various researchers has tried various feature 
+Over the time, numerous researchers has tried different feature 
 sets and applied various optimizers to find the best 
 possible Tetris controllers. The features used are typically
 ones that attempt to mimic the board conditions that would
 normally catch the attention of a human player, such as
 how high the overall pile of pieces is and how many holes 
-the board has. In \cite{scherrer2009:b} table 1, a table 
+the board has. In \citep{scherrer2009:b} table 1, a table 
 presents some feature sets used throughout various publications
 on the subject. In later works, many authors have had success
 with applying evolutionary stochastic search methods for tuning 
 the weights of the feature sets towards
 efficient controllers. For the purpose of this thesis,
-we are in particular concerned with the 
+we are in particular addressing the
 Cross-Entropy method described in detail in \citep{cetut2014} and the
 Covariance Matrix Adaption Evolution Strategy (CMA-ES), described 
-in \cite{hansen2011}. For the Cross-Entropy method,
-a certain variant described in \cite{szita:06} using noise
-is the one we will apply in the experiments.\\
+in \citep{hansen2011}. The particular Cross-Entropy method applied 
+is the one described in \citep{szita:06} as the "Noisy Cross Entropy Method".\\
 
 \begin{figure}[h!]
 \begin{center}
@@ -36,7 +35,7 @@ Column transitions & Number of vertical cell transitions \\
 \hline
 Holes & Number of empty cells covered by a full cell\\
 \hline
-Board wells & cumulative sum of cells to the depth of
+Board wells & Cumulative sum of cells to the depth of
 the board wells.\\
 \hline
 \end{tabular}
@@ -44,9 +43,12 @@ the board wells.\\
 \caption{features of the Dellacherie controller \label{table:dellfeat}}
 \end{figure}
 
-Currently, many feature sets exists, as well as optimizations for those have been
-investigated. A controller often referred to is the Dellacherie controller 
-\citep{fahey}. This controller was hand tuned by trial and error,
+
+Currently, many researchers have proposed numerous 
+feature sets and multiple 
+optimization methods have been explored. 
+A controller often referred to is the Dellacherie controller 
+\citep{fahey}. This controller was hand-tuned by trial and error,
 and did originally, on a regular non-simplified Tetris game, achieve an average of
 660 000 lines. The same feature set (see figure \ref{table:dellfeat}) is 
 often incoorporated in later works when optimizing controllers. An earlier

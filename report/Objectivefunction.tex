@@ -1,40 +1,47 @@
 \section{Objective function}
 
-The optimizing algorithms used in this thesis all attempts to 
+The optimizing algorithms used in this thesis both attempts to 
 optimize a certain function. In this case, the optimization 
 function aims to develop the best possible Tetris playing agent.
-Thus, the value of the objecive funtion describes and estimated 
-performance of input agent. The objective function is then 
+Thus, the value of the objective function describes an estimated 
+performance of the input agent. The objective function serves as
 an abstraction to the Tetris emulator that will evaluate 
 the agent by letting the agent play a pre-configured number 
-of games.\\
+of games. The objective function that estimates the performance 
+of an agent is later referred to as $\fitnessFunction$.\\
 \\
 When the Tetris simulator plays Tetris, the internal decision process
-of the tetris controller is configured with a set of parameters that remain
-fixed across the entire game. These parameters are the weights associated 
-with each feature function that is considered by the controller. The features $\feature _{i}$
-each map a state of the game $\gameState$ to a real value. An overview of the exact mappings
+of the Tetris controller is configured with a set of parameters which remain
+fixed across a single game. These parameters are the weights associated 
+with each feature function that is considered by the controller. 
+The features $\feature _{i}$
+each map a state $\gameState$ of the game to a real value. 
+An overview of the exact mappings
 can be seen in table 1 in \citep{scherrer2009:b}. How much each of these mappings
-should count in on the final evaluation of the board is determined by $\weight _{i}$
-denoting the weight of the $i$-th feature. Finally, the function to assess the value 
-of current board state $\valueFunction$, with $\dimensions$ features functions present, can be expressed as:
-
+should affect the final evaluation of the board is determined by $\weight _{i}$
+denoting the weight of the $i$-th feature.
+Finally, the function to assess the value 
+of current board state $\valueFunction \left( \gameState \right)$, 
+with $\dimensions$ features functions present, can be expressed as:
 \begin{align*}
-\valueFunction (\gameState ) &= \sum_{i=1}^{\dimensions} \weight _{i}\feature _{i}(\gameState )
+\valueFunction (\gameState ) &= 
+\sum_{i=1}^{\dimensions} \weight _{i}\feature _{i}(\gameState )
 \end{align*}
-
-For each possible action the controller may take, it simulates 
-the action and evaluate the value of the board for the new state. 
-The final action is the one that yields the state of the highest value.
+Let $\allGameStates$ be the set of all states that each possible 
+action can lead to from the current state $\gameState$. The 
+controller will then for each reachable state 
+$gameState_i \in \allGameStates$ evaluate the state by 
+$\fitnessFunction \left( \gameState_i \right)$. 
+The chosen action is the one that yields the state of the highest value.
 The performance of the controller is hence directly tied to the 
 features and weights in the evaluation function. To adjust these controllers,
-one can either change the set of used feature functions, or as the 
+one can either change the set of applied feature functions, or as the 
 optimization algorithms will do, change the weighting of the features.
 For the experiments, the feature sets remain fixed, and the task of the
 optimization algorithm applied is to tune the set of weights in order 
 to maximize the performance of the controller.\\
 \\
-The objective function then accepts a vector of values for each weight
+In summary, the objective function accepts a vector of values for each weight
 and configures an agent with the weights corresponding to the entries in
 the input vector. It then plays $\numberOfEvaluations$ games with the
 agent and reports the mean score.
@@ -57,7 +64,6 @@ When evaluating each possible action, the
 objective function S is used. As shown in the 
 input-section, the objective function is 
 defined as:
-
 \begin{align*}
 \valueFunction (\gameState ) &= \sum_{i=1}^{\dimensions} \weight _{i}\feature _{i}(\gameState )
 \end{align*}

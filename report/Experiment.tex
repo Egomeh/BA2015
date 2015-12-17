@@ -1,6 +1,6 @@
 \section{Experiments}
 
-This section will explore our experimental setup, our verification of CE and 
+This section will walk through our experimental setup, our verification of CE and 
 and a analysis/discussion of the results.
 
 \subsection{MDP-Tetris}
@@ -19,7 +19,19 @@ distinguish between regular moves and moves that results in losing
 the game. When running the experiments with this setting, a large portion
 of the agents never exceeded a zero mean score. However, setting the value
 to $-1$, meaning that a "game-over" move yields $-\infty$ reward, 
-none of the experiments got stuck on only zero scores.
+none of the experiments got stuck on only zero scores. An example
+of the layout of the feature file can be seen in figure \ref{fig:featfile}.
+\begin{figure}[h!]
+\centering
+\begin{lstlisting}
+0    <- Describes the reward function
+-1   <- Actions leading to game over is avoided at all cost
+22   <- The policy contains 22 features
+8 0  <- The feature with id 8 initially has weight 0
+...  <- The remaining 21 features
+\end{lstlisting}
+\caption{Example of a file that describes a feature set. \label{fig:featfile}}
+\end{figure}
 
  
 \subsection{Normalization of samples}
@@ -33,17 +45,15 @@ possible actions possible with the current piece. It will use the
 value function $\valueFunction$ of each state $\gameState_i$ and 
 choose the state with the highest value from the value function.
 Thus, if the states are ordered such that:
-
 \begin{align*}
 \valueFunction \left(  \gameState_1 \right) 
 > \dots 
 > \valueFunction \left( \gameState_\populationSize \right)
 \end{align*}
 
-The agent chooses the action that leads from the current state 
+The agent then chooses the action that transitions from the current state 
 to state $\gameState_1$.\\
 Since the value function assess the state by the following:
-
 \begin{align*}
 \valueFunction (\gameState ) &= 
 \sum_{i=1}^{\dimensions} \weight _{i}\feature _{i}(\gameState )
@@ -51,14 +61,13 @@ Since the value function assess the state by the following:
 
 Then scaling the input of the agent, the weight vector $\weight$, by a
 number $a \in \mathbb{R}, \ a > 0$ the assessment is changed by:
-
 \begin{align*}
 \sum_{i=1}^{\dimensions} a \weight _{i}\feature _{i}(\gameState ) &= 
-a\sum_{i=1}^{\dimensions} \weight _{i}\feature _{i}(\gameState )
+a\sum_{i=1}^{\dimensions} \weight _{i}\feature _{i}(\gameState )\\
+&= a \valueFunction \left( \gameState \right)
 \end{align*}
 
 And the ordering remains:
-
 \begin{align*}
 a \valueFunction \left(  \gameState_1 \right) 
 > \dots 
@@ -69,14 +78,15 @@ Thus the order of the value functions of
 each state does not change, and the same $\gameState_1$
 is still chosen for any $a \in \mathbb{R}, \ a > 0$.\\
 \\
-To verify this, the Tetris objective function was run using with the
+To verify this, the Tetris objective function was executed with the
 same vector and the same seed for the random generator with a scale
 $a \in \{0.1, 0.2,0.3, \dots, 9.8,9.9,10.0\}$, and the agent scored 
 exactly the same for each scale.\\
 \\
 This can be used in experiments for various reasons. As reported 
-by A. Boumaza, this will prevent CMA-ES from diverging step size,
-and it can prevent loosing precision if the magnitude weight 
+in \citep{boumaza2009}, normalizing the samples will 
+prevent CMA-ES from diverging in step size,
+and it can prevent loosing precision if the magnitude of weight 
 vector becomes larger than feasible for the used floating 
 point number and avoids size limitations.
 
@@ -85,14 +95,14 @@ point number and avoids size limitations.
 \subsection{Setup}
 
 When executing the experiments, various parameters each have 
-impact on the final result of the learning curve. Thus, the parameters
-are adjusted, first to match the experiments run by other authors, and later
-to conduct as fair as possible comparisons between Cross-Entropy and 
-CMA-ES.\\
+an impact on the final result of the learning curve. Thus, the parameters
+are adjusted, first to match the experiments run by other researchers, 
+and later to conduct as fair as possible comparisons between 
+Cross-Entropy and CMA-ES.\\
 \\
 % agents
 The amount of vectors sampled in each generation $\populationSize$
-has obvious impact on the algorithm performance. By setting $\populationSize$
+has a high impact on the algorithm performance. By setting $\populationSize$
 high, more policies are evaluated per iteration, and leads to a more thorough 
 exploration of the search space. Thus the higher $\populationSize$ increases the
 chances of finding a better mean for the next iteration.
@@ -102,7 +112,7 @@ tuning this parameter is then
 to set $\populationSize$ high enough to ensure 
 exploration of good solutions, and yet 
 low enough to avoid unnecessary evaluations.\\
-In the implementation of CMA-ES used in \shark , 
+In the implementation of CMA-ES from \shark , 
 the algorithm  itself determines
 the value of $\populationSize$ according to the 
 size of the search space. 
@@ -116,24 +126,24 @@ As both of the optimizing algorithm uses a subset of the sampled vectors
 from a generation to update the distribution parameters, the number of 
 offspring $\offspringNumber$ influences how the next generation is sampled.
 By setting the value too high, the algorithm risks ceasing to progress any 
-further since the new mean would be too close to the previous mean to 
-significantly move the mean. By setting the value too low,
-we risk reaching a local optimum since the high-scoring agents 
-might have been lucky in "one-time" occurring situations.\\
-Once again, the CMA-ES itself manages setting $\offspringNumber$ and Cross-Entropy
+further since the updated mean would be too close to the previous one to 
+significantly make a difference. By setting the value too low,
+the risk of reaching a local optimum increases since the high-scoring agents
+might have reached their high performance by chance.\\
+The CMA-ES itself manages setting $\offspringNumber$ and Cross-Entropy
 is set according to the problem. Most authors that uses Cross-Entropy for Tetris
 sets the offspring size to $10\%$ of population size, that is 
 $\offspringNumber = \lfloor 0.1 \cdot \populationSize \rfloor $.\\
 \\
 % Number of games per iteration
-The number of games, $\numberOfEvaluations$, is the number of games  which each agent 
-has to play in each iteration. An agent's score from a given
-iteration/generation is defined as the mean of the score of these 
+The number of games, $\numberOfEvaluations$, 
+is the number of games  which each agent 
+plays in each iteration. An agent's score is defined as the 
+mean of the score of these 
 $\numberOfEvaluations$ games.
 We want this value low as possible, because as with the number of
 agents, $\populationSize$, The number of games, $\numberOfEvaluations$, 
-is another major factor which 
-impacts the run-time of the algorithm.
+is another major factor in the run-time of the algorithm.
 As Tetris is stochastic by nature, the score deviates a lot, 
 even when the
 same agent with the same policy plays multiple games. 
@@ -147,15 +157,17 @@ Specific to the Cross-Entropy method,
 most authors report that the performance of the 
 algorithm increases dramatically when the sampling 
 distribution is associated with
-a random noise. The different types of 
+a noise term. The different types of 
 noise are described in section \ref{CrossEntropy}.
 The noise term is adjusted in order to 
 prevent the algorithm from reaching a local optimum.
 The current research shows that noise terms of $\noise_\generation = 4$ and 
-$\noise_\generation = max \left( 5 - \generation / 10 \right)$ \citep{thiery:09}.
+$\noise_\generation = max \left( 5 - \generation / 10 \right)$ 
+\citep{thiery:09} produces the best results.
 The constant noise (such as $\noise_\generation = 4$) ensures that the algorithm
 never settles in a too small area from which it samples, and forces it to explore
-solutions that are further away from the mean. The further the algorithm gets, 
+solutions that are further away from the mean. The further the 
+algorithm progresses, 
 the less noise is assumed needed, as the mean should approach a global optimum. to
 address this, the linear decreasing noise 
 is applied as it will lower the noise term
@@ -182,17 +194,17 @@ we used the same experiments as used by
 Christophe Thiery and Bruno Scherrer \citep{thiery:09}. 
 These experiments were used be Thiery and Scherrer to 
 verify their own CE implementation with various types of noise correction. 
-Therefore, we will utilize the same experiments to verify our 
+Therefore, we will perform the same experiments to verify our 
 own contribution to the \shark library, by trying to achieve the same results.\\
 \\
-The setup is mirrored as in the paper \citep{thiery:09}, 
+The setup is mirrored from the paper \citep{thiery:09}, 
 with 100 agents ($\populationSize = 100$) per iteration. 
 The 10 best agents ($\offspringNumber = 10$) will be used 
 to update gaussian distribution. After each iteration, 
-an agent with the mean weights from the $\offspringNumber$ best agents, 
-play 30 games.\\
-Each agent is during evaluation plays one game, that is $\numberOfEvaluations = 1$.\\
-\\
+an agent with the updated mean 
+plays 30 games and the mean of these scores are recorded for the
+learning curve.\\
+During evaluation each agent plays one game, that is $\numberOfEvaluations = 1$.\\
 \begin{figure}[h!]
 \begin{tikzpicture}
 \meansPlot 

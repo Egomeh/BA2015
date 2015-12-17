@@ -2,16 +2,16 @@
 
 
 The experiments will be carried out on the simplified version of
-Tetris using the MDPTetris software found at \cite{mdptetris},
-which is the same simulator used by Scherrer et al. in \cite{scherrer2009:b} among 
-other authors in various papers.
+Tetris using the MDPTetris software found at \citep{mdptetris},
+which is the same simulator used by Scherrer et al. in \citep{scherrer2009:b} 
+among other authors in various papers.
 This software already have the well known feature sets
 implemented, so we will not ourselves extend any of the features.
 The source code of the Tetris simulator is used as-is, and is therefore 
 not altered prior to running the experiments. 
-For comparing the optimizers, the Shark\footnote{See \url{http://image.diku.dk/shark/} or \cite{shark08}
-} library will be used. This library already contains an
-implementation of the CMA-ES optimizer, but lack the 
+For comparing the optimizers, the \shark library will be used. 
+This library already contains an
+implementation of the CMA-ES optimizer, but lacks the 
 Cross-Entropy. Therefore, a part of this thesis will
 be to implement and document the Cross-Entropy method in Shark.
 

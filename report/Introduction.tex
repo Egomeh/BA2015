@@ -5,7 +5,7 @@ for learning algorithms are designing agents
 for playing the classical game of Tetris. Tetris is an 
 appealing benchmarking problem due to it's complexity. The 
 standard games plays on a board made from a grid that is
-10 cells wide and 20 cells high. As the game progress, differently
+10 cells wide and 20 cells tall. As the game progress, differently
 shaped pieces fall from the top of the board. 
 When a row on the board is fully occupied by pieces, the line
 is removed, all lines above it moved one line down and a score
@@ -31,9 +31,10 @@ in which
 controllers need only to decide in what column to drop the current
 piece, and what orientation the piece should have when dropped.
 Thus, the simplified version of Tetris differs from the 
-original game in two main ways. One is that the controller is 
+original game mainly in two significant aspects. 
+First, the controller is 
 disallowed to move the piece horizontally while the piece 
-is falling. The other is that the controller has 'infinite'
+is falling. Second, the controller has 'infinite'
 time to make its decision on where to drop the current piece.
 Thus, the controller cannot take advantage of moving the piece 
 during the fall, but is not restricted by the time limitations.
@@ -46,7 +47,7 @@ leads to the most favourable board state. To evaluate the board
 state, the controller uses a set of features that defines 
 various qualities of the board, and associate a weight to each 
 feature. This means that the efficiency of the controller 
-is determined by which features of the board are considered by
+is determined by the features the controller is aware of
 and how heavily they are weighted. This allows
 the controller with $n$ features to be expressed as an 
 $n$ dimensional real-valued vector, with one dimension 
@@ -54,7 +55,7 @@ per feature, and the value in that dimension the weight.
 An often referred to controller is the Dellacherie's controller, 
 as described in \cite{scherrer2009}. This controller
 takes six features of the board into account, seen in table 
-\ref{table:dellfeat}.
+\ref{table:dellfeat} on page \pageref{table:dellfeat}.
 
 
 
@@ -72,13 +73,18 @@ outperforms existing controllers, but only to investigate
 how the Cross-Entropy and CMA-ES differs when learning Tetris
 with similar controllers.\\
 \\
-In this paper, we will investigate the state-of-the-art Tetris and also the optimization 
-algorithms, CMA-ES and CE, to get a theoretical understanding of the task and how they 
-apply to Tetris.\\
-From the the SHARK library \citep{shark08} we have a working implementation of the CMA-ES 
-algorithm. However, the Cross-Entropy method is not present in the SHARK library and thus 
-we must implement it ourselves according to the other researchers work. To document the 
-soundness of the implemented CE method, we will replicate other researchers experiments and 
-verify that we obtain the same results.\\
-Then we will benchmark CMA-ES and CE against eachother 
+In this paper, we will explore how the two state-of-the-art
+optimization algorithms, Cross-Entropy and CMA-ES, differ when 
+applied to the task of playing Tetris.\\
+\\
+The SHARK library \citep{shark08} contains a
+working implementation of the CMA-ES 
+algorithm. However, the Cross-Entropy method 
+is not present in the SHARK library and thus, 
+a part of the thesis is to implement it ourselves according to 
+the other researchers work. To document the 
+soundness of the implemented CE method, 
+we will replicate the experiment in \citep{thiery:09} and 
+verify that we obtain the similar results.\\
+Then, we will benchmark CMA-ES and CE against each other 
 to determine if one yields better optimization results than the other.
