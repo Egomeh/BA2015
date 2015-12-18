@@ -1,6 +1,6 @@
 import threading
 import Queue
-import subprocess
+import os
 
 tasks = Queue.Queue()
 
@@ -12,16 +12,23 @@ class Worker (threading.Thread):
 
 def work():
   while not tasks.empty():
-    (cmd, arg) = tasks.get()
-    subprocess.call([cmd, arg])
+    cmd = tasks.get()
+    print cmd
+    os.system( cmd )
 
 def main():
   
   
-  for i in range(0, 1):
-    tasks.put( ("echo \"Hehe\" > %d.txt" % i, "") )
+  for i in range(0, 10):
+    tasks.put( "./ExampleProject -optimizer=ce -noiseType=0 -noise=0 -maxiter=81 -sigma=100 -output=ce_NoNoise_%d" % i )
 
-  nThreads = 1
+  for i in range(0, 10):
+    tasks.put( "./ExampleProject -optimizer=ce -noiseType=1 -noise=4 -maxiter=81 -sigma=100 -output=ce_ConstantNoise_%d" % i )
+
+  for i in range(0, 10):
+    tasks.put( "./ExampleProject -optimizer=ce -noiseType=2 -noise=4 -maxiter=81 -sigma=100 -output=ce_LinearNoise_%d" % i )
+
+  nThreads = 4
   threads = []
   for i in range(0, nThreads):
     t = threading.Thread(target=work, args=[])
