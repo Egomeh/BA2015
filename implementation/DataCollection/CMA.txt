@@ -1,0 +1,1 @@
+(./ExampleProject -optimizer=cma -maxagents=8000 -sigma=1 -output=cma_sigma_1_$i) x 10
