@@ -55,9 +55,21 @@
 /* Number of games to play when asserting the performance of the mean */
 #define OPT_NB_LEARNING_GAMES  "-nblearnames"
 #define OPT_OUTPUTNAME         "-output"
+
+/* Options for stopping criteria */
 #define OPT_MAXITER            "-maxiter"
+#define OPT_MAX_AGENTS         "-maxagents"
+
+/* Noise type for the Cross Entropy */
 #define OPT_NOISETYPE          "-noiseType"
 #define OPT_NOISE              "-noise"
+
+/* The stopping criteria for the experiment */
+enum StoppingCriteria
+{
+    STOP_BY_ITERATION,
+    STOP_BY_AGENTS_EVALUATED
+};
 
 void useCMA(std::string startPolicyFile,
             std::string piecesFile,
@@ -68,6 +80,8 @@ void useCMA(std::string startPolicyFile,
             int randomSeed,
             double initialSigma,
             unsigned int maxIterations,
+            unsigned int maxAgents,
+            StoppingCriteria stoppingCriteria,
             std::ostream & out,
             std::string outname)
 {
@@ -99,11 +113,13 @@ void useCMA(std::string startPolicyFile,
 
     cma.setSigma(initialSigma);
 
-    int t = 1;
+    int t = 0;
     int generation = 0;
     double bestScore = 0.0;
 
-    while (cma.solution().value > 0.0 && generation < maxIterations)
+    bool running = true;
+
+    while (running)
     {
 
         cma.step(objFun);
@@ -120,7 +136,7 @@ void useCMA(std::string startPolicyFile,
 
             std::ofstream fs;
             fs.open (outname.c_str(), std::ios::app);
-            fs << generation << "," << mean_score << std::endl;
+            fs << generation << "," << t << "," << mean_score << std::endl;
         }
 
         if (TETRIS_MAX_SCORE - cma.solution().value > bestScore)
@@ -132,6 +148,14 @@ void useCMA(std::string startPolicyFile,
             _DUMP(solution);
         }
         generation++;
+        if (stoppingCriteria == STOP_BY_ITERATION && generation > maxIterations)
+        {
+            running = false;
+        }
+        else if (stoppingCriteria == STOP_BY_AGENTS_EVALUATED && t > maxAgents)
+        {
+            running = false;
+        }
     }
 
 
@@ -147,6 +171,8 @@ void useCE(std::string startPolicyFile,
            int randomSeed,
            double initialSigma,
            unsigned int maxIterations,
+           unsigned int maxAgents,
+           StoppingCriteria stoppingCriteria,
            std::ostream & out,
            std::string outname,
            shark::CrossEntropy::SamplingNoise noiseType,
@@ -193,11 +219,13 @@ void useCE(std::string startPolicyFile,
     // Still need to set the initial sigma vector
 
 
-    int t = 1;
+    int t = 0;
     int generation = 0;
     double bestScore = 0.0;
 
-    while (ce.solution().value > 0.0 && generation < maxIterations)
+    bool running = true;
+
+    while (running)
     {
         _DUMP(generation);
         ce.step(objFun);
@@ -214,7 +242,7 @@ void useCE(std::string startPolicyFile,
 
             std::ofstream fs;
             fs.open (outname.c_str(), std::ios::app);
-            fs << generation << "," << mean_score << std::endl;
+            fs << generation << "," << t << "," << mean_score << std::endl;
         }
 
         if (TETRIS_MAX_SCORE - ce.solution().value > bestScore)
@@ -226,6 +254,14 @@ void useCE(std::string startPolicyFile,
             _DUMP(solution);
         }
         generation++;
+        if (stoppingCriteria == STOP_BY_ITERATION && generation > maxIterations)
+        {
+            running = false;
+        }
+        else if (stoppingCriteria == STOP_BY_AGENTS_EVALUATED && t > maxAgents)
+        {
+            running = false;
+        }
     }
 
 
@@ -345,10 +381,18 @@ int main( int argc, char ** argv )
     unsigned int boardWidth = 10;
     unsigned int boardHeight = 20;
 
-    unsigned int maxIterations = 5000;
+    StoppingCriteria stoppingCriteria = STOP_BY_ITERATION;
+    unsigned int maxIterations = 80;  /* Default stop at 80 iterations */
+    unsigned int maxAgents = 80000;   /* Default agents to evaluate is 80000 */
     if (options.count(OPT_MAXITER) == 1)
     {
         maxIterations = atoi ( options[OPT_MAXITER].c_str() );
+        stoppingCriteria = STOP_BY_ITERATION;
+    }
+    else if (options.count(OPT_MAX_AGENTS) == 1)
+    {
+        maxAgents = atoi ( options[OPT_MAX_AGENTS].c_str() );
+        stoppingCriteria = STOP_BY_AGENTS_EVALUATED;
     }
 
     std::string outputfile = std::string("");
@@ -356,9 +400,13 @@ int main( int argc, char ** argv )
     {
         outputfile = std::string(options[OPT_OUTPUTNAME]) + ".txt";
 
-
+        /* Write the header */
         std::ofstream fs;
         fs.open (outputfile.c_str());
+
+        fs << "generation,agents,score" << std::endl;
+
+        fs.close();
 
         /*
         fs << "Start-Experiment" << std::endl;
@@ -389,8 +437,6 @@ int main( int argc, char ** argv )
         fs << "End-Policy" << std::endl;
         */
 
-        fs.close();
-
 
     }
 
@@ -408,6 +454,8 @@ int main( int argc, char ** argv )
                     seed,
                     initialSigma,
                     maxIterations,
+                    maxAgents,
+                    stoppingCriteria,
                     std::cout,
                     outputfile
             );
@@ -424,6 +472,8 @@ int main( int argc, char ** argv )
                     seed,
                     initialSigma,
                     maxIterations,
+                    maxAgents,
+                    stoppingCriteria,
                     std::cout,
                     outputfile,
                     noiseType,
