@@ -1,3 +1,3 @@
-(./ExampleProject -optimizer=ce -noiseType=0 -noise=0 -maxiter=80 -sigma=100 -output=ce_NoNoise_$i) x 10
-(./ExampleProject -optimizer=ce -noiseType=1 -noise=4 -maxiter=80 -sigma=100 -output=ce_ConstantNoise_$i) x 10
-(./ExampleProject -optimizer=ce -noiseType=2 -noise=4 -maxiter=80 -sigma=100 -output=ce_LinearNoise_$i) x 10
+(./ExampleProject -optimizer=ce -noiseType=0 -noise=0 -maxiter=80 -sigma=100 -nbgames=1 -nblearnames=30 -output=ce_NoNoise_$i) x 10
+(./ExampleProject -optimizer=ce -noiseType=1 -noise=4 -maxiter=80 -sigma=100 -nbgames=1 -nblearnames=30 -output=ce_ConstantNoise_$i) x 10
+(./ExampleProject -optimizer=ce -noiseType=2 -noise=4 -maxiter=80 -sigma=100 -nbgames=1 -nblearnames=30 -output=ce_LinearNoise_$i) x 10
