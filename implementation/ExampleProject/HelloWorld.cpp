@@ -119,6 +119,19 @@ void useCMA(std::string startPolicyFile,
 
     bool running = true;
 
+    /* Report header for CSV output */
+    if ( outname.size() > 0 )
+    {
+        /* Write the header */
+        std::ofstream fs;
+        fs.open (outname.c_str());
+
+        fs << "generation,agents,score,stepsize" << std::endl;
+
+        fs.close();
+    }
+
+
     while (running)
     {
 
@@ -136,7 +149,7 @@ void useCMA(std::string startPolicyFile,
 
             std::ofstream fs;
             fs.open (outname.c_str(), std::ios::app);
-            fs << generation << "," << t << "," << mean_score << std::endl;
+            fs << generation << "," << t << "," << mean_score << "," << cma.sigma() << std::endl;
         }
 
         if (TETRIS_MAX_SCORE - cma.solution().value > bestScore)
@@ -224,6 +237,19 @@ void useCE(std::string startPolicyFile,
     double bestScore = 0.0;
 
     bool running = true;
+
+
+    /* Report header for CSV output */
+    if ( outname.size() > 0 )
+    {
+        /* Write the header */
+        std::ofstream fs;
+        fs.open (outname.c_str());
+
+        fs << "generation,agents,score" << std::endl;
+
+        fs.close();
+    }
 
     while (running)
     {
@@ -399,45 +425,6 @@ int main( int argc, char ** argv )
     if (options.count(OPT_OUTPUTNAME) == 1)
     {
         outputfile = std::string(options[OPT_OUTPUTNAME]) + ".txt";
-
-        /* Write the header */
-        std::ofstream fs;
-        fs.open (outputfile.c_str());
-
-        fs << "generation,agents,score" << std::endl;
-
-        fs.close();
-
-        /*
-        fs << "Start-Experiment" << std::endl;
-        fs << "optimizer:" << options[OPT_OPTIMIZER] << std::endl;
-        fs << "game-width:" << boardWidth << std::endl;
-        fs << "game-height:" << boardHeight << std::endl;
-        fs << "game-height:" << boardHeight << std::endl;
-        fs << "game-evaluations:" << nbGames << std::endl;
-        fs << "seed:" << seed << std::endl;
-        fs << "End-Experiment" << std::endl;
-
-        std::ifstream ifs;
-        ifs.open(start_policy.c_str());
-
-        fs << "Start-Policy" << std::endl;
-
-        std::string line;
-        while (!ifs.eof()) {
-            std::getline(ifs, line);
-            fs << line;
-            if (!ifs.eof())
-            {
-                fs << std::endl;
-            }
-        }
-        ifs.close();
-
-        fs << "End-Policy" << std::endl;
-        */
-
-
     }
 
     if ( options.count(OPT_OPTIMIZER) == 1 )
