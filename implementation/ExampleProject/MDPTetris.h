@@ -31,6 +31,31 @@ extern "C"{
 class MDPTetris : public shark::SingleObjectiveFunction {
 
 public:
+
+    class MDPTetrisDetailedResult
+    {
+    public:
+        MDPTetrisDetailedResult(unsigned int minScore, unsigned int maxScore, double mean, double standardDeviation)
+            : m_maxScore(maxScore),
+              m_minScore(minScore),
+              m_mean(mean),
+              m_standardDeviation(standardDeviation){};
+
+        /* Get the values */
+        double mean(void) const { return m_mean; }
+        double standardDeviation(void) const { return m_standardDeviation; }
+        unsigned int maxScore(void) const { return m_maxScore; }
+        unsigned int minScore(void) const { return m_minScore; }
+    private:
+        /* Highest and lowest score of the game played */
+        unsigned int m_maxScore, m_minScore;
+
+        /* Mean score and standard deviation */
+        double m_mean, m_standardDeviation;
+
+    };
+
+
     MDPTetris(int board_width, int board_height, int nb_games,
               Game *game, GamesStatistics *stats, std::string featureFile);
 
@@ -42,7 +67,10 @@ public:
     std::size_t numberOfVariables() const;
 
     /* The function for evaluating a single feature policy */
-    ResultType eval(const SearchPointType &input) const; 
+    ResultType eval(const SearchPointType &input) const;
+
+    /* The function for evaluating a single feature policy */
+    MDPTetrisDetailedResult evalDetailed(const SearchPointType &input) const;
 
     /* Set the game data file */
     void setGamedataFilename(std::string filename)
@@ -76,6 +104,10 @@ private:
 
     /* A filename to which game data is written */
     std::string m_gamedataFilename;
+
+    /* Info about last evaluation */
+    unsigned int m_lastMinScore, m_lastMaxScore;
+    double m_lastStandardDeviation;
 
 };
 

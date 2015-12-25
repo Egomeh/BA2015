@@ -171,7 +171,7 @@ void useCMA(std::string startPolicyFile,
         std::ofstream fs;
         fs.open (outname.c_str());
 
-        fs << "generation,agents,score,stepsize" << std::endl;
+        fs << "generation,agents,minScore,maxScore,meanScore,standardDeviation,stepSize" << std::endl;
 
         fs.close();
     }
@@ -188,13 +188,19 @@ void useCMA(std::string startPolicyFile,
 
             /* Set the number of games for the learning curve */
             objFun.setNbGames(nbLearnGames);
-            double mean_score = TETRIS_MAX_SCORE - objFun.eval(cma.mean());
+            MDPTetris::MDPTetrisDetailedResult report = objFun.evalDetailed(cma.mean());
             objFun.setNbGames(nbGames);
 
 
             std::ofstream fs;
             fs.open (outname.c_str(), std::ios::app);
-            fs << generation << "," << t << "," << mean_score << "," << cma.sigma() << std::endl;
+            fs << generation << ","
+               << t << ","
+               << report.minScore() << ","
+               << report.maxScore() << ","
+               << report.mean() << ","
+               << report.standardDeviation() << ","
+               << cma.sigma() << std::endl;
         }
 
         if (TETRIS_MAX_SCORE - cma.solution().value > bestScore)
@@ -294,7 +300,7 @@ void useCE(std::string startPolicyFile,
         std::ofstream fs;
         fs.open (outname.c_str());
 
-        fs << "generation,agents,score" << std::endl;
+        fs << "generation,agents,minScore,maxScore,meanScore,standardDeviation" << std::endl;
 
         fs.close();
     }
@@ -310,13 +316,18 @@ void useCE(std::string startPolicyFile,
 
             /* Set the number of games for the learning curve */
             objFun.setNbGames(nbLearnGames);
-            double mean_score = TETRIS_MAX_SCORE - objFun.eval(ce.mean());
+            MDPTetris::MDPTetrisDetailedResult report = objFun.evalDetailed(ce.mean());
             objFun.setNbGames(nbGames);
 
 
             std::ofstream fs;
             fs.open (outname.c_str(), std::ios::app);
-            fs << generation << "," << t << "," << mean_score << std::endl;
+            fs << generation << ","
+            << t << ","
+            << report.minScore() << ","
+            << report.maxScore() << ","
+            << report.mean() << ","
+            << report.standardDeviation() << std::endl;
         }
 
         if (TETRIS_MAX_SCORE - ce.solution().value > bestScore)
