@@ -64,11 +64,41 @@
 #define OPT_NOISETYPE          "-noiseType"
 #define OPT_NOISE              "-noise"
 
+/* Lower bound on the step size */
+#define OPT_LOWER_BOUND        "-lbound"
+
 /* The stopping criteria for the experiment */
 enum StoppingCriteria
 {
     STOP_BY_ITERATION,
     STOP_BY_AGENTS_EVALUATED
+};
+
+/* This class is used to hand non-default experiment variables
+ * to the experiment functions
+ * */
+template<class T>
+class ExperimentOptionType
+{
+public:
+    /* Constructor, only sets the values */
+    ExperimentOptionType(bool use, T value)
+    : m_use(use), m_value(value) {};
+
+    /* Check if used */
+    bool used(void) const
+    { return m_use; }
+
+    /* Get the value */
+    const T &operator()(void) const
+    { return m_value; }
+
+private:
+    /* Indicates if the option should be applied */
+    bool m_use;
+
+    /* If applied, apply this value */
+    T    m_value;
 };
 
 void useCMA(std::string startPolicyFile,
@@ -78,12 +108,13 @@ void useCMA(std::string startPolicyFile,
             unsigned int boardWidth,
             unsigned int boardHeight,
             int randomSeed,
-            double initialSigma,
+            ExperimentOptionType<double> initialSigma,
             unsigned int maxIterations,
             unsigned int maxAgents,
             StoppingCriteria stoppingCriteria,
             std::ostream & out,
-            std::string outname)
+            std::string outname,
+            ExperimentOptionType<double> lowerBound)
 {
     out << "Running CMA-ES with following configurations" << std::endl;
     out << "Start policy       : " << startPolicyFile << std::endl;
@@ -93,8 +124,11 @@ void useCMA(std::string startPolicyFile,
     out << "Game board with    : " << boardWidth << std::endl;
     out << "Game board height  : " << boardHeight << std::endl;
     out << "Random seed        : " << randomSeed << std::endl;
-    out << "initialSigma       : " << initialSigma << std::endl;
+    if (initialSigma.used())
+        out << "initialSigma       : " << initialSigma() << std::endl;
     out << "MaxIterations      : " << maxIterations << std::endl;
+    if (lowerBound.used())
+        out << "lowerBound       : " << lowerBound() << std::endl;
 
     initialize_random_generator( randomSeed );
     shark::Rng::seed( randomSeed );
@@ -111,7 +145,18 @@ void useCMA(std::string startPolicyFile,
 
     cma.init(objFun);
 
-    cma.setSigma(initialSigma);
+    /* Set the initial sigma */
+    if (initialSigma.used())
+    {
+        cma.setSigma(initialSigma());
+    }
+
+    /* Set the lower bound */
+    if(lowerBound.used())
+    {
+        cma.lowerBound() = lowerBound();
+    }
+
 
     int t = 0;
     int generation = 0;
@@ -182,7 +227,7 @@ void useCE(std::string startPolicyFile,
            unsigned int boardWidth,
            unsigned int boardHeight,
            int randomSeed,
-           double initialSigma,
+           ExperimentOptionType<double> initialSigma,
            unsigned int maxIterations,
            unsigned int maxAgents,
            StoppingCriteria stoppingCriteria,
@@ -199,7 +244,8 @@ void useCE(std::string startPolicyFile,
     out << "Game board with    : " << boardWidth << std::endl;
     out << "Game board height  : " << boardHeight << std::endl;
     out << "Random seed        : " << randomSeed << std::endl;
-    out << "initialSigma       : " << initialSigma << std::endl;
+    if (initialSigma.used())
+        out << "initialSigma       : " << initialSigma() << std::endl;
     out << "MaxIterations      : " << maxIterations << std::endl;
 
     initialize_random_generator( randomSeed );
@@ -226,8 +272,10 @@ void useCE(std::string startPolicyFile,
     out << "NoiseType          : " << noiseType << std::endl;
     out << "Noise              : " << noise << std::endl;
 
-
-    ce.setSigma(initialSigma);
+    if (initialSigma.used())
+    {
+        ce.setSigma(initialSigma());
+    }
 
     // Still need to set the initial sigma vector
 
@@ -332,7 +380,7 @@ int main( int argc, char ** argv )
     std::string start_policy;
     if (options.count(OPT_START_POL_FILE) == 1)
     {
-        start_policy = options[OPT_START_POL_FILE];
+        start_policy = MDPTETRIS_DATA_PATH(options[OPT_START_POL_FILE]);
     }
     else
     {
@@ -351,10 +399,29 @@ int main( int argc, char ** argv )
         piece_file = MDPTETRIS_DATA_PATH("pieces4.dat");
     }
 
-    double initialSigma = 1.0;
+    /* Optionally set the initial Sigma
+     * For Cross entropy, this sets all the variance
+     * intries to the value given.
+     * In CMA this is the initial step-size.
+     * */
+    ExperimentOptionType<double> initialSigma(false, 1.0);
     if (options.count(OPT_INITIAL_SIGMA) == 1)
     {
-        initialSigma = atof ( options[OPT_INITIAL_SIGMA].c_str() );
+        double s = atof ( options[OPT_INITIAL_SIGMA].c_str() );
+        initialSigma = ExperimentOptionType<double>(true, s);
+    }
+
+    /* CMA specific lower bound.
+     * The will force the CMA step-size to keep
+     * the smallest eignvalue of the covariance matrix
+     * multiplied by the step-size to stay above this
+     * value.
+     * */
+    ExperimentOptionType<double> lowerBound(false, 1E-20);
+    if (options.count(OPT_LOWER_BOUND) == 1)
+    {
+        double s = atof ( options[OPT_LOWER_BOUND].c_str() );
+        lowerBound = ExperimentOptionType<double>(true, s);
     }
 
 
@@ -397,7 +464,7 @@ int main( int argc, char ** argv )
         }
     }
 
-
+    /* Cross Entropy specific for noise type */
     double noise = 0;
     if (options.count(OPT_NOISE) == 1)
     {
@@ -444,7 +511,8 @@ int main( int argc, char ** argv )
                     maxAgents,
                     stoppingCriteria,
                     std::cout,
-                    outputfile
+                    outputfile,
+                    lowerBound
             );
         }
         else if ( options[OPT_OPTIMIZER].compare("ce") == 0 )
