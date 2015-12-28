@@ -67,6 +67,10 @@
 /* Lower bound on the step size */
 #define OPT_LOWER_BOUND        "-lbound"
 
+/* Options for regulating population and offspring */
+#define OPT_LAMBDA             "-lambda"
+#define OPT_OFFSPRING          "-offspring"
+
 /* The stopping criteria for the experiment */
 enum StoppingCriteria
 {
@@ -114,7 +118,9 @@ void useCMA(std::string startPolicyFile,
             StoppingCriteria stoppingCriteria,
             std::ostream & out,
             std::string outname,
-            ExperimentOptionType<double> lowerBound)
+            ExperimentOptionType<double> lowerBound,
+            ExperimentOptionType<unsigned int> lambda,
+            ExperimentOptionType<unsigned int> offspring)
 {
     out << "Running CMA-ES with following configurations" << std::endl;
     out << "Start policy       : " << startPolicyFile << std::endl;
@@ -155,6 +161,16 @@ void useCMA(std::string startPolicyFile,
     if(lowerBound.used())
     {
         cma.lowerBound() = lowerBound();
+    }
+
+    /* set lambda and offspring size */
+    if(lambda.used())
+    {
+        cma.lambda() = lambda();
+    }
+    if(offspring.used())
+    {
+        cma.mu() = offspring();
     }
 
 
@@ -240,7 +256,10 @@ void useCE(std::string startPolicyFile,
            std::ostream & out,
            std::string outname,
            shark::CrossEntropy::SamplingNoise noiseType,
-           double noise)
+           double noise,
+           ExperimentOptionType<unsigned int> lambda,
+           ExperimentOptionType<unsigned int> offspring
+)
 {
     out << "Running Cross Entropy with following configurations" << std::endl;
     out << "Start policy       : " << startPolicyFile << std::endl;
@@ -281,6 +300,15 @@ void useCE(std::string startPolicyFile,
     if (initialSigma.used())
     {
         ce.setSigma(initialSigma());
+    }
+
+    if(lambda.used())
+    {
+        ce.lambda() = lambda();
+    }
+    if(offspring.used())
+    {
+        ce.mu() = offspring();
     }
 
     // Still need to set the initial sigma vector
@@ -436,6 +464,23 @@ int main( int argc, char ** argv )
     }
 
 
+    /* Register option for population size */
+    ExperimentOptionType<unsigned int> lambda(false, 100);
+    if (options.count(OPT_LAMBDA) == 1)
+    {
+        int i = atoi( options[OPT_LAMBDA].c_str() );
+        lambda = ExperimentOptionType<unsigned int>(true, i);
+    }
+
+    /* Register option for offspriong size */
+    ExperimentOptionType<unsigned int> offspring(false, 100);
+    if (options.count(OPT_OFFSPRING) == 1)
+    {
+        int i = atoi( options[OPT_OFFSPRING].c_str() );
+        offspring = ExperimentOptionType<unsigned int>(true, i);
+    }
+
+
     unsigned int nbGames = 1;
     if (options.count(OPT_NB_GAMES) == 1)
     {
@@ -523,7 +568,9 @@ int main( int argc, char ** argv )
                     stoppingCriteria,
                     std::cout,
                     outputfile,
-                    lowerBound
+                    lowerBound,
+                    lambda,
+                    offspring
             );
         }
         else if ( options[OPT_OPTIMIZER].compare("ce") == 0 )
@@ -543,7 +590,9 @@ int main( int argc, char ** argv )
                     std::cout,
                     outputfile,
                     noiseType,
-                    noise
+                    noise,
+                    lambda,
+                    offspring
             );
         }
     }

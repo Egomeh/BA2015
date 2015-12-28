@@ -1,0 +1,8 @@
+(./ExampleProject -optimizer=ce -noiseType=1 -noise=4 -maxagents=8000 -lambda=10  -offspring=1   -sigma=100 -nbgames=1 -nblearnames=30 -output=ce_ConstantNoise_l10_o1_$i) x 10
+(./ExampleProject -optimizer=ce -noiseType=1 -noise=4 -maxagents=8000 -lambda=22  -offspring=2   -sigma=100 -nbgames=1 -nblearnames=30 -output=ce_ConstantNoise_l22_o2_$i) x 10
+(./ExampleProject -optimizer=ce -noiseType=1 -noise=4 -maxagents=8000 -lambda=50  -offspring=5   -sigma=100 -nbgames=1 -nblearnames=30 -output=ce_ConstantNoise_l50_o5_$i) x 10
+(./ExampleProject -optimizer=ce -noiseType=1 -noise=4 -maxagents=8000 -lambda=10  -offspring=5   -sigma=100 -nbgames=1 -nblearnames=30 -output=ce_ConstantNoise_l10_o5_$i) x 10
+(./ExampleProject -optimizer=ce -noiseType=1 -noise=4 -maxagents=8000 -lambda=22  -offspring=11  -sigma=100 -nbgames=1 -nblearnames=30 -output=ce_ConstantNoise_l22_o11_$i) x 10
+(./ExampleProject -optimizer=ce -noiseType=1 -noise=4 -maxagents=8000 -lambda=50  -offspring=25  -sigma=100 -nbgames=1 -nblearnames=30 -output=ce_ConstantNoise_l50_o25_$i) x 10
+(./ExampleProject -optimizer=ce -noiseType=1 -noise=4 -maxagents=8000 -lambda=200 -offspring=20  -sigma=100 -nbgames=1 -nblearnames=30 -output=ce_ConstantNoise_l200_o20_$i) x 10
+(./ExampleProject -optimizer=ce -noiseType=1 -noise=4 -maxagents=8000 -lambda=200 -offspring=100 -sigma=100 -nbgames=1 -nblearnames=30 -output=ce_ConstantNoise_l200_o100_$i) x 10
