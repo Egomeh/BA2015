@@ -1,0 +1,2 @@
+(./ExampleProject -optimizer=ce -pieceFile=STLpieces4.dat -startPolicy=starting_policy00.dat -noiseType=1 -noise=4 -maxagents=8000 -sigma=100 -nbgames=1 -nblearnames=30 -output=ce_$i) x 10
+(./ExampleProject -optimizer=cma -pieceFile=STLpieces4.dat -startPolicy=starting_policy00.dat -maxagents=8000 -sigma=10 -lbound=1 -nbgames=1 -nblearnames=30 -output=cma_$i) x 10
