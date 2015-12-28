@@ -431,7 +431,7 @@ int main( int argc, char ** argv )
     std::string piece_file;
     if (options.count(OPT_PIECE_FILE) == 1)
     {
-        piece_file = options[OPT_PIECE_FILE];
+        piece_file = MDPTETRIS_DATA_PATH(options[OPT_PIECE_FILE]);
     }
     else
     {
