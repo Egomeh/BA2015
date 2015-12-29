@@ -1,0 +1,3 @@
+(./ExampleProject -optimizer=cma -maxagents=8000 -sigma=10 -nbgames=1 -nblearnames=30 -lbound=0.5 -output=cma_bound_0_5_$i) x 10
+(./ExampleProject -optimizer=cma -maxagents=8000 -sigma=10 -nbgames=1 -nblearnames=30 -lbound=2.0 -output=cma_bound_2_0_$i) x 10
+(./ExampleProject -optimizer=cma -maxagents=8000 -sigma=10 -nbgames=1 -nblearnames=30 -lbound=4.0 -output=cma_bound_4_0_$i) x 10
