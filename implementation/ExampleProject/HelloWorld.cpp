@@ -202,7 +202,7 @@ void useCMA(std::string startPolicyFile,
     {
 
         cma.step(objFun);
-        t += cma.lambda();
+        t += cma.lambda() * nbGames;
 
         if ( outname.size() > 0 )
         {
@@ -348,7 +348,7 @@ void useCE(std::string startPolicyFile,
     {
         _DUMP(generation);
         ce.step(objFun);
-        t += ce.lambda();
+        t += ce.lambda() * nbGames;
 
         if ( outname.size() > 0 )
         {
