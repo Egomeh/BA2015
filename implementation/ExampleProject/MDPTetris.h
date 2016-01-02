@@ -35,17 +35,67 @@ public:
     class MDPTetrisDetailedResult
     {
     public:
-        MDPTetrisDetailedResult(unsigned int minScore, unsigned int maxScore, double mean, double standardDeviation)
+        MDPTetrisDetailedResult(
+                unsigned int minScore,
+                unsigned int maxScore,
+                double mean,
+                double standardDeviation,
+                std::vector<unsigned int> scores,
+                std::vector<int> policy,
+                std::vector<double> weights)
             : m_maxScore(maxScore),
               m_minScore(minScore),
               m_mean(mean),
-              m_standardDeviation(standardDeviation){};
+              m_standardDeviation(standardDeviation),
+              m_scores(scores),
+              m_policy(policy),
+              m_weights(weights){};
 
         /* Get the values */
         double mean(void) const { return m_mean; }
         double standardDeviation(void) const { return m_standardDeviation; }
         unsigned int maxScore(void) const { return m_maxScore; }
         unsigned int minScore(void) const { return m_minScore; }
+        std::vector<unsigned int> scores(void) const {return m_scores; }
+        std::vector<int> policy(void) const { return m_policy; }
+        std::vector<double> weights(void) const { return m_weights; }
+
+        /* Pretty print scores */
+        std::string printScores(std::string sep)
+        {
+            std::stringstream s;
+            for (int i = 0; i < m_scores.size()-1; i++)
+            {
+                s << m_scores[i] << sep;
+            }
+            s << m_scores[m_scores.size()-1];
+            return s.str();
+        }
+
+        /* Pretty print feature ID's */
+        std::string printPolicy(std::string sep)
+        {
+            std::stringstream s;
+            for (int i = 0; i < m_policy.size()-1; i++)
+            {
+                s << m_policy[i] << sep;
+            }
+            s << m_policy[m_policy.size()-1];
+            return s.str();
+        }
+
+        /* Pretty print weights */
+        std::string printWeights(std::string sep)
+        {
+            std::stringstream s;
+            for (int i = 0; i < m_weights.size()-1; i++)
+            {
+                s << m_weights[i] << sep;
+            }
+            s << m_weights[m_weights.size()-1];
+            return s.str();
+        }
+
     private:
         /* Highest and lowest score of the game played */
         unsigned int m_maxScore, m_minScore;
@@ -53,6 +103,14 @@ public:
         /* Mean score and standard deviation */
         double m_mean, m_standardDeviation;
 
+        /* Score data */
+        std::vector<unsigned int> m_scores;
+
+        /* Policy used */
+        std::vector<int> m_policy;
+
+        /* Weights of the policy */
+        std::vector<double> m_weights;
     };
 
 

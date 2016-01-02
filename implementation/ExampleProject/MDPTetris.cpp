@@ -126,10 +126,14 @@ MDPTetris::MDPTetrisDetailedResult MDPTetris::evalDetailed(const shark::blas::ve
     //GamesStatistics *stats = games_statistics_new("stat.dat", m_nbGames, NULL);
 
     FeaturePolicy attemptPolicy = m_featurePolicy;
+    std::vector<int> policy;
+    std::vector<double> weights;
 
     for (std::size_t i = 0; i < m_dimensions; i++)
     {
         attemptPolicy.features[i].weight = input(i);
+        policy.push_back(attemptPolicy.features[i].feature_id);
+        weights.push_back(input(i));
     }
 
     /* MDPTetris specific */
@@ -156,6 +160,7 @@ MDPTetris::MDPTetrisDetailedResult MDPTetris::evalDetailed(const shark::blas::ve
 
     /* Calculate the details of the games played */
     unsigned int minScore, maxScore, sum;
+    std::vector<unsigned int> scores;
     double mean, stdDiv;
     sum = 0;
     for (int i = 0; i < m_nbGames; i++)
@@ -175,7 +180,12 @@ MDPTetris::MDPTetrisDetailedResult MDPTetris::evalDetailed(const shark::blas::ve
 
         /* add score to the sum */
         sum += curScore;
+
+        scores.push_back(curScore);
     }
+
+    /* Sort the scores, such that median is easy to find */
+    std::sort(scores.begin(), scores.end());
 
     /* calc the mean */
     mean = double(sum) / m_nbGames;
@@ -193,7 +203,7 @@ MDPTetris::MDPTetrisDetailedResult MDPTetris::evalDetailed(const shark::blas::ve
     varianceTemp = varianceTemp / (double) (m_nbGames-1);
     double stdDeviation = std::sqrt(varianceTemp);
 
-    MDPTetrisDetailedResult result(minScore, maxScore, points, stdDeviation);
+    MDPTetrisDetailedResult result(minScore, maxScore, points, stdDeviation, scores, policy, weights);
 
 
     games_statistics_end_episode(stats, NULL);
