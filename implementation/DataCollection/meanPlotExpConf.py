@@ -94,9 +94,11 @@ def main():
     writer.writeheader()
     for i in range(0, 80000):
       if i in meanData:
-        confSpan = 1.96 / (math.sqrt(30))
-        clow  = meanData[i] * (1 - (1.96 / math.sqrt(30)))
-        chigh = meanData[i] * (1 + (1.96 / math.sqrt(30)))
+        rateHat = 1.0 / meanData[i]
+        rateLow = rateHat * (1 - ( 1.96 / math.sqrt(30) ) 
+        rateUpp = rateHat * (1 + ( 1.96 / math.sqrt(30) )
+        clow  = 1.0 / rateLow
+        chigh = 1.0 / rateUpp
         writer.writerow( { refCol:i , meanCol:meanData[i], 'clow':clow, 'chigh':chigh } )
 
 
