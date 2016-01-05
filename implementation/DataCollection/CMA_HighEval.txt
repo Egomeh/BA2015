@@ -1,0 +1,1 @@
+(./ExampleProject -optimizer=cma -maxagents=240000 -sigma=1 -nbgames=30 -nblearnames=30 -output=cma_eval30_$i) x 10
