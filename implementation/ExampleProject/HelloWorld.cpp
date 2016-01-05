@@ -187,7 +187,12 @@ void useCMA(std::string startPolicyFile,
         std::ofstream fs;
         fs.open (outname.c_str());
 
-        fs << "generation,agents,minScore,maxScore,meanScore,standardDeviation,stepSize" << std::endl;
+        fs << "generation,agents,minScore,maxScore,meanScore,standardDeviation,stepSize,";
+        for (int i = 0; i < objFun.numberOfVariables()-1; i++)
+        {
+            fs << "w" << i << ",";
+        }
+        fs << "w" << objFun.numberOfVariables()-1 << std::endl;
 
         fs.close();
     }
@@ -197,7 +202,7 @@ void useCMA(std::string startPolicyFile,
     {
 
         cma.step(objFun);
-        t += cma.lambda();
+        t += cma.lambda() * nbGames;
 
         if ( outname.size() > 0 )
         {
@@ -216,7 +221,8 @@ void useCMA(std::string startPolicyFile,
                << report.maxScore() << ","
                << report.mean() << ","
                << report.standardDeviation() << ","
-               << cma.sigma() << std::endl;
+               << cma.sigma()  << ","
+               << report.printWeights(",") << std::endl;
         }
 
         if (TETRIS_MAX_SCORE - cma.solution().value > bestScore)
@@ -328,7 +334,12 @@ void useCE(std::string startPolicyFile,
         std::ofstream fs;
         fs.open (outname.c_str());
 
-        fs << "generation,agents,minScore,maxScore,meanScore,standardDeviation" << std::endl;
+        fs << "generation,agents,minScore,maxScore,meanScore,standardDeviation,";
+        for (int i = 0; i < objFun.numberOfVariables()-1; i++)
+        {
+            fs << "w" << i << ",";
+        }
+        fs << "w" << objFun.numberOfVariables()-1 << std::endl;
 
         fs.close();
     }
@@ -337,7 +348,7 @@ void useCE(std::string startPolicyFile,
     {
         _DUMP(generation);
         ce.step(objFun);
-        t += ce.lambda();
+        t += ce.lambda() * nbGames;
 
         if ( outname.size() > 0 )
         {
@@ -355,7 +366,8 @@ void useCE(std::string startPolicyFile,
             << report.minScore() << ","
             << report.maxScore() << ","
             << report.mean() << ","
-            << report.standardDeviation() << std::endl;
+            << report.standardDeviation() << ","
+            << report.printWeights(",") << std::endl;
         }
 
         if (TETRIS_MAX_SCORE - ce.solution().value > bestScore)
