@@ -243,8 +243,31 @@ reported in \citep{thiery:09}. As the results seen from our experiments
 to a high degree resemble those reported by Thiery et. al, we conclude
 that our Cross-Entropy implementation works similar to theirs.
 
-\comment{Technical reason for why the results are accepted.}
+\subsection{Optimal settings for Cross Entropy}
 
+Other researchers run the Cross Entropy algorithm with population size of
+$\populationSize = 100$ and an offspring corresponding to 10\% of 
+the population size, resulting in $\offspringNumber = 10$. As it's not 
+discussed why this exact setting is applied, various setings of the 
+Cross-Entropy was run to asses the performance of other configurations.
+The experiments includes different population sizes 
+$\populationSize \in \{10, 22, 50, 100, 200\}$ and offspring 
+sizes of either $10\%$ and $50\%$. 
+A summary of the experiments can be seen in figure \ref{CEConfigTest}
+on page \pageref{CEConfigTest}.
+
+\begin{figure}[H]
+\centering
+\begin{tabular}{l l l l l l}
+$\populationSize$ & $\offspringNumber$ & mean & Q1 & Q2 & Q3
+\end{tabular}
+\caption{Cross Entropy configuration test \label{CEConfigTest}}
+\end{figure}
+
+The experiments with different population and offsping sizes
+does not seem to support a choise for any other configuration 
+than the mostly commonly used 
+$\populationSize = 100$ and $\offspringNumber = 10$.
 
 \subsection{Comparison between CMA-ES and CE}
 
