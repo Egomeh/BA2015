@@ -194,10 +194,11 @@ the controllers score is calculated by:
 \hat{\mean} &= \sum_{i=1}^{\populationSize} \individual_i
 \end{align*}
 
-Thus, the rate parameter of the distribution is given by
-\footnote{Note that $\lambda$ is in this context not,
+Thus, the maximum likelihood estimation of the rate 
+parameter\footnote{Note that $\lambda$ is in this context not,
 the population size but instead the rate parameter for the
 exponential distribution.}
+of the distribution is given by
 
 \begin{align*}
 \hat{\lambda} = \frac{1}{\hat{\mean}}
@@ -206,11 +207,11 @@ exponential distribution.}
 A confidence interval is found by the following:
 
 \begin{align*}
-\frac{2\populationSize}{\chi^{2}_{1-\frac{\alpha}{2},2\populationSize}}
+\frac{2\populationSize}{\hat{\lambda}\chi^{2}_{1-\frac{\alpha}{2},2\populationSize}}
 <
 \frac{1}{\lambda}
 < 
-\frac{2\populationSize}{\chi^{2}_{\frac{\alpha}{2},2\populationSize}}
+\frac{2\populationSize}{\hat{\lambda}\chi^{2}_{\frac{\alpha}{2},2\populationSize}}
 \end{align*}
 
 However, for these experiments, an approximation for a $95\%$
@@ -232,7 +233,8 @@ By this, the $95\%$ confidence interval for the mean $\mean$ is:
 
 When a controllers score is presented as "$s \pm p$" this means 
 has an empirical mean score of $s$ and a real mean that is with 
-$95\%$ likelihood within $s \pm p$.
+$95\%$ likelihood within $s \pm p$. \\
+\comment{Add reference to exponential distribtutions}
 
 \subsection{Verification of CE}
 Because the \shark library already contains an implementation of 
@@ -292,14 +294,23 @@ Figure \ref{fig:ceNoNoise}, \ref{fig:ceCnstantNoise} and
 The goal of these experiments were to replicate the experiments 
 reported in \citep{thiery:09}. As the results seen from our experiments
 to a high degree resemble those reported by Thiery et. al, we conclude
-that our Cross-Entropy implementation works similar to theirs.
+that our Cross-Entropy implementation works similar to theirs.\\
+\\
+When evaluating the score of the agent we also want to compute the confidence
+interval in verifying the implementation of CE. Since the population size is static for the 
+mean agent, the confidence also becomes static for all experiments with 30
+games, which is $\pm36\%$. Compared to other papers, this confidence interval
+is similar \citep{scherrer2009}.\\
+Based on the mean graphs and confidence interval compared to other papers, we can
+hereby verify that our implementation of CE works as intended.\\
+\comment{Specific examples of mean score + confidence interval}
 
 \subsection{Optimal settings for Cross Entropy}
 
 Other researchers run the Cross Entropy algorithm with population size of
 $\populationSize = 100$ and an offspring corresponding to 10\% of 
 the population size, resulting in $\offspringNumber = 10$. As it's not 
-discussed why this exact setting is applied, various setings of the 
+discussed why this exact setting is applied, various settings of the 
 Cross-Entropy was run to asses the performance of other configurations.
 The experiments includes different population sizes 
 $\populationSize \in \{10, 22, 50, 100, 200\}$ and offspring 
@@ -315,10 +326,17 @@ $\populationSize$ & $\offspringNumber$ & mean & Q1 & Q2 & Q3
 \caption{Cross Entropy configuration test \label{CEConfigTest}}
 \end{figure}
 
-The experiments with different population and offsping sizes
-does not seem to support a choise for any other configuration 
+The experiments with different population and offspring sizes
+does not seem to support a choice for any other configuration 
 than the mostly commonly used 
-$\populationSize = 100$ and $\offspringNumber = 10$.
+$\populationSize = 100$ and $\offspringNumber = 10$. \\
+With a configuration of $\populationSize = 50$ and $\offspringNumber = 5$ convergence
+is achieved faster. This means that the score limit is reached faster, which
+results in longer computation time, than the $\populationSize = 100$ and $\offspringNumber = 10$
+configuration.
+
+\comment{Add graphs of the two different configurations}
+
 
 \subsection{Comparison between CMA-ES and CE}
 
