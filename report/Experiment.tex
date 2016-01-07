@@ -306,16 +306,27 @@ By looking at the individual graphs for the different noise types
 \\
 \textbf{Without noise (figure \ref{fig:ceNoNoise})}: The learning curve
 stabilizes after 1,500 agents evaluated. And as it can be observed the
-score variates a lot for the different executions between a score of 300 and 6,000
+score variates much for the different executions between a score of 300 and 6,000
 rows. This results in an average score of 1,400$\pm36\%$ rows.\\
 \textbf{Constant noise (figure \ref{fig:ceCnstantNoise})}: 
-The 10 executions reaches equivalent performances at some point, with a score between
+The 10 executions reaches equivalent performances at some point, 
+with a score between
 54,000 and 154,000. This results in an average score of 105,000$\pm36\%$ rows.\\
 \textbf{Linear decreasing noise (figure \ref{fig:ceLinNoise})}:
-\comment{write stuff here} \\
+Most of the executions of this noise type settles around 200,000.
+However, a single execution settled at a score of only around 5,000.
+The mean performance of this noise type yielded a score of
+120,000$\pm36\%$ \\
 
 Based on the mean graphs and confidence interval compared to other papers, we can
-hereby verify that our implementation of CE works as intended.\\
+hereby verify that our implementation of CE works as intended. Even though the
+experiments with linear decreasing noise in this case seems to outperform
+the constant noise, other runs with linear decreasing noise ended in a mean 
+performance of only 90,000$\pm36\%$. Yet, the constant noise is both from our
+own experiments, and described in other research, to be the most reliable
+noise type for reaching high scoring controllers \citep{scherrer2009}. 
+Due to this, the constant noise is used in the 
+benchmarking against CMA-ES.\\
 
 \subsection{Optimal settings for Cross Entropy}
 
@@ -332,18 +343,21 @@ on page \pageref{CEConfigTest}.
 
 \begin{figure}[H]
 \centering
-\begin{tabular}{r r r r r r}
+\begin{tabular}{r r | r r r r}
 $\populationSize$ & $\offspringNumber$ & mean & Q1 & Q2 & Q3\\
-10 & $10\%$  & 704.6 	 & 7.2 		 & 48.3  		& 430.3\\
-10 & $50\%$  & 9,272.5	 & 149.6	 & 7626.5 		& 16,919.9\\
-22 & $10\%$  & 35,841.6	 & 20,391.9	 & 42,045.5 	& 48,464.6\\
-22 & $50\%$  & 52,887.4  & 23,531.9  & 42,161.0     & 83,144.1\\
-50 & $10\%$  & 95,623.1  & 82,738.9  & 93,388.9     & 111,351.5\\
-50 & $50\%$  & 69,130.7  & 52,511.0  & 64,351.6     & 91,488.6\\
-100 & $10\%$ & 115,868.7 & 84,368.5  & 122,238.5    & 146,457.0\\
-100 & $50\%$ & 0 & 0 & 0 & 0\\
-200 & $10\%$ & 85,181.7  & 45,201.5  & 96,803.1     & 117,578.0\\
-200 & $50\%$ & 946.4 	 & 585.0	 & 802.5 		& 1,267.7
+\hline
+10 & $10\%$  & 704.6      & 7.2       & 48.3         & 430.3\\
+10 & $50\%$  & 9,272.5    & 149.6     & 7626.5       & 16,919.9\\
+22 & $10\%$  & 35,841.6   & 20,391.9  & 42,045.5     & 48,464.6\\
+22 & $50\%$  & 52,887.4   & 23,531.9  & 42,161.0     & 83,144.1\\
+50 & $10\%$  & 95,623.1   & 82,738.9  & 93,388.9     & 111,351.5\\
+50 & $50\%$  & 69,130.7   & 52,511.0  & 64,351.6     & 91,488.6\\
+\hline
+100 & $10\%$ & 115,868.7  & 84,368.5  & 122,238.5    & 146,457.0\\
+\hline
+100 & $50\%$ & 0 & 0 & 0  & 0\\
+200 & $10\%$ & 85,181.7   & 45,201.5  & 96,803.1     & 117,578.0\\
+200 & $50\%$ & 946.4      & 585.0     & 802.5        & 1,267.7
 \end{tabular}
 \caption{Cross Entropy configuration test \label{CEConfigTest}}
 \end{figure}

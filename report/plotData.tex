@@ -33,54 +33,21 @@
 {
 \begin{axis}[%
 	xmin=0,
-	xmax=80,
-    xlabel={Iteration/Generation},
-    ylabel={Mean score},
+	xmax=8000,
+    xlabel={Agents evaluated},
+    ylabel={stepsize},
     ymode=log,
     log basis y={10},
-    width=\textwidth,
+    width=16cm,
     height=12cm,
-    clip bounding box=upper bound]
-\addplot[color=black,mark=none] 
-    table [x expr=\thisrowno{0},
-           y expr=\thisrowno{1}, 
-           col sep=comma] {data/LinearNoise/ce_sigma100_lnoise4_0.txt};
-\addplot[color=black,mark=none] 
-    table [x expr=\thisrowno{0}, 
-           y expr=\thisrowno{1}, 
-           col sep=comma] {data/LinearNoise/ce_sigma100_lnoise4_1.txt};
-\addplot[color=black,mark=none] 
-    table [x expr=\thisrowno{0}, 
-           y expr=\thisrowno{1}, 
-           col sep=comma] {data/LinearNoise/ce_sigma100_lnoise4_2.txt};
-\addplot[color=black,mark=none] 
-    table [x expr=\thisrowno{0}, 
-           y expr=\thisrowno{1}, 
-           col sep=comma] {data/LinearNoise/ce_sigma100_lnoise4_3.txt};
-\addplot[color=black,mark=none] 
-    table [x expr=\thisrowno{0}, 
-           y expr=\thisrowno{1}, 
-           col sep=comma] {data/LinearNoise/ce_sigma100_lnoise4_4.txt};
-\addplot[color=black,mark=none] 
-    table [x expr=\thisrowno{0}, 
-           y expr=\thisrowno{1}, 
-           col sep=comma] {data/LinearNoise/ce_sigma100_lnoise4_5.txt};
-\addplot[color=black,mark=none] 
-    table [x expr=\thisrowno{0}, 
-           y expr=\thisrowno{1}, 
-           col sep=comma] {data/LinearNoise/ce_sigma100_lnoise4_6.txt};
-\addplot[color=black,mark=none] 
-    table [x expr=\thisrowno{0}, 
-           y expr=\thisrowno{1}, 
-           col sep=comma] {data/LinearNoise/ce_sigma100_lnoise4_7.txt};
-\addplot[color=black,mark=none] 
-    table [x expr=\thisrowno{0}, 
-           y expr=\thisrowno{1}, 
-           col sep=comma] {data/LinearNoise/ce_sigma100_lnoise4_8.txt};
-\addplot[color=black,mark=none] 
-    table [x expr=\thisrowno{0}, 
-           y expr=\thisrowno{1}, 
-           col sep=comma] {data/LinearNoise/ce_sigma100_lnoise4_9.txt};
+    legend pos=south east,
+    title={}]
+\foreach \x in {0,1,2,3,4,5,6,7,8,9}
+{
+\addplot[color=black,mark=none]  
+ table [x=agents, y=meanScore, col sep=comma]    
+       {data/LinearNoise/ce_LinearNoise_\x.txt};
+}
 \end{axis}
 }
 
@@ -115,7 +82,7 @@
 {
 \begin{axis}[%
 	xmin=0,
-	xmax=80,
+	xmax=8100,
     xlabel={Iteration/Generation},
     ylabel={Mean score},
     ymode=log,
@@ -124,17 +91,14 @@
     height=12cm,
     legend pos=south east]
 \addplot[color=black,mark=none, dotted, thick] 
-    table [x expr=\thisrowno{0}, 
-           y expr=\thisrowno{1}, 
-           col sep=comma] {data/Cemeans/noNoise.txt};
+    table [x=agents, y=meanScore, 
+           col sep=comma] {data/NoNoise/mean.txt};
 \addplot[color=black,mark=none, thick] 
-    table [x expr=\thisrowno{0}, 
-           y expr=\thisrowno{1}, 
-           col sep=comma] {data/Cemeans/constantNoise.txt};
+    table [x=agents, y=meanScore, 
+           col sep=comma] {data/ConstantNoise/mean.txt};
 \addplot[color=black,mark=none,dashed, thick] 
-    table [x expr=\thisrowno{0}, 
-           y expr=\thisrowno{1}, 
-           col sep=comma] {data/Cemeans/linearNoise.txt};
+    table [x=agents, y=meanScore, 
+           col sep=comma] {data/LinearNoise/mean.txt};
 \legend{No noise, constant noise, Linear decreasing noise}
 \end{axis}
 }
