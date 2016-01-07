@@ -72,8 +72,10 @@ def main():
   # Get the mean of the data
   meanData = {}
   observations = -1
+  largestRefPoint = 0
   for i in range(0, 80000):
     if i in sumData:
+      largestRefPoint = i
       if observations == -1:
         observations = len(sumData[i])
       else:
@@ -95,12 +97,14 @@ def main():
     for i in range(0, 80000):
       if i in meanData:
         rateHat = 1.0 / meanData[i]
-        rateLow = rateHat * (1 - ( 1.96 / math.sqrt(30) ) 
-        rateUpp = rateHat * (1 + ( 1.96 / math.sqrt(30) )
+        rateLow = rateHat * (1 - ( 1.96 / math.sqrt(30) ) ) 
+        rateUpp = rateHat * (1 + ( 1.96 / math.sqrt(30) ) )
         clow  = 1.0 / rateLow
         chigh = 1.0 / rateUpp
         writer.writerow( { refCol:i , meanCol:meanData[i], 'clow':clow, 'chigh':chigh } )
-
+        
+    # Report data
+    print "Last x-axis point: %s" % str(largestRefPoint)
 
 
 if __name__ == "__main__":
