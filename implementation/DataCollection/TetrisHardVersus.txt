@@ -1,0 +1,8 @@
+(./ExampleProject -optimizer=cma -maxagents=8000 -sigma=1 -nbgames=1 -nblearnames=30 -pieceFile=pieces4_hard.dat -output=cma_bert_hard_$i) x 30
+(./ExampleProject -optimizer=ce -noiseType=0 -noise=0 -maxiter=80 -sigma=100 -nbgames=1 -nblearnames=30 -pieceFile=pieces4_hard.dat -output=ce_bert_hard_NoNoise_$i) x 30
+(./ExampleProject -optimizer=ce -noiseType=1 -noise=4 -maxiter=80 -sigma=100 -nbgames=1 -nblearnames=30 -pieceFile=pieces4_hard.dat -output=ce_bert_hard_ConstantNoise_$i) x 30
+(./ExampleProject -optimizer=ce -noiseType=2 -noise=4 -maxiter=80 -sigma=100 -nbgames=1 -nblearnames=30 -pieceFile=pieces4_hard.dat -output=ce_bert_hard_LinearNoise_$i) x 30
+(./ExampleProject -optimizer=cma -maxagents=8000 -sigma=1 -nbgames=1 -nblearnames=30 -pieceFile=pieces4_hard.dat -startPolicy=starting_policy00.dat -output=cma_dell_hard_$i) x 30
+(./ExampleProject -optimizer=ce -noiseType=0 -noise=0 -maxiter=80 -sigma=100 -nbgames=1 -nblearnames=30 -pieceFile=pieces4_hard.dat -startPolicy=starting_policy00.dat -output=ce_dell_NoNoise_$i) x 30
+(./ExampleProject -optimizer=ce -noiseType=1 -noise=4 -maxiter=80 -sigma=100 -nbgames=1 -nblearnames=30 -pieceFile=pieces4_hard.dat -startPolicy=starting_policy00.dat -output=ce_dell_ConstantNoise_$i) x 30
+(./ExampleProject -optimizer=ce -noiseType=2 -noise=4 -maxiter=80 -sigma=100 -nbgames=1 -nblearnames=30 -pieceFile=pieces4_hard.dat -startPolicy=starting_policy00.dat -output=ce_dell_LinearNoise_$i) x 30
