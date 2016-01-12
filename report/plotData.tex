@@ -109,7 +109,7 @@
 \begin{axis}[%
 	xmin=0,
 	xmax=8000,
-    xlabel={Iteration/Generation},
+    xlabel={Number of agents evaluated},
     ylabel={Mean score},
     ymode=log,
     log basis y={10},
@@ -122,7 +122,7 @@
 \addplot[color=black,mark=none,thick] 
     table [x=agents, y=score, 
            col sep=comma] {data/CMA_00/cma_sigma_0_5_mean.txt};
-\legend{Cross Entropy ($z_t = 4$, $\sigma_0 = 100$), CMA-ES ($\sigma_0 = 0.5$)}
+\legend{Cross Entropy ($z_t = 4$ $\sigma_0 = 100$), CMA-ES ($\sigma_0 = 0.5$)}
 \end{axis}
 }
 

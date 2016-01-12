@@ -22,6 +22,63 @@ CMA compares to Cross Entropy.\\
 
 \textbf{Results}
 
+\comment{- More statistical results, multilevel model, etc.}\\
+
+Using Cross Entropy with the constant noise setting and CMA with an initial step-size
+of $0.5$, we get the following results, seen in figure \ref{fig:CMA_VS_CE_00}.\\
+
+\begin{figure}[H]
+\begin{tikzpicture}
+\cmaCePlot
+\end{tikzpicture}
+\caption{Initial comparison between CMA-ES and Cross Entropy \label{fig:CMA_VS_CE_00}}
+\end{figure}
+
+As it can be observed in figure \ref{fig:CMA_VS_CE_00} CMA converges faster,
+but seems to reach a local optimum around 2,000 agents evaluated. Meanwhile CE has a 
+slower convergence but reaches a better local optimum compared to CMA, around 5,500
+agents evaluated. In detail CMA on average reaches a score 50,000 rows, and
+CE reaches a score of 100,000.\\
+
+\textbf{Analysis and discussion}
+
+These results clearly defy our initial hypothesis, namely we estimated that
+CMA would clearly outperform CE, due to CMA's more sophisticated method of 
+searching. One reason for this outcome could possible be that
+CMA has a very little population size compared to Cross Entropy,
+which could be a decisive lack as the evaluation function is non-deterministic with 
+a very high variance. These results could indicate that we need to tweak the CMA
+configuration, as the CMA local optimum is reached quickly compared to Cross Entropy.
+More specifically we might need to adjust the number games played gamer per agent,
+since the low population size and increasing variance makes the CMA converge on a
+local optimum. But as it can be seen in figure \ref{fig:CMA_VS_CE_00}, the
+fast convergence suggests that one game per agent is sufficient until the
+score begins to stall at around 1,000-2,000 agents evaluated. It would seem that 
+as the CMA-ES reaches a score of around 50,000, variance of the objective function 
+appears to render the algorithm incapable of effectively distinguish performance 
+of agents. Therefore, to increase the perception of the agents’ performs, 
+more evaluations per agent could be necessary at higher scores.\\
+\\
+As no experiment so far has yielded consistent scores of more than around 200,000 
+on average, one explanation could be that the feature set itself poses a limit for 
+the optimization algorithms. To address this issue, further experiments will include 
+other feature sets. Also, the specific task is not to find a good controller for Tetris, 
+but to compare how well each algorithm performs. To reduce runtimes, the Tetris games 
+played can be configured to be harder to play. This includes possible reduction of 
+board size and posing higher chances of occurrence of pieces that are difficult to place.\\
+\\
+Therefore, based on the current results, conducting more experiments to discover optimal
+settings for CMA-ES seems appropriate.
+
+\subsection{Configuration of CMA}
+\comment{- Write about adjustments made to CMA because of the previous experiment}
+
+\subsection{Dellacherie comparison}
+
+\comment{Indledenede tekst}
+
+\textbf{Results}
+
 \comment{- WHAT results did the comparison yield}\\
 \comment{- Show results from comparison experiments}
 
@@ -31,8 +88,7 @@ CMA compares to Cross Entropy.\\
 \comment{- WHY did we get these results}\\
 \comment{- Discuss the results of the comparison experiments}
 
-
-\subsection{Dellacherie comparison}
+\subsection{Dynamic games played per agent}
 
 \comment{Indledenede tekst}
 

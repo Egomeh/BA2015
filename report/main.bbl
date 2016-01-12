@@ -1,0 +1,58 @@
+\begin{thebibliography}{}
+
+\bibitem[Bertsekas and Tsitsiklis, 1996]{Bertsekas}
+Bertsekas, D. and Tsitsiklis, J. (1996).
+\newblock Neuro-dynamic programming.
+\newblock {\em Athena Scientific}.
+
+\bibitem[Boumaza, 2009]{boumaza2009}
+Boumaza, A. (2009).
+\newblock On the evolution of artificial tetris players.
+\newblock {\em HAL}, 14:1--14.
+
+\bibitem[Fahey, 2003]{fahey}
+Fahey, C. (2003).
+\newblock Tetris ai.
+\newblock \url{http://www.colinfahey.com/tetris/}.
+\newblock Accessed: 2015-11-21.
+
+\bibitem[Hansen, 2015]{hansen2011}
+Hansen, N. (2015).
+\newblock The {CMA} evolution strategy: {A} tutorial.
+
+\bibitem[Igel et~al., 2008]{shark08}
+Igel, C., Heidrich-Meisner, V., and Glasmachers, T. (2008).
+\newblock Shark.
+\newblock {\em Journal of Machine Learning Research}, 9:993--996.
+
+\bibitem[MDPTetris, 2009]{mdptetris}
+MDPTetris (2009).
+\newblock mdptetris.
+\newblock {\em None}.
+
+\bibitem[Pieter-Tjerk De~Boer and Rubenstein, 2014]{cetut2014}
+Pieter-Tjerk De~Boer, Dirk P.~Kroese, S.~M. and Rubenstein, R.~Y. (2014).
+\newblock A tutorial on the cross-entropy method.
+\newblock {\em Springer Science}, 521:20--67.
+
+\bibitem[Scherrer, 2009a]{scherrer2009:b}
+Scherrer, C. T.~B. (2009a).
+\newblock Building controllers for tetris.
+\newblock {\em International Computer Games Association Journal}, 32:3--11.
+
+\bibitem[Scherrer, 2009b]{scherrer2009}
+Scherrer, C. T.~B. (2009b).
+\newblock Improvements on learning tetris with cross entropy.
+\newblock {\em International Computer Games Association Journal,}, 32:23--33.
+
+\bibitem[Szita and L{\"o}rincz, 2006]{szita:06}
+Szita, I. and L{\"o}rincz, A. (2006).
+\newblock Learning tetris using the noisy cross-entropy method.
+\newblock {\em Neural Computation}, 18(12):2936--2941.
+
+\bibitem[Thiery and Scherrer, 2009]{thiery:09}
+Thiery, C. and Scherrer, B. (2009).
+\newblock Improvements on learning tetris with cross entropy.
+\newblock {\em International Computer Games Association Journal}, 32(1):23--33.
+
+\end{thebibliography}
