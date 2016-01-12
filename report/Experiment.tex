@@ -1,4 +1,4 @@
-\section{Experiments}
+\section{Experiment settings}
 
 This section will walk through our experimental setup, our verification of CE and 
 and a analysis/discussion of the results.
@@ -362,7 +362,7 @@ $\populationSize$ & $\offspringNumber$ & mean & Q1 & Q2 & Q3\\
 \caption{Cross Entropy configuration test \label{CEConfigTest}}
 \end{figure}
 
-\comment{Boxplot + graphs to appendix + comment about the quantiles?}
+\comment{graphs to appendix + comment about the quantiles?}
 
 The experiments with different population and offspring sizes
 does not seem to support a choice for any other configuration 
@@ -379,17 +379,34 @@ configuration technically performs better.
 \comment{Add graphs of the two different configurations?}
 
 \subsection{Step-size and lower bound for CMA}
+\comment{write about intitial sigma}
+
+\begin{figure}[H]
+\centering
+\begin{tabular}{r | r r r r r}
+$\sigma_0$ & mean & Q1 & Q2 & Q3\\
+\hline
+0.1 & 50769.3 & 21301.1 & 54588.7 & 73972.4\\
+0.2 & 42290.6 & 32180.2 & 42290.6 & 49337.4\\
+0.5 & 53893.7 & 14211.1 & 66773.0 & 85816.7\\
+0.8 & 37557.7 & 1422.8  & 15450.8 & 93719.4\\
+1.0 & 49537.9 & 31369.8 & 49537.4 & 58454.6
+\end{tabular}
+\caption{Results of CMA-ES with adjusted initial step-size \label{CEConfigTest}}
+\end{figure}
+
+For the initial experiments using CMA-ES, the only adjusted parameter is the initial 
+step-size $\sigma_0$. The configurations of step-sizes were 
+$\sigma_0 \in \{0.1, 0.2, 0.5, 0.8, 1.0\}$. As the table shows,
+the final mean score does not seem to change with the initial step-size.
+From this, it's assumed that the initial step-size, at least in this range,
+does not have a significant impact, and the best of these runs, $\sigma_0$ is chosen
+for first comparison.\\
+
 \comment{Write stuff about our practical experiences with the step size and lower bound}
 
-\subsection{Comparison between CMA-ES and CE}
 
-\comment{add experiments that compare CMA-ES to cross entropy}
 
-\subsection{Results}
 
-\comment{Show results from comparison experiments}
 
-\subsection{Analysis and discussion}
-
-\comment{Discuss the results of the comparison experiments}
 
