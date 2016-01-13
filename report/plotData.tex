@@ -126,3 +126,51 @@
 \end{axis}
 }
 
+
+\def \plotBertsekasCmaVsCEHardTetris
+{
+\begin{axis}[%
+	xmin=0,
+	xmax=8000,
+    xlabel={Agents evaluated},
+    ylabel={Mean Score},
+    ymode=log,
+    log basis y={10},
+    width=16cm,
+    height=12cm,
+    legend pos=south east,
+    title={Bertsekas comparison, hard Tetris}]
+\addplot[color=black,mark=none,dashed, very thin]  
+ table [x=agents, y=meanScore, col sep=comma, ] 
+ {data/FeaturesetCompare/_ce_bert_hard_ConstantNoise_mean.txt};
+\addplot[color=black,mark=none, very thin]  
+ table [x=agents, y=meanScore, col sep=comma, ] 
+ {data/FeaturesetCompare/_cma_bert_hard_mean.txt};
+\legend{Cross Entropy ($z_t = 4$ $\sigma_0 = 100$), CMA-ES ($\sigma_0 = 1$)}
+\end{axis}
+}
+
+\def \plotDellCmaVsCEHardTetris
+{
+\begin{axis}[%
+	xmin=0,
+	xmax=8000,
+    xlabel={Agents evaluated},
+    ylabel={Mean Score},
+    ymode=log,
+    log basis y={10},
+    width=16cm,
+    height=12cm,
+    legend pos=south east,
+    title={Dellacherie comparison, hard Tetris}]
+\addplot[color=black,mark=none,dashed, very thin]  
+ table [x=agents, y=meanScore, col sep=comma, ] 
+ {data/FeaturesetCompare/_ce_dell_ConstantNoise_mean.txt};
+\addplot[color=black,mark=none, very thin]  
+ table [x=agents, y=meanScore, col sep=comma, ] 
+ {data/FeaturesetCompare/_cma_dell_hard_mean.txt};
+\legend{Cross Entropy ($z_t = 4$ $\sigma_0 = 100$), CMA-ES ($\sigma_0 = 1$)}
+\end{axis}
+}
+
+
