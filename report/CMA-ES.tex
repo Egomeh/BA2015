@@ -64,14 +64,14 @@ $C$ is the covariance matrix usually set to $C=I$}
 This serves the same purpose as in Cross Entropy (see page \pageref{CEObjective}).
 \\
 
-\textbf{The mean and variance of the gaussian distribution (Adapt to CMA)} \\
+\textbf{The mean and variance of the gaussian distribution} \\
 Here $\mean_{\generation}$ is the mean and  
-$C^{\generation}$ is the variance 
+$C^{2}_{\generation}$ is the variance 
 of the gaussian distribution ($\mean_{\generation}$,
-$\varianceMatrix^2_{\generation}$). 
+$C^2_{\generation}$). 
 More specifically this gaussian distribution is defined as 
 \begin{align*}
-\mathcal{N}(\mean_{\generation},\varianceMatrix^2_{\generation})
+\mathcal{N}(\mean_{\generation},C^2_{\generation})
 \end{align*}
 
 Where $\generation$ denotes the current iteration.\\
@@ -83,11 +83,9 @@ $\populationSize$ is the number of vectors sampled in each generation.
 
 \textbf{The number of offspring}\\
 $\offspringNumber$ is the number of vectors which are used to compute 
-the new mean, $\mean_{\generation + 1}$, and variance,
-$\varianceMatrix^2_{\generation + 1}$, for next generation/iteration. 
-These offspring vectors gets selected 
-directly by taking $\offspringNumber$ vectors
-which got the best evaluation.
+the new mean very much like in Cross Entropy. However the CMA algorithm
+is not bound to weight each vector equally. It has the option to assign 
+a weight to each vector and hence biasing towards the better solutions.
 \\
 
 
@@ -105,24 +103,63 @@ Set evolution path $p_{\sigma} = 0$, $p_{c} = 0$, covariance matrix $C = I$ and 
 \subsection{Loop}
 
 \textbf{Sample new generation}\\
-Sample new population of search points, for $k = 1, \dots, \populationSize$
+Sample new population of search points, for $k = 1, \dots, \populationSize$.
+The aim is to sample vectors in the following form:
+\begin{align*}
+\individual_{i} \sim \mathcal{N}(m, \sigma^2 C)
+\end{align*}
+
+
+To generate the sample for the generation, the covariance matrix is first 
+decomposed as follows:
 
 \begin{align*}
-z_{k} &\sim \mathcal{N}(0, I)\\
-y_{k} &= BDz_{k} \sim \mathcal{N}(o, C)\\
+C = B D^2 B^{T}
+\end{align*}
+
+Where $B$ is a matrix of all eigenvectors of the covariance matrix, and  $D$
+is a diagonal matrix that contains all eigenvalues.\\
+\\
+Intermediately, the vectors are sampled from a Gaussian with zero mean and
+the identity matrix as variance.
+\begin{align*}
+z_{k} &\sim \mathcal{N}(0, I)
+\end{align*}
+
+The matrix $D$ will then scale the vectors such that the samples
+are distributed along the principal axes. The matrix $B$, containing 
+the eigenvectors will rotate samples according to estimated covariance.
+\begin{align*}
+y_{k} &= BDz_{k} \sim \mathcal{N}(o, C)
+\end{align*}
+
+The mean is then added, and the vectors are scaled by the step-size.
+\begin{align*}
 x_{k} &= m + \sigma y_{k} \sim \mathcal{N}(m, \sigma^2 C)
 \end{align*}
 
-\textbf{Evaluate each vector using $\fitnessFunction$ and recombine}\\
-Selection and recombination
 
+
+\textbf{Evaluate each vector using $\fitnessFunction$ and recombine}\\
+As each vector is evaluated, they are ranked such that 
+$\fitnessFunction{ \left( \individual_{i} \right) } \geq \dots \geq \fitnessFunction{ \left( \individual_{\offspringNumber} \right)}$.
+
+\comment{Gibe ein comment on this?}
 \begin{align*}
-\langle y \rangle_{w} &= \sum^{\offspringNumber}_{i = 1}w_{i} y_{i : \populationSize}, \text{where} \sum^{\offspringNumber}_{i = 1} w_{i} = 1, w_{i} > 0\\
-m &\leftarrow m + \sigma \langle y \rangle_{w} = \sum^{\offspringNumber}_{i = 1} w_{i}x_{i:\populationSize}
+\langle y \rangle_{w} &= \sum^{\offspringNumber}_{i = 1}w_{i} y_{i : \populationSize}, \text{where} \sum^{\offspringNumber}_{i = 1} w_{i} = 1, w_{i} > 0
+\end{align*}
+
+The new mean is computed as:
+\begin{align*}
+m_{\generation+1} &= m_{\generation} + \sigma \langle y \rangle_{w} = \sum^{\offspringNumber}_{i = 1} w_{i}x_{i:\populationSize}
 \end{align*}
 
 \textbf{Step-size control}
 
+The evolution path for the step-size is updated according 
+to the path of the last iteration and the covariance matrix.
+
+\comment{Does it make sense to look into the derivation}
 \begin{align*}
 p_{\sigma} &\leftarrow \left( 1 - c_{\sigma} \right) p_{\sigma} + \sqrt{c_{\sigma} \left( 2 - c_{\sigma} \right) \offspringNumber_{\text{eff}}} C^{- \frac{1}{2}} \langle y \rangle_{w}\\
 \sigma &\leftarrow \sigma \times exp \left( \frac{c_{\sigma}}{d_{\sigma}} \left( \frac{||p_{\sigma}||}{E|| \mathcal{N}(o, I) ||} - 1 \right) \right)
@@ -130,13 +167,18 @@ p_{\sigma} &\leftarrow \left( 1 - c_{\sigma} \right) p_{\sigma} + \sqrt{c_{\sigm
 
 \textbf{Covariance matrix adaption}
 
+The evolution path for the covariance matrix is updated much like for the step-size, 
+and the covariance matrix is updated to gain shape of the estimated covariance 
+of the new selected vectors.
+
 \begin{align*}
 p_{c} &\leftarrow \left( 1 - c_{c} \right) p_{c} + h_{\sigma} \sqrt{c_{\sigma} \left( 2 - c_{c} \right) \offspringNumber_{\text{eff}}} \langle y \rangle_{w}\\
 C &\leftarrow \left( 1 - c_{c} - c_{\offspringNumber} \right) C + c_{1} \left( p_{c} p_{c}^{T} + \delta \left( h_{\sigma} \right) C \right) + c_{\offspringNumber} \sum^{\offspringNumber}_{i = 1} w_{i} y_{i : \offspringNumber} y_{i : \offspringNumber} ^{T}
 \end{align*}
 
 
-
+Finally the loop is iterated until a certain criteria is met, 
+or if the generation counter exceeds an upper limit.
 
 
 

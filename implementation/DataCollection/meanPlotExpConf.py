@@ -8,6 +8,7 @@ from time import sleep
 import csv
 import collections
 import math
+import numpy as np
 
 
 def usageGuide():
@@ -82,7 +83,8 @@ def main():
         if len(sumData[i]) != observations:
           print "index: %d does not have inconsistent observation count" % i
 
-      meanData[i] = sum(sumData[i]) / float(len(sumData[i]))
+      #meanData[i] = sum(sumData[i]) / float(len(sumData[i]))
+      meanData[i] = np.mean(np.array(sumData[i]))
 
 
   # Check if the output file exists
@@ -92,7 +94,7 @@ def main():
   generationData = {}
 
   # write the CSV data to the file
-  with open(outputFile, 'w') as csvfile:
+  with open(outputFile, 'wb') as csvfile:
     fieldnames = [refCol, meanCol, 'clow', 'chigh', 'Q1', 'Q2', 'Q3', 'means']
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
     writer.writeheader()
@@ -106,18 +108,13 @@ def main():
         
         sortedMeans = sorted(sumData[i])
         
-        # Define quantiles and calculate
-        Q1 = 0
-        Q2 = 0
-        Q3 = 0
-        n = len(sortedMeans)
-        Q1 = (sortedMeans[int(math.floor(n   / 4.0) ) -1 ] + sortedMeans[int(math.ceil(n   / 4.0) ) - 1  ]) / 2
-        Q3 = (sortedMeans[int(math.floor(n*3.0 / 4.0) )  ] + sortedMeans[int(math.ceil(n*3.0 / 4.0) )  ]) / 2
+        numpyData = np.array( sortedMeans )
         
-        if (n % 2) == 0:
-            Q2 = (sortedMeans[int(n / 2)-1  ] + sortedMeans[int(n / 2)  ]) / 2
-        else:
-            Q2 = sortedMeans[int(math.floor(n/2))]
+        # Define quantiles and calculate
+        Q1 = np.percentile(numpyData, 30)
+        Q2 = np.percentile(numpyData, 50)
+        Q3 = np.percentile(numpyData, 70)
+        n = len(sortedMeans)
         
         writer.writerow( { refCol:i , meanCol:meanData[i], 'clow':clow, 'chigh':chigh, 'Q1':Q1, 'Q2':Q2, 'Q3':Q3, 'means':sortedMeans } )
         
