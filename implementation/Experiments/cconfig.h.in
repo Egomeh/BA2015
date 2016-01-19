@@ -1,0 +1,10 @@
+#ifndef CUSTOM_CONFIG_H
+#define CUSTOM_CONFIG_H
+
+#define MDPTETRIS_DATA_FOLDER "@MDPTETRIS_DATA_FOLDER@"
+#define MDPTETRIS_DATA_FOLDER_STR std::string(MDPTETRIS_DATA_FOLDER)
+#define MDPTETRIS_DATA_PATH(filename) std::string(MDPTETRIS_DATA_FOLDER_STR + "/" + filename)
+
+#define _DUMP(var) std::cout << #var << ": " << var << std::endl
+
+#endif
