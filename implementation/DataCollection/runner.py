@@ -32,7 +32,7 @@ def work():
     outFile = "%s.txt" % outputFinder.group(1)
     
     # Wait a while, rng is time based
-    sleep(randint(1,10))
+    sleep(randint(10,30))
     
     # execute the task
     os.system( cmd )
@@ -123,7 +123,7 @@ def main():
     t.daemon = True
     threads.append( t )
     t.start()
-    sleep(randint(1,10))
+    sleep(randint(10,20))
   
 
   for i in range(0, nThreads):
