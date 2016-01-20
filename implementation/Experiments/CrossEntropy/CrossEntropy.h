@@ -54,21 +54,14 @@ namespace shark {
 	class CrossEntropy : public AbstractSingleObjectiveOptimizer<RealVector >
 	{
 	public:
-		/**
-		 * \brief Models the noise when sampling
-		 */
-		enum SamplingNoise {
-			NONE    = 0,
-			CONSTANT = 1,
-			LINEAR_DECREASING = 2
-		};
 
 		/**
 		 * \brief Interface class for noise type.
 		 */
 		class INoiseType {
 		public:
-			double noiseValue (int t) const; 
+			virtual double noiseValue (int t) const { return 0.0; };
+            virtual std::string name() const { return std::string("Default noise of 0"); }
 		};
 
 		/**
@@ -82,7 +75,12 @@ namespace shark {
         class ConstantNoise : public INoiseType {
 		public:
 			ConstantNoise ( double noise ) { m_noise = noise; };
-			double noiseValue (int t) const { return std::max(m_noise, 0.0); } 
+			virtual double noiseValue (int t) const { return std::max(m_noise, 0.0); }
+            virtual std::string name() const {
+                std::stringstream ss;
+                ss << "z(t) = " << m_noise;
+                return std::string(ss.str());
+            }
 		private:
 			double m_noise;
 		};
@@ -93,7 +91,13 @@ namespace shark {
 		class LinearNoise : public INoiseType {
 		public:
 			LinearNoise ( double a, double b ) { m_a = a; m_b = b; };
-			double noiseValue (int t) const { return std::max(m_a + (t * m_b), 0.0); } 
+			virtual double noiseValue (int t) const { return std::max(m_a + (t * m_b), 0.0); }
+            virtual std::string name() const {
+                std::stringstream ss;
+                std::string sign = (m_b < 0.0 ? " - " : " + ");
+                ss << "z(t) = " << m_a << sign << "t * " << std::abs(m_b);
+                return std::string(ss.str());
+            }
 		private:
 			double m_a, m_b;
 		};
@@ -127,12 +131,12 @@ namespace shark {
 		/**
 		* \brief Calculates lambda for the supplied dimensionality n.
 		*/
-		SHARK_EXPORT_SYMBOL static unsigned suggestLambda( unsigned int dimension ) ;
+		SHARK_EXPORT_SYMBOL static unsigned suggestPopulationSize(  ) ;
 
 		/**
 		* \brief Calculates mu for the supplied lambda and the recombination strategy.
 		*/
-		SHARK_EXPORT_SYMBOL static unsigned suggestMu( unsigned int lambda ) ;
+		SHARK_EXPORT_SYMBOL static unsigned suggestSelectionSize( unsigned int lambda ) ;
 
 		void read( InArchive & archive );
 		void write( OutArchive & archive ) const;
@@ -171,20 +175,21 @@ namespace shark {
          */
         void updateDistribution();
 
-		/** \brief Accesses the current step size. */
-		RealVector sigma() const {
-			return m_sigma;
+		/** \brief Accesses the current variance. */
+		RealVector const& variance() const {
+			return m_variance;
 		}
 
-		/** \brief Accesses the current step size. */
-		void setSigma(RealVector sigma) {
-			m_sigma = sigma;
+		/** \brief Set the variance to a vector */
+		void setVariance(RealVector variance) {
+			assert(variance.size() == m_variance.size());
+			m_variance = variance;
 		}
 
-        /** \brief set all sigma values with single double */
-        void setSigma(double sigma){
-            for(int i = 0; i < m_sigma.size(); i++)
-                m_sigma(i) = sigma;
+        /** \brief set all variance values */
+        void setVariance(double variance){
+            for(int i = 0; i < m_variance.size(); i++)
+                m_variance(i) = variance;
             updateDistribution();
 
         }
@@ -222,6 +227,21 @@ namespace shark {
 			return m_populationSize;
 		}
 
+		/**
+		 * \brief Set the noise type from a raw pointer.
+		 */
+		void setNoiseType( INoiseType* noiseType ) {
+			m_noise.reset();
+			m_noise = boost::shared_ptr<INoiseType> (noiseType);
+		}
+
+        /**
+		 * \brief Get an immutable reference to
+		 */
+        const INoiseType &getNoiseType( ) const {
+            return *m_noise.get();
+        }
+
 
 	protected:
 		/**
@@ -233,13 +253,15 @@ namespace shark {
 		unsigned int m_selectionSize; ///< Number of vectors chosen when updating distribution parameters.
 		unsigned int m_populationSize; ///< Number of vectors sampled in a generation.
 
-		RealVector m_sigma; ///< Variace for sample parameters
+		RealVector m_variance; ///< Variance for sample parameters
 
 		StrongNoisePtr m_noise; ///< Noise type to apply in update of distribution parameters.
 
 		RealVector m_mean; ///< The mean of the population.
 
 		unsigned m_counter; ///< counter for generations
+
+        Normal< Rng::rng_type > m_distribution; ///< Normal distribution
 
 	};
 }

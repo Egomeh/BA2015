@@ -1,0 +1,3 @@
+(./ExampleProject -optimizer=ce -noiseType=0 -noiseValueA=0 -maxiter=80 -sigma=100 -nbgames=1 -nbLearningGames=30 -output=ce_NoNoise_revised_$i) x 30
+(./ExampleProject -optimizer=ce -noiseType=1 -noiseValueA=4 -maxiter=80 -sigma=100 -nbgames=1 -nbLearningGames=30 -output=ce_ConstantNoise_revised_$i) x 30
+(./ExampleProject -optimizer=ce -noiseType=2 -noiseValueA=5 -noiseValueB=0.1 -maxiter=80 -sigma=100 -nbgames=1 -nbLearningGames=30 -output=ce_LinearNoise_revised_$i) x 30

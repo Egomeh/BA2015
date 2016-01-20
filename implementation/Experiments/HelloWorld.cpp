@@ -53,7 +53,7 @@
 #define OPT_NB_GAMES           "-nbgames"
 
 /* Number of games to play when asserting the performance of the mean */
-#define OPT_NB_LEARNING_GAMES  "-nblearnames"
+#define OPT_NB_LEARNING_GAMES  "-nbLearningGames"
 #define OPT_OUTPUTNAME         "-output"
 
 /* Options for stopping criteria */
@@ -62,7 +62,8 @@
 
 /* Noise type for the Cross Entropy */
 #define OPT_NOISETYPE          "-noiseType"
-#define OPT_NOISE              "-noise"
+#define OPT_NOISE              "-noiseValueA"
+#define OPT_NOISE2             "-noiseValueB"
 
 /* Lower bound on the step size */
 #define OPT_LOWER_BOUND        "-lbound"
@@ -70,6 +71,15 @@
 /* Options for regulating population and offspring */
 #define OPT_LAMBDA             "-lambda"
 #define OPT_OFFSPRING          "-offspring"
+
+/* CMA-ES recombination type */
+#define OPT_RECOMBINATION_TYPE "-recombinationType"
+
+const std::string known_opts[]
+        = {OPT_SEED,OPT_START_POL_FILE,OPT_PIECE_FILE,OPT_OPTIMIZER,OPT_INITIAL_SIGMA,
+           OPT_NB_GAMES,OPT_NB_LEARNING_GAMES,OPT_OUTPUTNAME,OPT_MAXITER,OPT_MAX_AGENTS,
+           OPT_NOISETYPE,OPT_NOISE,OPT_NOISE2,OPT_LOWER_BOUND,OPT_LAMBDA,OPT_OFFSPRING,OPT_RECOMBINATION_TYPE,
+           "STOP"};
 
 /* The stopping criteria for the experiment */
 enum StoppingCriteria
@@ -120,7 +130,8 @@ void useCMA(std::string startPolicyFile,
             std::string outname,
             ExperimentOptionType<double> lowerBound,
             ExperimentOptionType<unsigned int> lambda,
-            ExperimentOptionType<unsigned int> offspring)
+            ExperimentOptionType<unsigned int> offspring,
+            ExperimentOptionType<shark::CMA::RecombinationType> recombinationType)
 {
     out << "Running CMA-ES with following configurations" << std::endl;
     out << "Start policy       : " << startPolicyFile << std::endl;
@@ -168,11 +179,31 @@ void useCMA(std::string startPolicyFile,
     {
         cma.lambda() = lambda();
     }
+    std::cout << "populationSize: " << cma.lambda() << std::endl;
+
     if(offspring.used())
     {
         cma.mu() = offspring();
     }
+    std::cout << "offspringSize: " << cma.mu() << std::endl;
 
+    if (recombinationType.used())
+    {
+        cma.recombinationType() = recombinationType();
+    }
+
+    switch (cma.recombinationType())
+    {
+        case shark::CMA::EQUAL:
+            std::cout << "Equal recombination" << std::endl;
+            break;
+        case shark::CMA::LINEAR:
+            std::cout << "Linear recombination" << std::endl;
+            break;
+        case shark::CMA::SUPERLINEAR:
+            std::cout << "Superlinear recombination" << std::endl;
+            break;
+    }
 
     int t = 0;
     int generation = 0;
@@ -188,11 +219,16 @@ void useCMA(std::string startPolicyFile,
         fs.open (outname.c_str());
 
         fs << "generation,agents,minScore,maxScore,meanScore,standardDeviation,stepSize,";
-        for (int i = 0; i < objFun.numberOfVariables()-1; i++)
+        for (int i = 0; i < objFun.numberOfVariables(); i++)
         {
             fs << "w" << i << ",";
         }
-        fs << "w" << objFun.numberOfVariables()-1 << std::endl;
+
+        for (int i = 0; i < nbLearnGames; i++)
+        {
+            fs << "s" << i << ",";
+        }
+        fs << "s" << nbLearnGames-1 << std::endl;
 
         fs.close();
     }
@@ -222,7 +258,9 @@ void useCMA(std::string startPolicyFile,
                << report.mean() << ","
                << report.standardDeviation() << ","
                << cma.sigma()  << ","
-               << report.printWeights(",") << std::endl;
+               << report.printWeights(",") << ","
+               << report.printScores(",")
+                  << std::endl;
         }
 
         if (TETRIS_MAX_SCORE - cma.solution().value > bestScore)
@@ -255,14 +293,13 @@ void useCE(std::string startPolicyFile,
            unsigned int boardWidth,
            unsigned int boardHeight,
            int randomSeed,
-           ExperimentOptionType<double> initialSigma,
+           ExperimentOptionType<double> initialVariance,
            unsigned int maxIterations,
            unsigned int maxAgents,
            StoppingCriteria stoppingCriteria,
            std::ostream & out,
            std::string outname,
-           shark::CrossEntropy::SamplingNoise noiseType,
-           double noise,
+           ExperimentOptionType<shark::CrossEntropy::INoiseType*> noise,
            ExperimentOptionType<unsigned int> lambda,
            ExperimentOptionType<unsigned int> offspring
 )
@@ -275,8 +312,8 @@ void useCE(std::string startPolicyFile,
     out << "Game board with    : " << boardWidth << std::endl;
     out << "Game board height  : " << boardHeight << std::endl;
     out << "Random seed        : " << randomSeed << std::endl;
-    if (initialSigma.used())
-        out << "initialSigma       : " << initialSigma() << std::endl;
+    if (initialVariance.used())
+        out << "initialVariance: " << initialVariance() << std::endl;
     out << "MaxIterations      : " << maxIterations << std::endl;
 
     initialize_random_generator( randomSeed );
@@ -300,12 +337,15 @@ void useCE(std::string startPolicyFile,
     //ce.setSamplingNoisetype(noiseType);
     //ce.SamplingNoiseTerm() = noise;
 
-    out << "NoiseType          : " << noiseType << std::endl;
-    out << "Noise              : " << noise << std::endl;
-
-    if (initialSigma.used())
+    if(noise.used())
     {
-        ce.setSigma(initialSigma());
+        ce.setNoiseType( noise() );
+    }
+
+
+    if (initialVariance.used())
+    {
+        ce.setVariance(initialVariance());
     }
 
     if(lambda.used())
@@ -318,6 +358,12 @@ void useCE(std::string startPolicyFile,
     }
 
     // Still need to set the initial sigma vector
+
+    out << "Noise              : " << ce.getNoiseType().name() << std::endl;
+    out << "PopulationSize     : " << ce.populationSize()      << std::endl;
+    out << "SelectionSize      : " << ce.selectionSize()       << std::endl;
+    out << "Variance           : " << ce.variance()            << std::endl;
+
 
 
     int t = 0;
@@ -335,11 +381,16 @@ void useCE(std::string startPolicyFile,
         fs.open (outname.c_str());
 
         fs << "generation,agents,minScore,maxScore,meanScore,standardDeviation,";
-        for (int i = 0; i < objFun.numberOfVariables()-1; i++)
+        for (int i = 0; i < objFun.numberOfVariables(); i++)
         {
             fs << "w" << i << ",";
         }
-        fs << "w" << objFun.numberOfVariables()-1 << std::endl;
+
+        for (int i = 0; i < nbLearnGames; i++)
+        {
+            fs << "s" << i << ",";
+        }
+        fs << "s" << nbLearnGames-1 << std::endl;
 
         fs.close();
     }
@@ -367,7 +418,9 @@ void useCE(std::string startPolicyFile,
             << report.maxScore() << ","
             << report.mean() << ","
             << report.standardDeviation() << ","
-            << report.printWeights(",") << std::endl;
+            << report.printWeights(",")  << ","
+            << report.printScores(",")
+            << std::endl;
         }
 
         if (TETRIS_MAX_SCORE - ce.solution().value > bestScore)
@@ -395,6 +448,24 @@ void useCE(std::string startPolicyFile,
 int main( int argc, char ** argv ) 
 {
 
+    // Store all options in vector.
+    std::vector<std::string> all_options;
+    bool stopFound = false;
+    int optionIndex = 0;
+    while ( stopFound == false )
+    {
+        std::string cur_str = known_opts[optionIndex];
+        if (  cur_str.compare(std::string("STOP")) == 0 )
+        {
+            stopFound = true;
+        }
+        else
+        {
+            all_options.push_back(known_opts[optionIndex]);
+            optionIndex++;
+        }
+    }
+
     std::map<std::string, std::string> options;
     for (int i = 1; i < argc; i++)
     {
@@ -412,6 +483,12 @@ int main( int argc, char ** argv )
         std::string value     = opt.substr(opt.find(delimiter)+1, opt.size());
         options[key] = value;
         std::cout << "Registering option " << key << " : " << value << std::endl;
+        // Make sure that we know of the option.
+        if (std::find(all_options.begin(), all_options.end(), key) == all_options.end())
+        {
+            std::cerr << "Option is unknown, aborting! " << key << std::endl;
+            return 64;
+        }
     }
 
 
@@ -505,39 +582,78 @@ int main( int argc, char ** argv )
         nbLearnGames = atoi ( options[OPT_NB_LEARNING_GAMES].c_str() );
     }
 
-    shark::CrossEntropy::SamplingNoise noiseType = shark::CrossEntropy::NONE;
+    /* Cross Entropy specific for noise type */
+    double noiseVal = 0;
+    if (options.count(OPT_NOISE) == 1)
+    {
+        noiseVal = atof( options[OPT_NOISE].c_str() );
+    }
+    double noiseVal2 = 0;
+    if (options.count(OPT_NOISE2) == 1)
+    {
+        noiseVal2 = atof( options[OPT_NOISE2].c_str() );
+    }
+
+    //shark::CrossEntropy::SamplingNoise noiseType = shark::CrossEntropy::NONE;
+    ExperimentOptionType<shark::CrossEntropy::INoiseType*> noise(false, new shark::CrossEntropy::INoiseType());
     if (options.count(OPT_NOISETYPE) == 1)
     {
         switch (atoi( options[OPT_NOISETYPE].c_str() ))
         {
             case 0:
             {
-                noiseType = shark::CrossEntropy::NONE;
+                // The standard noise type is no noise. This renders any changes redundant.
                 break;
             }
             case 1:
             {
-                noiseType = shark::CrossEntropy::CONSTANT;
+                noise = ExperimentOptionType<shark::CrossEntropy::INoiseType*>
+                         (true, new shark::CrossEntropy::ConstantNoise(noiseVal));
                 break;
             }
             case 2:
             {
-                noiseType = shark::CrossEntropy::LINEAR_DECREASING;
+                noise = ExperimentOptionType<shark::CrossEntropy::INoiseType*>
+                        (true, new shark::CrossEntropy::LinearNoise(noiseVal, -noiseVal2));
                 break;
             }
             default:
             {
-                break;
+                std::cerr << "Noise not recognized" << std::endl;
+                exit(-1);
             }
         }
     }
 
-    /* Cross Entropy specific for noise type */
-    double noise = 0;
-    if (options.count(OPT_NOISE) == 1)
+    /* Register option for recombination type */
+    ExperimentOptionType<shark::CMA::RecombinationType> recombinationType(false, shark::CMA::EQUAL);
+    if (options.count(OPT_RECOMBINATION_TYPE) == 1)
     {
-        noise = atof( options[OPT_NOISE].c_str() );
+        int i = atoi( options[OPT_RECOMBINATION_TYPE].c_str() );
+        switch (i){
+            case 0:
+            {
+                recombinationType = ExperimentOptionType<shark::CMA::RecombinationType> (true, shark::CMA::EQUAL);
+                break;
+            }
+            case 1:
+            {
+                recombinationType = ExperimentOptionType<shark::CMA::RecombinationType> (true, shark::CMA::LINEAR);
+                break;
+            }
+            case 2:
+            {
+                recombinationType = ExperimentOptionType<shark::CMA::RecombinationType> (true, shark::CMA::SUPERLINEAR);
+                break;
+            }
+            default:
+            {
+                std::cerr << "Invalid option for recombination type" << std::endl;
+            }
+
+        }
     }
+
 
     unsigned int boardWidth = 10;
     unsigned int boardHeight = 20;
@@ -582,7 +698,8 @@ int main( int argc, char ** argv )
                     outputfile,
                     lowerBound,
                     lambda,
-                    offspring
+                    offspring,
+                    recombinationType
             );
         }
         else if ( options[OPT_OPTIMIZER].compare("ce") == 0 )
@@ -601,7 +718,6 @@ int main( int argc, char ** argv )
                     stoppingCriteria,
                     std::cout,
                     outputfile,
-                    noiseType,
                     noise,
                     lambda,
                     offspring

@@ -42,52 +42,33 @@
 
 using namespace shark;
 
-//Functors used by the Cross Entropy
-
-namespace{
-	struct PointExtractor {
-		template<typename T>
-		const RealVector & operator()( const T & t ) const {
-			return t.searchPoint();
-		}
-	};
-
-	struct StepExtractor {
-		template<typename T>
-		const RealVector & operator()( const T & t ) const {
-			return  t.chromosome();
-		}
-	};
-	
-	double chi( unsigned int n ) {
-		return( std::sqrt( static_cast<double>( n ) )*(1. - 1./(4.*n) + 1./(21.*n*n)) );
-	}
-
-}
-
 /**
-* \brief Calculates lambda for the supplied dimensionality n.
+* \brief Suggest a population size of 100.
 */
-unsigned CrossEntropy::suggestLambda( unsigned int dimension ) {
-	unsigned lambda = unsigned( 4. + ::floor( 3. * ::log( static_cast<double>( dimension ) ) ) ); // eq. (44)
-	// heuristic for small search spaces
-	lambda = std::max<unsigned int>( 5, std::min( lambda, dimension ) );
-	return lambda;
+unsigned CrossEntropy::suggestPopulationSize(  ) {
+	/*
+	 * Most papers suggests a population size of 100, thus
+	 * simply choose 100.
+	 */
+	return 100;
 }
 
 /**
 * \brief Calculates mu for the supplied lambda and the recombination strategy.
 */
-unsigned int CrossEntropy::suggestMu( unsigned int lambda ) {
+unsigned int CrossEntropy::suggestSelectionSize( unsigned int populationSize ) {
 	/* Most papers says 10% of the population size is used for
-	 * the new generation, thus, just take 10% of the lambda.
+	 * the new generation, thus, just take 10% of the population size.
 	 * */
-	return (unsigned int) (lambda / 10.0);
+	return (unsigned int) (populationSize / 10.0);
 }
 
 CrossEntropy::CrossEntropy()
-: m_sigma( 0 )
-, m_counter( 0 ) {
+: m_variance( 0 )
+, m_counter( 0 )
+, m_distribution( Normal< Rng::rng_type >( Rng::globalRng, 0, 1.0 ) )
+, m_noise (boost::shared_ptr<INoiseType> (new ConstantNoise(0.0)))
+{
 	m_features |= REQUIRES_VALUE;
 }
 
@@ -96,7 +77,7 @@ void CrossEntropy::read( InArchive & archive ) {
 	archive >> m_selectionSize;
 	archive >> m_populationSize;
 
-	archive >> m_sigma;
+	archive >> m_variance;
 
 	archive >> m_mean;
 
@@ -108,7 +89,7 @@ void CrossEntropy::write( OutArchive & archive ) const {
 	archive << m_selectionSize;
 	archive << m_populationSize;
 
-	archive << m_sigma;
+	archive << m_variance;
 
 	archive << m_mean;
 
@@ -119,18 +100,20 @@ void CrossEntropy::write( OutArchive & archive ) const {
 
 void CrossEntropy::init( ObjectiveFunctionType & function, SearchPointType const& p) {
 	
-	unsigned int lambda = CrossEntropy::suggestLambda( p.size() );
-	unsigned int mu = CrossEntropy::suggestMu(  lambda );
-	RealVector initialSigma(p.size());
+	unsigned int populationSize = CrossEntropy::suggestPopulationSize( );
+	unsigned int selectionSize = CrossEntropy::suggestSelectionSize( populationSize );
+	RealVector initialVariance(p.size());
+
+	// Most papers set the variance to 100 by default.
 	for(int i = 0; i < p.size(); i++)
 	{
-		initialSigma(i) = 100;
+		initialVariance(i) = 100;
 	}
 	init( function,
 		p,
-		lambda,
-		mu,
-		initialSigma
+		populationSize,
+		selectionSize,
+		initialVariance
 	);
 }
 
@@ -140,17 +123,17 @@ void CrossEntropy::init( ObjectiveFunctionType & function, SearchPointType const
 void CrossEntropy::init(
 	ObjectiveFunctionType& function, 
 	SearchPointType const& initialSearchPoint,
-	unsigned int lambda, 
-	unsigned int mu,
-	RealVector initialSigma
+	unsigned int populationSize,
+	unsigned int selectionSize,
+	RealVector initialVariance
 ) {
 	checkFeatures(function);
 	function.init();
 	
 	m_numberOfVariables = function.numberOfVariables();
-	m_populationSize = lambda;
-	m_selectionSize = static_cast<unsigned int>(::floor(mu));
-	m_sigma = initialSigma;
+	m_populationSize = populationSize;
+	m_selectionSize = static_cast<unsigned int>(::floor(selectionSize));
+	m_variance = initialVariance;
 
 	m_mean.resize( m_numberOfVariables );
 	m_mean.clear();
@@ -161,7 +144,8 @@ void CrossEntropy::init(
 	m_counter = 0;
 
 	// Default noise setting is no noise.
-	m_noise = boost::shared_ptr<INoiseType> ( new ConstantNoise(0.0) );
+
+
 }
 
 /**
@@ -189,29 +173,17 @@ void CrossEntropy::updateStrategyParameters( const std::vector<Individual<RealVe
 	size_t nOffspring = offspring.size();
 	double normalizationFactor = 1.0 / double(nOffspring);
 
-
-
-	for (int j = 0; j < m_numberOfVariables; j++)
-	{
+	for (int j = 0; j < m_numberOfVariables; j++) {
         double innerSum = 0.0;
-		for (int i = 0; i < offspring.size(); i++)
-		{
-            double temp = offspring[i].searchPoint()(j) - m(j);
-			innerSum += temp * temp;
-		}
+        for (int i = 0; i < offspring.size(); i++) {
+            double diff = offspring[i].searchPoint()(j) - m(j);
+            innerSum += diff * diff;
+        }
         innerSum *= normalizationFactor;
 
         // Apply noise
-        m_sigma(j) = m_noise->noiseValue(m_counter);
-	}
-
-    //updateDistribution();
-
-
-	//m_selectionSizetationDistribution.update();
-
-    //std::cout << m_selectionSizetationDistribution.covarianceMatrix() << std::endl;
-    //std::cout << m_mean << std::endl;
+        m_variance(j) = innerSum + m_noise->noiseValue(m_counter);
+    }
 
 }
 
@@ -220,21 +192,18 @@ void CrossEntropy::updateStrategyParameters( const std::vector<Individual<RealVe
 */
 void CrossEntropy::step(ObjectiveFunctionType const& function){
 
-	std::vector< Individual<RealVector, double, RealVector> > offspring( m_populationSize );
+	std::vector< Individual<RealVector, double> > offspring( m_populationSize );
 
 	PenalizingEvaluator penalizingEvaluator;
 	for( unsigned int i = 0; i < offspring.size(); i++ ) {
         RealVector sample(m_numberOfVariables);
         for (int j = 0; j < m_numberOfVariables; j++)
         {
-            //Normal< Rng::rng_type > normal( Rng::globalRng, 0, m_sigma(j) );
-            Normal< Rng::rng_type > normal( Rng::globalRng, 0, m_sigma(j) );
-            sample(j) = normal(); // N (0, 100)
+            sample(j) = m_distribution(m_mean(j), m_variance(j)); // N (0, 100)
         }
-		//MultiVariateNormalDistribution::result_type sample = m_selectionSizetationDistribution();
-		//offspring[i].chromosome() = sample.second;
-		offspring[i].searchPoint() = m_mean + sample;
+		offspring[i].searchPoint() = sample;
 	}
+
 	penalizingEvaluator( function, offspring.begin(), offspring.end() );
 
 	// Selection

@@ -53,7 +53,7 @@
 #define OPT_NB_GAMES           "-nbgames"
 
 /* Number of games to play when asserting the performance of the mean */
-#define OPT_NB_LEARNING_GAMES  "-nblearnames"
+#define OPT_NB_LEARNING_GAMES  "-nbLearningGames"
 #define OPT_OUTPUTNAME         "-output"
 
 /* Options for stopping criteria */
