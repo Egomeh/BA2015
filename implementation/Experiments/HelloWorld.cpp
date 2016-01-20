@@ -192,6 +192,10 @@ void useCMA(std::string startPolicyFile,
         cma.recombinationType() = recombinationType();
     }
 
+    cma.updateFeatures();
+
+    std::cout << "CMA ofspring: " << cma.mu() << std::endl;
+
     switch (cma.recombinationType())
     {
         case shark::CMA::EQUAL:
@@ -224,7 +228,7 @@ void useCMA(std::string startPolicyFile,
             fs << "w" << i << ",";
         }
 
-        for (int i = 0; i < nbLearnGames; i++)
+        for (int i = 0; i < nbLearnGames-1; i++)
         {
             fs << "s" << i << ",";
         }
@@ -334,8 +338,6 @@ void useCE(std::string startPolicyFile,
 
     ce.populationSize() = 100;
     ce.selectionSize() = 10;
-    //ce.setSamplingNoisetype(noiseType);
-    //ce.SamplingNoiseTerm() = noise;
 
     if(noise.used())
     {
@@ -386,7 +388,7 @@ void useCE(std::string startPolicyFile,
             fs << "w" << i << ",";
         }
 
-        for (int i = 0; i < nbLearnGames; i++)
+        for (int i = 0; i < nbLearnGames-1; i++)
         {
             fs << "s" << i << ",";
         }
