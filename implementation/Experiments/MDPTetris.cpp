@@ -60,8 +60,6 @@ double MDPTetris::eval(const SearchPointType &input) const {
 
     m_evaluationCounter++;
 
-    //std::cout << "evaluation on: " << input << std::endl;
-
     /* init a game and statistics object */
     //Game *game = new_game(0, m_boardWidth, m_boardHeight, 0, m_pieceFile.c_str(), NULL);
     //GamesStatistics *stats = games_statistics_new("stat.dat", m_nbGames, NULL);
@@ -80,12 +78,12 @@ double MDPTetris::eval(const SearchPointType &input) const {
     double points;
     GamesStatistics *stats = games_statistics_new(NULL, m_nbGames, NULL);
 
-             /* MDPTetris function for playing tetris:
-                attemptPolicy: policy to use when playing.
-                m_nbGames    : How many games to play.
-                m_game       : The game object, holding board dimensions etc.
-                stats        : The object to hold game statistics.
-              */
+     /* MDPTetris function for playing tetris:
+        attemptPolicy: policy to use when playing.
+        m_nbGames    : How many games to play.
+        m_game       : The game object, holding board dimensions etc.
+        stats        : The object to hold game statistics.
+      */
     points = feature_policy_play_games(&attemptPolicy, m_nbGames, m_game, stats, 0);
 
     /* Store the results about the game */
@@ -93,20 +91,7 @@ double MDPTetris::eval(const SearchPointType &input) const {
     {
         std::ofstream fs;
         fs.open (m_gamedataFilename.c_str(), std::ios::app);
-
-        /* Do not report each individual
-        fs << "weights:" << input << ":";
-        for (int i = 0; i < m_nbGames; i++)
-        {
-            fs << stats->scores[i];
-            if (i < m_nbGames-1)
-            {
-                fs << ",";
-            };
-        }
-        fs << std::endl;
         fs.close();
-         */
     }
 
 

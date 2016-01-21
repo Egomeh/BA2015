@@ -1,15 +1,13 @@
 /*!
  *
- * \brief       Implements the most recent version of the non-elitist CMA-ES.
+ * \brief       Implements the Cross Entropy Algorithm.
  * 
- * The algorithm is described in
- * Hansen, N. The CMA Evolution Startegy: A Tutorial, June 28, 2011
- * and the eqation numbers refer to this publication (retrieved April 2014).
+ * Christophe Thiery, Bruno Scherrer. Improvements on Learning Tetris with Cross Entropy.
+ * International Computer Games Association Journal, ICGA, 2009, 32. <inria-00418930>
  * 
  *
- * \author      Thomas Voss and Christian Igel
- * \date        April 2014
- *
+ * \author      Jens Holm, Mathias Petræus and Mark Wulff
+ * \date        January 2016
  *
  * \par Copyright 1995-2015 Shark Development Team
  * 
@@ -54,12 +52,13 @@ unsigned CrossEntropy::suggestPopulationSize(  ) {
 }
 
 /**
-* \brief Calculates mu for the supplied lambda and the recombination strategy.
+* \brief Calculates Selection Size for the supplied Population Size.
 */
 unsigned int CrossEntropy::suggestSelectionSize( unsigned int populationSize ) {
-	/* Most papers says 10% of the population size is used for
+	/* 
+	 * Most papers says 10% of the population size is used for
 	 * the new generation, thus, just take 10% of the population size.
-	 * */
+	 */
 	return (unsigned int) (populationSize / 10.0);
 }
 
@@ -92,7 +91,6 @@ void CrossEntropy::write( OutArchive & archive ) const {
 	archive << m_variance;
 
 	archive << m_mean;
-
 
 	archive << m_counter;
 }
@@ -142,9 +140,6 @@ void CrossEntropy::init(
 	m_best.point = initialSearchPoint;
 	m_best.value = function(initialSearchPoint);
 	m_counter = 0;
-
-	// Default noise setting is no noise.
-
 
 }
 
@@ -227,4 +222,5 @@ void CrossEntropy::init(ObjectiveFunctionType& function ){
 
 void CrossEntropy::updateDistribution() {
 	/* Not sure if we should do anything here */
+	/* Always same variance, therefore no update? */
 }

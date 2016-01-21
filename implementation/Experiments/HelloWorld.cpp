@@ -203,9 +203,9 @@ void useCMA(std::string startPolicyFile,
             break;
     }
 
-    std::cout << "populationSize: " << cma.lambda() << std::endl;
-    std::cout << "offspringSize: " << cma.mu() << std::endl;
-    std::cout << "CMA ofspring: " << cma.mu() << std::endl;
+    std::cout << "populationSize   : " << cma.lambda() << std::endl;
+    std::cout << "CMA prent number : " << cma.mu() << std::endl;
+    std::cout << "CMA lower bound  : " << cma.lowerBound() << std::endl;
 
     int t = 0;
     int generation = 0;
@@ -254,6 +254,9 @@ void useCMA(std::string startPolicyFile,
             objFun.setNbGames(nbLearnGames);
             MDPTetris::MDPTetrisDetailedResult report = objFun.evalDetailed(cma.mean());
             objFun.setNbGames(nbGames);
+
+            double centroid_score = report.mean();
+            _DUMP(centroid_score);
 
             // Get a string of eignvalues
             std::stringstream _s;
