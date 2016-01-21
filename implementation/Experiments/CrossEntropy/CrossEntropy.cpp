@@ -144,34 +144,34 @@ void CrossEntropy::init(
 }
 
 /**
-* \brief Updates the strategy parameters based on the supplied offspring population.
+* \brief Updates the strategy parameters based on the supplied parent population.
 */
-void CrossEntropy::updateStrategyParameters( const std::vector<Individual<RealVector, double> > & offspring ) {
+void CrossEntropy::updateStrategyParameters( const std::vector<Individual<RealVector, double> > & parents ) {
 
-    /* Calculate the centroid of the offspring */
+    /* Calculate the centroid of the parents */
 	RealVector m(m_numberOfVariables);
 	for (int i = 0; i < m_numberOfVariables; i++)
 	{
         m(i) = 0;
-        for (int j = 0; j < offspring.size(); j++)
+        for (int j = 0; j < parents.size(); j++)
         {
-        	m(i) += offspring[j].searchPoint()(i);
+        	m(i) += parents[j].searchPoint()(i);
         }
-        m(i) /= double(offspring.size());
+        m(i) /= double(parents.size());
 	}
 
 
 	// mean update
 	m_mean = m;
 
-	// Sigma update
-	size_t nOffspring = offspring.size();
-	double normalizationFactor = 1.0 / double(nOffspring);
+	// Variance update
+	size_t nParents = parents.size();
+	double normalizationFactor = 1.0 / double(nParents);
 
 	for (int j = 0; j < m_numberOfVariables; j++) {
         double innerSum = 0.0;
-        for (int i = 0; i < offspring.size(); i++) {
-            double diff = offspring[i].searchPoint()(j) - m(j);
+        for (int i = 0; i < parents.size(); i++) {
+            double diff = parents[i].searchPoint()(j) - m(j);
             innerSum += diff * diff;
         }
         innerSum *= normalizationFactor;
@@ -219,8 +219,3 @@ void CrossEntropy::init(ObjectiveFunctionType& function ){
 	CrossEntropy::init(function,function.proposeStartingPoint());
 }
 
-
-void CrossEntropy::updateDistribution() {
-	/* Not sure if we should do anything here */
-	/* Always same variance, therefore no update? */
-}

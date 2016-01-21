@@ -107,22 +107,6 @@ namespace shark {
 		{ return "Cross Entropy"; }
 
 		/**
-		* \brief Calculates the center of gravity of the given population \f$ \in \mathbb{R}^d\f$.
-		*
-		*
-		*/
-		template<typename Container, typename Extractor>
-		RealVector weightedSum( const Container & container, const RealVector & weights, const Extractor & e ) {
-
-			RealVector result( m_numberOfVariables, 0. );
-
-			for( unsigned int j = 0; j < container.size(); j++ )
-				result += weights( j ) * e( container[j] );
-
-			return( result );
-		}
-
-		/**
 		* \brief Sets default value for Population size.
 		*/
 		SHARK_EXPORT_SYMBOL static unsigned suggestPopulationSize(  ) ;
@@ -137,7 +121,7 @@ namespace shark {
 
 		using AbstractSingleObjectiveOptimizer<RealVector >::init;
 		/**
-		* \brief Initializes the algorithm for the supplied objective function.
+		* \brief Initializes the algorithm for the supplied objective function and the initial mean p.
 		*/
 		SHARK_EXPORT_SYMBOL void init( ObjectiveFunctionType& function, SearchPointType const& p);
 
@@ -162,11 +146,6 @@ namespace shark {
 		*/
 		SHARK_EXPORT_SYMBOL void step(ObjectiveFunctionType const& function);
 
-        /**
-         * \brief Update the multivariateNormalDistribution according to internal sigma
-         */
-        void updateDistribution();
-
 		/** \brief Access the current variance. */
 		RealVector const& variance() const {
 			return m_variance;
@@ -182,8 +161,6 @@ namespace shark {
         void setVariance(double variance){
             for(int i = 0; i < m_variance.size(); i++)
                 m_variance(i) = variance;
-            updateDistribution();
-
         }
 
 		/** \brief Access the current population mean. */
@@ -237,9 +214,9 @@ namespace shark {
 
 	protected:
 		/**
-		* \brief Updates the strategy parameters based on the supplied offspring population.
+		* \brief Updates the strategy parameters based on the supplied parent population.
 		*/
-		SHARK_EXPORT_SYMBOL void updateStrategyParameters( const std::vector<Individual<RealVector, double, RealVector> > & offspring ) ;
+		SHARK_EXPORT_SYMBOL void updateStrategyParameters( const std::vector<Individual<RealVector, double, RealVector> > & parents ) ;
 
 		std::size_t m_numberOfVariables; ///< Stores the dimensionality of the search space.
 		unsigned int m_selectionSize; ///< Number of vectors chosen when updating distribution parameters.
