@@ -151,7 +151,7 @@ void CrossEntropy::init(
 /**
 * \brief Updates the strategy parameters based on the supplied offspring population.
 */
-void CrossEntropy::updateStrategyParameters( const std::vector<Individual<RealVector, double, RealVector> > & offspring ) {
+void CrossEntropy::updateStrategyParameters( const std::vector<Individual<RealVector, double> > & offspring ) {
 
     /* Calculate the centroid of the offspring */
 	RealVector m(m_numberOfVariables);

@@ -160,7 +160,23 @@ void useCMA(std::string startPolicyFile,
         objFun.setGamedataFilename(outname);
     }
 
-    cma.init(objFun);
+    // If population size and offspring is given, special initialization needs to take place.
+    if(offspring.used() && lambda.used())
+    {
+                                                                              // Sigma is set later on
+        cma.init(objFun, objFun.proposeStartingPoint(), lambda(), offspring(), 1.0);
+        cma.mu() = offspring();
+    }
+    // Othertwise, init as normal.
+    else
+    {
+        cma.init(objFun);
+    }
+
+    if (recombinationType.used())
+    {
+        cma.recombinationType() = recombinationType();
+    }
 
     /* Set the initial sigma */
     if (initialSigma.used())
@@ -174,28 +190,6 @@ void useCMA(std::string startPolicyFile,
         cma.lowerBound() = lowerBound();
     }
 
-    /* set lambda and offspring size */
-    if(lambda.used())
-    {
-        cma.lambda() = lambda();
-    }
-    std::cout << "populationSize: " << cma.lambda() << std::endl;
-
-    if(offspring.used())
-    {
-        cma.mu() = offspring();
-    }
-    std::cout << "offspringSize: " << cma.mu() << std::endl;
-
-    if (recombinationType.used())
-    {
-        cma.recombinationType() = recombinationType();
-    }
-
-    cma.updateFeatures();
-
-    std::cout << "CMA ofspring: " << cma.mu() << std::endl;
-
     switch (cma.recombinationType())
     {
         case shark::CMA::EQUAL:
@@ -208,6 +202,10 @@ void useCMA(std::string startPolicyFile,
             std::cout << "Superlinear recombination" << std::endl;
             break;
     }
+
+    std::cout << "populationSize: " << cma.lambda() << std::endl;
+    std::cout << "offspringSize: " << cma.mu() << std::endl;
+    std::cout << "CMA ofspring: " << cma.mu() << std::endl;
 
     int t = 0;
     int generation = 0;
@@ -228,11 +226,16 @@ void useCMA(std::string startPolicyFile,
             fs << "w" << i << ",";
         }
 
-        for (int i = 0; i < nbLearnGames-1; i++)
+        for (int i = 0; i < nbLearnGames; i++)
         {
             fs << "s" << i << ",";
         }
-        fs << "s" << nbLearnGames-1 << std::endl;
+
+        for (int i = 0; i < objFun.numberOfVariables()-1; i++)
+        {
+            fs << "e" << i << ",";
+        }
+        fs << "e" <<  objFun.numberOfVariables()-1 << std::endl;
 
         fs.close();
     }
@@ -252,6 +255,13 @@ void useCMA(std::string startPolicyFile,
             MDPTetris::MDPTetrisDetailedResult report = objFun.evalDetailed(cma.mean());
             objFun.setNbGames(nbGames);
 
+            // Get a string of eignvalues
+            std::stringstream _s;
+            for (int i = 0; i < cma.eigenValues().size()-1; i++)
+            {
+                _s << cma.eigenValues()[i] << ",";
+            }
+            _s << cma.eigenValues()[cma.eigenValues().size()-1];
 
             std::ofstream fs;
             fs.open (outname.c_str(), std::ios::app);
@@ -263,7 +273,8 @@ void useCMA(std::string startPolicyFile,
                << report.standardDeviation() << ","
                << cma.sigma()  << ","
                << report.printWeights(",") << ","
-               << report.printScores(",")
+               << report.printScores(",") << ","
+               << _s.str()
                   << std::endl;
         }
 

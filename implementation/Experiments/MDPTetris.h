@@ -12,7 +12,7 @@
 
 #include <shark/ObjectiveFunctions/AbstractObjectiveFunction.h>
 
-#define TETRIS_MAX_SCORE 1000000.0
+#define TETRIS_MAX_SCORE 10000000.0
 
 extern "C"{
 #include "feature_functions.h"
@@ -95,6 +95,9 @@ public:
             s << m_weights[m_weights.size()-1];
             return s.str();
         }
+
+
+
 
     private:
         /* Highest and lowest score of the game played */
