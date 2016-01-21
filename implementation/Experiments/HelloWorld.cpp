@@ -425,6 +425,9 @@ void useCE(std::string startPolicyFile,
             MDPTetris::MDPTetrisDetailedResult report = objFun.evalDetailed(ce.mean());
             objFun.setNbGames(nbGames);
 
+            double centroid_score = report.mean();
+            _DUMP(centroid_score);
+
 
             std::ofstream fs;
             fs.open (outname.c_str(), std::ios::app);

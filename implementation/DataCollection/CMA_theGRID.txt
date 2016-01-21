@@ -1,0 +1,48 @@
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=1 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=0 -lambda=13 -offspring=6 -output=cma_equal_g1_l13_o6_$i) x 30
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=1 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=0 -lambda=22 -offspring=8 -output=cma_equal_g1_l22_o8_$i) x 30
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=1 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=0 -lambda=50 -offspring=10 -output=cma_equal_g1_l50_o10_$i) x 30
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=1 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=0 -lambda=100 -offspring=10 -output=cma_equal_g1_l100_o10_$i) x 30
+
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=5 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=0 -lambda=13 -offspring=6 -output=cma_equal_g5_l13_o6_$i) x 30
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=5 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=0 -lambda=22 -offspring=8 -output=cma_equal_g5_l22_o8_$i) x 30
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=5 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=0 -lambda=50 -offspring=10 -output=cma_equal_g5_l50_o10_$i) x 30
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=5 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=0 -lambda=100 -offspring=10 -output=cma_equal_g5_l100_o10_$i) x 30
+
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=10 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=0 -lambda=13 -offspring=6 -output=cma_equal_g10_l13_o6_$i) x 30
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=10 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=0 -lambda=22 -offspring=8 -output=cma_equal_g10_l22_o8_$i) x 30
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=10 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=0 -lambda=50 -offspring=10 -output=cma_equal_g10_l50_o10_$i) x 30
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=10 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=0 -lambda=100 -offspring=10 -output=cma_equal_g10_l100_o10_$i) x 30
+
+
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=1 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=1 -lambda=13 -offspring=6 -output=cma_linear_g1_l13_o6_$i) x 30
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=1 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=1 -lambda=22 -offspring=8 -output=cma_linear_g1_l22_o8_$i) x 30
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=1 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=1 -lambda=50 -offspring=10 -output=cma_linear_g1_l50_o10_$i) x 30
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=1 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=1 -lambda=100 -offspring=10 -output=cma_linear_g1_l100_o10_$i) x 30
+
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=5 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=1 -lambda=13 -offspring=6 -output=cma_linear_g5_l13_o6_$i) x 30
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=5 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=1 -lambda=22 -offspring=8 -output=cma_linear_g5_l22_o8_$i) x 30
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=5 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=1 -lambda=50 -offspring=10 -output=cma_linear_g5_l50_o10_$i) x 30
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=5 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=1 -lambda=100 -offspring=10 -output=cma_linear_g5_l100_o10_$i) x 30
+
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=10 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=1 -lambda=13 -offspring=6 -output=cma_linear_g10_l13_o6_$i) x 30
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=10 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=1 -lambda=22 -offspring=8 -output=cma_linear_g10_l22_o8_$i) x 30
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=10 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=1 -lambda=50 -offspring=10 -output=cma_linear_g10_l50_o10_$i) x 30
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=10 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=1 -lambda=100 -offspring=10 -output=cma_linear_g10_l100_o10_$i) x 30
+
+
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=1 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=2 -lambda=13 -offspring=6 -output=cma_superlinear_g1_l13_o6_$i) x 30
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=1 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=2 -lambda=22 -offspring=8 -output=cma_superlinear_g1_l22_o8_$i) x 30
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=1 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=2 -lambda=50 -offspring=10 -output=cma_superlinear_g1_l50_o10_$i) x 30
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=1 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=2 -lambda=100 -offspring=10 -output=cma_superlinear_g1_l100_o10_$i) x 30
+
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=5 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=2 -lambda=13 -offspring=6 -output=cma_superlinear_g5_l13_o6_$i) x 30
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=5 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=2 -lambda=22 -offspring=8 -output=cma_superlinear_g5_l22_o8_$i) x 30
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=5 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=2 -lambda=50 -offspring=10 -output=cma_superlinear_g5_l50_o10_$i) x 30
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=5 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=2 -lambda=100 -offspring=10 -output=cma_superlinear_g5_l100_o10_$i) x 30
+
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=10 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=2 -lambda=13 -offspring=6 -output=cma_superlinear_g10_l13_o6_$i) x 30
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=10 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=2 -lambda=22 -offspring=8 -output=cma_superlinear_g10_l22_o8_$i) x 30
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=10 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=2 -lambda=50 -offspring=10 -output=cma_superlinear_g10_l50_o10_$i) x 30
+(./ExampleProject -optimizer=cma -maxagents=16000 -sigma=1 -nbgames=10 -nbLearningGames=30 -pieceFile=pieces4_hard.dat -lbound=2 -recombinationType=2 -lambda=100 -offspring=10 -output=cma_superlinear_g10_l100_o10_$i) x 30
+
+
