@@ -3,8 +3,8 @@
  *
  * \brief       Implements the Cross Entropy Algorithm.
  * 
- * Hansen, N. The CMA Evolution Startegy: A Tutorial, June 28, 2011
- * and the eqation numbers refer to this publication (retrieved April 2014).
+ * Christophe Thiery, Bruno Scherrer. Improvements on Learning Tetris with Cross Entropy.
+ * International Computer Games Association Journal, ICGA, 2009, 32. <inria-00418930>
  * 
  *
  * \author      Jens Holm, Mathias Petræus and Mark Wulff
@@ -44,13 +44,7 @@
 #include <boost/shared_ptr.hpp>
 
 namespace shark {
-	/**
-	* \brief Implements the Cross-Entropy method.
-	*
-	*  The algorithm is described in "Improvements on Learning Tetris with Cross Entropy"
-	*
-	*  Find the real reference and add it.
-	*/
+
 	class CrossEntropy : public AbstractSingleObjectiveOptimizer<RealVector >
 	{
 	public:
@@ -129,14 +123,14 @@ namespace shark {
 		}
 
 		/**
-		* \brief Calculates lambda for the supplied dimensionality n.
+		* \brief Sets default value for Population size.
 		*/
 		SHARK_EXPORT_SYMBOL static unsigned suggestPopulationSize(  ) ;
 
 		/**
-		* \brief Calculates mu for the supplied lambda and the recombination strategy.
+		* \brief Calculates selection size for the supplied population size.
 		*/
-		SHARK_EXPORT_SYMBOL static unsigned suggestSelectionSize( unsigned int lambda ) ;
+		SHARK_EXPORT_SYMBOL static unsigned suggestSelectionSize( unsigned int populationSize ) ;
 
 		void read( InArchive & archive );
 		void write( OutArchive & archive ) const;
@@ -148,7 +142,7 @@ namespace shark {
 		SHARK_EXPORT_SYMBOL void init( ObjectiveFunctionType& function, SearchPointType const& p);
 
         /**
-         * \brief Inits the cross entropy with only with the function
+         * \brief Inits the Cross Entropy, only with the objective function
          */
         SHARK_EXPORT_SYMBOL void init( ObjectiveFunctionType& function );
 
@@ -158,8 +152,8 @@ namespace shark {
 		SHARK_EXPORT_SYMBOL void init(
 			ObjectiveFunctionType& function,
 			SearchPointType const& initialSearchPoint,
-			unsigned int lambda,
-			unsigned int mu,
+			unsigned int populationSize,
+			unsigned int selectionSize,
 			RealVector initialSigma
 		);
 
@@ -168,14 +162,12 @@ namespace shark {
 		*/
 		SHARK_EXPORT_SYMBOL void step(ObjectiveFunctionType const& function);
 
-
-
         /**
-         * \brief Update the multivariateNormalDistributiopon accoring to internal sigma
+         * \brief Update the multivariateNormalDistribution according to internal sigma
          */
         void updateDistribution();
 
-		/** \brief Accesses the current variance. */
+		/** \brief Access the current variance. */
 		RealVector const& variance() const {
 			return m_variance;
 		}
@@ -186,7 +178,7 @@ namespace shark {
 			m_variance = variance;
 		}
 
-        /** \brief set all variance values */
+        /** \brief Set all variance values */
         void setVariance(double variance){
             for(int i = 0; i < m_variance.size(); i++)
                 m_variance(i) = variance;
@@ -194,34 +186,34 @@ namespace shark {
 
         }
 
-		/** \brief Accesses the current population mean. */
+		/** \brief Access the current population mean. */
 		RealVector const& mean() const {
 			return m_mean;
 		}
 
 		/**
-		 * \brief Returns the size of the parent population \f$\mu\f$.
+		 * \brief Returns the size of the parent population.
 		 */
 		unsigned int selectionSize() const {
 			return m_selectionSize;
 		}
 
 		/**
-		 * \brief Returns a mutable reference to the size of the parent population \f$\mu\f$.
+		 * \brief Returns a mutable reference to the size of the parent population.
 		 */
 		unsigned int& selectionSize(){
 			return m_selectionSize;
 		}
 
-                /**
-		 * \brief Returns a immutable reference to the size of the offspring population \f$\mu\f$.
+        /**
+		 * \brief Returns a immutable reference to the size of the population.
 		 */
 		unsigned int populationSize()const{
 			return m_populationSize;
 		}
 
 		/**
-		 * \brief Returns a mutable reference to the size of the offspring population \f$\mu\f$.
+		 * \brief Returns a mutable reference to the size of the population.
 		 */
 		unsigned int & populationSize(){
 			return m_populationSize;
@@ -236,7 +228,7 @@ namespace shark {
 		}
 
         /**
-		 * \brief Get an immutable reference to
+		 * \brief Get an immutable reference to Noise Type.
 		 */
         const INoiseType &getNoiseType( ) const {
             return *m_noise.get();
@@ -253,15 +245,15 @@ namespace shark {
 		unsigned int m_selectionSize; ///< Number of vectors chosen when updating distribution parameters.
 		unsigned int m_populationSize; ///< Number of vectors sampled in a generation.
 
-		RealVector m_variance; ///< Variance for sample parameters
+		RealVector m_variance; ///< Variance for sample parameters.
 
-		StrongNoisePtr m_noise; ///< Noise type to apply in update of distribution parameters.
+		StrongNoisePtr m_noise; ///< Noise type to apply in the update of distribution parameters.
 
 		RealVector m_mean; ///< The mean of the population.
 
-		unsigned m_counter; ///< counter for generations
+		unsigned m_counter; ///< Counter for generations.
 
-        Normal< Rng::rng_type > m_distribution; ///< Normal distribution
+        Normal< Rng::rng_type > m_distribution; ///< Normal distribution.
 
 	};
 }

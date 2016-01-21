@@ -149,7 +149,47 @@ hard Tetris when comparing CMA against Cross Entropy.
 }
 
 \subsection{Configuration of CMA}
-\comment{- Write about adjustments made to CMA because of the previous experiment}
+\begin{itemize}
+\item Tidligere eksperimenter viser at vi bør justere på cma således det passer bedre til Tetris problemet/featuresættet (population size/offspring regulering, number of games pr agent, nævne at vi benytter hard tetris til eksperimenterne)
+\item beskrivelse af eksperiment setup og forventet udfald (begrundelse for hvorfor eksperimenterne udføres)
+\item resultater af eksperimenter (grafer, tabeller)
+\item analyse og diskussion af resultater
+\end{itemize}
+
+In previous sections we focused on tuning Cross Entropy for the Tetris 
+problem. Whereas we deliberately chose not to tune CMA due to its implementation 
+into the Shark library \citep{shark08}. However, experiments with the "out of 
+the box" CMA from Shark, with default settings vs the tuned Cross Entropy
+resulted in CMA reaching convergence very fast but not achieving the same point
+limit as Cross Entropy.\\
+By adjusting the population size to that similar of Cross Entropy, we are able
+to get a fair comparison between the two algorithms, given each generation will
+contain the same number of agents. By setting the population and offspring size
+to the same values, we in effect test if the covariance matrix and the step-size
+control has a impact on the algorithm performance compared to Cross Entropy
+which does not have the features.\\
+Furthermore, CMA also has a unique formula for calculating the updated mean,
+called the 'Recombination type' \ref{sec:CMA-ES}. Where the recombination type
+determines how much influence each of the offspring vectors has on the next
+generation. Built into the CMA algorithm is three methods of recombination. 
+\begin{itemize}
+\item EQUAL, Each of the offspring vectors has equal influence in the generated mean. Each has $w_i = 1$.
+\item LINEAR, The best of the offspring vectors has more influence. 
+\item SUPERLINEAR, The vectors are weighted with a logarithmic equation. $w_i = \frac{w_i'}{\sum_{j=1}^{\mu} w_j'^+}$
+\end{itemize}
+As default, CMA uses Super Linear recombination. However, Tetris is a problem
+with multiple local optimums in its solution space. This means, though a vector may be the best in its generation, it could be a nearby local optimum. Therefore, Super Linear recombination may not be the optimal recombination type for the Tetris problem.\\
+\\
+\comment{Was about to list the experiment setup (population/offspring with recombination type - wait for Oswin conversation to end), will perform experiments with hard tetris}\\
+\\
+\comment{Reference to CMA-ES section needs to be fixed}\\
+\comment{Weights for recombination could have a symbol? (change policy weight
+symbol?)}\\
+\comment{Find Linear combination type formula of change format of itemize list}
+
+\textbf{Results}
+
+\textbf{Analysis and discussion}
 
 
 \subsection{Dynamic games played per agent}
