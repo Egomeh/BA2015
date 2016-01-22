@@ -1,0 +1,38 @@
+\documentclass[border=10pt]{standalone}
+\usepackage{graphicx,color,tikz,pgfplots}
+
+\begin{document}
+
+\begin{tikzpicture}
+\begin{axis}[%
+	xmin=0,
+	xmax=8000,
+    xlabel={Agents evaluated},
+    ylabel={Mean score},
+    ymode=log,
+    log basis y={10},
+    width=16cm,
+    height=12cm,
+    legend pos=south east]
+\addplot[color=black,mark=none, dotted, thick] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/Comparison/quickDirty/noNoise.txt};
+\addplot[color=black,mark=none, thick] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/Comparison/quickDirty/constantNoise.txt};
+\addplot[color=black,mark=none,dashed, thick] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/Comparison/quickDirty/linearNoise.txt};
+\addplot[color=red,mark=none,thick] 
+    table [x expr=\thisrowno{0}, 
+           y expr=\thisrowno{1}, 
+           col sep=comma] {data/Comparison/quickDirty/CMA.txt};
+\legend{No noise, constant noise, Linear decreasing noise, CMA}
+\end{axis}
+\end{tikzpicture}
+
+\end{document}
+\end{document}

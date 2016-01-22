@@ -15,7 +15,11 @@
     width=16cm,
     height=12cm,
     legend pos=south east,
-    title={}]
+    title={},
+    xticklabel = {
+    \pgfmathparse{\tick/1000}
+    \pgfmathprintnumber{\pgfmathresult}\,K
+}]
 \foreach \x in {0,1,2,3,4,5,6,7,8,9}
 {
 \addplot[color=black,mark=none]  
@@ -41,7 +45,11 @@
     width=16cm,
     height=12cm,
     legend pos=south east,
-    title={}]
+    title={},
+    xticklabel = {
+    \pgfmathparse{\tick/1000}
+    \pgfmathprintnumber{\pgfmathresult}\,K
+}]
 \foreach \x in {0,1,2,3,4,5,6,7,8,9}
 {
 \addplot[color=black,mark=none]  
@@ -66,7 +74,11 @@
     width=16cm,
     height=12cm,
     legend pos=south east,
-    title={}]
+    title={},
+    xticklabel = {
+    \pgfmathparse{\tick/1000}
+    \pgfmathprintnumber{\pgfmathresult}\,K
+}]
 \foreach \x in {0,1,2,3,4,5,6,7,8,9}
 {
 \addplot[color=black,mark=none]  
@@ -89,7 +101,11 @@
     log basis y={10},
     width=\textwidth,
     height=12cm,
-    legend pos=south east]
+    legend pos=south east,
+    xticklabel = {
+    \pgfmathparse{\tick/1000}
+    \pgfmathprintnumber{\pgfmathresult}\,K
+}]
 \addplot[color=black,mark=none, dotted, thick] 
     table [x=agents, y=meanScore, 
            col sep=comma] {data/NoNoise/mean.txt};
@@ -115,7 +131,11 @@
     log basis y={10},
     width=\textwidth,
     height=12cm,
-    legend pos=south east]
+    legend pos=south east,
+    xticklabel = {
+    \pgfmathparse{\tick/1000}
+    \pgfmathprintnumber{\pgfmathresult}\,K
+}]
 \addplot[color=black,mark=none, dashed, thick] 
     table [x=agents, y=meanScore, 
            col sep=comma] {data/ConstantNoise/mean.txt};
@@ -139,7 +159,11 @@
     width=16cm,
     height=12cm,
     legend pos=south east,
-    title={Bertsekas comparison, hard Tetris}]
+    title={Bertsekas comparison, hard Tetris},
+    xticklabel = {
+    \pgfmathparse{\tick/1000}
+    \pgfmathprintnumber{\pgfmathresult}\,K
+}]
 \addplot[color=black,mark=none,dashed, very thin]  
  table [x=agents, y=meanScore, col sep=comma, ] 
  {data/FeaturesetCompare/_ce_bert_hard_ConstantNoise_mean.txt};
@@ -162,7 +186,11 @@
     width=16cm,
     height=12cm,
     legend pos=south east,
-    title={Dellacherie comparison, hard Tetris}]
+    title={Dellacherie comparison, hard Tetris},
+    xticklabel = {
+    \pgfmathparse{\tick/1000}
+    \pgfmathprintnumber{\pgfmathresult}\,K
+}]
 \addplot[color=black,mark=none,dashed, very thin]  
  table [x=agents, y=meanScore, col sep=comma, ] 
  {data/FeaturesetCompare/_ce_dell_ConstantNoise_mean.txt};

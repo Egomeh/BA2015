@@ -34,7 +34,7 @@ of the layout of the feature file can be seen in figure \ref{fig:featfile}.
 \end{figure}
 
  
-\subsection{Normalization of samples}
+\subsection{Normalization of samples \label{normalSamples}}
 As mentioned by some authors \citep{boumaza2009}, the vector that
 describes the agent can very well be normalized such that the vector
 is a point that lies on the $\dimensions$-dimensional hypersphere.\\
@@ -379,7 +379,12 @@ configuration technically performs better.
 \comment{Add graphs of the two different configurations?}
 
 \subsection{Step-size and lower bound for CMA}
-\comment{- write about intitial sigma}
+Initially, the covariance matrix of CMA in generation $\generation = 0$
+is the identity matrix. The initial step-size $\sigma_0$ will hence in 
+the first iteration scale the area in which the CMA algorithm searches.
+As from section \ref{normalSamples}, it's known that the scale of the 
+solutions has no impact on the scores. Hence, it's assumed that the initial 
+step-size should not have any major impact on the results.
 
 \begin{figure}[H]
 \centering
@@ -395,13 +400,41 @@ $\sigma_0$ & mean & Q1 & Q2 & Q3\\
 \caption{Results of CMA-ES with adjusted initial step-size \label{CEConfigTest}}
 \end{figure}
 
-For the initial experiments using CMA-ES, the only adjusted parameter is the initial 
+For the initial experiments using CMA-ES, 
+the only adjusted parameter is the initial 
 step-size $\sigma_0$. The configurations of step-sizes were 
 $\sigma_0 \in \{0.1, 0.2, 0.5, 0.8, 1.0\}$. As the table shows,
 the final mean score does not seem to change with the initial step-size.
-From this, it's assumed that the initial step-size, at least in this range,
+As the table shows, the adjustment of the step-sizes does not appear to 
+have a drastic impact on the mean scores. However, based on both mean score and
+quantiles, the best configuration seems to be $\sigma_0 = 0.5$. This is 
+is also referred to as a typical initial setting in \citep{boumaza2009}.
+However, the conclusion remains that the initial step-size is not critical 
+for the experiment.\\
+
+As with the Cross Entropy method, to avoid too early convergence, a 
+certain lower threshold for the variance should be applied when 
+sampling vectors for solutions. In the Cross Entropy method, a constant 
+noise term $z_t = 4$ was added to the variance for each component
+of the sampled vectors. When the $i$'th component in cross entropy is
+sampled as follows:
+\begin{align*}
+\individual_i &\sim \mathcal{N}\left(m, \sigma^{2}\right)\\
+              &\sim \sigma \mathcal{N}\left(m, 1\right)
+\end{align*}
+Then $\sigma^{2} \geq 4$. To gain the same effect for the CMA, a lower bound 
+is applied to the step.size. Such a bound is implemented in the Shark library
+as the following, where the value of the lower bound is $l$.
+\begin{align*}
+\sigma  \lambda_n \geq l
+\end{align*}
+Where $\lambda_n$ is the lowest eigenvalue in the covariance matrix. 
+
+\maybe{From this, it's assumed that the initial step-size, at least in this range,
 does not have a significant impact, and the best of these runs, $\sigma_0$ is chosen
-for first comparison.\\
+for first comparison.}
+
+
 
 \comment{- Write stuff about our practical experiences with the step size and lower bound}\\
 \comment{- Make sure to fully conclude that the initial step-size doesn't matter}
