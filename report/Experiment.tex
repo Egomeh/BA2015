@@ -362,7 +362,7 @@ $\populationSize$ & $\offspringNumber$ & mean & Q1 & Q2 & Q3\\
 \caption{Cross Entropy configuration test \label{CEConfigTest}}
 \end{figure}
 
-\comment{graphs to appendix + comment about the quantiles?}
+\comment{graphs to appendix}
 
 The experiments with different population and offspring sizes
 does not seem to support a choice for any other configuration 
@@ -374,7 +374,9 @@ results in longer computation time, than the $\populationSize = 100$ and $\offsp
 configuration. In other words, the $\populationSize = 100$ and $\offspringNumber = 10$ configuration 
 is therefore preferred since it takes shorter computation time and the end-result is similar compared
 to the $\populationSize = 50$ and $\offspringNumber = 5$ configuration, even though the latter 
-configuration technically performs better.
+configuration from our expriments converged faster. The experiments also apppears
+to suffer from a from high noise, yet both the mean and the quantiles favor the 
+very well tested Cross Entropy configuration of of $\populationSize = 100$ and $\offspringNumber = 10$.
 
 \comment{Add graphs of the two different configurations?}
 
@@ -429,6 +431,25 @@ as the following, where the value of the lower bound is $l$.
 \sigma  \lambda_n \geq l
 \end{align*}
 Where $\lambda_n$ is the lowest eigenvalue in the covariance matrix. 
+When the vectors are sampled, the samples are scaled b the matrix $D$
+containing the eignvalues of the covariance matrix. 
+Hence, if $\sigma \lambda_n \geq l$, then smallest scaling
+that takes place is at least $l$. As the vectors are samples
+as: 
+\reminder{Check if this is correct, 
+and maybe place this in theoretical section.
+Also make sure that variable names makes sense.}
+\begin{align*}
+\individual &\sim \mathcal{N}\left( m, \sigma^{2}C \right)
+\end{align*}
+To roughly resemble the constant noise configuration of Cross Entropy,
+the dimension with the lowest variance must not drop below 4. 
+This is achived by setting a lower bound $l=2$. By setting this, 
+the variance in the normal distribution in each dimension 
+before rotation is enured to be at least $\sigma^{2} = 4$
+since $\sigma \mathcal{N}\left( 0, 1 \right) \sim 
+\mathcal{N}\left( 0, \sigma^{2} \right)$.
+
 
 \maybe{From this, it's assumed that the initial step-size, at least in this range,
 does not have a significant impact, and the best of these runs, $\sigma_0$ is chosen
