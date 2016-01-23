@@ -99,18 +99,22 @@ double MDPTetris::eval(const SearchPointType &input) const {
     games_statistics_free(stats);
 
     //Constrain penalty
-    double fval = TETRIS_MAX_SCORE - points;
-    double vlen = 0;
-    for (int i = 0; i < input.size(); i++)
+    if ( m_penalizeLength )
     {
-        vlen += input(i) * input(i);
+        double fval = TETRIS_MAX_SCORE - points;
+        double vlen = 0;
+        for (int i = 0; i < input.size(); i++)
+        {
+            vlen += input(i) * input(i);
+        }
+        vlen = std::sqrt(vlen);
+        double maxLen  = 100.0;
+        if (vlen > maxLen)
+        {
+            return fval + 0.001 * (vlen - maxLen);
+        }
     }
-    vlen = std::sqrt(vlen);
-    double maxLen  = 100.0;
-    if (vlen > maxLen)
-    {
-        return fval + 0.001 * (vlen - maxLen);
-    }
+    
 
     return TETRIS_MAX_SCORE - points;
 }

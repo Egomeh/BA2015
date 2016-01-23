@@ -142,6 +142,10 @@ public:
     void setNbGames(unsigned int nbGames)
     { m_nbGames = nbGames; }
 
+    /* Enable or disable length penalizing */
+    void enableLengthPenalty(bool _enable)
+    { m_penalizeLength = _enable; }
+
 private:
 
     /* The struct from the mdptetris
@@ -169,6 +173,12 @@ private:
     /* Info about last evaluation */
     unsigned int m_lastMinScore, m_lastMaxScore;
     double m_lastStandardDeviation;
+
+    /* Penalize length of a vector, to 
+     * prevent searches stratching far 
+     * from the origin.
+     */
+    bool m_penalizeLength = false;
 
 };
 
