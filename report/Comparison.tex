@@ -75,11 +75,14 @@ settings for CMA-ES seems appropriate.
 The best configurations of the experiments using the Bertsekas
 featureset never appears to score much higher than 200,000 lines
 on average. Due to this, the question of whether the specific featureset
-is the cause of too rapid convergence. To address this, both CMA-ES and Cross
+causes rapid convergence remains.\\
+To address this, both CMA-ES and Cross
 Entropy experiments were run 30 times with respectively the Bertsekas and 
 Dellacherie featureset. To prevent long runtimes, the games were simulated
-using a harder version of Tetris referred to as 'Hard Tetris'. Regular 
-Tetris, all pieces occur with equal likelihood (see figure \ref{fig:TetrisPieces}). To increase the difficulty of the game,
+using a harder version of Tetris referred to as 'Hard Tetris'. With regular 
+Tetris, all pieces occur with equal likelihood.\\
+%(see figure \ref{fig:TetrisPieces})
+To increase the difficulty of the game,
 in our hard Tetris, the s-block and z-block appear twice as often 
 as the other pieces.
 
@@ -90,11 +93,9 @@ as the other pieces.
 \caption{Regular Tetris pieces \label{fig:TetrisPieces}}
 \end{figure}
 
-
-
 \textbf{Results}
 
-In following figures the mean results of 30 runs of both CMA and Cross 
+In the following figures the mean results of 30 runs of both CMA and Cross 
 Entropy is presented. The settings for Cross Entropy remains at constant noise
 with a noise term of $z_t = 4$ and an initial sigma of $\sigma_0 = 100.$, 
 and the CMA with $\sigma_0 = 1$.\\
@@ -137,8 +138,8 @@ Add full data graphs as appendix.
 \textbf{Analysis and discussion}
 
 The experiment with different featuresets indicates that the behaviour 
-is not heavily dependant on featureset, as the development of the 
-graphs closely resemble that from the initial comparison experiment.
+is not heavily dependant on the featureset, as the development of the 
+graphs closely resemble the initial comparison experiment.
 Furthermore, it appears that increasing the difficulty of the game
 simple shifts the score, but does not affect the development of the graphs.
 Therefore, we conclude that changing the featureset does not invalidate

@@ -188,24 +188,19 @@ and is in other research verified to be exponentially distributed.
 As a result of the high variance of the controllers, the performance 
 of single controllers are often presented along with a confidence interval
 for the estimated mean score of the controller. The estimated mean of 
-the controllers score is calculated by:
-
+the controllers score is calculated by
 \begin{align*}
 \hat{\mean} &= \sum_{i=1}^{\populationSize} \individual_i
 \end{align*}
-
 Thus, the maximum likelihood estimation of the rate 
 parameter\footnote{Note that $\lambda$ is in this context not,
 the population size but instead the rate parameter for the
 exponential distribution.}
 of the distribution is given by
-
 \begin{align*}
 \hat{\lambda} = \frac{1}{\hat{\mean}}
 \end{align*}
-
-A confidence interval is found by the following:
-
+A confidence interval is found by the following
 \begin{align*}
 \frac{2\populationSize}{\hat{\lambda}\chi^{2}_{1-\frac{\alpha}{2},2\populationSize}}
 <
@@ -213,24 +208,19 @@ A confidence interval is found by the following:
 < 
 \frac{2\populationSize}{\hat{\lambda}\chi^{2}_{\frac{\alpha}{2},2\populationSize}}
 \end{align*}
-
 However, for these experiments, an approximation for a $95\%$
 confidence on lower and upper bound 
-of the rate parameter $\lambda$ is used:
-
+of the rate parameter $\lambda$ is used
 \begin{align*}
 \lambda_{low} &= 
 \hat{\lambda} \left( 1 - \frac{1.96}{\sqrt{\populationSize}} \right)\\
 \lambda_{upp} &= 
 \hat{\lambda} \left( 1 + \frac{1.96}{\sqrt{\populationSize}} \right)
 \end{align*}
-
-By this, the $95\%$ confidence interval for the mean $\mean$ is:
-
+By this, the $95\%$ confidence interval for the mean $\mean$ is
 \begin{align*}
 \frac{1}{\lambda_{low}} < \mean < \frac{1}{\lambda_{upp}}
 \end{align*}
-
 When a controllers score is presented as "$s \pm p$" this means 
 has an empirical mean score of $s$ and a real mean that is with 
 $95\%$ likelihood within $s \pm p$. \\
@@ -334,10 +324,12 @@ Other researchers run the Cross Entropy algorithm with population size of
 $\populationSize = 100$ and an offspring corresponding to 10\% of 
 the population size, resulting in $\offspringNumber = 10$. As it's not 
 discussed why this exact setting is applied, various settings of the 
-Cross-Entropy was run to asses the performance of other configurations.
+Cross-Entropy was executed to asses the performance of other configurations
+in our experiments.
 The experiments includes different population sizes 
 $\populationSize \in \{10, 22, 50, 100, 200\}$ and offspring 
-sizes of either $10\%$ and $50\%$. 
+sizes of either $10\%$ and $50\%$ (since the CMA algorithm by default
+uses $50 \%$ offspring). 
 A summary of the experiments can be seen in figure \ref{CEConfigTest}
 on page \pageref{CEConfigTest}.
 
@@ -352,9 +344,9 @@ $\populationSize$ & $\offspringNumber$ & mean & Q1 & Q2 & Q3\\
 22 & $50\%$  & 52,887.4   & 23,531.9  & 42,161.0     & 83,144.1\\
 50 & $10\%$  & 95,623.1   & 82,738.9  & 93,388.9     & 111,351.5\\
 50 & $50\%$  & 69,130.7   & 52,511.0  & 64,351.6     & 91,488.6\\
-\hline
+\hdashline
 100 & $10\%$ & 115,868.7  & 84,368.5  & 122,238.5    & 146,457.0\\
-\hline
+\hdashline
 100 & $50\%$ & 22,910.4   & 4,037.7   & 14,353.7     & 47,215.9\\
 200 & $10\%$ & 85,181.7   & 45,201.5  & 96,803.1     & 117,578.0\\
 200 & $50\%$ & 946.4      & 585.0     & 802.5        & 1,267.7
@@ -375,14 +367,14 @@ configuration. In other words, the $\populationSize = 100$ and $\offspringNumber
 is therefore preferred since it takes shorter computation time and the end-result is similar compared
 to the $\populationSize = 50$ and $\offspringNumber = 5$ configuration, even though the latter 
 configuration from our expriments converged faster. The experiments also apppears
-to suffer from a from high noise, yet both the mean and the quantiles favor the 
-very well tested Cross Entropy configuration of of $\populationSize = 100$ and $\offspringNumber = 10$.
+to suffer from a high noise, yet both the mean and the quantiles favor the 
+extensively tested Cross Entropy configuration of of $\populationSize = 100$ and $\offspringNumber = 10$.
 
 \comment{Add graphs of the two different configurations?}
 
 \subsection{Step-size and lower bound for CMA}
 Initially, the covariance matrix of CMA in generation $\generation = 0$
-is the identity matrix. The initial step-size $\sigma_0$ will hence in 
+is the identity matrix. The initial step-size, $\sigma_0$, will hence in 
 the first iteration scale the area in which the CMA algorithm searches.
 As from section \ref{normalSamples}, it's known that the scale of the 
 solutions has no impact on the scores. Hence, it's assumed that the initial 
@@ -407,11 +399,11 @@ the only adjusted parameter is the initial
 step-size $\sigma_0$. The configurations of step-sizes were 
 $\sigma_0 \in \{0.1, 0.2, 0.5, 0.8, 1.0\}$. As the table shows,
 the final mean score does not seem to change with the initial step-size.
-As the table shows, the adjustment of the step-sizes does not appear to 
+Furthermore, the adjustment of the step-sizes does not appear to 
 have a drastic impact on the mean scores. However, based on both mean score and
 quantiles, the best configuration seems to be $\sigma_0 = 0.5$. This is 
 is also referred to as a typical initial setting in \citep{boumaza2009}.
-However, the conclusion remains that the initial step-size is not critical 
+Therefore, the conclusion remains that the initial step-size is not critical 
 for the experiment.\\
 
 As with the Cross Entropy method, to avoid too early convergence, a 
@@ -425,16 +417,16 @@ sampled as follows:
               &\sim \sigma \mathcal{N}\left(m, 1\right)
 \end{align*}
 Then $\sigma^{2} \geq 4$. To gain the same effect for the CMA, a lower bound 
-is applied to the step.size. Such a bound is implemented in the Shark library
+is applied to the step-size. Such a bound is implemented in the Shark library
 as the following, where the value of the lower bound is $l$.
 \begin{align*}
 \sigma  \lambda_n \geq l
 \end{align*}
 Where $\lambda_n$ is the lowest eigenvalue in the covariance matrix. 
-When the vectors are sampled, the samples are scaled b the matrix $D$
+When the vectors are sampled, the samples are scaled by the matrix $D$
 containing the eignvalues of the covariance matrix. 
-Hence, if $\sigma \lambda_n \geq l$, then smallest scaling
-that takes place is at least $l$. As the vectors are samples
+Hence, if $\sigma \lambda_n \geq l$, then the smallest scaling
+that takes place is at least $l$. As the vectors are sampled
 as: 
 \reminder{Check if this is correct, 
 and maybe place this in theoretical section.
@@ -444,9 +436,9 @@ Also make sure that variable names makes sense.}
 \end{align*}
 To roughly resemble the constant noise configuration of Cross Entropy,
 the dimension with the lowest variance must not drop below 4. 
-This is achived by setting a lower bound $l=2$. By setting this, 
-the variance in the normal distribution in each dimension 
-before rotation is enured to be at least $\sigma^{2} = 4$
+This is achieved by setting a lower bound $l=2$. By setting this, 
+the variance of the normal distribution in each dimension 
+before rotation is ensured to be at least $\sigma^{2} = 4$
 since $\sigma \mathcal{N}\left( 0, 1 \right) \sim 
 \mathcal{N}\left( 0, \sigma^{2} \right)$.
 
