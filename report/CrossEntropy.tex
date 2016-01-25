@@ -110,7 +110,7 @@ Where $\generation$ denotes the current iteration.\\
 $\populationSize$ is the number of vectors sampled in each generation.
 \\
 
-\textbf{The number of selected vector / parents}\\
+\textbf{The number of selected vectors / parents}\\
 $\offspringNumber$ is the number of vectors which are selected to compute 
 the new mean $\mean_{\generation + 1}$, and variance
 $\varianceMatrix^2_{\generation + 1}$, for next generation/iteration. 
@@ -119,17 +119,26 @@ directly by taking the $\offspringNumber$ best ranked
 vectors.
 \\
 
-\textbf{The noise factor}\\
-The noise factor, $\noise_{\generation}$, is the amount of noise which 
-is applied to the variance $\varianceMatrix^2$ in iteration/generation 
-$\generation$. In general, noise is used to prevent the algorithm from 
-getting stuck in a local optimum.
-There are different kinds of noise settings, such as: no noise, constant noise 
+\textbf{The noise term}\\
+The noise factor, $\noise_{\generation}$, 
+is the amount of noise which 
+is applied to the variance $\varianceMatrix^2$ in
+iteration/generation 
+$\generation$. In general, noise is used to prevent
+the algorithm from 
+getting narrowing down to a local optimum, but
+rather explore new solutions.
+The noise term can be any
+function of $\generation$. Among 
+the most described noise types are: no noise, constant noise 
 and linear decreasing noise \citep{szita:06}. 
 When using no noise, $\noise_{\generation}$ 
-is simply set to zero. When using constant noise, the same value is 
-added to the variance $\varianceMatrix^2$ in each iteration/generation. 
-When using linear decreasing noise, $\noise_{\generation}$ is defined as
+is simply set to zero. When using constant noise, 
+the same value is 
+added to the variance $\varianceMatrix^2$ 
+in each iteration/generation. 
+When using linear decreasing noise, 
+$\noise_{\generation}$ is often set as
 $\noise_{\generation}=max(5- \generation /10,0)$.
 \\
 

@@ -18,7 +18,7 @@
     title={},
     xticklabel = {
     \pgfmathparse{\tick/1000}
-    \pgfmathprintnumber{\pgfmathresult}\,K
+    \pgfmathprintnumber{\pgfmathresult}\,k
 }]
 \foreach \x in {0,1,2,3,4,5,6,7,8,9}
 {
@@ -48,7 +48,7 @@
     title={},
     xticklabel = {
     \pgfmathparse{\tick/1000}
-    \pgfmathprintnumber{\pgfmathresult}\,K
+    \pgfmathprintnumber{\pgfmathresult}\,k
 }]
 \foreach \x in {0,1,2,3,4,5,6,7,8,9}
 {
@@ -77,7 +77,7 @@
     title={},
     xticklabel = {
     \pgfmathparse{\tick/1000}
-    \pgfmathprintnumber{\pgfmathresult}\,K
+    \pgfmathprintnumber{\pgfmathresult}\,k
 }]
 \foreach \x in {0,1,2,3,4,5,6,7,8,9}
 {
@@ -104,7 +104,7 @@
     legend pos=south east,
     xticklabel = {
     \pgfmathparse{\tick/1000}
-    \pgfmathprintnumber{\pgfmathresult}\,K
+    \pgfmathprintnumber{\pgfmathresult}\,k
 }]
 \addplot[color=black,mark=none, dotted, thick] 
     table [x=agents, y=meanScore, 
@@ -134,7 +134,7 @@
     legend pos=south east,
     xticklabel = {
     \pgfmathparse{\tick/1000}
-    \pgfmathprintnumber{\pgfmathresult}\,K
+    \pgfmathprintnumber{\pgfmathresult}\,k
 }]
 \addplot[color=black,mark=none, dashed, thick] 
     table [x=agents, y=meanScore, 
@@ -162,7 +162,7 @@
     title={Bertsekas comparison, hard Tetris},
     xticklabel = {
     \pgfmathparse{\tick/1000}
-    \pgfmathprintnumber{\pgfmathresult}\,K
+    \pgfmathprintnumber{\pgfmathresult}\,k
 }]
 \addplot[color=black,mark=none,dashed, very thin]  
  table [x=agents, y=meanScore, col sep=comma, ] 
@@ -189,7 +189,7 @@
     title={Dellacherie comparison, hard Tetris},
     xticklabel = {
     \pgfmathparse{\tick/1000}
-    \pgfmathprintnumber{\pgfmathresult}\,K
+    \pgfmathprintnumber{\pgfmathresult}\,k
 }]
 \addplot[color=black,mark=none,dashed, very thin]  
  table [x=agents, y=meanScore, col sep=comma, ] 
@@ -200,5 +200,36 @@
 \legend{Cross Entropy ($z_t = 4$ $\sigma_0 = 100$), CMA-ES ($\sigma_0 = 1$)}
 \end{axis}
 }
+
+
+
+\newcommand{\plotCEConfig}[3]
+{
+\begin{tikzpicture}
+\begin{axis}[%
+	xmin=0,
+	xmax=8000,
+    xlabel={},
+    ylabel={},
+    ymode=log,
+    log basis y={10},
+    width=8cm,
+    height=6cm,
+    legend pos=south east,
+    title={$\populationSize = #1, \offspringNumber=#2$},
+    xticklabel = {
+    \pgfmathparse{\tick/1000}
+    \pgfmathprintnumber{\pgfmathresult}\,k
+}]
+\foreach \x in {0,1,2,3,4,5,6,7,8,9}
+{
+\addplot[color=black,mark=none, very thin]  
+ table [x=agents, y=meanScore, col sep=comma, ] {data/CrossEntropyConfiguration/#3\x.txt};
+}
+\end{axis}
+\end{tikzpicture}
+}
+
+
 
 

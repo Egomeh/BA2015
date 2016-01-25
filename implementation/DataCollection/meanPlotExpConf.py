@@ -111,9 +111,9 @@ def main():
         numpyData = np.array( sortedMeans )
         
         # Define quantiles and calculate
-        Q1 = np.percentile(numpyData, 30)
+        Q1 = np.percentile(numpyData, 25)
         Q2 = np.percentile(numpyData, 50)
-        Q3 = np.percentile(numpyData, 70)
+        Q3 = np.percentile(numpyData, 75)
         n = len(sortedMeans)
         
         writer.writerow( { refCol:i , meanCol:meanData[i], 'clow':clow, 'chigh':chigh, 'Q1':Q1, 'Q2':Q2, 'Q3':Q3, 'means':sortedMeans } )
