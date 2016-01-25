@@ -361,12 +361,12 @@ see Appendix \ref{appendixCrossEntropyConfig} for the full plots
 of the experiments.  \label{CEConfigTest}}
 \end{figure}
 
-The experiments with different population and offspring sizes
+The experiments with different population and parent sizes
 does not seem to support a choice for any other configuration 
 than the mostly commonly used 
 $\populationSize = 100$ and $\offspringNumber = 10$. \\
 However, with a configuration of $\populationSize = 50$ and $\offspringNumber = 5$ convergence
-is achieved faster. This means that the score limit is reached faster, which
+is achieved faster (see figure \ref{fig:bestConfCE}). This means that the score limit is reached faster, which
 results in longer computation time, than the $\populationSize = 100$ and $\offspringNumber = 10$
 configuration. In other words, the $\populationSize = 100$ and $\offspringNumber = 10$ configuration 
 is therefore preferred since it takes shorter computation time and the end-result is similar compared
@@ -375,7 +375,15 @@ configuration from our expriments converged faster. The experiments also apppear
 to suffer from a high noise, yet both the mean and the quantiles favor the 
 extensively tested Cross Entropy configuration of $\populationSize = 100$ and $\offspringNumber = 10$.
 
-\comment{Add graphs of the two different configurations?}
+
+\begin{figure}[H]
+\begin{tabular}{@{}l@{}l@{}}
+\plotCEConfig{50}{5}{ce_ConstantNoise_l50_o5_} &
+\plotCEConfigBase{100}{10}{data/ConstantNoise/ce_ConstantNoise_}
+\end{tabular}
+\caption{The two best configurations of Cross Entropy 
+\label{fig:bestConfCE}}
+\end{figure}
 
 \subsection{Step-size and lower bound for CMA}
 Initially, the covariance matrix of CMA in generation $\generation = 0$
@@ -416,7 +424,7 @@ certain lower threshold for the variance should be applied when
 sampling vectors for solutions. In the Cross Entropy method, a constant 
 noise term $z_t = 4$ was added to the variance for each component
 of the sampled vectors. When the $i$'th component in cross entropy is
-sampled as follows:
+sampled as follows
 \begin{align*}
 \individual_i &\sim \mathcal{N}\left(m, \sigma^{2}\right)\\
               &\sim \sigma \mathcal{N}\left(m, 1\right)
@@ -432,7 +440,7 @@ When the vectors are sampled, the samples are scaled by the matrix $D$
 containing the eignvalues of the covariance matrix. 
 Hence, if $\sigma \lambda_n \geq l$, then the smallest scaling
 that takes place is at least $l$. As the vectors are sampled
-as: 
+as
 \reminder{Check if this is correct, 
 and maybe place this in theoretical section.
 Also make sure that variable names makes sense.}
@@ -454,7 +462,7 @@ for first comparison.}
 
 
 
-\comment{- Write stuff about our practical experiences with the step size and lower bound}\\
+\comment{- Write stuff about our practical experiences with lower bound}\\
 \comment{- Make sure to fully conclude that the initial step-size doesn't matter}
 
 

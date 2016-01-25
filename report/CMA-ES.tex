@@ -55,7 +55,7 @@ $C$ is the covariance matrix usually set to $C=I$}
 \caption{The pseudo code for the Cross-Entropy algorithm \label{fig:cmaCode}}
 \end{figure}
 
-\comment{All CMA specific beow this is NOT DONE!}
+\comment{All CMA specific below this is NOT DONE!}
 
 \subsection{Input}
 
@@ -143,7 +143,6 @@ x_{k} &= m + \sigma y_{k} \sim \mathcal{N}(m, \sigma^2 C)
 As each vector is evaluated, they are ranked such that 
 $\fitnessFunction{ \left( \individual_{i} \right) } \geq \dots \geq \fitnessFunction{ \left( \individual_{\offspringNumber} \right)}$.
 
-\comment{Gibe ein comment on this?}
 \begin{align*}
 \langle y \rangle_{w} &= \sum^{\offspringNumber}_{i = 1}w_{i} y_{i : \populationSize}, \text{where} \sum^{\offspringNumber}_{i = 1} w_{i} = 1, w_{i} > 0
 \end{align*}
@@ -158,7 +157,6 @@ m_{\generation+1} &= m_{\generation} + \sigma \langle y \rangle_{w} = \sum^{\off
 The evolution path for the step-size is updated according 
 to the path of the last iteration and the covariance matrix.
 
-\comment{Does it make sense to look into the derivation}
 \begin{align*}
 p_{\sigma} &\leftarrow \left( 1 - c_{\sigma} \right) p_{\sigma} + \sqrt{c_{\sigma} \left( 2 - c_{\sigma} \right) \offspringNumber_{\text{eff}}} C^{- \frac{1}{2}} \langle y \rangle_{w}\\
 \sigma &\leftarrow \sigma \times exp \left( \frac{c_{\sigma}}{d_{\sigma}} \left( \frac{||p_{\sigma}||}{E|| \mathcal{N}(o, I) ||} - 1 \right) \right)

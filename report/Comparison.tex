@@ -26,8 +26,6 @@ CMA compares to Cross Entropy.\\
 
 \textbf{Results}
 
-\comment{- More statistical results, multilevel model, etc.}\\
-
 Using Cross Entropy with the constant noise setting and CMA with an initial step-size
 of $0.5$, we get the following results, seen in figure \ref{fig:CMA_VS_CE_00}.\\
 
@@ -184,12 +182,13 @@ graphs closely resemble the initial comparison experiment.
 Furthermore, it appears that increasing the difficulty of the game
 simple shifts the score, but does not affect the development of the graphs.
 Therefore, we conclude that changing the featureset does not invalidate
-the comparison of the two optimization algorithms.
-\comment{
-We will also consider it valid to simulate using the faster
-hard Tetris when comparing CMA against Cross Entropy.
-}
+the comparison of the two optimization algorithms. In further experiments,
+in our configuration of CMA, the harder version of Tetris is applied
+in experiments used to optimize the CMA configurations.
 
+
+
+\maybe{
 \subsection{Configuration of CMA}
 
 In previous sections we focused on tuning Cross Entropy for the Tetris 
@@ -250,3 +249,4 @@ symbol?)}\\
 
 \comment{- WHY did we get these results}\\
 \comment{- Discuss the results of the comparison experiments}
+}
