@@ -18,6 +18,11 @@
 \usepackage{tikz}
 \usetikzlibrary{calc}
 
+\usetikzlibrary{external}
+\tikzexternalize[prefix=plots/]
+\tikzset{external/system call={lualatex \tikzexternalcheckshellescape -halt-on-error -interaction=batchmode -jobname "\image" "\texsource"}}
+\tikzexternalize
+
 \usepackage{amsmath}
 
 \usepackage{hyperref}
@@ -27,7 +32,6 @@
 \usepackage{listings}
 
 \usepackage{subcaption}
-
 
 \usepackage[toc,page]{appendix}
 
@@ -76,4 +80,5 @@
 \newcommand{\maybe}[1]{}
 
 \newcommand{\tmpcom}[1]{}
+
 

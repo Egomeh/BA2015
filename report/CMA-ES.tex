@@ -2,29 +2,28 @@
 
 
 This description is based on the tutorial written by Nikolaus Hansen
-\citep{hansen2011}. The section will not in detail cover how 
-the CMA-ES is derived, but rather how it deviates from Cross Entropy.\\
-\\
-The CMA-ES operates on a general level much like the Cross Entropy 
+\citep{hansen2011}. This section will not focus on the theoretical derivation
+of CMA, but rather how it deviates from Cross Entropy. 
+The CMA operates on a general level much like the Cross Entropy 
 method, but includes some features that increases the adaptability 
 of the algorithm.\\
 \\
-The CMA-ES, like the Cross Entropy, uses a Gaussian distribution to
-search for good solutions to $\fitnessFunction$. Yet, in the second argument 
-in the Gaussian distribution, the CMA-ES provides a covariance matrix.
-As the Cross Entropy method only provides a diagonal matrix of scalers
+The CMA, like the Cross Entropy, uses a Gaussian distribution to
+search for good solutions to $\fitnessFunction$. Yet, for the 
+variance parameter, the CMA provides a full covariance matrix.
+As the Cross Entropy method only provides a diagonal matrix of scalers,
 it's restricted to only scaling the ellipsoid of equal density along
-the coordinate axes. The CMA-ES however, with a full covariance matrix,
+the coordinate axes. The CMA however, with a full covariance matrix,
 allows the ellipsoid to rotate arbitrarily in the search space.\\
-\\
-While the Cross Entropy only considers the next population when updating the
-distribution parameters, the CMA-ES keeps some information from earlier 
-generations. This allows the CMA-ES somewhat keep track of the evolution 
+Another difference between the two algorithms is that 
+Cross Entropy only considers the next population when updating the
+distribution parameters, while the CMA keeps track of 
+some information from earlier 
+generations. This allows the CMA somewhat keep track of the evolution 
 of the sampled vectors.\\
-\\
-The CMA-ES also differs from Cross Entropy in how it evaluates the influence 
-of the offspring vectors. As Cross Entropy weights all vectors equally when 
-moving the mean. The CMA-ES, at least from the implementation in SHARK, 
+The CMA also differs from Cross Entropy in how it evaluates the influence 
+of the parent vectors. As Cross Entropy weights all vectors equally when 
+moving the mean. The CMA, at least from the implementation in SHARK, 
 has the option of taking a weighted combination of the offspring in order
 to bias towards the better vectors.
 
@@ -36,10 +35,10 @@ to bias towards the better vectors.
 \hrule
 \begin{algorithmic}
 \State{\textbf{input}}
-\State{$\fitnessFunction$ : The function that estimates the performance of a vector $\individual$}
+\State{$\fitnessFunction$: The function that estimates the performance of a vector $\individual$}
 \State{($\mean$, $C$): The mean and variance of the initial distribution, where 
 $C$ is the covariance matrix usually set to $C=I$}
-\State{$\populationSize$ : The number of vectors sampled per generation/iteration}
+\State{$\populationSize$: The number of vectors sampled per generation/iteration}
 \State{$\offspringNumber$: The number of offspring selected for the new mean}
 \\
 \State{\textbf{initialization}}
@@ -104,7 +103,7 @@ Set evolution path $p_{\sigma} = 0$, $p_{c} = 0$, covariance matrix $C = I$ and 
 
 \textbf{Sample new generation}\\
 Sample new population of search points, for $k = 1, \dots, \populationSize$.
-The aim is to sample vectors in the following form:
+The aim is to sample vectors in the following form
 \begin{align*}
 \individual_{i} \sim \mathcal{N}(m, \sigma^2 C)
 \end{align*}
