@@ -2,15 +2,19 @@
 
 \subsection{Global comparison settings}
 In all papers used for reference we haven't seen any experiments with different population
-and offspring sizes presented side-by-side. However, in our upcoming experimental settings
-CMA and CE are most likely to have different population and offspring sizes, which means
-that we can't compare them based on iterations/generations. Instead, using the  
-\textit{number of agents} as comparison reference, equal terms are secured for both algorithms 
-in regards to learning potential. As one of the adjustments to the algorithms are tuning the 
-population size, it's required that the frame of reference is invariant.\\
-Regarding the graphs themselves, the comparison graphs' x-axis shows the total number 
-of Tetris games evaluated, $\sum_{i = 1}^{\generation} \populationSize$. Meanwhile
-the y-axis still represents the mean agent's score of the iteration $\generation$.
+and parent sizes presented side-by-side. All the experiments we've seen
+that has applied Cross Entropy to Tetris fix the population size to 100. 
+However, in our upcoming experiments
+CMA and CE are configured with different population and parnet numbers, which means
+that we cannot compare the learning curves based on iterations/generations. Instead as described
+in section \ref{varifyofce}, using the  
+\textit{number of games played} as comparison reference, equal terms are secured for both algorithms 
+in regards to learning speed. \\
+Hence x-axis shows the total number 
+of Tetris games evaluated, 
+$\sum_{i = 1}^{\generation} \populationSize \numberOfEvaluations$. 
+Meanwhile the y-axis still represents the mean score 
+of the centroid agent at iteration $\generation$.
 
 \subsection{Initial comparison - Bertsekas}
 For the initial comparison we use the Bertsekas featureset, since the same featureset
@@ -34,43 +38,80 @@ of $0.5$, we get the following results, seen in figure \ref{fig:CMA_VS_CE_00}.\\
 \caption{Initial comparison between CMA-ES and Cross Entropy \label{fig:CMA_VS_CE_00}}
 \end{figure}
 
-As it can be observed in figure \ref{fig:CMA_VS_CE_00} CMA converges faster,
-but seems to reach a local optimum around 2,000 agents evaluated. Meanwhile CE has a 
-slower convergence but reaches a better local optimum compared to CMA, around 5,500
-agents evaluated. In detail CMA on average reaches a score 50,000 rows, and
+As figure \ref{fig:CMA_VS_CE_00} reveals that CMA converges faster,
+but reaches a local optimum at around 2,000 games played. Meanwhile CE has a 
+slower convergence but reaches a better mean score compared to CM at around 5,500
+agents evaluated. In detail, CMA on average reaches a score of 50,000 rows, and
 CE reaches a score of 100,000.\\
 
 \textbf{Analysis and discussion}
 
-These results clearly defy our initial hypothesis, namely we estimated that
-CMA would clearly outperform CE, due to CMA's more sophisticated method of 
-searching. One reason for this outcome could possible be that
+These results clearly defy our initial hypothesis as we predicted
+for CMA to outperform CE, due to its more sophisticated nature. 
+One reason for this outcome could possibly be that
 CMA has a very little population size compared to Cross Entropy,
-which could be a decisive lack as the evaluation function is non-deterministic with 
-a very high variance. These results could indicate that we need to tweak the CMA
-configuration, as the CMA local optimum is reached quickly compared to Cross Entropy.
-More specifically we might need to adjust the number games played gamer per agent,
-since the low population size and increasing variance makes the CMA converge on a
-local optimum. But as it can be seen in figure \ref{fig:CMA_VS_CE_00}, the
-fast convergence suggests that one game per agent is sufficient until the
-score begins to stall at around 1,000-2,000 agents evaluated. It would seem that 
-as the CMA-ES reaches a score of around 50,000, variance of the objective function 
-appears to render the algorithm incapable of effectively distinguish performance 
-of agents. Therefore, to increase the perception of the agents’ performs, 
-more evaluations per agent could be necessary at higher scores.\\
-\\
-As no experiment so far has yielded consistent scores of more than around 200,000 
-on average, one explanation could be that the feature set itself poses a limit for 
-the optimization algorithms. To address this issue, further experiments will include 
-other feature sets. Also, the specific task is not to find a good controller for Tetris, 
-but to compare how well each algorithm performs. To reduce runtimes, the Tetris games 
-played can be configured to be harder to play. This includes possible reduction of 
-board size and posing higher chances of occurrence of pieces that are difficult to place.\\
-\\
-Therefore, based on the current results, conducting more experiments to discover optimal
-settings for CMA-ES seems appropriate.
+which could be a decisive lack as the objective function is noisy with 
+a high variance. These results indicate a need to adjust the CMA
+configuration, to prevent the too fast convergance.
 
-\subsection{Comparison of featuresets}
+Among the possible adjustments are:\\
+\\
+\textit{Enlargment of population size}\\
+As the population size is quite small (only around 13)
+for this experiment, the CMA algorithm might not be able
+extract enough information at each generation. As seen in 
+section \ref{optimalsettingsce}, CE looses performance as 
+thepopulation size is set too low. This might be a problem 
+that counts for CMA as well. In figure \ref{fig:CMA_VS_CE_00},
+the CMA algorithm has much the same shape as \\
+\\
+\textit{Evaluate each agent multiple times}\\
+A posible source of poor performance could be 
+that the ranking of agents becomes very difficult
+due to high noise. To better verify the actual
+performance of an agent, it could be evaluated 
+multiple times and let the mean of the evaluations
+determine it's ranking.\\
+\\
+\textit{Change the recombination type}\\
+As described in section \ref{CMAtheory}, 
+the CMA algorithm is not bound to update its 
+new mean to just the centroid of the selected 
+vectors. Instead, it can weight better solutions
+more heavily when moving its mean. When doing so,
+it risks biasing vectors that appear to be better 
+but in reality, just by faulty ranking, should
+not be considered a good agent.\\
+\\
+None of the experiments seen so far has allowed a 
+consistent mean score of more 
+than 200,000. This brings concern into 
+consideration, that it might be the objective function
+that poses a natural limit on the score.
+In this case the objective function
+models playing Tetris with the Bertsekas featureset. 
+It is unkown to us
+whether it's possible to construct an agent 
+with a mean score of more than
+200,000 lines on average. 
+Yet, as our aim is not to find the best controller,
+untill both algorithms reaches the same upper limit 
+of scores theres is no need
+to alter the featureset just to
+expand the maximum score reachable.\\
+\\
+Yet, to minimize the likelihood 
+that the featureset were the cause of the 
+poor performance of CMA, it seemed 
+appropiate to conduct a similar comparison 
+using another featureset. 
+To speed up the process, the game difficulty were 
+adujsted to casue agents to fail faster.
+The increased difficulty and alternate
+featureset is described in 
+further detail in section \ref{compoffeatureset}.
+
+\subsection{Comparison of featuresets  \label{compoffeatureset}}
 
 The best configurations of the experiments using the Bertsekas
 featureset never appears to score much higher than 200,000 lines
@@ -170,7 +211,7 @@ to the same values, we in effect test if the covariance matrix and the step-size
 control has a impact on the algorithm performance compared to Cross Entropy
 which does not have the features.\\
 Furthermore, CMA also has a unique formula for calculating the updated mean,
-called the 'Recombination type' \ref{sec:CMA-ES}. Where the recombination type
+called the 'Recombination type' \ref{CMAtheory}. Where the recombination type
 determines how much influence each of the offspring vectors has on the next
 generation. Built into the CMA algorithm is three methods of recombination. 
 \begin{itemize}
