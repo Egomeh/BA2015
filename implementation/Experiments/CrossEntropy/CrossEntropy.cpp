@@ -148,16 +148,16 @@ void CrossEntropy::init(
 */
 void CrossEntropy::updateStrategyParameters( const std::vector<Individual<RealVector, double> > & parents ) {
 
-    /* Calculate the centroid of the parents */
+	/* Calculate the centroid of the parents */
 	RealVector m(m_numberOfVariables);
 	for (int i = 0; i < m_numberOfVariables; i++)
 	{
-        m(i) = 0;
-        for (int j = 0; j < parents.size(); j++)
-        {
-        	m(i) += parents[j].searchPoint()(i);
-        }
-        m(i) /= double(parents.size());
+		m(i) = 0;
+		for (int j = 0; j < parents.size(); j++)
+		{
+			m(i) += parents[j].searchPoint()(i);
+		}
+		m(i) /= double(parents.size());
 	}
 
 
@@ -169,16 +169,16 @@ void CrossEntropy::updateStrategyParameters( const std::vector<Individual<RealVe
 	double normalizationFactor = 1.0 / double(nParents);
 
 	for (int j = 0; j < m_numberOfVariables; j++) {
-        double innerSum = 0.0;
-        for (int i = 0; i < parents.size(); i++) {
-            double diff = parents[i].searchPoint()(j) - m(j);
-            innerSum += diff * diff;
-        }
-        innerSum *= normalizationFactor;
+		double innerSum = 0.0;
+		for (int i = 0; i < parents.size(); i++) {
+			double diff = parents[i].searchPoint()(j) - m(j);
+			innerSum += diff * diff;
+		}
+		innerSum *= normalizationFactor;
 
-        // Apply noise
-        m_variance(j) = innerSum + m_noise->noiseValue(m_counter);
-    }
+		// Apply noise
+		m_variance(j) = innerSum + m_noise->noiseValue(m_counter);
+	}
 
 }
 
@@ -191,11 +191,11 @@ void CrossEntropy::step(ObjectiveFunctionType const& function){
 
 	PenalizingEvaluator penalizingEvaluator;
 	for( unsigned int i = 0; i < offspring.size(); i++ ) {
-        RealVector sample(m_numberOfVariables);
-        for (int j = 0; j < m_numberOfVariables; j++)
-        {
-            sample(j) = m_distribution(m_mean(j), m_variance(j)); // N (0, 100)
-        }
+		RealVector sample(m_numberOfVariables);
+		for (int j = 0; j < m_numberOfVariables; j++)
+		{
+			sample(j) = m_distribution(m_mean(j), m_variance(j)); // N (0, 100)
+		}
 		offspring[i].searchPoint() = sample;
 	}
 
