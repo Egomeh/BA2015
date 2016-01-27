@@ -1,0 +1,182 @@
+\subsection{CMA-ES \label{CMAtheory}}
+
+
+This description is based on the tutorial written by Nikolaus Hansen
+\citep{hansen2011}. This section will not focus on the theoretical derivation
+of CMA, but rather how it deviates from Cross Entropy. 
+The CMA operates on a general level much like the Cross Entropy 
+method, but includes some features that increases the adaptability 
+of the algorithm.\\
+\\
+The CMA, like the Cross Entropy, uses a Gaussian distribution to
+search for good solutions to $\fitnessFunction$. Yet, for the 
+variance parameter, the CMA provides a full covariance matrix.
+As the Cross Entropy method only provides a diagonal matrix of scalers,
+it's restricted to only scaling the ellipsoid of equal density along
+the coordinate axes. The CMA however, with a full covariance matrix,
+allows the ellipsoid to rotate arbitrarily in the search space.\\
+Another difference between the two algorithms is that 
+Cross Entropy only considers the next population when updating the
+distribution parameters, while the CMA keeps track of 
+some information from earlier 
+generations. This allows the CMA somewhat keep track of the evolution 
+of the sampled vectors.\\
+The CMA also differs from Cross Entropy in how it evaluates the influence 
+of the parent vectors. As Cross Entropy weights all vectors equally when 
+moving the mean. The CMA, at least from the implementation in SHARK, 
+has the option of taking a weighted combination of the offspring in order
+to bias towards the better vectors.
+
+\begin{figure}[H]
+\hrule
+\vspace{0.2cm}
+{\centering  \textit{CMA-ES}}
+\vspace{0.2cm}
+\hrule
+\begin{algorithmic}
+\State{\textbf{input}}
+\State{$\fitnessFunction$: The function that estimates the performance of a vector $\individual$}
+\State{($\mean$, $C$): The mean and variance of the initial distribution, where 
+$C$ is the covariance matrix usually set to $C=I$}
+\State{$\populationSize$: The number of vectors sampled per generation/iteration}
+\State{$\offspringNumber$: The number of offspring selected for the new mean}
+\\
+\State{\textbf{initialization}}
+\State{Set initial internal parameters}
+\\
+\Loop
+\State{Sample new generation}
+\State{Evaluate each vector using $\fitnessFunction$ and recombine}
+\State{Step-size control}
+\State{Covariance matrix adaption}
+\EndLoop
+\end{algorithmic}
+\hrule
+\caption{The pseudo code for the Cross-Entropy algorithm \label{fig:cmaCode}}
+\end{figure}
+
+\comment{All CMA specific below this is NOT DONE!}
+
+\subsubsection{Input}
+
+\textbf{The objective function} \\
+This serves the same purpose as in Cross Entropy (see page \pageref{CEObjective}).
+\\
+
+\textbf{The mean and variance of the gaussian distribution} \\
+Here $\mean_{\generation}$ is the mean and  
+$C^{2}_{\generation}$ is the variance 
+of the gaussian distribution ($\mean_{\generation}$,
+$C^2_{\generation}$). 
+More specifically this gaussian distribution is defined as 
+\begin{align*}
+\mathcal{N}(\mean_{\generation},C^2_{\generation})
+\end{align*}
+
+Where $\generation$ denotes the current iteration.\\
+
+
+\textbf{The number of vectors}\\
+$\populationSize$ is the number of vectors sampled in each generation.
+\\
+
+\textbf{The number of offspring}\\
+$\offspringNumber$ is the number of vectors which are used to compute 
+the new mean very much like in Cross Entropy. However the CMA algorithm
+is not bound to weight each vector equally. It has the option to assign 
+a weight to each vector and hence biasing towards the better solutions.
+\\
+
+
+\subsubsection{Initialization}
+
+
+Set parameters
+\begin{align*}
+\populationSize, \offspringNumber, w_{i \dots \offspringNumber}, c_{\sigma}, d_{\sigma}, c_c, c_1, c_{\offspringNumber}
+\end{align*}
+To their default values according to table 1 in \citep{hansen2011}.
+
+Set evolution path $p_{\sigma} = 0$, $p_{c} = 0$, covariance matrix $C = I$ and $\generation = 0$
+
+\subsubsection{Loop}
+
+\textbf{Sample new generation}\\
+Sample new population of search points, for $k = 1, \dots, \populationSize$.
+The aim is to sample vectors in the following form
+\begin{align*}
+\individual_{i} \sim \mathcal{N}(m, \sigma^2 C)
+\end{align*}
+
+
+To generate the sample for the generation, the covariance matrix is first 
+decomposed as follows:
+
+\begin{align*}
+C = B D^2 B^{T}
+\end{align*}
+
+Where $B$ is a matrix of all eigenvectors of the covariance matrix, and  $D$
+is a diagonal matrix that contains all eigenvalues.\\
+\\
+Intermediately, the vectors are sampled from a Gaussian with zero mean and
+the identity matrix as variance.
+\begin{align*}
+z_{k} &\sim \mathcal{N}(0, I)
+\end{align*}
+
+The matrix $D$ will then scale the vectors such that the samples
+are distributed along the principal axes. The matrix $B$, containing 
+the eigenvectors will rotate samples according to estimated covariance.
+\begin{align*}
+y_{k} &= BDz_{k} \sim \mathcal{N}(o, C)
+\end{align*}
+
+The mean is then added, and the vectors are scaled by the step-size.
+\begin{align*}
+x_{k} &= m + \sigma y_{k} \sim \mathcal{N}(m, \sigma^2 C)
+\end{align*}
+
+
+
+\textbf{Evaluate each vector using $\fitnessFunction$ and recombine}\\
+As each vector is evaluated, they are ranked such that 
+$\fitnessFunction{ \left( \individual_{i} \right) } \geq \dots \geq \fitnessFunction{ \left( \individual_{\offspringNumber} \right)}$.
+
+\begin{align*}
+\langle y \rangle_{w} &= \sum^{\offspringNumber}_{i = 1}w_{i} y_{i : \populationSize}, \text{where} \sum^{\offspringNumber}_{i = 1} w_{i} = 1, w_{i} > 0
+\end{align*}
+
+The new mean is computed as:
+\begin{align*}
+m_{\generation+1} &= m_{\generation} + \sigma \langle y \rangle_{w} = \sum^{\offspringNumber}_{i = 1} w_{i}x_{i:\populationSize}
+\end{align*}
+
+\textbf{Step-size control}
+
+The evolution path for the step-size is updated according 
+to the path of the last iteration and the covariance matrix.
+
+\begin{align*}
+p_{\sigma} &\leftarrow \left( 1 - c_{\sigma} \right) p_{\sigma} + \sqrt{c_{\sigma} \left( 2 - c_{\sigma} \right) \offspringNumber_{\text{eff}}} C^{- \frac{1}{2}} \langle y \rangle_{w}\\
+\sigma &\leftarrow \sigma \times exp \left( \frac{c_{\sigma}}{d_{\sigma}} \left( \frac{||p_{\sigma}||}{E|| \mathcal{N}(o, I) ||} - 1 \right) \right)
+\end{align*}
+
+\textbf{Covariance matrix adaption}
+
+The evolution path for the covariance matrix is updated much like for the step-size, 
+and the covariance matrix is updated to gain shape of the estimated covariance 
+of the new selected vectors.
+
+\begin{align*}
+p_{c} &\leftarrow \left( 1 - c_{c} \right) p_{c} + h_{\sigma} \sqrt{c_{\sigma} \left( 2 - c_{c} \right) \offspringNumber_{\text{eff}}} \langle y \rangle_{w}\\
+C &\leftarrow \left( 1 - c_{c} - c_{\offspringNumber} \right) C + c_{1} \left( p_{c} p_{c}^{T} + \delta \left( h_{\sigma} \right) C \right) + c_{\offspringNumber} \sum^{\offspringNumber}_{i = 1} w_{i} y_{i : \offspringNumber} y_{i : \offspringNumber} ^{T}
+\end{align*}
+
+
+Finally the loop is iterated until a certain criteria is met, 
+or if the generation counter exceeds an upper limit.
+
+
+
+

@@ -1,0 +1,55 @@
+\subsection{Normalization of samples \label{normalSamples}}
+As mentioned by some authors \citep{boumaza2009}, the vector that
+describes the agent can very well be normalized such that the vector
+is a point that lies on the $\dimensions$-dimensional hypersphere.\\
+\\
+The reason for this lies in the nature of the evaluation function.
+When the controller chooses an action, it will evaluate all the 
+possible actions possible with the current piece. It will use the 
+value function $\valueFunction$ of each state $\gameState_i$ and 
+choose the state with the highest value from the value function.
+Thus, if the states are ordered such that:
+\begin{align*}
+\valueFunction \left(  \gameState_1 \right) 
+> \dots 
+> \valueFunction \left( \gameState_\populationSize \right)
+\end{align*}
+
+The agent then chooses the action that transitions from the current state 
+to state $\gameState_1$.\\
+Since the value function assess the state by the following:
+\begin{align*}
+\valueFunction (\gameState ) &= 
+\sum_{i=1}^{\dimensions} \weight _{i}\feature _{i}(\gameState )
+\end{align*}
+
+Then scaling the input of the agent, the weight vector $\weight$, by a
+number $a \in \mathbb{R}, \ a > 0$ the assessment is changed by:
+\begin{align*}
+\sum_{i=1}^{\dimensions} a \weight _{i}\feature _{i}(\gameState ) &= 
+a\sum_{i=1}^{\dimensions} \weight _{i}\feature _{i}(\gameState )\\
+&= a \valueFunction \left( \gameState \right)
+\end{align*}
+
+And the ordering remains:
+\begin{align*}
+a \valueFunction \left(  \gameState_1 \right) 
+> \dots 
+> a \valueFunction \left( \gameState_\populationSize \right)
+\end{align*}
+
+Thus the order of the value functions of 
+each state does not change, and the same $\gameState_1$
+is still chosen for any $a \in \mathbb{R}, \ a > 0$.\\
+\\
+To verify this, the Tetris objective function was executed with the
+same vector and the same seed for the random generator with a scale
+$a \in \{0.1, 0.2,0.3, \dots, 9.8,9.9,10.0\}$, and the agent scored 
+exactly the same for each scale.\\
+\\
+This can be used in experiments for various reasons. As reported 
+in \citep{boumaza2009}, normalizing the samples will 
+prevent CMA-ES from diverging in step size,
+and it can prevent loosing precision if the magnitude of weight 
+vector becomes larger than feasible for the used floating 
+point number and avoids size limitations.

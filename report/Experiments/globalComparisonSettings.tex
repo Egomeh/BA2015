@@ -1,0 +1,15 @@
+\subsubsection{Global comparison settings}
+In all papers used for reference we haven't seen any experiments with different population
+and parent sizes presented side-by-side. All the experiments we've seen
+that has applied Cross Entropy to Tetris fix the population size to 100. 
+However, in our upcoming experiments
+CMA and CE are configured with different population and parnet numbers, which means
+that we cannot compare the learning curves based on iterations/generations. Instead as described
+in section \ref{varifyofce}, using the  
+\textit{number of games played} as comparison reference, equal terms are secured for both algorithms 
+in regards to learning speed. \\
+Hence x-axis shows the total number 
+of Tetris games evaluated, 
+$\sum_{i = 1}^{\generation} \populationSize \numberOfEvaluations$. 
+Meanwhile the y-axis still represents the mean score 
+of the centroid agent at iteration $\generation$.

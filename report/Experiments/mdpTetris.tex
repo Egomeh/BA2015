@@ -1,0 +1,40 @@
+\subsection{MDP-Tetris}
+
+When running the experiments, the source code of the MDP-Tetris
+\citep{mdptetris} was used to emulate the Tetris games.
+The source code is accompanied with files that describe the
+various existing features. These files contains the identifiers of 
+each feature to use, as well as two numbers respectively describing 
+the agents reward function and how to evaluate a game over state. 
+The number for the reward function has remained unchanged at $0$ 
+during all experiments. The "game-over" evaluation was for the
+Bertsekas feature set initially set to $0$. Setting the 
+"game-over" evaluation to $0$ means that the agent will not 
+distinguish between regular moves and moves that results in losing
+the game. When running the experiments with this setting, a large portion
+of the agents never exceeded a zero mean score. However, setting the value
+to $-1$, meaning that a "game-over" move yields $-\infty$ reward, 
+none of the experiments got stuck on only zero scores. An example
+of the layout of the feature file can be seen in figure \ref{fig:featfile}.
+\begin{figure}[h!]
+\centering
+\begin{lstlisting}
+0    <- Describes the reward function
+-1   <- Actions leading to game over is avoided at all cost
+22   <- The policy contains 22 features
+8 0  <- The feature with id 8 initially has weight 0
+...  <- The remaining 21 features
+\end{lstlisting}
+\caption{Example of a file that describes a feature set. \label{fig:featfile}}
+\end{figure}
+
+ 
+
+\subsubsection{Featureset}
+
+
+\subsubsection{Game complexity}
+
+
+
+

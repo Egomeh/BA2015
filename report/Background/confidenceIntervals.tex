@@ -1,0 +1,43 @@
+\subsection{Assesment of controller performance}
+The performance of a one-piece controller has a very high variation,
+and is in other research verified to be exponentially distributed.
+As a result of the high variance of the controllers, the performance 
+of single controllers are often presented along with a confidence interval
+for the estimated mean score of the controller. The estimated mean of 
+the controllers score is calculated by
+\begin{align*}
+\hat{\mean} &= \sum_{i=1}^{\populationSize} \individual_i
+\end{align*}
+Thus, the maximum likelihood estimation of the rate 
+parameter\footnote{Note that $\lambda$ is in this context not,
+the population size but instead the rate parameter for the
+exponential distribution.}
+of the distribution is given by
+\begin{align*}
+\hat{\lambda} = \frac{1}{\hat{\mean}}
+\end{align*}
+A confidence interval is found by the following
+\begin{align*}
+\frac{2\populationSize}{\hat{\lambda}\chi^{2}_{1-\frac{\alpha}{2},2\populationSize}}
+<
+\frac{1}{\lambda}
+< 
+\frac{2\populationSize}{\hat{\lambda}\chi^{2}_{\frac{\alpha}{2},2\populationSize}}
+\end{align*}
+However, for these experiments, an approximation for a $95\%$
+confidence on lower and upper bound 
+of the rate parameter $\lambda$ is used
+\begin{align*}
+\lambda_{low} &= 
+\hat{\lambda} \left( 1 - \frac{1.96}{\sqrt{\populationSize}} \right)\\
+\lambda_{upp} &= 
+\hat{\lambda} \left( 1 + \frac{1.96}{\sqrt{\populationSize}} \right)
+\end{align*}
+By this, the $95\%$ confidence interval for the mean $\mean$ is
+\begin{align*}
+\frac{1}{\lambda_{low}} < \mean < \frac{1}{\lambda_{upp}}
+\end{align*}
+When a controllers score is presented as "$s \pm p$" this means 
+has an empirical mean score of $s$ and a real mean that is with 
+$95\%$ likelihood within $s \pm p$. \\
+\comment{Add reference to exponential distribtutions}
