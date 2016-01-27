@@ -55,7 +55,7 @@ namespace shark {
 		class INoiseType {
 		public:
 			virtual double noiseValue (int t) const { return 0.0; };
-            virtual std::string name() const { return std::string("Default noise of 0"); }
+			virtual std::string name() const { return std::string("Default noise of 0"); }
 		};
 
 		/**
@@ -66,15 +66,15 @@ namespace shark {
 		/**
 		 * \brief Constant noise term z_t = noise.
 		 */
-        class ConstantNoise : public INoiseType {
+		class ConstantNoise : public INoiseType {
 		public:
 			ConstantNoise ( double noise ) { m_noise = noise; };
 			virtual double noiseValue (int t) const { return std::max(m_noise, 0.0); }
-            virtual std::string name() const {
-                std::stringstream ss;
-                ss << "z(t) = " << m_noise;
-                return std::string(ss.str());
-            }
+			virtual std::string name() const {
+				std::stringstream ss;
+				ss << "z(t) = " << m_noise;
+				return std::string(ss.str());
+			}
 		private:
 			double m_noise;
 		};
@@ -86,12 +86,12 @@ namespace shark {
 		public:
 			LinearNoise ( double a, double b ) { m_a = a; m_b = b; };
 			virtual double noiseValue (int t) const { return std::max(m_a + (t * m_b), 0.0); }
-            virtual std::string name() const {
-                std::stringstream ss;
-                std::string sign = (m_b < 0.0 ? " - " : " + ");
-                ss << "z(t) = " << m_a << sign << "t * " << std::abs(m_b);
-                return std::string(ss.str());
-            }
+			virtual std::string name() const {
+				std::stringstream ss;
+				std::string sign = (m_b < 0.0 ? " - " : " + ");
+				ss << "z(t) = " << m_a << sign << "t * " << std::abs(m_b);
+				return std::string(ss.str());
+			}
 		private:
 			double m_a, m_b;
 		};
@@ -125,10 +125,10 @@ namespace shark {
 		*/
 		SHARK_EXPORT_SYMBOL void init( ObjectiveFunctionType& function, SearchPointType const& p);
 
-        /**
-         * \brief Inits the Cross Entropy, only with the objective function
-         */
-        SHARK_EXPORT_SYMBOL void init( ObjectiveFunctionType& function );
+		/**
+		 * \brief Inits the Cross Entropy, only with the objective function
+		 */
+		SHARK_EXPORT_SYMBOL void init( ObjectiveFunctionType& function );
 
 		/**
 		* \brief Initializes the algorithm for the supplied objective function.
@@ -157,11 +157,11 @@ namespace shark {
 			m_variance = variance;
 		}
 
-        /** \brief Set all variance values */
-        void setVariance(double variance){
-            for(int i = 0; i < m_variance.size(); i++)
-                m_variance(i) = variance;
-        }
+		/** \brief Set all variance values */
+		void setVariance(double variance){
+			for(int i = 0; i < m_variance.size(); i++)
+				m_variance(i) = variance;
+		}
 
 		/** \brief Access the current population mean. */
 		RealVector const& mean() const {
@@ -182,7 +182,7 @@ namespace shark {
 			return m_selectionSize;
 		}
 
-        /**
+		/**
 		 * \brief Returns a immutable reference to the size of the population.
 		 */
 		unsigned int populationSize()const{
@@ -204,12 +204,12 @@ namespace shark {
 			m_noise = boost::shared_ptr<INoiseType> (noiseType);
 		}
 
-        /**
+		/**
 		 * \brief Get an immutable reference to Noise Type.
 		 */
-        const INoiseType &getNoiseType( ) const {
-            return *m_noise.get();
-        }
+		const INoiseType &getNoiseType( ) const {
+			return *m_noise.get();
+		}
 
 
 	protected:
@@ -230,7 +230,7 @@ namespace shark {
 
 		unsigned m_counter; ///< Counter for generations.
 
-        Normal< Rng::rng_type > m_distribution; ///< Normal distribution.
+		Normal< Rng::rng_type > m_distribution; ///< Normal distribution.
 
 	};
 }
