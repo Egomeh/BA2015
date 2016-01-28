@@ -1,7 +1,100 @@
 \subsection{Optimal settings 
 for CMA \label{optimalsettingscma}}
 
+When finding the optimal settings for CMA we have a larger set of parameters we can adjust compared
+to Cross Entropy. Again, as the same with Cross Entropy, we can adjust the population/parent size and
+games per agent. Furthermore we can adjust the initial step-size, lower bound and recombination type.\\
+The following sections will go into detail how these parameters affect the performance of CMA
+algorithm. In the last section we will perform experiments to determine the optimal settings.
 
+%In previous sections we focused on tuning Cross Entropy for the Tetris 
+%problem. Whereas we deliberately chose not to tune CMA due to its implementation 
+%into the Shark library \citep{shark08}. However, experiments with the "out of 
+%the box" CMA from Shark, with default settings vs the tuned Cross Entropy
+%resulted in CMA reaching convergence very fast but not achieving the same point
+%limit as Cross Entropy.\\
+
+\subsubsection{Recombination type}
+Furthermore, CMA also has a unique formula for calculating the updated mean,
+called the 'Recombination type' \ref{CMAtheory}. Where the recombination type
+determines how much influence each of the offspring vectors has on the next
+generation. Built into the CMA algorithm is three methods of recombination. 
+\begin{itemize}
+\item EQUAL, Each of the offspring vectors has equal influence in the generated mean. Each has $w_i = 1$.
+\item LINEAR, The best of the offspring vectors has more influence. 
+\item SUPERLINEAR, The vectors are weighted with a logarithmic equation. $w_i = \frac{w_i'}{\sum_{j=1}^{\mu} w_j'^+}$
+\end{itemize}
+As default, CMA uses Super Linear recombination. However, Tetris is a problem
+with multiple local optimums in its solution space. This means, though a vector may be the best in its generation, it could be a nearby local optimum. Therefore, Super Linear recombination may not be the optimal recombination type for the Tetris problem.\\
+
+\comment{- Weights for recombination could have a symbol? (change policy weight
+symbol?)}\\
+\comment{- Find Linear combination type formula of change format of itemize list}
+
+\subsubsection{Population and selection size}
+By adjusting the population size to that similar of Cross Entropy, we are able
+to get a fair comparison between the two algorithms, given each generation will
+contain the same number of agents. By setting the population and parent size
+to the same values, we in effect test if the covariance matrix and the step-size
+control has a impact on the algorithm performance compared to Cross Entropy
+which does not have the features.\\
+Table \ref{CMAPopulationSelectionConfigTest} displays the values that we are going
+to test for the population and selection size.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c c}
+Population size, $\populationSize$ & Parent size, $\offspringNumber$\\
+\hline
+$12$ & $1$\\
+$12$ & $3$\\
+$12$ & $6$\\
+$22$ & $2$\\
+$22$ & $5$\\
+$22$ & $11$\\
+$50$ & $5$\\
+$50$ & $12$\\
+$50$ & $25$\\
+$100$ & $10$\\
+$100$ & $25$\\
+$100$ & $50$
+\end{tabular}
+\caption{CMA configuration for population and parent size \label{CMAPopulationSelectionConfigTest}}
+\end{table}
+
+The experiments includes different population $N \in \{12,22,50,100\}$ and offspring sizes of either
+10\%, 25\% and 50\%. We use 10\% because of the Cross Entropy recommended selection size, while
+we use 25\% because of CMA's standard selection size for the EQUAL recombination type. 
+Furthermore we use 50\% because of CMA's standard selection size for the LINEAR and SUPERLINEAR 
+recombination type.
+
+\subsubsection{Games per agent}
+As with Cross Entropy we can also adjust the number of games each agent plays per generation.
+However, because of the recombination type for CMA, one game pr. agent may  be insufficient to assess the
+performance of an agent. The Linear and Super Liner recombination types will value the better agents higher.
+Therefore, it may occur that some better-on-average agent encounter an unlucky game, achieving a lower score than
+it's actual potential allows. \\
+Thus, evaluating each agent multiple times and using the average score for recombination may allow for a more accurate assessment.\\
+Table \ref{CMAGamesPerAgent} displays the values that we are going
+to test for games per agent.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c}
+Games per agent\\
+\hline
+$1$\\
+$3$\\
+$5$\\
+$7$\\
+$10$
+\end{tabular}
+\caption{CMA configuration for games per agent \label{CMAGamesPerAgent}}
+\end{table}
+
+The experiments includes different games per agent of $\{1,3,5,7,10\}$. The reasoning for these specific 
+values are discussed in section...\\
+\comment{Write the CE section about gamers per agent and create a reference to it}
 
 \subsubsection{Initial step-size}
 Initially, the covariance matrix of CMA in generation $\generation = 0$
@@ -25,6 +118,8 @@ $\sigma_0$ & mean & Q1 & Q2 & Q3\\
 \caption{Results of CMA-ES with adjusted initial step-size \label{CMAInitialSigmaConfigTest}}
 \end{figure}
 
+\comment{Add the data-graphs to appendix}
+
 For the initial experiments using CMA-ES, 
 the only adjusted parameter is the initial 
 step-size $\sigma_0$. The configurations of step-sizes were 
@@ -37,6 +132,8 @@ is also referred to as a typical initial setting in \citep{boumaza2009}.
 Therefore, the conclusion remains that the initial step-size is not critical 
 for the experiment.\\
 
+\comment{- Make sure to fully conclude that the initial step-size doesn't matter and therefore we don't
+use this paramater in the upcoming experiments}
 
 \subsubsection{Lower bound}
 
@@ -80,66 +177,39 @@ since $\sigma \mathcal{N}\left( 0, 1 \right) \sim
 \maybe{From this, it's assumed that the initial step-size, at least in this range,
 does not have a significant impact, and the best of these runs, $\sigma_0$ is chosen
 for first comparison.}
+\comment{- Write stuff about our practical experiences with lower bound and add the graphs to appendix}\\
+\comment{- Make sure to fully conclude that the lower bound doesn't matter and therefore we don't
+use this paramater in the upcoming experiments}
 
-\comment{- Write stuff about our practical experiences with lower bound}\\
-\comment{- Make sure to fully conclude that the initial step-size doesn't matter}
+\subsubsection{Experiment}
+Setup of the "SUPER" experiment\\
 
+\begin{figure}[H]
+\centering
+\begin{tabular}{c c c c}
+Population & Parent size & Recombination & Games pr. Agent\\
+\hline
+$12$ & $1$ & Equal/linear/superlinear & 1/3/5/7/10\\
+$12$ & $3$ & Equal & 1/3/5/7/10\\
+$12$ & $6$ & linear/superlinear & 1/3/5/7/10\\
+$22$ & $2$ & Equal/linear/superlinear & 1/3/5/7/10\\
+$22$ & $5$ & Equal & 1/3/5/7/10\\
+$22$ & $11$ & linear/superlinear & 1/3/5/7/10\\
+$50$ & $5$ & Equal/linear/superlinear & 1/3/5/7/10\\
+$50$ & $12$ & Equal & 1/3/5/7/10\\
+$50$ & $25$ & linear/superlinear & 1/3/5/7/10\\
+$100$ & $10$ & Equal/linear/superlinear & 1/3/5/7/10\\
+$100$ & $25$ & Equal & 1/3/5/7/10\\
+$100$ & $50$ & linear/superlinear & 1/3/5/7/10
+\end{tabular}
+\caption{Full experiments overview}
+\end{figure}
 
-\subsubsection{Configuration of CMA}
+\textbf{Results}\\
+show results, specify best resuslts/candidates.\\
 
-In previous sections we focused on tuning Cross Entropy for the Tetris 
-problem. Whereas we deliberately chose not to tune CMA due to its implementation 
-into the Shark library \citep{shark08}. However, experiments with the "out of 
-the box" CMA from Shark, with default settings vs the tuned Cross Entropy
-resulted in CMA reaching convergence very fast but not achieving the same point
-limit as Cross Entropy.\\
-By adjusting the population size to that similar of Cross Entropy, we are able
-to get a fair comparison between the two algorithms, given each generation will
-contain the same number of agents. By setting the population and offspring size
-to the same values, we in effect test if the covariance matrix and the step-size
-control has a impact on the algorithm performance compared to Cross Entropy
-which does not have the features.\\
-Furthermore, CMA also has a unique formula for calculating the updated mean,
-called the 'Recombination type' \ref{CMAtheory}. Where the recombination type
-determines how much influence each of the offspring vectors has on the next
-generation. Built into the CMA algorithm is three methods of recombination. 
-\begin{itemize}
-\item EQUAL, Each of the offspring vectors has equal influence in the generated mean. Each has $w_i = 1$.
-\item LINEAR, The best of the offspring vectors has more influence. 
-\item SUPERLINEAR, The vectors are weighted with a logarithmic equation. $w_i = \frac{w_i'}{\sum_{j=1}^{\mu} w_j'^+}$
-\end{itemize}
-As default, CMA uses Super Linear recombination. However, Tetris is a problem
-with multiple local optimums in its solution space. This means, though a vector may be the best in its generation, it could be a nearby local optimum. Therefore, Super Linear recombination may not be the optimal recombination type for the Tetris problem.\\
-\comment{Discuss games per. agent, featuresets, Tetris difficulties, total agent evaluation / stopping criteria, parent size.}
-\\
-\comment{Was about to list the experiment setup (population/offspring with recombination type - wait for Oswin conversation to end), will perform experiments with hard tetris}\\
-\\
-\comment{Reference to CMA-ES section needs to be fixed}\\
-\comment{Weights for recombination could have a symbol? (change policy weight
-symbol?)}\\
-\comment{Find Linear combination type formula of change format of itemize list}
-
-\textbf{Results}
-
-%\begin{tabular}{l l | l l l }
-% & \multicolumn{1}{r|}{$\populationSize / \offspringNumber$} & (22/8) & (50/10) %& (100/10)
-%\multicolumn{1}{l}{Recombination type} & &  &  & \\
-%\hline
-%\multicolumn{2}{l|}{Equal / $w_i = \frac{1}{\sum_{j=1}^{\offspringNumber} w_j}$}}  & & &
-%\end{tabular}
-
-\textbf{Analysis and discussion}
-
-
-\subsubsection{PopulationSize}
-
-
-\subsubsection{Recombination type}
-
-
-
-\subsubsection{Games per agent}
-
+\textbf{Analysis and discussion}\\
+Discuss best results/candidates and conclude the optimal settings.\\
 
 
 
