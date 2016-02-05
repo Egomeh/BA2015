@@ -1,8 +1,10 @@
 \subsection{Optimal settings 
 for Cross Entropy \label{optimalsettingsce}}
 
-\comment{- Make an introduction of the parameters we can adjust}\\
-\comment{- Make further experiments with 25\% selection size?}
+In this section we will determine the optimal settings for Cross Entropy through testing
+of various adjustable parameters.\\
+Compared CMA, Cross Entropy has fewer customizable parameters, more specifically 
+population-parent size and games played per agent.
 
 \subsubsection{Population and selection size}
 
@@ -42,8 +44,6 @@ see Appendix \ref{appendixCrossEntropyConfig} for the full plots
 of the experiments.  \label{CEConfigTest}}
 \end{figure}
 
-\comment{Add the remaining two graphs with N = 100 to appendix}
-
 The experiments with different population and parent sizes
 does not seem to support a choice for any other configuration 
 than the mostly commonly used 
@@ -68,9 +68,39 @@ extensively tested Cross Entropy configuration of $\populationSize = 100$ and $\
 \label{fig:bestConfCE}}
 \end{figure}
 
-\subsubsection{Games per agent}
-\comment{- write about games per agent and dynamic games?}\\
-\comment{- make experiment in the same style as the previous section , where we use the same pop/parent
-size}
+\subsubsection{Games per agent \label{GamesPerAgentCESection}}
 
+Another thing we can adjust is the number of games played each agent plays per generation. By playing
+multiple games with each agent and using their mean score to compute the next generation mean. This
+secures a higher chance of a better offspring generation, but at the cost of more games
+evaluated.\\
+Table \ref{GamesPerAgentCE} shows the different values of games per agent we are going to be
+testing.
 
+\begin{table}[H]
+\centering
+\begin{tabular}{c c c}
+Population Size & Parent size & Games per Agent\\
+\hline
+$10$ & $10\%$ & 1/3/5/7/10\\
+$10$ & $50\%$ & 1/3/5/7/10\\
+$22$ & $10\%$ & 1/3/5/7/10\\
+$22$ & $50\%$ & 1/3/5/7/10\\
+$50$ & $10\%$ & 1/3/5/7/10\\
+$50$ & $50\%$ & 1/3/5/7/10\\
+$100$ & $10\%$  & 1/3/5/7/10\\
+$100$ & $50\%$ & 1/3/5/7/10\\
+$200$ & $10\%$ & 1/3/5/7/10\\
+$200$ & $50\%$ & 1/3/5/7/10
+\end{tabular}
+\caption{Games per agent CE experiment setup\label{GamesPerAgentCE}}
+\end{table}
+
+The experiments includes different games per agent of $\{1,3,5,7,10\}$. By increasing the number of games 
+played per agent, we are increasing the evaluation cost by a multiplication factor in exchange for a more 
+accurate evaluation of each agent. This is to avoid bad agents having a lucky game with an better than 
+average game, or the opposite, an good agent having a lesser than average game. However, we wish to find 
+the best performing configuration with the lowest cost and maximum benefit.
+
+\comment{- Conduct experiments, show results, make conclusion}\\
+\comment{- Make sure to mention that we use Hard Tetris for this experiment}

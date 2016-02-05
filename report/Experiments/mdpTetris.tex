@@ -29,10 +29,26 @@ of the layout of the feature file can be seen in figure \ref{fig:featfile}.
 \end{figure}
 
 \subsubsection{Featureset}
-\comment{Write stuff about featuresets and the difference they can make}
+
+As described in \comment{Theory section ref}, there are different kind of featuresets which
+impacts the performance of the agents. In our upcoming experiments, we are going to
+use both the Dellacherie and Bertsekas/Tsitsiklis featureset. For our initial comparison experiments
+we are going to use the Bertsekas/Tsitsiklis featureset, since other researchers report
+a lower score with the Bertsekas/Tsitsiklis featureset compared with the Dellacherie featureset
+\citep{thiery:09}. Compared to the \citep{thiery:09} experiments, we don't want to maximize the
+final score, but rather maximize the score with the lowest possible number of 
+games evaluated.\\
+It's important to note that we are not going to conduct comparison experiments with different
+featuresets in the same experiment, since the algorithms needs to be on equal terms.
 
 \subsubsection{Game complexity}
-\comment{Write stuff aboutGame complexity and the difference it can make}
+\comment{- Write stuff aboutGame complexity and the difference it can make}\\
+
+\comment{- The stuff about hard tetris in the comparison section should be here?
+This probably requires some restructuring of the report to make sense. For example 
+we conclude in the featureset comparison section that we are going to use hard tetris
+for configuration of CMA, which doesn't make sense, since CMA "already" has been configured 
+at this point.}
 
 
 
