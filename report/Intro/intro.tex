@@ -1,3 +1,5 @@
+\subsection{Learning Tetris}
+
 On the topic of reinforcement learning, a widely used benchmark
 for learning algorithms are designing agents 
 for playing the classical game of Tetris. Tetris is an 
@@ -14,13 +16,22 @@ score before the game ends.\\
 \\
 Tetris is indeed a hard task to computationally optimize, as
 the game has a very high number of board configurations estimated to be
-$10^{59}$ \citep{scherrer2009}. Because of this
+$10^{59}$ \citep{scherrer2009}. In relation to reinforcement learning,
+an agent that plays Tetris is placed in an environment with a set of 
+states far too large to exhaustively explore, and a set of transitions
+that are stochastic. Because of this
 complexity, a common approach 
 in the literature is to use 
 \textit{one-piece controllers}\footnote{Agents and controllers
 both refer to artificial players.}, such as described in 
-\cite{scherrer2009:b}. These controllers are aware of only 
+\cite{scherrer2009:b}. These controllers agents that are aware
+of only 
 the current board state and the currently falling piece.
+Hence, the policy of the agent is only to greedily choose
+the action that transitions to the most rewarding state
+from a single piece, which is typically less than 80 states\footnote{
+Assuming 4 possible rotations and 20 columns
+in which the piece may be dropped.}.
 Using these controllers, the search space is reduced 
 to only looking at the current board, and the possible 
 places to drop the piece. The 
@@ -34,9 +45,13 @@ First, the controller is
 disallowed to move the piece horizontally while the piece 
 is falling. Second, the controller has 'infinite'
 time to make its decision on where to drop the current piece.
+This way, the game only progress in discrete time steps
+when the controller takes
+an action, whereas the classical game runs continuously 
+regardless of the players actions.
 Thus, the controller cannot take advantage of moving the piece 
 during the fall, but is not restricted by the time limitations.
-This is however a common way of benchmarking Tetris controllers 
+This is however a common way of benchmarking Tetris playing agents
 \citep{scherrer2009}\\
 \\
 When the controllers decide which action to take, it will
@@ -53,5 +68,15 @@ per feature, and the value in that dimension the weight.
 An often referred to controller is the Dellacherie's controller, 
 as described in \cite{scherrer2009}. This controller
 takes six features of the board into account, seen in table 
-\ref{table:dellfeat} on page \pageref{table:dellfeat}.
+\ref{table:dellfeat} on page \pageref{table:dellfeat}. In relation 
+to reinforcement learning, the policy of the agent is the feature set
+combined with the weights of each feature. 
+When using the \textit{one-piece controllers}, the policy remains 
+the same during the episode, and the learning is based on updating
+the policy from concluded games, rather than picking up on signals
+that occur in the game as it plays.
+
+
+
+
 

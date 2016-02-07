@@ -1,0 +1,67 @@
+\subsection{Reinforcement learning \label{RL}}
+
+In the field of Machine Learning, the sub field of reinforcement learning
+deals with training agents to behave in an environment through
+trial and error. The environment typically consists of a set of states
+between which an agent can transition through a set of actions.
+The reinforcement learning methods relates somewhat 
+to supervised and unsupervised learning models. In unsupervised 
+learning, the agents are never given a feedback on their actions
+and must attempt to derive some a pattern without decisive responses.
+In supervised leaning, the agent is trained from labelled data.
+In this way the agent will always, for any action, receive 
+feedback of whether the committed action was desirable or not.
+Reinforcement learning appears somewhat similar to supervised learning.
+In reinforcement learning, the agent will commit actions in an environment
+and receive rewards based on those. The main difference between supervised
+learning and reinforcement learning is that in reinforcement learning,
+the agents cannot necessarily tie a correctness 
+to a specific action as some action, albeit yielding reward,
+may cause relative loss of reward in the future. An example of how this applies 
+to artificial agents is the game Tic Tac Toe. If supervised learning
+is applied, the playing agent will for each move in the game know
+if the move was considered good or bad. In reinforcement learning however,
+the only feedback the agent will have is rewards that a given 
+to the agent when reaching certain states of the game. 
+Often in the case of games, the 
+time frame naturally falls into episodes in which the 
+goal of the agent is to accumulate as much reward as possible 
+before the episode ends. When the agent interacts 
+with the environment, it transitions between different states through 
+actions. To determine what action to take, the agent will use
+a function that the yields a reward given to the agent 
+if the action is taken. 
+The goal is then to choose a policy, that when followed by the agent,
+gives the highest possible cumulative reward over time. 
+It's important to notice that the reward 
+for an action may be negative, and will in such case actively discourage 
+the agent for taking given actions.
+The environment, in which the agent appears, often 
+or at least for simplicity, has an exit state
+in which the agent is terminated, and the cumulative reward 
+is revealed. The action transitions may 
+not be deterministic and if they are not,
+it's required that the probabilities of transitions
+remain during the entire episode \citep{Carr}. If the state space 
+is large enough, it becomes infeasible to attempt to compute 
+the commutative reward when taking actions, as this would require
+a thorough search of a large space. Thus, in situations 
+with large state spaces, such as Tetris, one must choose 
+an approach for finding the best possible policies by other
+means than exhaustive search. The methods used in reinforcement learning 
+does specify how the agent should change its policy according to 
+results from earlier episodes, and the specific methods used in
+the context of Tetris is explained in further detail in later sections.
+
+
+
+
+
+
+
+
+
+
+
+
+

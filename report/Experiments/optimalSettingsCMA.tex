@@ -136,10 +136,11 @@ use this paramater in the upcoming experiments}
 
 \subsubsection{Lower bound}
 
-As with the Cross Entropy method, to avoid too early convergence, a 
+As with the Cross Entropy method, to avoid early convergence
+at a too low local optimum, a 
 certain lower threshold for the variance should be applied when 
 sampling vectors for solutions. In the Cross Entropy method, a constant 
-noise term $z_t = 4$ was added to the variance for each component
+noise term $z_t = 4$ i added to the variance for each component
 of the sampled vectors. When the $i$'th component in cross entropy is
 sampled as follows
 \begin{align*}
@@ -156,21 +157,27 @@ Where $\lambda_n$ is the lowest eigenvalue in the covariance matrix.
 When the vectors are sampled, the samples are scaled by the matrix $D$
 containing the eignvalues of the covariance matrix. 
 Hence, if $\sigma \lambda_n \geq l$, then the smallest scaling
-that takes place is at least $l$. As the vectors are sampled
+that takes place is at least $l$. As the vectors can be written 
 as
-\reminder{Check if this is correct, 
-and maybe place this in theoretical section.
-Also make sure that variable names makes sense.}
 \begin{align*}
-\individual &\sim \mathcal{N}\left( m, \sigma^{2}C \right)
+\individual &\sim \mean + \sigma B 
+\underbrace{D \mathcal{N}\left(0, I \right)}_{\mathcal{N}\left(0, D^2 \right)}
 \end{align*}
+Where $D \mathcal{N}\left(0, I \right)$ corresponds to 
+$\mathcal{N}\left(0, D^2 \right)$ which, since $D$ is a diagonal
+matrix, is just the same type of sampling as in Cross Entropy. 
+The matrix $B$ will only rotate the the sampled vectors, and finally,
+$\sigma$ will perform an isotropic scaling. 
 To roughly resemble the constant noise configuration of Cross Entropy,
-the dimension with the lowest variance must not drop below 4. 
-This is achieved by setting a lower bound $l=2$. By setting this, 
-the variance of the normal distribution in each dimension 
-before rotation is ensured to be at least $\sigma^{2} = 4$
-since $\sigma \mathcal{N}\left( 0, 1 \right) \sim 
-\mathcal{N}\left( 0, \sigma^{2} \right)$.
+when sampling vectors, the lowest variance may not drop below 4. 
+This is achieved by setting a lower bound $l=2$. If this applies,
+the sampling can be written as
+\begin{align*}
+\individual &\sim \mean +  B \mathcal{N}\left(0, \sigma^2 D^2 \right)
+\end{align*}
+Where, with $l=2$, the lowest entry in the diagonal matrix $\sigma^2 D^2$
+is $4$.
+
 
 
 \maybe{From this, it's assumed that the initial step-size, at least in this range,
