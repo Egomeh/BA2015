@@ -20,16 +20,16 @@ called the 'Recombination type' \ref{CMAtheory}. Where the recombination type
 determines how much influence each of the offspring vectors has on the next
 generation. Built into the CMA algorithm is three methods of recombination. 
 \begin{itemize}
-\item EQUAL, Each of the offspring vectors has equal influence in the generated mean. Each has $w_i = 1$.
+\item EQUAL, Each of the offspring vectors has equal influence in the generated mean.
 \item LINEAR, The best of the offspring vectors has more influence. 
-\item SUPERLINEAR, The vectors are weighted with a logarithmic equation. $w_i = \frac{w_i'}{\sum_{j=1}^{\mu} w_j'^+}$
+\item SUPERLINEAR, The vectors are weighted with a logarithmic equation.
 \end{itemize}
 As default, CMA uses Super Linear recombination. However, Tetris is a problem
 with multiple local optimums in its solution space. This means, though a vector may be the best in its generation, it could be a nearby local optimum. Therefore, Super Linear recombination may not be the optimal recombination type for the Tetris problem.\\
 
-\comment{- Weights for recombination could have a symbol? (change policy weight
-symbol?)}\\
-\comment{- Find Linear combination type formula of change format of itemize list}
+The recombination types are covered in section \ref{CMAtheory} on 
+page \pageref{eq:recomType}.
+
 
 \subsubsection{Population and selection size}
 By adjusting the population size to that similar of Cross Entropy, we are able

@@ -38,22 +38,29 @@ to bias towards the better vectors.
 \State{$\fitnessFunction$: The function that estimates the performance of a vector $\individual$}
 \State{($\mean$, $C$): The mean and variance of the initial distribution, where 
 $C$ is the covariance matrix usually set to $C=I$}
-\State{$\populationSize$: The number of vectors sampled per generation/iteration}
+\State{$\lambda$: The number of vectors sampled per generation/iteration}
 \State{$\offspringNumber$: The number of offspring selected for the new mean}
 \\
 \State{\textbf{initialization}}
 \State{Set initial internal parameters}
 \\
 \Loop
+\State{Increment generation counter2}
 \State{Sample new generation}
 \State{Evaluate each vector using $\fitnessFunction$ and recombine}
-\State{Step-size control}
 \State{Covariance matrix adaption}
+\State{Step-size control}
 \EndLoop
 \end{algorithmic}
 \hrule
 \caption{The pseudo code for the Cross-Entropy algorithm \label{fig:cmaCode}}
 \end{figure}
+
+Note here that the population size in this section is denoted as
+$\lambda$ as opposed to $\populationSize$. Also the iteration/generation 
+counter is referred to s $g$ rather than $\generation$. 
+This is to remain consistent 
+with the tutorial.
 
 \comment{All CMA specific below this is NOT DONE!}
 
@@ -92,90 +99,355 @@ a weight to each vector and hence biasing towards the better solutions.
 
 
 Set parameters
-\begin{align*}
-\populationSize, \offspringNumber, w_{i \dots \offspringNumber}, c_{\sigma}, d_{\sigma}, c_c, c_1, c_{\offspringNumber}
-\end{align*}
+\begin{align}
+\lambda, \offspringNumber, w_{i \dots \offspringNumber}, c_{\sigma}, d_{\sigma}, c_c, c_1, c_{\offspringNumber}
+\end{align}
 To their default values according to table 1 in \citep{hansen2011}.
 
-Set evolution path $p_{\sigma} = 0$, $p_{c} = 0$, covariance matrix $C = I$ and $\generation = 0$
+Set evolution path $p_{\sigma} = 0$, $p_{c} = 0$, covariance matrix $C = I$ and $g = 0$
+
+Where:
+
+\begin{align}
+\lambda, \mu, g &\in \mathbb{N}\\
+w_i,\dots,w_{\mu}, c_{\sigma}, d_{\sigma}, c_c, c_1, c_{\lambda}, &\in \mathbb{R}\\
+p_{c}, p_{\sigma} &\in \mathbb{R}^{\dimensions}\\
+C &\in \mathbb{R}^{\dimensions \times \dimensions}
+\end{align}
 
 \subsubsection{Loop}
+
+\textbf{Increment iteration counter}
+
+If the stopping criteria is not met
+\begin{align}
+g &= g+1
+\end{align}
+Otherwise, stop.\\
+
 
 \textbf{Sample new generation}\\
 Sample new population of search points, for $k = 1, \dots, \populationSize$.
 The aim is to sample vectors in the following form
-\begin{align*}
+\begin{align}
 \individual_{i} \sim \mathcal{N}(m, \sigma^2 C)
-\end{align*}
+\end{align}
 
 
 To generate the sample for the generation, the covariance matrix is first 
-decomposed as follows:
+decomposed using principal component analysis into
 
-\begin{align*}
+\begin{align}
 C = B D^2 B^{T}
-\end{align*}
+\end{align}
 
-Where $B$ is a matrix of all eigenvectors of the covariance matrix, and  $D$
-is a diagonal matrix that contains all eigenvalues.\\
+Where $B$ is am orthogonal basis of eigenvectors, and  $D^2$
+is a diagonal matrix that contains all eigenvalues of $C$.\\
 \\
-Intermediately, the vectors are sampled from a Gaussian with zero mean and
+Intermediately, the vectors are sampled from a Gaussian distribution 
+with zero mean and
 the identity matrix as variance.
-\begin{align*}
+\begin{align}
 z_{k} &\sim \mathcal{N}(0, I)
-\end{align*}
+\end{align}
 
-The matrix $D$ will then scale the vectors such that the samples
-are distributed along the principal axes. The matrix $B$, containing 
-the eigenvectors will rotate samples according to estimated covariance.
-\begin{align*}
-y_{k} &= BDz_{k} \sim \mathcal{N}(o, C)
-\end{align*}
+$z_k$ is then multiplied by a factor that causes the them to form 
+after the covariance matrix $C$. From Hansens tutorial, it's derived that
 
-The mean is then added, and the vectors are scaled by the step-size.
-\begin{align*}
-x_{k} &= m + \sigma y_{k} \sim \mathcal{N}(m, \sigma^2 C)
-\end{align*}
+
+\begin{align}
+C^{-1} &= B D^{-2} B^{T}\\
+C^{\frac{1}{2}} &= B D B^{T}
+\end{align}
+
+Thus, to get the effect of the covariance matrix to apply to the $z_k$
+samples, the following is used
+
+\begin{align}
+\mathcal{N}\left( 0, C \right) \sim C^{\frac{1}{2}} \mathcal{N}\left( 0, I \right)
+\end{align}
+
+\begin{align}
+y_{k} &= B D \underbrace{B^{T} z_{k}}_{\sim \mathcal{N}(0, I)} \sim \mathcal{N}(0, C)\\
+y_{k} &= B Dz_{k} \sim \mathcal{N}(0, C) \label{eq:sampley}
+\end{align}
+
+$B$ is the orthogonal basis of vectors of unit length, which means that 
+$B$ is purely a rotation matrix. Due to this, $B^{T} z_{k}$ only rotates
+$z_k$ yielding the same distribution. After this, the $BD$ is multiplied,
+which applies the scale such that each vector is scaled to match the
+variance in the principal axises of the covariance matrix, and $B$ 
+will rotate each sample such that the samples align with the principal axises
+of $C$.\\
+
+The mean and step-size is applied.
+\begin{align}
+x_{k} &= m + \sigma y_{k} \sim \mathcal{N}(m, \sigma^2 C) \label{eq:finalSample}
+\end{align}
+
+Finally, the $x_{k}$ vector resemble a realization of the Gaussian distribution
+with mean $m$ and covariance matrix $C$.\\
 
 
 
 \textbf{Evaluate each vector using $\fitnessFunction$ and recombine}\\
-As each vector is evaluated, they are ranked such that 
-$\fitnessFunction{ \left( \individual_{i} \right) } \geq \dots \geq \fitnessFunction{ \left( \individual_{\offspringNumber} \right)}$.
+As each vector is evaluated, they are ranked such that
+$\fitnessFunction{ \left( \individual_{i} \right) } \geq \dots \geq \fitnessFunction{ \left( \individual_{\offspringNumber} \right)} \geq \dots \geq \fitnessFunction{ \left( \individual_{\lambda} \right)}$.
 
-\begin{align*}
-\langle y \rangle_{w} &= \sum^{\offspringNumber}_{i = 1}w_{i} y_{i : \populationSize}, \text{where} \sum^{\offspringNumber}_{i = 1} w_{i} = 1, w_{i} > 0
-\end{align*}
+\begin{align}
+\langle y \rangle_{w} &= \sum^{\offspringNumber}_{i = 1}w_{i} y_{i : \lambda}
+\end{align}
 
-The new mean is computed as:
-\begin{align*}
-m_{\generation+1} &= m_{\generation} + \sigma \langle y \rangle_{w} = \sum^{\offspringNumber}_{i = 1} w_{i}x_{i:\populationSize}
-\end{align*}
+Where the notion of $y_{i : \lambda}$ means the $i$'th element in ranked list of vectors
+where $y_1$ is the best ranked vector.
 
-\textbf{Step-size control}
+\begin{align}
+\sum^{\offspringNumber}_{i = 1} w_{i} = 1, w_{i} > 0
+\end{align}
 
-The evolution path for the step-size is updated according 
-to the path of the last iteration and the covariance matrix.
+$\langle y \rangle_{w}$ is a measure of a 'weighted center of mass',
+and is part of the selection mechanism. The idea is to allow the selected vectors
+to contribute differently to the update, and hence emphasize the higher 
+ranking vectors. The individual weights are as the following
 
-\begin{align*}
-p_{\sigma} &\leftarrow \left( 1 - c_{\sigma} \right) p_{\sigma} + \sqrt{c_{\sigma} \left( 2 - c_{\sigma} \right) \offspringNumber_{\text{eff}}} C^{- \frac{1}{2}} \langle y \rangle_{w}\\
-\sigma &\leftarrow \sigma \times exp \left( \frac{c_{\sigma}}{d_{\sigma}} \left( \frac{||p_{\sigma}||}{E|| \mathcal{N}(o, I) ||} - 1 \right) \right)
-\end{align*}
+\begin{align}
+w_i &= \frac{w_{i}'}{\sum^{\offspringNumber}_{j=1} w_j }
+\end{align}
+
+Where the $w_i'$ is used for a intermediate weighting value for the vectors.\\
+In the Shark library, three generic weighting types are implemented, each with
+a distinct intermediate weight.
+
+\begin{align}
+\text{Equal}: &\quad w_i' = 1 \label{eq:recomType}\\
+\text{Linear}: &\quad  w_i' = \offspringNumber - i\\
+\text{Superlinear:} &\quad w_i' = ln \left( \offspringNumber + \frac{1}{2} \right)
+- ln \left( i \right)
+\end{align}
+Thus, with the equal, each vector contributes equally, and with the other two, the 
+higher ranking vectors has more influence on location of the 'center of mass' of 
+the selection.
+
+The new mean is computed as
+\begin{align}
+m_{\generation+1} &= m_{\generation} + \sigma \langle y \rangle_{w} = \sum^{\offspringNumber}_{i = 1} w_{i}x_{i:\lambda} \label{eq:movemean}
+\end{align}
+Such that the mean moves towards the 'center of mass' scaled by the step-size.
+The details of step-size $\sigma$ is covered later in this section,
+however in brief terms the step-size is meant to scale movements 
+of the mean.\\
+\\
+In relation to the selection mechanism, the value $\mu_{eff}$ is introduced.
+This is defined as
+\begin{align}
+\mu_{eff} = \left( \sum_{i=1}^{\offspringNumber} w_i^2 \right)^{-1}
+\end{align}
+Hence $1 \leq \mu_{eff} \leq \mu$. As an example, for the equal recombination
+type, $\mu_{eff} = \left( \sum_{i=1}^{\offspringNumber} w_i^2 \right)^{-1} = 1^1 =1$
+In the tutorial by N. Hansen, it's mentioned that $\mu_{eff} \approx 
+\frac{\lambda}{4}$ indicates a good setting of $w_i$. The $\mu_{eff}$ is 
+measure of how much of the parent mass is used, and serves as a normalization 
+factor in later equations.\\
 
 \textbf{Covariance matrix adaption}
 
-The evolution path for the covariance matrix is updated much like for the step-size, 
-and the covariance matrix is updated to gain shape of the estimated covariance 
-of the new selected vectors.
+The idea of using the covariance matrix is to make new samples
+resemble the covariance of the previous well-performing vectors, as opposed 
+to the Cross Entropy algorithm that does not contain any information of
+previous samples.\\
+\\
+A evolution path of the movement of the means is introduced as $p_{c}$. This 
+is a vector that holds the direction in which the mean has been moved in 
+both the current generation, and in previous generations. Using the 
+evolution path, the covariance matrix can take a shape that 
+makes samples occurring in the direction of previous step more likely.
+The evolution path for generation $g+1$ is updated as
 
-\begin{align*}
-p_{c} &\leftarrow \left( 1 - c_{c} \right) p_{c} + h_{\sigma} \sqrt{c_{\sigma} \left( 2 - c_{c} \right) \offspringNumber_{\text{eff}}} \langle y \rangle_{w}\\
-C &\leftarrow \left( 1 - c_{c} - c_{\offspringNumber} \right) C + c_{1} \left( p_{c} p_{c}^{T} + \delta \left( h_{\sigma} \right) C \right) + c_{\offspringNumber} \sum^{\offspringNumber}_{i = 1} w_{i} y_{i : \offspringNumber} y_{i : \offspringNumber} ^{T}
-\end{align*}
+\begin{align}
+p_{c}^{(g+1)} &= \underbrace{\left( 1 - c_{c} \right) 
+p_{c}^{(g)}}_{\makebox[0pt]{\text{previous steps}}}  + 
+\overbrace{h_{\sigma}}^{\makebox[0pt]{\text{{indicator function}}}}
+\underbrace{\sqrt{c_{c} \left( 2 - c_{c} \right) \offspringNumber_{\text{eff}}}}_{
+\makebox[0pt]{\text{normalization}}
+}
+\langle y \rangle_{w} \label{eq:epathc}
+\end{align}
+In (\ref{eq:epathc}), the term $\left( 1 - c_{c} \right) p_{c}^{(g)}$ makes 
+the evolution path become influenced by earlier path steps. Thelearning rate
+$c_c \in [0;1] $ indicates how much of the previous path is taken into account.
+if $c_c = 0$, the previous path is not considered at all, and if $c_c = 1$ the path 
+will only consist of the previous step. According to the tutorial, this is set
+$c_c = \frac{4 + \mu_{eff} / \dimensions}{\dimensions + 4 + 2 \mu_{eff} / \dimensions}$.\\
+\\
+Th indicator function $h_{\sigma}$ is discussed in detail in the tutorial \citep{hansen2011}.
+However, the main idea of this indicator function is.
+\begin{align}
+h_{\sigma}
+\begin{cases} 1\ \ \ \text{if $||p_{\sigma}||$ is large} \\
+              0\ \ \ \text{otherwise} %
+\end{cases}
+\end{align}
+The purpose of this is to stall updating the evolution path when 
+the length of the step-size evolution path becomes too large. The step-size
+evolution path is covered in \textit{Step-size control}.\\
+\\
+The normalization factor 
+$\sqrt{c_{c} \left( 2 - c_{c} \right) \offspringNumber_{\text{eff}}}$ is chosen such that
+$p^{g+1}_{c} \sim \mathcal{N}\left(0, C \right)$ if $p_c^{(g)} \sim \mathcal{N} 
+\left(0, C\right)$\\
+\\
+The covariance matrix is updated as follows
+\begin{align}
+C^{(g+1)} &= 
+\underbrace{\left( 1 - c_{1} - c_{\offspringNumber} \right)C^{(g)}}_{
+\makebox[0pt]{\text{{smoothing of previous steps}}}
+} + 
+\overbrace{c_{1} \left( p_{c}^{(g+1)} {p_{c}^{(g+1)}}^{T}\right)}^{
+\makebox[0pt]{\text{{Rank-one update}}}
+} +
+\underbrace{c_{\offspringNumber} \sum^{\offspringNumber}_{i = 1} w_{i} y_{i : \offspringNumber} y_{i : \offspringNumber} ^{T}}_{
+\makebox[0pt]{\text{{Rank-$\mu$ update}}}
+} \label{eq:fullCMA}
+\end{align}
+
+Again, the first term is the smoothing of the previous covariance matrices.
+the constants $c_1$ and $c_\mu$ are the learning rates for respectively the two
+different updates, and the sum of them must not exceed 1, $c_1 + c_\mu \leq 1$.\\
+\\
+The rank-one update is meant to form the covariance matrix in a way such that 
+it becomes more likely for the distribution to draw vectors in the direction of
+successive steps. The term $c_{1} \left( p_{c}^{(g+1)} {p_{c}^{(g+1)}}^{T}\right)$
+is first of all factored by the leaning rate $c_1$. The matrix computed as 
+$p_{c}^{(g+1)} {p_{c}^{(g+1)}}^{T}$ is the outer product of the evolution path. 
+Remember here that the $p_{c}^{(g+1)}$ is the smoothed vector that indicates 
+the path in which the mean has been moved. Hence, the covariance will for this 
+single vector be purely in the direction of the mean's movement. Also, as it's 
+the outer product of just one vector, the rank of this matrix is one, hence the
+name 'rank-one update'.\\
+\\
+The last term in (\ref{eq:fullCMA}) namely the rank-$\mu$ update
+\begin{align}
+c_{\offspringNumber} \sum^{\offspringNumber}_{i = 1} w_{i} y_{i : \offspringNumber} y_{i : \offspringNumber} ^{T} \label{eq:rankmuupdate}
+\end{align}
+Again, the entire term is factored by the learning rate $c_\mu$. The sum
+of outer products yields and estimate for the covariance matrix of the vectors
+sampled as $y_{i : \offspringNumber} \sim \mathcal{N}\left(0, C^{(g)}\right)$ 
+(see (\ref{eq:sampley})). Thus (\ref{eq:rankmuupdate}) corresponds to the 
+estimated covariance of the best selected vectors, with a weighting factor
+such that the covariance of the highest ranking vectors may contribute the most.
+The rank of the matrix in \ref{eq:rankmuupdate} is $min(\mu, \dimensions)$.\\
+\\
+As a result of this, when the covariance matrix is updated as in (\ref{eq:fullCMA})
+the next sample will be more likely to be realized somewhat like the previous 
+samples, somewhat in the direction in which the mean was moved and somewhat 
+according to the covariance of the highest ranking vectors.
+\\
 
 
-Finally the loop is iterated until a certain criteria is met, 
-or if the generation counter exceeds an upper limit.
+
+\textbf{Step-size control}
+
+In the CMA-ES algorithm, the step-size $\sigma$ is used as an isotropic scale across
+each of the principal axis in the covariance matrix. Hence the stepsize is used as 
+an 'overall' scaling mechanism when drawing vectors. The step-size is used when 
+sampling the vectors in (\ref{eq:finalSample}) where it expands the variance 
+of the distribution. When moving the mean in (\ref{eq:movemean}), the weighted 
+selection mass \textbf{scaled} with the step-size is added to the mean.
+
+\comment{PUT fig here}
+
+First we consider the evolution path of the step-size $p_\sigma$ which is
+updated a s follows.
+
+\begin{align}
+p_{\sigma}^{(g+1)} &= 
+\underbrace{\left( 1 - c_{\sigma} \right) p_{\sigma}^{(g)}}_{
+\makebox[0pt]{\text{{smoothing of previous steps}}}
+}
++ 
+\overbrace{\sqrt{c_{\sigma} \left( 2 - c_{\sigma} \right) \offspringNumber_{\text{eff}}}}
+^{
+\makebox[0pt]{\text{{normalization}}}
+} 
+\underbrace{C^{- \frac{1}{2}}}_{
+\makebox[0pt]{\text{{scale/rotation}}}
+}
+\langle y \rangle_{w}
+\end{align}
+The first term is the smoothing step as seen before only using the learning rate 
+associated with the step-size evolution path but is similar to what is seen in
+(\ref{eq:epathc}). The normalization constant is also very similar to the
+equivalent factor in (\ref{eq:epathc}).\\
+\\
+A newly introduced factor is the $C^{-\frac{1}{2}}$ with the decomposition
+$C^{-\frac{1}{2}} = B D^{-1} B^{T}$ which has the following effects. $B^{T}$
+rotates the principal axises to align with the coordinate axises. 
+$D^{-1}$ scales the axises into equal size, and finally, $B$ rotates the 
+axises back into the original direction. The transform $C^{-\frac{1}{2}}$
+has the effect of making the length of the $p_\sigma$ independent of 
+direction.\\
+\\
+The final effect is that
+\begin{align}
+p_\sigma^{(g+1)} &\sim \mathcal{N}\left(0, I \right)\\
+\text{When }
+p_\sigma^{(g)} &\sim \mathcal{N} \left(0, I \right)
+\end{align}
+
+as
+
+\begin{align}
+p_\sigma^{(g+1)} &\sim (1 - c_\sigma) \mathcal{N}\left( 0, I \right) + \sqrt{c_\sigma 
+\left( 2-c_\sigma \right)\mu_{eff} {C^{(g)}}^{-\frac{1}{2}}} \frac{1}{\sqrt{\mu_{eff}}}
+\mathcal{N} \left( 0, C^{(g)} \right)\\
+&\sim \mathcal{N} 
+\left( 
+  0, 
+  \left(  
+    \left( 
+      1-c_\sigma 
+    \right)^2 + \sqrt{c_\sigma 
+    \left(  
+      2 - c_\sigma
+    \right)}^2
+  \right) I
+\right) \sim \mathcal{N} \left( 0, I \right)
+\end{align}
+
+Hence, under random selection, the evolution path $p_\sigma \sim \mathcal{N} 
+\left( 0, I \right)$.  The step-size is adapted by comparing the length
+if the evolution path $||p_\sigma||$ with the expected length of a vector 
+drawn from $\mathcal{N} \left( 0, I \right)$, that is
+$\mathbb{E}||\mathcal{N}\left(0, I\right)||$. where 
+$\mathbb{E}||\mathcal{N}\left(0, I\right)|| \approx \sqrt{n} + \mathcal{O}\left(1/n\right)$
+The cases if this comparison are:
+
+\begin{align}
+\textbf{a: } ||p_\sigma^{(g+1)}|| &> \mathbb{E}||\mathcal{N}\left(0, I\right)|| 
+\label{case1}\\
+\textbf{b: } ||p_\sigma^{(g+1)}|| &< \mathbb{E}||\mathcal{N}\left(0, I\right)||
+\label{case2}\\
+\textbf{c: } ||p_\sigma^{(g+1)}|| &= \mathbb{E}||\mathcal{N}\left(0, I\right)||\label{case3}
+\end{align}
+In case \textbf{a} the steps are correlated and the idea is that a larger step-size
+would cause the mean to move towards a desired location faster. In case \textbf{b},
+the path is short and/or anti correlated. This means that the algorithm would benefit from
+shorter steps, and therefore decrease the step-size. In the final case \textbf{c}, the 
+steps appear perpendicular and the step-size appears reasonable.\\
+\\
+Eventually, the step-size is updated by the following.
+\begin{align}
+\sigma^{(g+1)} &= \sigma^{(g)} \cdot exp \left( \frac{c_{\sigma}}{d_{\sigma}} \left( \frac{||p_\sigma^{(g+1)}||}{E|| \mathcal{N}(0, I) ||} - 1 \right) \right)
+\end{align}
+Where $0 \leq \frac{c_\sigma}{d_\sigma} \leq 1$ is a damping factor for step-size changes.
+This update of the step-size will scale the step-size unbiased in direction 
+according to the cases in 
+(\ref{case1}), (\ref{case2}) and (\ref{case3}).
+
+
+
+
+
 
 
 
