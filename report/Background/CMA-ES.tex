@@ -160,6 +160,8 @@ x^{T} B D^{-2} B^T x &= x^{T} \frac{1}{l^2} x = \frac{1}{l^2} x^{T} x
 = \frac{1}{l^2} ||x||^2
 \end{align}
 This means that if $||x||^2 = l^2$ then $x$ lies on the ellipse.
+In the example of figure \ref{fig:ellipse}, $x$ is not 
+on the ellipse.
 
 
 \begin{figure}[H]
@@ -169,7 +171,7 @@ This means that if $||x||^2 = l^2$ then $x$ lies on the ellipse.
 \begin{center}
 \ellipseFigure
 \end{center}
-\caption{Illustration of $\{x \in R^{\dimensions} | x^{T} C^{-1} x = 1\}$ \label{fig:ellipse}}
+\caption{Illustration of $\{x \in R^{\dimensions} | x^{T} C^{-1} x \stackrel{?}{=} 1\}$ \label{fig:ellipse}}
 \end{figure}
 
 \subsubsection{Loop}
@@ -197,7 +199,7 @@ decomposed using principal component analysis into
 C = B D^2 B^{T}
 \end{align}
 
-Where $B$ is am orthogonal basis of eigenvectors, and  $D^2$
+Where $B$ is am orthogonal basis of eigenvectors, and  $D$
 is a diagonal matrix that contains all eigenvalues of $C$.\\
 \\
 Intermediately, the vectors are sampled from a Gaussian distribution 
