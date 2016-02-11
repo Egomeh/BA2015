@@ -115,6 +115,63 @@ p_{c}, p_{\sigma} &\in \mathbb{R}^{\dimensions}\\
 C &\in \mathbb{R}^{\dimensions \times \dimensions}
 \end{align}
 
+Again, note that $\lambda$ has the meaning of $\populationSize$ from earlier, that
+is $\lambda$ is in this case the population size. $\mu$ however, is still the number
+of vectors that contribute to the updating of distribution parameters, namely the 
+parent size.\\
+\\
+In this algorithm, the distribution used is multivariate normal distribution defined
+as 
+\begin{align}
+\mathcal{N} \left( m,  \sigma^2 C \right)
+\end{align}
+This distribution describes the set of correlated real-valued vectors that
+clusters around the mean vector $m$ and has a covariance described by the
+matrix $C$. The covariance matrix describes the 'shape' of the space in which 
+the vectors are most likely to be sampled. With a covariance matrix $C$
+the ellipsoid is defined as $\{x \in R^{\dimensions} | x^{T} C^{-1} x = 1\}$.
+When illustrating this, the step-size is set as $\sigma = 1$ for simplicity.\\
+\\
+The matrix $C^{-1}$ is decomposed as $C^{-1} = B D^{-2} B^T$, where $B$ is a rotation 
+matrix that rotates from the coordinate axises into the principal axises of $C$, and 
+$D^{-2}$ is the diagonal matrix 
+$\text{diag} \left( \frac{1}{d_{1}^2},\dots, \frac{1}{d_{\dimensions}^2} \right)$
+where $d_{i}$ is the $i$'th eigenvalue of $C$. Figure \ref{fig:ellipse} shows an example
+of how to determine if a point lies on the ellipsoid. In this example, the aim is to 
+determine if the point $x$ lies on the two-dimensional ellipsoid, hence checking if 
+$x^{T} C^{-1} x = 1 \Leftrightarrow x^{T} B D^{-2} B^T x = 1 $ holds. In figure 
+\ref{fig:ellipse}, $l$ is the length from the origin of the ellipse to the edge.
+Consider the operation
+\begin{align}
+B D^{-2} B^T x \label{eq:rotscal}
+\end{align}
+
+The order of operations are the following. 
+$B^{T}$ rotates $x$ from the proincipal axises of $C$
+into the coordinate axises. Then $D^{-2}$ scales the point by $\frac{1}{l^2}$ where
+$l$ is the length from the ellipsoid origin to the edge. Finally, $B$ rotates the point 
+back in the original direction. thus, (\ref{eq:rotscal}) has the same effect as
+\begin{align}
+\frac{1}{l^2} x
+\end{align}
+Hence, the entire operation is equivalent to
+\begin{align}
+x^{T} B D^{-2} B^T x &= x^{T} \frac{1}{l^2} x = \frac{1}{l^2} x^{T} x
+= \frac{1}{l^2} ||x||^2
+\end{align}
+This means that if $||x||^2 = l^2$ then $x$ lies on the ellipse.
+
+
+\begin{figure}[H]
+\begin{center}
+
+\end{center}
+\begin{center}
+\ellipseFigure
+\end{center}
+\caption{Illustration of $\{x \in R^{\dimensions} | x^{T} C^{-1} x = 1\}$ \label{fig:ellipse}}
+\end{figure}
+
 \subsubsection{Loop}
 
 \textbf{Increment iteration counter}
@@ -136,7 +193,6 @@ The aim is to sample vectors in the following form
 
 To generate the sample for the generation, the covariance matrix is first 
 decomposed using principal component analysis into
-
 \begin{align}
 C = B D^2 B^{T}
 \end{align}
@@ -153,8 +209,6 @@ z_{k} &\sim \mathcal{N}(0, I)
 
 $z_k$ is then multiplied by a factor that causes the them to form 
 after the covariance matrix $C$. From Hansens tutorial, it's derived that
-
-
 \begin{align}
 C^{-1} &= B D^{-2} B^{T}\\
 C^{\frac{1}{2}} &= B D B^{T}
@@ -178,15 +232,16 @@ $z_k$ yielding the same distribution. After this, the $BD$ is multiplied,
 which applies the scale such that each vector is scaled to match the
 variance in the principal axises of the covariance matrix, and $B$ 
 will rotate each sample such that the samples align with the principal axises
-of $C$.\\
+of $C$. After this step, $y_{k}$ now resemble the vectors that rotated and scaled
+to match shape of the covariance matrix.\\
 
-The mean and step-size is applied.
+The mean and step-size $\sigma$ is applied.
 \begin{align}
 x_{k} &= m + \sigma y_{k} \sim \mathcal{N}(m, \sigma^2 C) \label{eq:finalSample}
 \end{align}
 
 Finally, the $x_{k}$ vector resemble a realization of the Gaussian distribution
-with mean $m$ and covariance matrix $C$.\\
+with mean $m$ and covariance matrix $C$ scaled by the step-size $\sigma$.\\
 
 
 
