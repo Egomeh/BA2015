@@ -281,6 +281,538 @@ $100$ & $50$ & LINEAR/SUPERLINEAR & 1/3/5/7/10
 \end{table}
 
 
+%\begin{figure}
+%\centering
+%\caption{Population size 12, Parent size 1, \\Meanscore of EQUAL recombination}
+%\includegraphics[scale=0.5]{data/cma_population_offspring/12x_split/equal_l12_o1/mean/PlotFile.pdf}
+%\end{figure}
+
+\comment{When only testing 1 game pr agent, we observe that after 8000 agents it starts to decline in
+ score, thus finding worse performing agents - some conclusion that cma with 1 game pr agent should be
+  run only for some time and not infinityly}
+\comment{as seen on ex. population 12, parent size 6, linear, if played with dynamic games, meaning 1 game up to 500 agent and then a higher games per agent afterwards, a fast convergence and high score is achieved.}
+
+\clearpage
+
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\centering
+        \caption{Population size 12, Parent size 1, \\Meanscore of EQUAL recombination}
+        \includegraphics[width=\textwidth]{data/cma_population_offspring/12x_split/equal_l12_o1/mean/PlotFile.pdf}
+    \end{subfigure} 
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\centering
+    	\caption{Population size 12, Parent size 3, \\ Meanscore of EQUAL recombination}
+        \includegraphics[width=\textwidth]{data/cma_population_offspring/12x_split/equal_l12_o3/mean/PlotFile.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\centering
+    	\caption{Population size 12, Parent size 1, \\ Meanscore of LINEAR recombination}
+        \includegraphics[width=\textwidth]{data/cma_population_offspring/12x_split/linear_l12_o1/mean/PlotFile.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\centering
+    	\caption{Population size 12, Parent size 6, \\ Meanscore of LINEAR recombination}
+        \includegraphics[width=\textwidth]{data/cma_population_offspring/12x_split/linear_l12_o6/mean/PlotFile.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\centering
+    	\caption{Population size 12, Parent size 1, \\ Meanscore of SUPERLINEAR recombination}
+        \includegraphics[width=\textwidth]{data/cma_population_offspring/12x_split/superlinear_l12_o1/mean/PlotFile.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\centering
+    	\caption{Population size 12, Parent size 6, \\ Meanscore of SUPERLINEAR recombination}
+        \includegraphics[width=\textwidth]{data/cma_population_offspring/12x_split/superlinear_l12_o6/mean/PlotFile.pdf}
+    \end{subfigure}
+    
+    \caption{Mean results for population size 12 with variating recombination}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\centering
+        \caption{Population size 22, Parent size 2, \\Meanscore of EQUAL recombination}
+        \includegraphics[width=\textwidth]{data/cma_population_offspring/22x_split/equal_l22_o2/mean/PlotFile.pdf}
+    \end{subfigure} 
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\centering
+    	\caption{Population size 22, Parent size 5, \\ Meanscore of EQUAL recombination}
+        \includegraphics[width=\textwidth]{data/cma_population_offspring/22x_split/equal_l22_o5/mean/PlotFile.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\centering
+    	\caption{Population size 22, Parent size 2, \\ Meanscore of LINEAR recombination}
+        \includegraphics[width=\textwidth]{data/cma_population_offspring/22x_split/linear_l22_o2/mean/PlotFile.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\centering
+    	\caption{Population size 22, Parent size 11, \\ Meanscore of LINEAR recombination}
+        \includegraphics[width=\textwidth]{data/cma_population_offspring/22x_split/linear_l22_o11/mean/PlotFile.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\centering
+    	\caption{Population size 22, Parent size 2, \\ Meanscore of SUPERLINEAR recombination}
+        \includegraphics[width=\textwidth]{data/cma_population_offspring/22x_split/superlinear_l22_o2/mean/PlotFile.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\centering
+    	\caption{Population size 22, Parent size 11, \\ Meanscore of SUPERLINEAR recombination}
+        \includegraphics[width=\textwidth]{data/cma_population_offspring/22x_split/superlinear_l22_o11/mean/PlotFile.pdf}
+    \end{subfigure}
+    
+    \caption{Mean results for population size 22 with variating recombination}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\centering
+        \caption{Population size 50, Parent size 5, \\Meanscore of EQUAL recombination}
+        \includegraphics[width=\textwidth]{data/cma_population_offspring/50x_split/equal_l50_o5/mean/PlotFile.pdf}
+    \end{subfigure} 
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\centering
+    	\caption{Population size 50, Parent size 12, \\ Meanscore of EQUAL recombination}
+        \includegraphics[width=\textwidth]{data/cma_population_offspring/50x_split/equal_l50_o12/mean/PlotFile.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\centering
+    	\caption{Population size 50, Parent size 5, \\ Meanscore of LINEAR recombination}
+        \includegraphics[width=\textwidth]{data/cma_population_offspring/50x_split/linear_l50_o5/mean/PlotFile.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\centering
+    	\caption{Population size 50, Parent size 25, \\ Meanscore of LINEAR recombination}
+        \includegraphics[width=\textwidth]{data/cma_population_offspring/50x_split/linear_l50_o25/mean/PlotFile.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\centering
+    	\caption{Population size 50, Parent size 5, \\ Meanscore of SUPERLINEAR recombination}
+        \includegraphics[width=\textwidth]{data/cma_population_offspring/50x_split/superlinear_l50_o5/mean/PlotFile.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\centering
+    	\caption{Population size 50, Parent size 25, \\ Meanscore of SUPERLINEAR recombination}
+        \includegraphics[width=\textwidth]{data/cma_population_offspring/50x_split/superlinear_l50_o25/mean/PlotFile.pdf}
+    \end{subfigure}
+    
+    \caption{Mean results for population size 50 with variating recombination}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\centering
+        \caption{Population size 100, Parent size 10, \\Meanscore of EQUAL recombination}
+        \includegraphics[width=\textwidth]{data/cma_population_offspring/100x_split/equal_l100_o10/mean/PlotFile.pdf}
+    \end{subfigure} 
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\centering
+    	\caption{Population size 100, Parent size 25, \\ Meanscore of EQUAL recombination}
+        \includegraphics[width=\textwidth]{data/cma_population_offspring/100x_split/equal_l100_o25/mean/PlotFile.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\centering
+    	\caption{Population size 100, Parent size 10, \\ Meanscore of LINEAR recombination}
+        \includegraphics[width=\textwidth]{data/cma_population_offspring/100x_split/linear_l100_o10/mean/PlotFile.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\centering
+    	\caption{Population size 100, Parent size 50, \\ Meanscore of LINEAR recombination}
+        \includegraphics[width=\textwidth]{data/cma_population_offspring/100x_split/linear_l100_o50/mean/PlotFile.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\centering
+    	\caption{Population size 100, Parent size 10, \\ Meanscore of SUPERLINEAR recombination}
+        \includegraphics[width=\textwidth]{data/cma_population_offspring/100x_split/superlinear_l100_o10/mean/PlotFile.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+    	\centering
+    	\caption{Population size 100, Parent size 50, \\ Meanscore of SUPERLINEAR recombination}
+        \includegraphics[width=\textwidth]{data/cma_population_offspring/100x_split/superlinear_l100_o50/mean/PlotFile.pdf}
+    \end{subfigure}
+    
+    \caption{Mean results for population size 100 with variating recombination}
+\end{figure}
+
+\clearpage
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{c c c c r r r r}
+Population & Parent & Recombination & Games per Agent & mean & Q1 & Q2 & Q3\\
+\hline
+$12$ & $1$ & EQUAL & 1 & $86.998$ & $53.557$ & $63.417$ & $111.313$\\
+$12$ & $1$ & EQUAL & 3 & $458.616$ & $256.637$ & $349.033$ & $576.899$\\
+$12$ & $1$ & EQUAL & 5 & $1089.245$ & $850.220$ & $1104.535$ & $1299.039$\\
+$12$ & $1$ & EQUAL & 7 & $1081.248$ & $918.049$ & $1089.400$ & $1248.619$\\
+\hdashline
+$12$ & $1$ & EQUAL & 10 & $1134.339$ & $863.523$ & $1061.050$ & $1297.359$\\
+\hdashline
+$12$ & $1$ & LINEAR & 1 & $76.228$ & $45.587$ & $53.917$ & $74.353$\\
+$12$ & $1$ & LINEAR & 3 & $717.883$ & $380.890$ & $556.950$ & $878.597$\\
+$12$ & $1$ & LINEAR & 5 & $720.393$ & $503.130$ & $708.484$ & $893.517$\\
+$12$ & $1$ & LINEAR & 7 & $1043.547$ & $732.367$ & $969.217$ & $1234.040$\\
+\hdashline
+$12$ & $1$ & LINEAR & 10 & $1276.041$ & $1135.609$ & $1196.120$ & $1502.029$\\
+\hdashline
+$12$ & $1$ & SUPERLINEAR & 1 & $64.211$ & $45.687$ & $64.483$ & $78.090$\\
+$12$ & $1$ & SUPERLINEAR & 3 & $646.760$ & $429.043$ & $661.817$ & $860.470$\\
+$12$ & $1$ & SUPERLINEAR & 5 & $925.410$ & $726.360$ & $948.300$ & $1158.021$\\
+$12$ & $1$ & SUPERLINEAR & 7 & $1034.002$ & $792.567$ & $924.350$ & $1269.131$\\
+\hdashline
+$12$ & $1$ & SUPERLINEAR & 10 & $1401.300$ & $1194.430$ & $1440.500$ & $1569.012$\\
+\hdashline
+\end{tabular}
+\caption{Population size 12, Parent size 1 - "Cross Entropy"-inspired configuration}
+\end{table}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{c c c c r r r r}
+Population & Parent & Recombination & Games per Agent & mean & Q1 & Q2 & Q3\\
+\hline
+$12$ & $3$ & EQUAL & 1 & $461.762$ & $266.047$ & $408.034$ & $639.013$\\
+$12$ & $3$ & EQUAL & 3 & $1364.176$ & $1199.310$ & $1438.880$ & $1579.560$\\
+$12$ & $3$ & EQUAL & 5 & $1754.634$ & $1464.239$ & $1621.035$ & $1945.010$\\
+$12$ & $3$ & EQUAL & 7 & $1884.765$ & $1614.661$ & $1800.485$ & $2156.972$\\
+\hdashline
+$12$ & $3$ & EQUAL & 10 & $1940.783$ & $1566.721$ & $1913.415$ & $2210.251$\\
+\hdashline
+$12$ & $6$ & LINEAR & 1 & $626.867$ & $447.440$ & $538.150$ & $724.913$\\
+$12$ & $6$ & LINEAR & 3 & $1844.453$ & $1568.829$ & $1831.265$ & $2227.479$\\
+$12$ & $6$ & LINEAR & 5 & $2148.853$ & $1846.459$ & $2118.335$ & $2588.010$\\
+$12$ & $6$ & LINEAR & 7 & $2144.345$ & $1860.340$ & $2160.900$ & $2428.348$\\
+\hdashline
+$12$ & $6$ & LINEAR & 10 & $2365.089$ & $2072.719$ & $2263.665$ & $2637.732$\\
+\hdashline
+$12$ & $6$ & SUPERLINEAR & 1 & $669.005$ & $506.817$ & $648.167$ & $836.377$\\
+$12$ & $6$ & SUPERLINEAR & 3 & $1901.814$ & $1572.260$ & $1932.515$ & $2151.189$\\
+$12$ & $6$ & SUPERLINEAR & 5 & $2098.654$ & $1965.472$ & $2115.250$ & $2453.069$\\
+$12$ & $6$ & SUPERLINEAR & 7 & $2402.888$ & $2055.329$ & $2387.700$ & $2635.870$\\
+\hdashline
+$12$ & $6$ & SUPERLINEAR & 10 & $2472.293$ & $2194.049$ & $2430.780$ & $2709.040$\\
+\hdashline
+\end{tabular}
+\caption{Population size 12, Parent size 3/6 - CMA configuration}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{c c c c r r r r}
+Population & Parent & Recombination & Games per Agent & mean & Q1 & Q2 & Q3\\
+\hline
+$22$ & $2$ & EQUAL & 1 & $684.551$ & $429.890$ & $597.534$ & $877.150$\\
+$22$ & $2$ & EQUAL & 3 & $1473.504$ & $1197.290$ & $1490.865$ & $1713.091$\\
+$22$ & $2$ & EQUAL & 5 & $1648.777$ & $1425.150$ & $1630.535$ & $1826.372$\\
+$22$ & $2$ & EQUAL & 7 & $1762.786$ & $1521.832$ & $1769.180$ & $2033.799$\\
+\hdashline
+$22$ & $2$ & EQUAL & 10 & $1895.305$ & $1630.891$ & $1849.75$ & $2043.442$\\
+\hdashline
+$22$ & $2$ & LINEAR & 1 & $513.271$ & $398.023$ & $524.850$ & $589.467$\\
+$22$ & $2$ & LINEAR & 3 & $1374.423$ & $1082.859$ & $1255.985$ & $1561.119$\\
+$22$ & $2$ & LINEAR & 5 & $1607.568$ & $1513.389$ & $1656.465$ & $1791.069$\\
+$22$ & $2$ & LINEAR & 7 & $1770.294$ & $1538.900$ & $1691.165$ & $1881.590$\\
+\hdashline
+$22$ & $2$ & LINEAR & 10 & $2158.396$ & $1966.351$ & $2085.235$ & $2162.541$\\
+\hdashline
+$22$ & $2$ & SUPERLINEAR & 1 & $698.811$ & $359.367$ & $622.467$ & $937.423$\\
+$22$ & $2$ & SUPERLINEAR & 3 & $1447.704$ & $1281.119$ & $1452.680$ & $1640.468$\\
+$22$ & $2$ & SUPERLINEAR & 5 & $1714.875$ & $1362.931$ & $1733.230$ & $2023.590$\\
+\hdashline
+$22$ & $2$ & SUPERLINEAR & 7 & $1783.623$ & $1603.389$ & $1720.335$ & $1937.749$\\
+\hdashline
+$22$ & $2$ & SUPERLINEAR & 10 & $1859.642$ & $1636.870$ & $1915.650$ & $2208.830$\\
+\end{tabular}
+\caption{Population size 22, Parent size 2 - "Cross Entropy"-inspired configuration}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{c c c c r r r r}
+Population & Parent & Recombination & Games per Agent & mean & Q1 & Q2 & Q3\\
+\hline
+$22$ & $5$ & EQUAL & 1 & $1411.458$ & $1207.060$ & $1528.050$ & $1707.590$\\
+$22$ & $5$ & EQUAL & 3 & $2209.730$ & $2129.521$ & $2213.285$ & $2471.751$\\
+$22$ & $5$ & EQUAL & 5 & $2274.419$ & $1933.249$ & $2187.800$ & $2570.399$\\
+$22$ & $5$ & EQUAL & 7 & $2386.088$ & $2112.841$ & $2328.500$ & $2573.261$\\
+\hdashline
+$22$ & $5$ & EQUAL & 10 & $2462.409$ & $2277.180$ & $2418.100$ & $2600.411$\\
+\hdashline
+$22$ & $11$ & LINEAR & 1 & $1604.434$ & $1181.603$ & $1549.735$ & $1678.111$\\
+$22$ & $11$ & LINEAR & 3 & $2774.378$ & $2460.992$ & $2594.900$ & $3030.310$\\
+$22$ & $11$ & LINEAR & 5 & $2530.796$ & $2382.050$ & $2658.915$ & $2990.851$\\
+\hdashline
+$22$ & $11$ & LINEAR & 7 & $2763.353$ & $2597.450$ & $2705.080$ & $3000.242$\\
+\hdashline
+$22$ & $11$ & LINEAR & 10 & $2707.983$ & $2146.209$ & $2800.435$ & $3273.401$\\
+$22$ & $11$ & SUPERLINEAR & 1 & $1666.214$ & $1447.430$ & $1660.900$ & $1856.908$\\
+$22$ & $11$ & SUPERLINEAR & 3 & $2581.119$ & $2306.02$ & $2548.380$ & $2759.428$\\
+$22$ & $11$ & SUPERLINEAR & 5 & $2635.429$ & $2409.620$ & $2574.785$ & $2863.849$\\
+$22$ & $11$ & SUPERLINEAR & 7 & $2661.638$ & $2411.232$ & $2575.030$ & $2945.200$\\
+\hdashline
+$22$ & $11$ & SUPERLINEAR & 10 & $2849.220$ & $2500.231$ & $2835.450$ & $3143.121$\\
+\hdashline
+\end{tabular}
+\caption{Population size 22, Parent size 5/11 - CMA configuration}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{c c c c r r r r}
+Population & Parent & Recombination & Games per Agent & mean & Q1 & Q2 & Q3\\
+\hline
+$50$ & $5$ & EQUAL & 1 & $1999.620$ & $1789.150$ & $1902.020$ & $2161.948$\\
+$50$ & $5$ & EQUAL & 3 & $2471.173$ & $2178.651$ & $2389.070$ & $2660.220$\\
+$50$ & $5$ & EQUAL & 5 & $2849.482$ & $2459.460$ & $2875.835$ & $3276.190$\\
+$50$ & $5$ & EQUAL & 7 & $2466.801$ & $2355.349$ & $2517.335$ & $2644.751$\\
+\hdashline
+$50$ & $5$ & EQUAL & 10 & $2801.923$ & $2479.088$ & $2915.980$ & $3081.018$\\
+\hdashline
+$50$ & $5$ & LINEAR & 1 & $1931.703$ & $1659.412$ & $1885.150$ & $2130.479$\\
+$50$ & $5$ & LINEAR & 3 & $2612.345$ & $2380.759$ & $2529.150$ & $2796.729$\\
+$50$ & $5$ & LINEAR & 5 & $2410.633$ & $2067.111$ & $2357.830$ & $2675.572$\\
+\hdashline
+$50$ & $5$ & LINEAR & 7 & $2842.090$ & $2497.952$ & $2922.965$ & $3136.509$\\
+\hdashline
+$50$ & $5$ & LINEAR & 10 & $2696.952$ & $2518.290$ & $2678.400$ & $2923.010$\\
+$50$ & $5$ & SUPERLINEAR & 1 & $1962.410$ & $1715.568$ & $1781.865$ & $2009.488$\\
+$50$ & $5$ & SUPERLINEAR & 3 & $2493.884$ & $2220.200$ & $2398.230$ & $2762.609$\\
+$50$ & $5$ & SUPERLINEAR & 5 & $2541.065$ & $2268.881$ & $2593.150$ & $2974.558$\\
+$50$ & $5$ & SUPERLINEAR & 7 & $2647.412$ & $2448.010$ & $2745.400$ & $3058.870$\\
+\hdashline
+$50$ & $5$ & SUPERLINEAR & 10 & $2757.388$ & $2357.062$ & $2886.950$ & $3187.282$\\
+\hdashline
+\end{tabular}
+\caption{Population size 50, Parent size 5 - "Cross Entropy"-inspired configuration}
+\end{table}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{c c c c r r r r}
+Population & Parent & Recombination & Games per Agent & mean & Q1 & Q2 & Q3\\
+\hline
+$50$ & $12$ & EQUAL & 1 & $2395.091$ & $2095.030$ & $2442.485$ & $2778.160$\\
+$50$ & $12$ & EQUAL & 3 & $2878.667$ & $2550.399$ & $2794.915$ & $3102.639$\\
+$50$ & $12$ & EQUAL & 5 & $2760.846$ & $2509.000$ & $2695.450$ & $3006.988$\\
+$50$ & $12$ & EQUAL & 7 & $2913.846$ & $2627.310$ & $2809.600$ & $3128.439$\\
+\hdashline
+$50$ & $12$ & EQUAL & 10 & $2957.794$ & $2636.478$ & $2843.380$ & $3222.420$\\
+\hdashline
+$50$ & $25$ & LINEAR & 1 & $2355.564$ & $2262.991$ & $2543.665$ & $2752.431$\\
+$50$ & $25$ & LINEAR & 3 & $2857.170$ & $2464.251$ & $2830.765$ & $3209.929$\\
+$50$ & $25$ & LINEAR & 5 & $3036.881$ & $2807.050$ & $3095.300$ & $3416.750$\\
+$50$ & $25$ & LINEAR & 7 & $3043.399$ & $2821.049$ & $3099.235$ & $3239.032$\\
+\hdashline
+$50$ & $25$ & LINEAR & 10 & $3167.873$ & $2941.590$ & $3130.385$ & $3415.520$\\
+\hdashline
+$50$ & $25$ & SUPERLINEAR & 1 & $2418.057$ & $2352.851$ & $2553.465$ & $2718.759$\\
+$50$ & $25$ & SUPERLINEAR & 3 & $2958.686$ & $2715.579$ & $2941.800$ & $3173.361$\\
+\hdashline
+$50$ & $25$ & SUPERLINEAR & 5 & $3211.658$ & $2889.689$ & $3305.485$ & $3694.480$\\
+\hdashline
+$50$ & $25$ & SUPERLINEAR & 7 & $3147.611$ & $2799.510$ & $3123.550$ & $3457.999$\\
+$50$ & $25$ & SUPERLINEAR & 10 & $3265.516$ & $2928.771$ & $3162.250$ & $3389.121$\\
+\end{tabular}
+\caption{Population size 50, Parent size 12/25 - CMA configuration}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{c c c c r r r r}
+Population & Parent & Recombination & Games per Agent & mean & Q1 & Q2 & Q3\\
+\hline
+$100$ & $10$ & EQUAL & 1 & $2528.158$ & $2380.122$ & $2680.785$ & $2782.850$\\
+$100$ & $10$ & EQUAL & 3 & $2763.118$ & $2488.878$ & $2696.685$ & $2962.190$\\
+$100$ & $10$ & EQUAL & 5 & $2783.246$ & $2399.949$ & $2693.285$ & $2900.391$\\
+\hdashline
+$100$ & $10$ & EQUAL & 7 & $3016.342$ & $2835.049$ & $2985.150$ & $3292.910$\\
+\hdashline
+$100$ & $10$ & EQUAL & 10 & $2940.037$ & $2703.859$ & $2920.615$ & $3216.410$\\
+$100$ & $10$ & LINEAR & 1 & $2655.099$ & $2409.162$ & $2691.850$ & $2961.091$\\
+$100$ & $10$ & LINEAR & 3 & $2823.674$ & $2526.560$ & $2792.500$ & $2974.549$\\
+\hdashline
+$100$ & $10$ & LINEAR & 5 & $3204.395$ & $2928.050$ & $3248.515$ & $3371.008$\\
+\hdashline
+$100$ & $10$ & LINEAR & 7 & $2993.126$ & $2639.021$ & $3031.065$ & $3277.642$\\
+$100$ & $10$ & LINEAR & 10 & $2726.273$ & $2402.502$ & $2748.535$ & $3009.198$\\
+$100$ & $10$ & SUPERLINEAR & 1 & $2571.936$ & $2211.051$ & $2634.850$ & $2811.190$\\
+$100$ & $10$ & SUPERLINEAR & 3 & $2853.959$ & $2552.749$ & $2870.600$ & $3005.292$\\
+\hdashline
+$100$ & $10$ & SUPERLINEAR & 5 & $3009.495$ & $2816.660$ & $2989.900$ & $3189.310$\\
+\hdashline
+$100$ & $10$ & SUPERLINEAR & 7 & $2935.614$ & $2540.342$ & $2887.085$ & $3232.508$\\
+$100$ & $10$ & SUPERLINEAR & 10 & $2941.535$ & $2705.290$ & $2893.580$ & $3153.510$\\
+\end{tabular}
+\caption{Population size 100, Parent size 10 - "Cross Entropy"-inspired configuration}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{c c c c r r r r}
+Population & Parent & Recombination & Games per Agent & mean & Q1 & Q2 & Q3\\
+\hline
+$100$ & $25$ & EQUAL & 1 & $2885.131$ & $2565.572$ & $2886.735$ & $3231.600$\\
+\hdashline
+$100$ & $25$ & EQUAL & 3 & $3244.544$ & $2924.488$ & $3270.885$ & $3525.671$\\
+\hdashline
+$100$ & $25$ & EQUAL & 5 & $3065.143$ & $2773.848$ & $3032.830$ & $3347.358$\\
+$100$ & $25$ & EQUAL & 7 & $3125.085$ & $2758.298$ & $3054.950$ & $3486.672$\\
+$100$ & $25$ & EQUAL & 10 & $3258.533$ & $2976.271$ & $3144.750$ & $3598.868$\\
+$100$ & $50$ & LINEAR & 1 & $3099.651$ & $2814.781$ & $3019.830$ & $3466.380$\\
+$100$ & $50$ & LINEAR & 3 & $3125.019$ & $2706.618$ & $3087.815$ & $3368.681$\\
+$100$ & $50$ & LINEAR & 5 & $3171.761$ & $2941.030$ & $3138.515$ & $3436.670$\\
+\hdashline
+$100$ & $50$ & LINEAR & 7 & $3322.076$ & $3160.098$ & $3289.370$ & $3537.850$\\
+\hdashline
+$100$ & $50$ & LINEAR & 10 & $3320.153$ & $3040.611$ & $3291.335$ & $3633.491$\\
+$100$ & $50$ & SUPERLINEAR & 1 & $3162.245$ & $2815.099$ & $3093.050$ & $3482.748$\\
+$100$ & $50$ & SUPERLINEAR & 3 & $3188.324$ & $2781.382$ & $3258.400$ & $3413.710$\\
+\hdashline
+$100$ & $50$ & SUPERLINEAR & 5 & $3304.119$ & $3004.140$ & $3226.235$ & $3679.359$\\
+\hdashline
+$100$ & $50$ & SUPERLINEAR & 7 & $3072.331$ & $2682.300$ & $2964.850$ & $3403.132$\\
+$100$ & $50$ & SUPERLINEAR & 10 & $3106.917$ & $2914.349$ & $3162.250$ & $3324.970$\\
+\end{tabular}
+\caption{Population size 100, Parent size 25/50 - CMA configuration}
+\end{table}
+
+\clearpage
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{c c c c r r r r}
+Population & Parent & Recombination & Games per Agent & mean & Q1 & Q2 & Q3\\
+\hline
+$12$ & $1$ & EQUAL & 10 & $1134.339$ & $863.523$ & $1061.050$ & $1297.359$\\
+$12$ & $1$ & LINEAR & 10 & $1276.041$ & $1135.609$ & $1196.120$ & $1502.029$\\
+$12$ & $1$ & SUPERLINEAR & 10 & $1401.300$ & $1194.430$ & $1440.500$ & $1569.012$\\
+$12$ & $3$ & EQUAL & 10 & $1940.783$ & $1566.721$ & $1913.415$ & $2210.251$\\
+$12$ & $6$ & LINEAR & 10 & $2365.089$ & $2072.719$ & $2263.665$ & $2637.732$\\
+$12$ & $6$ & SUPERLINEAR & 10 & $2472.293$ & $2194.049$ & $2430.780$ & $2709.040$\\
+\end{tabular}
+\caption{Best performing configurations for population size 12}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\caption{Best performing configurations for population size 12}
+\includegraphics[scale=1]{data/cma_population_offspring/bestofeach_population/12x/PlotFile.pdf}
+\end{figure}
+
+\clearpage
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{c c c c r r r r}
+Population & Parent & Recombination & Games per Agent & mean & Q1 & Q2 & Q3\\
+\hline
+$22$ & $2$ & EQUAL & 10 & $1895.305$ & $1630.891$ & $1849.75$ & $2043.442$\\
+$22$ & $2$ & LINEAR & 10 & $2158.396$ & $1966.351$ & $2085.235$ & $2162.541$\\
+$22$ & $2$ & SUPERLINEAR & 7 & $1783.623$ & $1603.389$ & $1720.335$ & $1937.749$\\
+$22$ & $5$ & EQUAL & 10 & $2462.409$ & $2277.180$ & $2418.100$ & $2600.411$\\
+$22$ & $11$ & LINEAR & 7 & $2763.353$ & $2597.450$ & $2705.080$ & $3000.242$\\
+$22$ & $11$ & SUPERLINEAR & 10 & $2849.220$ & $2500.231$ & $2835.450$ & $3143.121$\\
+\end{tabular}
+\caption{Best performing configurations for population size 22}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\caption{Best performing configurations for population size 22}
+\includegraphics[scale=1]{data/cma_population_offspring/bestofeach_population/22x/PlotFile.pdf}
+\end{figure}
+
+\clearpage
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{c c c c r r r r}
+Population & Parent & Recombination & Games per Agent & mean & Q1 & Q2 & Q3\\
+\hline
+$50$ & $5$ & EQUAL & 10 & $2801.923$ & $2479.088$ & $2915.980$ & $3081.018$\\
+$50$ & $5$ & LINEAR & 7 & $2842.090$ & $2497.952$ & $2922.965$ & $3136.509$\\
+$50$ & $5$ & SUPERLINEAR & 10 & $2757.388$ & $2357.062$ & $2886.950$ & $3187.282$\\
+$50$ & $12$ & EQUAL & 10 & $2957.794$ & $2636.478$ & $2843.380$ & $3222.420$\\
+$50$ & $25$ & LINEAR & 10 & $3167.873$ & $2941.590$ & $3130.385$ & $3415.520$\\
+$50$ & $25$ & SUPERLINEAR & 5 & $3211.658$ & $2889.689$ & $3305.485$ & $3694.480$\\
+\end{tabular}
+\caption{Best performing configurations for population size 50}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\caption{Best performing configurations for population size 50}
+\includegraphics[scale=1]{data/cma_population_offspring/bestofeach_population/50x/PlotFile.pdf}
+\end{figure}
+
+\clearpage
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{c c c c r r r r}
+Population & Parent & Recombination & Games per Agent & mean & Q1 & Q2 & Q3\\
+\hline
+$100$ & $10$ & EQUAL & 7 & $3016.342$ & $2835.049$ & $2985.150$ & $3292.910$\\
+$100$ & $10$ & LINEAR & 5 & $3204.395$ & $2928.050$ & $3248.515$ & $3371.008$\\
+$100$ & $10$ & SUPERLINEAR & 5 & $3009.495$ & $2816.660$ & $2989.900$ & $3189.310$\\
+$100$ & $25$ & EQUAL & 3 & $3244.544$ & $2924.488$ & $3270.885$ & $3525.671$\\
+$100$ & $50$ & LINEAR & 7 & $3322.076$ & $3160.098$ & $3289.370$ & $3537.850$\\
+$100$ & $50$ & SUPERLINEAR & 5 & $3304.119$ & $3004.140$ & $3226.235$ & $3679.359$\\
+\end{tabular}
+\caption{Best performing configurations for population size 100}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\caption{Best performing configurations for population size 100}
+\includegraphics[scale=1]{data/cma_population_offspring/bestofeach_population/100x/PlotFile.pdf}
+\end{figure}
+
+\clearpage 
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{c c c c r r r r}
+Population & Parent & Recombination & Games per Agent & mean & Q1 & Q2 & Q3\\
+\hline
+$12$ & $6$ & SUPERLINEAR & 10 & $2472.293$ & $2194.049$ & $2430.780$ & $2709.040$\\
+$22$ & $11$ & SUPERLINEAR & 10 & $2849.220$ & $2500.231$ & $2835.450$ & $3143.121$\\
+$50$ & $25$ & SUPERLINEAR & 5 & $3211.658$ & $2889.689$ & $3305.485$ & $3694.480$\\
+$100$ & $50$ & LINEAR & 7 & $3322.076$ & $3160.098$ & $3289.370$ & $3537.850$\\
+\end{tabular}
+\caption{Best performing configurations of all population sizes}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\caption{Best performing configurations for population size 100}
+\includegraphics[scale=1]{data/cma_population_offspring/bestofall_population/PlotFile.pdf}
+\end{figure}
+
+
+
 \clearpage
 
 \subsection{Comparison - Initial comparison}
