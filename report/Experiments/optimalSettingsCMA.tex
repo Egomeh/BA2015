@@ -191,7 +191,7 @@ use this paramater in the upcoming experiments}
 In this in section we are going to conduct a wide variety of experiments to determine
 the best settings for CMA. More specifically we are going to find the best combination for
 population size, parent size and games per agent.\\
-Table \ref{SuperCMAExperiment} shows the different experiments we are
+Table \ref{SuperCMAExperiment} depict the different experiments we are
 going to carry out.
 
 \begin{table}[H]
@@ -218,20 +218,57 @@ $100$ & $50$ & LINEAR/SUPERLINEAR & 1/3/5/7/10
 The choice behind using the above population sizes is to use the same population sizes as
 when we tuned Cross Entropy (see section \ref{optimalsettingsce}). However, we use a population
 size of 12 instead of 10, because a population size of 12 is the stock setting for Shark CMA \citep{shark08}.\\
-In regard to the parent size, they have been determined depending on the recombination type.
+In regards to the parent size, they have been determined depending on the recombination type.
 We use all three different recombination types for the 10\% parent sizes to make these experiments
 correspond to the Cross Entropy settings (see section \ref{optimalsettingsce}). However, Shark CMA
 has predetermined parent sizes for each recombination types, 25\% for EQUAL and 50\% for both
 LINEAR and SUPERLINEAR \citep{shark08}. For this reason we also conduct experiments for each population
 size to represent these Shark CMA preferred settings.
-Furthermore we also test different number of games per agent as for the reason presented in section
-\ref{CMAGamesPerAgentSection}.\\
+Furthermore we also test different number of games per agent as for the reason presented in section \ref{CMAGamesPerAgentSection}.\\\\
+These experiments will be conducted using Hard Tetris (see section \ref{HardTetris}), in order
+to lower the computation time.\\
 
 \textbf{Results}\\
-\comment{show results, specify best resuslts/candidates.}\\
+The total number of configuration experiments is 120, with 30 individual experiments each,
+resulting in a total of 3.600 individual experiment runs. These results are all included in 
+appendix \ref{appendixCMAPopulationParent}.\\
+Below in table \ref{CMABestConfigTable} and figure \ref{CMABestConfigPlot}, the four best
+best resulting configurations are depicted. We chose these by first selecting the best 
+configuration of each Population-Parent size with each recombination type. This results in six
+configurations for each Population-Parent size, which we then compare to determine the best
+configuration for each Population-Parent size, regardless of recombination type. Which is depicted in table \ref{CMABestConfigTable} and figure \ref{CMABestConfigPlot}.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{c c c c r r r r}
+Population & Parent & Recombination & Games per Agent & Mean & Q1 & Q2 & Q3\\
+\hline
+$12$ & $6$  & SUPERLINEAR & 10 & $2472.293$ & $2194.049$ & $2430.780$ & $2709.040$\\
+$22$ & $11$ & SUPERLINEAR & 10 & $2849.220$ & $2500.231$ & $2835.450$ & $3143.121$\\
+$50$ & $25$ & SUPERLINEAR & 5  & $3211.658$ & $2889.689$ & $3305.485$ & $3694.480$\\
+$100$ & $50$ & LINEAR     & 7  & $3322.076$ & $3160.098$ & $3289.370$ & $3537.850$
+\end{tabular}
+\caption{Best performing configurations of all population sizes \label{CMABestConfigTable}}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=1]{data/cma_population_offspring/bestofall_population/PlotFile.pdf}
+\caption{Best performing configurations of all population sizes \label{CMABestConfigPlot}}
+\end{figure}
+
+From table \ref{CMABestConfigTable} and figure \ref{CMABestConfigPlot}, we can see that
+Linear recombination type, with population size 100 and parent size 50 (black) yields a 
+better score compared to Superlinear with population size 50 and parent size 25 (green).
+However, green has a much faster convergence than black and almost reaches the same score.\\
+
 
 \textbf{Analysis and discussion}\\
-\comment{Discuss best results/candidates and conclude the optimal settings.}\\
+\comment{Argument for either green go black from the results section - this is the 
+configuration for the comparison experiment}\\
+\\
+\comment{Result for best configuration is made using hard tetris, therefore it may not be the best result for Normal tetris.}
 
 
 

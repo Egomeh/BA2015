@@ -7,7 +7,7 @@ The tables are formatted
 \centering
 \caption{Overview of the two table formats}
 \begin{tabular}{l r}
-Optimizer & -\\
+Optimizer & CMA\\
 Number of Evaluations & -\\
 Number of Learning Games & -\\
 Population size& -\\
@@ -16,11 +16,12 @@ Games per Agent & -\\
 Tetris Type & -\\
 \hline
 Recombination Type & -\\
-Initial Sigma & -
+Initial Sigma & -\\
+ & \\
 \end{tabular}
 \quad
 \begin{tabular}{l r}
-Optimizer & -\\
+Optimizer & Cross Entropy\\
 Number of Evaluations & -\\
 Number of Learning Games & -\\
 Population size & -\\
@@ -33,6 +34,73 @@ Noise Type & -\\
 Noise & -
 \end{tabular}
 \end{table}
+
+\clearpage
+
+\subsection{Game Complexity}
+Experiments to test if game complexity can be used for tuning the CMA and CE configurations.
+
+\begin{table}[h]
+\centering
+\caption{Overview aipyshdfiabhsf}
+\begin{tabular}{l r}
+Optimizer & Cross Entropy\\
+Number of Evaluations & 8000\\
+Population size & 100\\
+Parent size & 10\\
+Games per Agent & 1\\
+Tetris Type & Normal\\
+\hline
+Sigma & 100\\
+Noise Type & No noise\\
+Noise & -
+\end{tabular}
+\quad
+\begin{tabular}{l r}
+Optimizer & Cross Entropy\\
+Number of Evaluations & 8000\\
+Population size & 100\\
+Parent size & 10\\
+Games per Agent & 1\\
+Tetris Type & Hard\\
+\hline
+Sigma & 100\\
+Noise Type & No noise\\
+Noise & -
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Overview adasdasdasd}
+\begin{tabular}{l r}
+Optimizer & CMA\\
+Number of Evaluations & 8000\\
+Number of Learning Games & 30\\
+Population size& 13\\
+Parent size & 6\\
+Games per Agent & 1\\
+Tetris Type & Hard\\
+\hline
+Recombination Type & Superlinear\\
+Initial Sigma & stock
+\end{tabular}
+\quad
+\begin{tabular}{l r}
+Optimizer & CMA\\
+Number of Evaluations & 8000\\
+Number of Learning Games & 30\\
+Population size& 13\\
+Parent size & 6\\
+Games per Agent & 1\\
+Tetris Type & Normal\\
+\hline
+Recombination Type & Superlinear\\
+Initial Sigma & stock
+\end{tabular}
+\end{table}
+
+
 
 \clearpage
 
@@ -122,15 +190,20 @@ with the following population/Parent size
 \begin{tabular}{l l}
 Population size & Parent size\\
 \hline
-10 & 1\\
-10 & 5\\
+12 & 1\\
+12 & 3\\
+12 & 5\\
 22 & 2\\
+22 & 5\\
 22 & 11\\
 50 & 5\\
+50 & 12\\
 50 & 25\\
 100 & 10\\
+100 & 25\\
 100 & 50\\
 200 & 20\\
+200 & 50\\
 200 & 100
 \end{tabular}
 \end{table}
@@ -141,7 +214,34 @@ quantile table and two graphs over the mean plots of 10 \% and 50 \% Parent size
 
 \clearpage
 
+\begin{figure}[H]
+\centering
+\begin{tabular}{r r | r r r r}
+population & offspring & mean & Q1 & Q2 & Q3\\
+\hline
+12 & $10\%$  & 1585,3     & 93,0      & 113,5        & 220,7\\
+12 & $25\%$  & 30.496,9   & 15.222,1  & 20.264,2     & 39.019,8\\
+12 & $50\%$  & 39.824,2   & 26.457,0  & 33.663,4     & 49.743,7\\
+22 & $10\%$  & 35.841,6   & 20.391,9  & 42.045,5     & 48.464,6\\
+22 & $25\%$  & 80.884,9   & 56.042,5  & 71.900,2     & 78.653,4\\
+22 & $50\%$  & 52.887,4   & 23.531,9  & 42.161,0     & 83.144,1\\
+50 & $10\%$  & 95,623,1   & 82.738,9  & 93.388,9     & 111.351,5\\
+50 & $25\%$  & 110.525,0  & 103.128,1 & 111.195,5    & 121.974,4\\
+50 & $50\%$  & 69.130,7   & 52.511,0  & 64.351,6     & 91.488,6\\
+100 & $10\%$ & 115.868,7  & 84.368,5  & 122.238,5    & 146.457,0\\
+100 & $25\%$ & 70.011,1   & 58.008,0  & 69.588,2     & 80.432,7\\
+100 & $50\%$ & 22.910,4   & 4.037,7   & 14.353,7     & 47.215,9\\
+200 & $10\%$ & 85.181,7   & 45.201,5  & 96.803,1     & 117.578,0\\
+200 & $25\%$ & 32.894,6   & 8688,7    & 25.333,1     & 58.434,8\\
+200 & $50\%$ & 946,4      & 585,0     & 802,5        & 1.267,7
+\end{tabular}
+\caption{Cross Entropy configuration test, 
+see Appendix for the full plots 
+of the experiments.  \label{CEConfigTest}}
+\end{figure}
 
+
+\clearpage
 
 \subsection{Optimal settings for Cross Entropy - Games per agent}
 Experiment to determine the optimal number of games played per agent for best resulting score at lowest evaluation cost.
@@ -165,28 +265,161 @@ Noise & 4
 
 with the following population/Parent size and number of games played per agent
 
+
 \begin{table}[H]
 \centering
 \begin{tabular}{c c c}
 Population Size & Parent size & Games per Agent\\
 \hline
-$10$ & $10\%$ & 1/3/5/7/10\\
-$10$ & $50\%$ & 1/3/5/7/10\\
+$12$ & $10\%$ & 1/3/5/7/10\\
+$12$ & $25\%$ & 1/3/5/7/10\\
+$12$ & $50\%$ & 1/3/5/7/10\\
 $22$ & $10\%$ & 1/3/5/7/10\\
+$22$ & $25\%$ & 1/3/5/7/10\\
 $22$ & $50\%$ & 1/3/5/7/10\\
 $50$ & $10\%$ & 1/3/5/7/10\\
+$50$ & $25\%$ & 1/3/5/7/10\\
 $50$ & $50\%$ & 1/3/5/7/10\\
-$100$ & $10\%$  & 1/3/5/7/10\\
+$100$ & $10\%$ & 1/3/5/7/10\\
+$100$ & $25\%$ & 1/3/5/7/10\\
 $100$ & $50\%$ & 1/3/5/7/10\\
 $200$ & $10\%$ & 1/3/5/7/10\\
+$200$ & $25\%$ & 1/3/5/7/10\\
 $200$ & $50\%$ & 1/3/5/7/10
 \end{tabular}
-\caption{Games per agent CE experiment setup\label{GamesPerAgentCEAppendix}}
+\caption{Games per agent CE experiment setup\label{GamesPerAgentCE}}
 \end{table}
 
-INSERT PLOTS HERE.\\
-\\
-quantile table and two graphs over the mean plots
+\clearpage
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{c c c r r r r}
+Population & Parent & Games per Agent & mean & Q1 & Q2 & Q3\\
+\hline
+$12$ & $1$ & 1 & $57.818$ & $46.277$ & $58.650$ & $72.703$\\
+$12$ & $1$ & 3 & $356.373$ & $167.527$ & $271.933$ & $408.820$\\
+$12$ & $1$ & 5 & $673.571$ & $411.463$ & $563.983$ & $834.717$\\
+$12$ & $1$ & 7 & $942.772$ & $586.771$ & $819.434$ & $1249.562$\\
+$12$ & $1$ & 10 & $1008.984$ & $724.373$ & $960.684$ & $1156.081$\\
+$12$ & $3$ & 1 & - & - & - & -\\
+$12$ & $3$ & 3 & - & - & - & -\\
+$12$ & $3$ & 5 & - & - & - & -\\
+$12$ & $3$ & 7 & - & - & - & -\\
+$12$ & $3$ & 10 & - & - & - & -\\
+$12$ & $6$ & 1 & $510.686$ & $305.133$ & $421.067$ & $630.730$\\
+$12$ & $6$ & 3 & $1584.396$ & $1359.411$ & $1479.835$ & $1651.791$\\
+$12$ & $6$ & 5 & $1524.285$ & $1349.078$ & $1597.585$ & $1728.091$\\
+$12$ & $6$ & 7 & $1824.980$ & $1568.218$ & $1767.685$ & $2035.880$\\
+$12$ & $6$ & 10 & $2109.837$ & $1802.968$ & $2021.165$ & $2276.652$\\
+\end{tabular}
+\caption{population 12 - Cross Entropy}
+\end{table}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{c c c r r r r}
+Population & Parent & Games per Agent & mean & Q1 & Q2 & Q3\\
+\hline
+$22$ & $2$ & 1 & $849.001$ & $542.797$ & $799.083$ & $1031.299$\\
+$22$ & $2$ & 3 & $1442.883$ & $1276.870$ & $1437.550$ & $1541.938$\\
+$22$ & $2$ & 5 & $1668.974$ & $1352.250$ & $1579.885$ & $1849.210$\\
+$22$ & $2$ & 7 & $1843.644$ & $1575.732$ & $1860.815$ & $2112.678$\\
+$22$ & $2$ & 10 & $1732.664$ & $1475.000$ & $1754.785$ & $2024.980$\\
+$22$ & $5$ & 1 & - & - & - & -\\
+$22$ & $5$ & 3 & - & - & - & -\\
+$22$ & $5$ & 5 & - & - & - & -\\
+$22$ & $5$ & 7 & - & - & - & -\\
+$22$ & $5$ & 10 & - & - & - & -\\
+$22$ & $11$ & 1 & $1415.511$ & $1011.101$ & $1327.030$ & $1600.599$\\
+$22$ & $11$ & 3 & $2168.012$ & $1966.552$ & $2119.100$ & $2456.230$\\
+$22$ & $11$ & 5 & $2245.854$ & $2017.992$ & $2222.900$ & $2424.450$\\
+$22$ & $11$ & 7 & $2463.227$ & $2091.090$ & $2384.230$ & $2702.740$\\
+$22$ & $11$ & 10 & $2282.032$ & $1957.148$ & $2257.285$ & $2565.950$\\
+\end{tabular}
+\caption{population 22 - Cross Entropy}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{c c c r r r r}
+Population & Parent & Games per Agent & mean & Q1 & Q2 & Q3\\
+\hline
+$50$ & $5$ & 1 & $2060.069$ & $1731.441$ & $1967.465$ & $2076.389$\\
+$50$ & $5$ & 3 & $2524.279$ & $2195.189$ & $2501.985$ & $2848.859$\\
+$50$ & $5$ & 5 & $2418.023$ & $2283.708$ & $2388.770$ & $2639.078$\\
+$50$ & $5$ & 7 & $2433.615$ & $2145.718$ & $2356.800$ & $2734.611$\\
+$50$ & $5$ & 10 & $2341.267$ & $2104.480$ & $2252.570$ & $2418.809$\\
+$50$ & $12$ & 1 & - & - & - & -\\
+$50$ & $12$ & 3 & - & - & - & -\\
+$50$ & $12$ & 5 & - & - & - & -\\
+$50$ & $12$ & 7 & - & - & - & -\\
+$50$ & $12$ & 10 & - & - & - & -\\
+$50$ & $25$ & 1 & $2396.866$ & $2115.161$ & $2357.980$ & $2664.099$\\
+$50$ & $25$ & 3 & $2572.860$ & $2308.748$ & $2615.185$ & $2861.858$\\
+$50$ & $25$ & 5 & $2485.564$ & $2226.889$ & $2419.080$ & $2747.609$\\
+$50$ & $25$ & 7 & $2396.309$ & $2180.099$ & $2306.165$ & $2605.832$\\
+$50$ & $25$ & 10 & $2332.305$ & $2019.738$ & $2268.415$ & $2561.252$\\
+\end{tabular}
+\caption{population 50 - Cross Entropy}
+\end{table}
+
+
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{c c c r r r r}
+Population & Parent & Games per Agent & mean & Q1 & Q2 & Q3\\
+\hline
+$100$ & $10$ & 1 & $2658.689$ & $2469.169$ & $2601.480$ & $2866.970$\\
+$100$ & $10$ & 3 & $2677.629$ & $2375.419$ & $2770.615$ & $3004.819$\\
+$100$ & $10$ & 5 & $2690.802$ & $2360.800$ & $2646.920$ & $2946.831$\\
+$100$ & $10$ & 7 & $2678.393$ & $2442.688$ & $2630.120$ & $2877.830$\\
+$100$ & $10$ & 10 & $2880.385$ & $2636.640$ & $2828.880$ & $3108.429$\\
+$100$ & $25$ & 1 & - & - & - & -\\
+$100$ & $25$ & 3 & - & - & - & -\\
+$100$ & $25$ & 5 & - & - & - & -\\
+$100$ & $25$ & 7 & - & - & - & -\\
+$100$ & $25$ & 10 & - & - & - & -\\
+$100$ & $50$ & 1 & $2409.168$ & $2206.828$ & $2299.435$ & $2534.019$\\
+$100$ & $50$ & 3 & $2622.402$ & $2318.410$ & $2714.500$ & $2905.521$\\
+$100$ & $50$ & 5 & $2351.742$ & $2213.480$ & $2410.500$ & $2532.500$\\
+$100$ & $50$ & 7 & $2232.970$ & $2035.291$ & $2296.430$ & $2466.811$\\
+$100$ & $50$ & 10 & $1320.906$ & $1088.809$ & $1231.050$ & $1618.431$\\
+\end{tabular}
+\caption{population 100 - Cross Entropy}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{c c c r r r r}
+Population & Parent & Games per Agent & mean & Q1 & Q2 & Q3\\
+\hline
+$200$ & $20$ & 1 & $2880.572$ & $2596.999$ & $2764.400$ & $3184.290$\\
+$200$ & $20$ & 3 & $2735.539$ & $2493.400$ & $2751.215$ & $2849.329$\\
+$200$ & $20$ & 5 & $2756.202$ & $2609.579$ & $2728.885$ & $2826.881$\\
+$200$ & $20$ & 7 & $2797.015$ & $2515.971$ & $2722.150$ & $3036.839$\\
+$200$ & $20$ & 10 & $2531.674$ & $2186.629$ & $2652.365$ & $2897.672$\\
+$200$ & $50$ & 1 & - & - & - & -\\
+$200$ & $50$ & 3 & - & - & - & -\\
+$200$ & $50$ & 5 & - & - & - & -\\
+$200$ & $50$ & 7 & - & - & - & -\\
+$200$ & $50$ & 10 & - & - & - & -\\
+$200$ & $100$ & 1 & $2589.020$ & $2391.080$ & $2594.285$ & $2798.470$\\
+$200$ & $100$ & 3 & $2164.732$ & $2018.790$ & $2136.900$ & $2335.079$\\
+$200$ & $100$ & 5 & $1235.709$ & $837.947$ & $1195.730$ & $1478.081$\\
+$200$ & $100$ & 7 & $451.171$ & $377.813$ & $421.150$ & $498.470$\\
+$200$ & $100$ & 10 & $320.356$ & $287.023$ & $322.733$ & $350.773$\\
+\end{tabular}
+\caption{population 200 - Cross Entropy}
+\end{table}
 
 \clearpage
 
@@ -240,7 +473,7 @@ $\sigma_0$ & mean & Q1 & Q2 & Q3\\
 
 \clearpage
 
-\subsection{Optimal settings for CMA - Experiment for finding the optimal settings}
+\subsection{Optimal settings for CMA - Experiment for finding the optimal settings \label{appendixCMAPopulationParent}}
 Experiments finding the best configuration of population and parent size with recombination type. The parent size is dependent on the recombination type, therefore we tested these parameter together.
 \begin{table}[h]
 \centering
@@ -295,10 +528,10 @@ $100$ & $50$ & LINEAR/SUPERLINEAR & 1/3/5/7/10
 \clearpage
 
 \begin{figure}
-    \centering
+	\centering
     \begin{subfigure}[b]{0.45\textwidth}
     	\centering
-        \caption{Population size 12, Parent size 1, \\Meanscore of EQUAL recombination}
+    	\caption{Population size 12, Parent size 1, \\Meanscore of EQUAL recombination}
         \includegraphics[width=\textwidth]{data/cma_population_offspring/12x_split/equal_l12_o1/mean/PlotFile.pdf}
     \end{subfigure} 
     \begin{subfigure}[b]{0.45\textwidth}
@@ -713,8 +946,8 @@ $12$ & $6$ & SUPERLINEAR & 10 & $2472.293$ & $2194.049$ & $2430.780$ & $2709.040
 
 \begin{figure}[H]
 \centering
-\caption{Best performing configurations for population size 12}
 \includegraphics[scale=1]{data/cma_population_offspring/bestofeach_population/12x/PlotFile.pdf}
+\caption{Best performing configurations for population size 12}
 \end{figure}
 
 \clearpage
@@ -737,8 +970,8 @@ $22$ & $11$ & SUPERLINEAR & 10 & $2849.220$ & $2500.231$ & $2835.450$ & $3143.12
 
 \begin{figure}[H]
 \centering
-\caption{Best performing configurations for population size 22}
 \includegraphics[scale=1]{data/cma_population_offspring/bestofeach_population/22x/PlotFile.pdf}
+\caption{Best performing configurations for population size 22}
 \end{figure}
 
 \clearpage
@@ -761,8 +994,8 @@ $50$ & $25$ & SUPERLINEAR & 5 & $3211.658$ & $2889.689$ & $3305.485$ & $3694.480
 
 \begin{figure}[H]
 \centering
-\caption{Best performing configurations for population size 50}
 \includegraphics[scale=1]{data/cma_population_offspring/bestofeach_population/50x/PlotFile.pdf}
+\caption{Best performing configurations for population size 50}
 \end{figure}
 
 \clearpage
@@ -785,8 +1018,8 @@ $100$ & $50$ & SUPERLINEAR & 5 & $3304.119$ & $3004.140$ & $3226.235$ & $3679.35
 
 \begin{figure}[H]
 \centering
-\caption{Best performing configurations for population size 100}
 \includegraphics[scale=1]{data/cma_population_offspring/bestofeach_population/100x/PlotFile.pdf}
+\caption{Best performing configurations for population size 100}
 \end{figure}
 
 \clearpage 
@@ -807,8 +1040,8 @@ $100$ & $50$ & LINEAR & 7 & $3322.076$ & $3160.098$ & $3289.370$ & $3537.850$\\
 
 \begin{figure}[H]
 \centering
-\caption{Best performing configurations for population size 100}
 \includegraphics[scale=1]{data/cma_population_offspring/bestofall_population/PlotFile.pdf}
+\caption{Best performing configurations of all population sizes}
 \end{figure}
 
 
