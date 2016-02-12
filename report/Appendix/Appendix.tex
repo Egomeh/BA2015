@@ -42,14 +42,14 @@ Experiments to test if game complexity can be used for tuning the CMA and CE con
 
 \begin{table}[h]
 \centering
-\caption{Overview aipyshdfiabhsf}
+\caption{Cross Entropy settings for testing game complexity}
 \begin{tabular}{l r}
 Optimizer & Cross Entropy\\
 Number of Evaluations & 8000\\
 Population size & 100\\
 Parent size & 10\\
 Games per Agent & 1\\
-Tetris Type & Normal\\
+Tetris Type & Hard\\
 \hline
 Sigma & 100\\
 Noise Type & No noise\\
@@ -62,7 +62,7 @@ Number of Evaluations & 8000\\
 Population size & 100\\
 Parent size & 10\\
 Games per Agent & 1\\
-Tetris Type & Hard\\
+Tetris Type & Normal\\
 \hline
 Sigma & 100\\
 Noise Type & No noise\\
@@ -72,7 +72,7 @@ Noise & -
 
 \begin{table}[h]
 \centering
-\caption{Overview adasdasdasd}
+\caption{CMA settings for testing game complexity}
 \begin{tabular}{l r}
 Optimizer & CMA\\
 Number of Evaluations & 8000\\
@@ -83,7 +83,7 @@ Games per Agent & 1\\
 Tetris Type & Hard\\
 \hline
 Recombination Type & Superlinear\\
-Initial Sigma & stock
+Initial Sigma & 1
 \end{tabular}
 \quad
 \begin{tabular}{l r}
@@ -96,7 +96,7 @@ Games per Agent & 1\\
 Tetris Type & Normal\\
 \hline
 Recombination Type & Superlinear\\
-Initial Sigma & stock
+Initial Sigma & 1
 \end{tabular}
 \end{table}
 
@@ -109,7 +109,6 @@ Using the same configuration as in "reference paper", we will reproduce the expe
 \\
 \begin{table}[h!]
 \centering
-\caption{Cross Entropy - No noise}
 \begin{tabular}{l r}
 Optimizer & Cross Entropy\\
 Number of Evaluations & 8000\\
@@ -122,11 +121,11 @@ Sigma & 100\\
 Noise Type & No noise\\
 Noise & -
 \end{tabular}
+\caption{Cross Entropy - No noise}
 \end{table}
 
 \begin{table}[h!]
 \centering
-\caption{Cross Entropy - Constant noise}
 \begin{tabular}{l r}
 Optimizer & Cross Entropy\\
 Number of Evaluations & 8000\\
@@ -139,11 +138,11 @@ Sigma & 100\\
 Noise Type & Constant\\
 Noise & 4
 \end{tabular}
+\caption{Cross Entropy - Constant noise}
 \end{table}
 
 \begin{table}[h!]
 \centering
-\caption{Cross Entropy - Linear decreasing noise}
 \begin{tabular}{l r}
 Optimizer & Cross Entropy\\
 Number of Evaluations & 8000\\
@@ -156,6 +155,7 @@ Sigma & 100\\
 Noise Type & Linear decreasing\\
 Noise & $max \left( 5 - \frac{t}{10}, 0 \right)$
 \end{tabular}
+\caption{Cross Entropy - Linear decreasing noise}
 \end{table}
 
 
@@ -186,7 +186,6 @@ with the following population/Parent size
 
 \begin{table}[h]
 \centering
-\caption{Population/Parent size \label{CEPopulationParentSize}}
 \begin{tabular}{l l}
 Population size & Parent size\\
 \hline
@@ -206,6 +205,7 @@ Population size & Parent size\\
 200 & 50\\
 200 & 100
 \end{tabular}
+\caption{Population/Parent size \label{CEPopulationParentSize}}
 \end{table}
 
 INSERT PLOTS HERE.\\
@@ -477,7 +477,6 @@ $\sigma_0$ & mean & Q1 & Q2 & Q3\\
 Experiments finding the best configuration of population and parent size with recombination type. The parent size is dependent on the recombination type, therefore we tested these parameter together.
 \begin{table}[h]
 \centering
-\caption{Overview of the two table formats}
 \begin{tabular}{l r}
 Optimizer & CMA\\
 Number of Evaluations & 80000\\
@@ -490,6 +489,7 @@ Tetris Type & Hard\\
 Recombination Type & See table \ref{SuperCMAExperiment}\\
 Initial Sigma & 1
 \end{tabular}
+\caption{CMA experiment parameters for testing games per agent}
 \end{table}
 
 \begin{table}[H]
@@ -529,34 +529,29 @@ $100$ & $50$ & LINEAR/SUPERLINEAR & 1/3/5/7/10
 
 \begin{figure}
 	\centering
-    \begin{subfigure}[b]{0.45\textwidth}
-    	\centering
-    	\caption{Population size 12, Parent size 1, \\Meanscore of EQUAL recombination}
+	\captionsetup[subfigure]{justification=centering}
+    \begin{subfigure}[b]{0.49\textwidth}
+    	\caption{Population size 12, Parent size 1,\\EQUAL recombination}
         \includegraphics[width=\textwidth]{data/cma_population_offspring/12x_split/equal_l12_o1/mean/PlotFile.pdf}
     \end{subfigure} 
-    \begin{subfigure}[b]{0.45\textwidth}
-    	\centering
-    	\caption{Population size 12, Parent size 3, \\ Meanscore of EQUAL recombination}
+    \begin{subfigure}[b]{0.49\textwidth}
+    	\caption{Population size 12, Parent size 3,\\EQUAL recombination}
         \includegraphics[width=\textwidth]{data/cma_population_offspring/12x_split/equal_l12_o3/mean/PlotFile.pdf}
     \end{subfigure}
-    \begin{subfigure}[b]{0.45\textwidth}
-    	\centering
-    	\caption{Population size 12, Parent size 1, \\ Meanscore of LINEAR recombination}
+    \begin{subfigure}[b]{0.49\textwidth}
+    	\caption{Population size 12, Parent size 1,\\LINEAR recombination}
         \includegraphics[width=\textwidth]{data/cma_population_offspring/12x_split/linear_l12_o1/mean/PlotFile.pdf}
     \end{subfigure}
-    \begin{subfigure}[b]{0.45\textwidth}
-    	\centering
-    	\caption{Population size 12, Parent size 6, \\ Meanscore of LINEAR recombination}
+    \begin{subfigure}[b]{0.49\textwidth}
+    	\caption{Population size 12, Parent size 6,\\LINEAR recombination}
         \includegraphics[width=\textwidth]{data/cma_population_offspring/12x_split/linear_l12_o6/mean/PlotFile.pdf}
     \end{subfigure}
-    \begin{subfigure}[b]{0.45\textwidth}
-    	\centering
-    	\caption{Population size 12, Parent size 1, \\ Meanscore of SUPERLINEAR recombination}
+    \begin{subfigure}[b]{0.49\textwidth}
+    	\caption{Population size 12, Parent size 1,\\SUPERLINEAR recombination}
         \includegraphics[width=\textwidth]{data/cma_population_offspring/12x_split/superlinear_l12_o1/mean/PlotFile.pdf}
     \end{subfigure}
-    \begin{subfigure}[b]{0.45\textwidth}
-    	\centering
-    	\caption{Population size 12, Parent size 6, \\ Meanscore of SUPERLINEAR recombination}
+    \begin{subfigure}[b]{0.49\textwidth}
+    	\caption{Population size 12, Parent size 6,\\SUPERLINEAR recombination}
         \includegraphics[width=\textwidth]{data/cma_population_offspring/12x_split/superlinear_l12_o6/mean/PlotFile.pdf}
     \end{subfigure}
     
@@ -565,34 +560,35 @@ $100$ & $50$ & LINEAR/SUPERLINEAR & 1/3/5/7/10
 
 \begin{figure}
     \centering
-    \begin{subfigure}[b]{0.45\textwidth}
+    \captionsetup[subfigure]{justification=centering}
+    \begin{subfigure}[b]{0.49\textwidth}
     	\centering
-        \caption{Population size 22, Parent size 2, \\Meanscore of EQUAL recombination}
+        \caption{Population size 22, Parent size 2,\\EQUAL recombination}
         \includegraphics[width=\textwidth]{data/cma_population_offspring/22x_split/equal_l22_o2/mean/PlotFile.pdf}
     \end{subfigure} 
-    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{subfigure}[b]{0.49\textwidth}
     	\centering
-    	\caption{Population size 22, Parent size 5, \\ Meanscore of EQUAL recombination}
+    	\caption{Population size 22, Parent size 5,\\EQUAL recombination}
         \includegraphics[width=\textwidth]{data/cma_population_offspring/22x_split/equal_l22_o5/mean/PlotFile.pdf}
     \end{subfigure}
-    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{subfigure}[b]{0.49\textwidth}
     	\centering
-    	\caption{Population size 22, Parent size 2, \\ Meanscore of LINEAR recombination}
+    	\caption{Population size 22, Parent size 2,\\LINEAR recombination}
         \includegraphics[width=\textwidth]{data/cma_population_offspring/22x_split/linear_l22_o2/mean/PlotFile.pdf}
     \end{subfigure}
-    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{subfigure}[b]{0.49\textwidth}
     	\centering
-    	\caption{Population size 22, Parent size 11, \\ Meanscore of LINEAR recombination}
+    	\caption{Population size 22, Parent size 11,\\LINEAR recombination}
         \includegraphics[width=\textwidth]{data/cma_population_offspring/22x_split/linear_l22_o11/mean/PlotFile.pdf}
     \end{subfigure}
-    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{subfigure}[b]{0.49\textwidth}
     	\centering
-    	\caption{Population size 22, Parent size 2, \\ Meanscore of SUPERLINEAR recombination}
+    	\caption{Population size 22, Parent size 2,\\SUPERLINEAR recombination}
         \includegraphics[width=\textwidth]{data/cma_population_offspring/22x_split/superlinear_l22_o2/mean/PlotFile.pdf}
     \end{subfigure}
-    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{subfigure}[b]{0.49\textwidth}
     	\centering
-    	\caption{Population size 22, Parent size 11, \\ Meanscore of SUPERLINEAR recombination}
+    	\caption{Population size 22, Parent size 11,\\SUPERLINEAR recombination}
         \includegraphics[width=\textwidth]{data/cma_population_offspring/22x_split/superlinear_l22_o11/mean/PlotFile.pdf}
     \end{subfigure}
     
@@ -601,34 +597,35 @@ $100$ & $50$ & LINEAR/SUPERLINEAR & 1/3/5/7/10
 
 \begin{figure}
     \centering
-    \begin{subfigure}[b]{0.45\textwidth}
+    \captionsetup[subfigure]{justification=centering}
+    \begin{subfigure}[b]{0.49\textwidth}
     	\centering
-        \caption{Population size 50, Parent size 5, \\Meanscore of EQUAL recombination}
+        \caption{Population size 50, Parent size 5,\\EQUAL recombination}
         \includegraphics[width=\textwidth]{data/cma_population_offspring/50x_split/equal_l50_o5/mean/PlotFile.pdf}
     \end{subfigure} 
-    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{subfigure}[b]{0.49\textwidth}
     	\centering
-    	\caption{Population size 50, Parent size 12, \\ Meanscore of EQUAL recombination}
+    	\caption{Population size 50, Parent size 12,\\EQUAL recombination}
         \includegraphics[width=\textwidth]{data/cma_population_offspring/50x_split/equal_l50_o12/mean/PlotFile.pdf}
     \end{subfigure}
-    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{subfigure}[b]{0.49\textwidth}
     	\centering
-    	\caption{Population size 50, Parent size 5, \\ Meanscore of LINEAR recombination}
+    	\caption{Population size 50, Parent size 5,\\LINEAR recombination}
         \includegraphics[width=\textwidth]{data/cma_population_offspring/50x_split/linear_l50_o5/mean/PlotFile.pdf}
     \end{subfigure}
-    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{subfigure}[b]{0.49\textwidth}
     	\centering
-    	\caption{Population size 50, Parent size 25, \\ Meanscore of LINEAR recombination}
+    	\caption{Population size 50, Parent size 25,\\LINEAR recombination}
         \includegraphics[width=\textwidth]{data/cma_population_offspring/50x_split/linear_l50_o25/mean/PlotFile.pdf}
     \end{subfigure}
-    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{subfigure}[b]{0.49\textwidth}
     	\centering
-    	\caption{Population size 50, Parent size 5, \\ Meanscore of SUPERLINEAR recombination}
+    	\caption{Population size 50, Parent size 5,\\SUPERLINEAR recombination}
         \includegraphics[width=\textwidth]{data/cma_population_offspring/50x_split/superlinear_l50_o5/mean/PlotFile.pdf}
     \end{subfigure}
-    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{subfigure}[b]{0.49\textwidth}
     	\centering
-    	\caption{Population size 50, Parent size 25, \\ Meanscore of SUPERLINEAR recombination}
+    	\caption{Population size 50, Parent size 25,\\SUPERLINEAR recombination}
         \includegraphics[width=\textwidth]{data/cma_population_offspring/50x_split/superlinear_l50_o25/mean/PlotFile.pdf}
     \end{subfigure}
     
@@ -637,34 +634,35 @@ $100$ & $50$ & LINEAR/SUPERLINEAR & 1/3/5/7/10
 
 \begin{figure}
     \centering
-    \begin{subfigure}[b]{0.45\textwidth}
+    \captionsetup[subfigure]{justification=centering}
+    \begin{subfigure}[b]{0.49\textwidth}
     	\centering
-        \caption{Population size 100, Parent size 10, \\Meanscore of EQUAL recombination}
+        \caption{Population size 100, Parent size 10,\\EQUAL recombination}
         \includegraphics[width=\textwidth]{data/cma_population_offspring/100x_split/equal_l100_o10/mean/PlotFile.pdf}
     \end{subfigure} 
-    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{subfigure}[b]{0.49\textwidth}
     	\centering
-    	\caption{Population size 100, Parent size 25, \\ Meanscore of EQUAL recombination}
+    	\caption{Population size 100, Parent size 25,\\EQUAL recombination}
         \includegraphics[width=\textwidth]{data/cma_population_offspring/100x_split/equal_l100_o25/mean/PlotFile.pdf}
     \end{subfigure}
-    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{subfigure}[b]{0.49\textwidth}
     	\centering
-    	\caption{Population size 100, Parent size 10, \\ Meanscore of LINEAR recombination}
+    	\caption{Population size 100, Parent size 10,\\LINEAR recombination}
         \includegraphics[width=\textwidth]{data/cma_population_offspring/100x_split/linear_l100_o10/mean/PlotFile.pdf}
     \end{subfigure}
-    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{subfigure}[b]{0.49\textwidth}
     	\centering
-    	\caption{Population size 100, Parent size 50, \\ Meanscore of LINEAR recombination}
+    	\caption{Population size 100, Parent size 50,\\LINEAR recombination}
         \includegraphics[width=\textwidth]{data/cma_population_offspring/100x_split/linear_l100_o50/mean/PlotFile.pdf}
     \end{subfigure}
-    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{subfigure}[b]{0.49\textwidth}
     	\centering
-    	\caption{Population size 100, Parent size 10, \\ Meanscore of SUPERLINEAR recombination}
+    	\caption{Population size 100, Parent size 10,\\SUPERLINEAR recombination}
         \includegraphics[width=\textwidth]{data/cma_population_offspring/100x_split/superlinear_l100_o10/mean/PlotFile.pdf}
     \end{subfigure}
-    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{subfigure}[b]{0.49\textwidth}
     	\centering
-    	\caption{Population size 100, Parent size 50, \\ Meanscore of SUPERLINEAR recombination}
+    	\caption{Population size 100, Parent size 50,\\SUPERLINEAR recombination}
         \includegraphics[width=\textwidth]{data/cma_population_offspring/100x_split/superlinear_l100_o50/mean/PlotFile.pdf}
     \end{subfigure}
     
