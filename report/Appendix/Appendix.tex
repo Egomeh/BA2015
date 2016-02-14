@@ -255,7 +255,7 @@ Number of Evaluations & 80000\\
 Population size & See table \ref{GamesPerAgentCE}\\
 Parent size & See table \ref{GamesPerAgentCE}\\
 Games per Agent & See table \ref{GamesPerAgentCE}\\
-Tetris Type & Normal\\
+Tetris Type & Hard\\
 \hline
 Sigma & 100\\
 Noise Type & Constant\\
@@ -289,6 +289,92 @@ $200$ & $50\%$ & 1/3/5/7/10
 \end{tabular}
 \caption{Games per agent CE experiment setup\label{GamesPerAgentCE}}
 \end{table}
+
+\clearpage
+
+\begin{figure}
+	\centering
+	\captionsetup[subfigure]{justification=centering}
+    \begin{subfigure}[b]{0.49\textwidth}
+    	\caption{Population size 12, Parent size 1}
+        \includegraphics[width=\textwidth]{data/ce_population_offspring/12x_split/constant_l12_o1/mean/PlotFile.pdf}
+    \end{subfigure} 
+    \begin{subfigure}[b]{0.49\textwidth}
+    	\caption{Population size 12, Parent size 3}
+        \includegraphics[width=\textwidth]{data/ce_population_offspring/12x_split/constant_l12_o3/mean/PlotFile.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.49\textwidth}
+    	\caption{Population size 12, Parent size 6}
+        \includegraphics[width=\textwidth]{data/ce_population_offspring/12x_split/constant_l12_o6/mean/PlotFile.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.49\textwidth}
+    	\caption{Population size 22, Parent size 2}
+        \includegraphics[width=\textwidth]{data/ce_population_offspring/22x_split/constant_l22_o2/mean/PlotFile.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.49\textwidth}
+    	\caption{Population size 22, Parent size 5}
+        \includegraphics[width=\textwidth]{data/ce_population_offspring/22x_split/constant_l22_o5/mean/PlotFile.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.49\textwidth}
+    	\caption{Population size 22, Parent size 11}
+        \includegraphics[width=\textwidth]{data/ce_population_offspring/22x_split/constant_l22_o11/mean/PlotFile.pdf}
+    \end{subfigure}
+    
+    \caption{Mean results for population size 12 and 22 with parent sizes $10 \% , 25 \%$ and $50 \%$}
+\end{figure}
+
+\clearpage
+
+\begin{figure}
+	\centering
+	\captionsetup[subfigure]{justification=centering}
+    \begin{subfigure}[b]{0.49\textwidth}
+    	\caption{Population size 50, Parent size 5}
+        \includegraphics[width=\textwidth]{data/ce_population_offspring/50x_split/constant_l50_o5/mean/PlotFile.pdf}
+    \end{subfigure} 
+    \begin{subfigure}[b]{0.49\textwidth}
+    	\caption{Population size 50, Parent size 12}
+        \includegraphics[width=\textwidth]{data/ce_population_offspring/50x_split/constant_l50_o12/mean/PlotFile.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.49\textwidth}
+    	\caption{Population size 50, Parent size 25}
+        \includegraphics[width=\textwidth]{data/ce_population_offspring/50x_split/constant_l50_o25/mean/PlotFile.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.49\textwidth}
+    	\caption{Population size 100, Parent size 10}
+        \includegraphics[width=\textwidth]{data/ce_population_offspring/100x_split/constant_l100_o10/mean/PlotFile.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.49\textwidth}
+    	\caption{Population size 100, Parent size 25}
+        \includegraphics[width=\textwidth]{data/ce_population_offspring/100x_split/constant_l100_o25/mean/PlotFile.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.49\textwidth}
+    	\caption{Population size 100, Parent size 50}
+        \includegraphics[width=\textwidth]{data/ce_population_offspring/100x_split/constant_l100_o50/mean/PlotFile.pdf}
+    \end{subfigure}
+    
+    \caption{Mean results for population size 50 and 100 with parent sizes $10 \% , 25 \%$ and $50 \%$}
+\end{figure}
+
+\clearpage
+
+\begin{figure}
+	\captionsetup[subfigure]{justification=centering}
+    \begin{subfigure}[b]{0.49\textwidth}
+    	\caption{Population size 200, Parent size 20}
+        \includegraphics[width=\textwidth]{data/ce_population_offspring/200x_split/constant_l200_o20/mean/PlotFile.pdf}
+    \end{subfigure} 
+    \begin{subfigure}[b]{0.49\textwidth}
+    	\caption{Population size 200, Parent size 50}
+        \includegraphics[width=\textwidth]{data/ce_population_offspring/200x_split/constant_l200_o50/mean/PlotFile.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.49\textwidth}
+    	\caption{Population size 200, Parent size 100}
+        \includegraphics[width=\textwidth]{data/ce_population_offspring/200x_split/constant_l200_o100/mean/PlotFile.pdf}
+    \end{subfigure}
+    
+    \caption{Mean results for population size 200 with parent sizes $10 \% , 25 \%$ and $50 \%$}
+\end{figure}
 
 \clearpage
 
@@ -328,11 +414,11 @@ $22$ & $2$ & 3 & $1442.883$ & $1276.870$ & $1437.550$ & $1541.938$\\
 $22$ & $2$ & 5 & $1668.974$ & $1352.250$ & $1579.885$ & $1849.210$\\
 $22$ & $2$ & 7 & $1843.644$ & $1575.732$ & $1860.815$ & $2112.678$\\
 $22$ & $2$ & 10 & $1732.664$ & $1475.000$ & $1754.785$ & $2024.980$\\
-$22$ & $5$ & 1 & - & - & - & -\\
-$22$ & $5$ & 3 & - & - & - & -\\
-$22$ & $5$ & 5 & - & - & - & -\\
-$22$ & $5$ & 7 & - & - & - & -\\
-$22$ & $5$ & 10 & - & - & - & -\\
+$22$ & $5$ & 1 & $1485.692$ & $1202.661$ & $1561.635$ & $1661.268$\\
+$22$ & $5$ & 3 & $2250.239$ & $2081.798$ & $2210.850$ & $2435.021$\\
+$22$ & $5$ & 5 & $2371.793$ & $2013.168$ & $2412.815$ & $2708.931$\\
+$22$ & $5$ & 7 & $2351.371$ & $1976.141$ & $2274.180$ & $2586.641$\\
+$22$ & $5$ & 10 & $2266.329$ & $2010.798$ & $2175.850$ & $2365.220$\\
 $22$ & $11$ & 1 & $1415.511$ & $1011.101$ & $1327.030$ & $1600.599$\\
 $22$ & $11$ & 3 & $2168.012$ & $1966.552$ & $2119.100$ & $2456.230$\\
 $22$ & $11$ & 5 & $2245.854$ & $2017.992$ & $2222.900$ & $2424.450$\\
@@ -354,11 +440,11 @@ $50$ & $5$ & 3 & $2524.279$ & $2195.189$ & $2501.985$ & $2848.859$\\
 $50$ & $5$ & 5 & $2418.023$ & $2283.708$ & $2388.770$ & $2639.078$\\
 $50$ & $5$ & 7 & $2433.615$ & $2145.718$ & $2356.800$ & $2734.611$\\
 $50$ & $5$ & 10 & $2341.267$ & $2104.480$ & $2252.570$ & $2418.809$\\
-$50$ & $12$ & 1 & - & - & - & -\\
-$50$ & $12$ & 3 & - & - & - & -\\
-$50$ & $12$ & 5 & - & - & - & -\\
-$50$ & $12$ & 7 & - & - & - & -\\
-$50$ & $12$ & 10 & - & - & - & -\\
+$50$ & $12$ & 1 & $2563.539$ & $2283.399$ & $2502.880$ & $2830.192$\\
+$50$ & $12$ & 3 & $2702.266$ & $2322.849$ & $2565.365$ & $2841.160$\\
+$50$ & $12$ & 5 & $2749.991$ & $2605.171$ & $2702.400$ & $2835.960$\\
+$50$ & $12$ & 7 & $2527.792$ & $2287.091$ & $2476.965$ & $2758.970$\\
+$50$ & $12$ & 10 & $2687.438$ & $2342.811$ & $2577.285$ & $2838.771$\\
 $50$ & $25$ & 1 & $2396.866$ & $2115.161$ & $2357.980$ & $2664.099$\\
 $50$ & $25$ & 3 & $2572.860$ & $2308.748$ & $2615.185$ & $2861.858$\\
 $50$ & $25$ & 5 & $2485.564$ & $2226.889$ & $2419.080$ & $2747.609$\\
@@ -381,11 +467,11 @@ $100$ & $10$ & 3 & $2677.629$ & $2375.419$ & $2770.615$ & $3004.819$\\
 $100$ & $10$ & 5 & $2690.802$ & $2360.800$ & $2646.920$ & $2946.831$\\
 $100$ & $10$ & 7 & $2678.393$ & $2442.688$ & $2630.120$ & $2877.830$\\
 $100$ & $10$ & 10 & $2880.385$ & $2636.640$ & $2828.880$ & $3108.429$\\
-$100$ & $25$ & 1 & - & - & - & -\\
-$100$ & $25$ & 3 & - & - & - & -\\
-$100$ & $25$ & 5 & - & - & - & -\\
-$100$ & $25$ & 7 & - & - & - & -\\
-$100$ & $25$ & 10 & - & - & - & -\\
+$100$ & $25$ & 1 & $2702.678$ & $2443.269$ & $2692.620$ & $2973.202$\\
+$100$ & $25$ & 3 & $2776.560$ & $2397.691$ & $2742.950$ & $3027.541$\\
+$100$ & $25$ & 5 & $2666.479$ & $2469.161$ & $2673.770$ & $2917.939$\\
+$100$ & $25$ & 7 & $2555.354$ & $2187.871$ & $2461.220$ & $2866.030$\\
+$100$ & $25$ & 10 & $2823.755$ & $2540.171$ & $2729.280$ & $2933.510$\\
 $100$ & $50$ & 1 & $2409.168$ & $2206.828$ & $2299.435$ & $2534.019$\\
 $100$ & $50$ & 3 & $2622.402$ & $2318.410$ & $2714.500$ & $2905.521$\\
 $100$ & $50$ & 5 & $2351.742$ & $2213.480$ & $2410.500$ & $2532.500$\\
@@ -407,11 +493,11 @@ $200$ & $20$ & 3 & $2735.539$ & $2493.400$ & $2751.215$ & $2849.329$\\
 $200$ & $20$ & 5 & $2756.202$ & $2609.579$ & $2728.885$ & $2826.881$\\
 $200$ & $20$ & 7 & $2797.015$ & $2515.971$ & $2722.150$ & $3036.839$\\
 $200$ & $20$ & 10 & $2531.674$ & $2186.629$ & $2652.365$ & $2897.672$\\
-$200$ & $50$ & 1 & - & - & - & -\\
-$200$ & $50$ & 3 & - & - & - & -\\
-$200$ & $50$ & 5 & - & - & - & -\\
-$200$ & $50$ & 7 & - & - & - & -\\
-$200$ & $50$ & 10 & - & - & - & -\\
+$200$ & $50$ & 1 & $2950.767$ & $2564.118$ & $2841.065$ & $3377.189$\\
+$200$ & $50$ & 3 & $2677.694$ & $2414.600$ & $2559.765$ & $2803.289$\\
+$200$ & $50$ & 5 & $2627.598$ & $2296.710$ & $2641.415$ & $2999.199$\\
+$200$ & $50$ & 7 & $2140.359$ & $1884.261$ & $2173.235$ & $2418.772$\\
+$200$ & $50$ & 10 & $1245.519$ & $625.930$ & $1009.132$ & $1644.630$\\
 $200$ & $100$ & 1 & $2589.020$ & $2391.080$ & $2594.285$ & $2798.470$\\
 $200$ & $100$ & 3 & $2164.732$ & $2018.790$ & $2136.900$ & $2335.079$\\
 $200$ & $100$ & 5 & $1235.709$ & $837.947$ & $1195.730$ & $1478.081$\\
