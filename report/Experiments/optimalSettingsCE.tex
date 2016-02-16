@@ -86,15 +86,20 @@ testing.
 \begin{tabular}{c c c}
 Population Size & Parent size & Games per Agent\\
 \hline
-$10$ & $10\%$ & 1/3/5/7/10\\
-$10$ & $50\%$ & 1/3/5/7/10\\
+$12$ & $10\%$ & 1/3/5/7/10\\
+$12$ & $25\%$ & 1/3/5/7/10\\
+$12$ & $50\%$ & 1/3/5/7/10\\
 $22$ & $10\%$ & 1/3/5/7/10\\
+$22$ & $25\%$ & 1/3/5/7/10\\
 $22$ & $50\%$ & 1/3/5/7/10\\
 $50$ & $10\%$ & 1/3/5/7/10\\
+$50$ & $25\%$ & 1/3/5/7/10\\
 $50$ & $50\%$ & 1/3/5/7/10\\
 $100$ & $10\%$  & 1/3/5/7/10\\
+$100$ & $25\%$  & 1/3/5/7/10\\
 $100$ & $50\%$ & 1/3/5/7/10\\
 $200$ & $10\%$ & 1/3/5/7/10\\
+$200$ & $25\%$ & 1/3/5/7/10\\
 $200$ & $50\%$ & 1/3/5/7/10
 \end{tabular}
 \caption{Games per agent CE experiment setup\label{GamesPerAgentCE}}
@@ -104,7 +109,39 @@ The experiments includes different games per agent of $\{1,3,5,7,10\}$. By incre
 played per agent, we are increasing the evaluation cost by a multiplication factor in exchange for a more 
 accurate evaluation of each agent. This is to avoid bad agents having a lucky game with an better than 
 average game, or the opposite, an good agent having a lesser than average game. However, we wish to find 
-the best performing configuration with the lowest cost and maximum benefit.
+the best performing configuration with the lowest cost and maximum benefit.\\
+\\
+\textbf{Results}\\
+The total number of configuration experiments is 75, with 30 individual experiments each,
+resulting in a total of 2.250 individual experiment runs. These results are all included in 
+appendix \ref{appendixCEPopulationParent}.\\
+Below in table \ref{CEBestConfigTable} and figure \ref{CEBestConfigPlot}, the five best
+best resulting configurations are depicted. We chose these by first selecting the best 
+configuration of each Population-Parent size. This results in three
+configurations for each Population-Parent size, which we then compare to determine the best
+configuration for each Population-Parent size. Which is depicted in table \ref{CEBestConfigTable} and figure \ref{CEBestConfigPlot}.
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{c c c r r r r}
+Population & Parent & Games per Agent & mean & Q1 & Q2 & Q3\\
+\hline
+$12$ & $6$ & 10 & $2109.837$ & $1802.968$ & $2021.165$ & $2276.652$\\
+$22$ & $5$ & 5 & $2371.793$ & $2013.168$ & $2412.815$ & $2708.931$\\
+$50$ & $12$ & 5 & $2749.991$ & $2605.171$ & $2702.400$ & $2835.960$\\
+$100$ & $25$ & 3 & $2776.560$ & $2397.691$ & $2742.950$ & $3027.541$\\
+$200$ & $50$ & 1 & $2950.767$ & $2564.118$ & $2841.065$ & $3377.189$\\
+\end{tabular}
+\caption{Best configurations of all population sizes - Cross Entropy \label{CEBestConfigTable}}
+\end{table}
 
-\comment{- Conduct experiments, show results, make conclusion}\\
-\comment{- Make sure to mention that we use Hard Tetris for this experiment}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=1]{data/ce_population_offspring/bestofall_population/PlotFile.pdf}
+\caption{Best configurations of all population sizes - Cross Entropy \label{CEBestConfigPlot}}
+\end{figure}
+
+From table \ref{CEBestConfigTable} and figure \ref{CEBestConfigPlot}, we can see that population size 50 with parent size 12 and 5 games per agent, population size 100 with parent size 25 and 3 games per agent, and, population size 200 with parent size 50 and 1 game per agent, performs almost identically.\\\\
+
+\textbf{Discussion and analysis}
+\comment{pick best of three configurations and determine why}

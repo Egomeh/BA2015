@@ -1,0 +1,37 @@
+\documentclass[landscape,border=0pt]{standalone}
+\usepackage{graphicx,color,tikz,pgfplots}
+
+\begin{document}
+
+\begin{tabular}{@{}l@{}}
+\begin{tikzpicture}
+\begin{axis}[%
+	xmin=0,
+	xmax=80000,
+	ymin=0,
+	ymax=10000,
+    xlabel={Agents evaluated},
+    ylabel={Mean Score},
+    ymode=log,
+    log basis y={10},
+    width=16cm,
+    height=12cm,
+    legend pos=south east,
+    %title={Meanscore of constant noise, population size 12 and parent size 6}
+    ]
+\addplot[color=blue,mark=none, very thin, each nth point=1]  
+ table [x=agents, y=meanScore, col sep=comma, ] {mean_constantnoise_g10_l12_o1.txt};
+ \addlegendentry{Parent size 1, Games per agent 10}
+\addplot[color=red,mark=none, very thin, each nth point=1]  
+ table [x=agents, y=meanScore, col sep=comma, ] {mean_constantnoise_g7_l12_o3.txt};
+ \addlegendentry{Parent size 3, Games per agent 7}
+\addplot[color=green,mark=none, very thin, each nth point=1]  
+ table [x=agents, y=meanScore, col sep=comma, ] {mean_constantnoise_g10_l12_o6.txt};
+ \addlegendentry{Parent size 6, Games per agent 10}
+\end{axis}
+\end{tikzpicture}
+\end{tabular}
+
+
+
+\end{document}
