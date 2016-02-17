@@ -42,6 +42,27 @@ It's important to note that we are not going to conduct comparison experiments w
 featuresets in the same experiment, since the algorithms needs to be on equal terms.
 
 \subsubsection{Game complexity \label{HardTetris}}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{c c c r r r r}
+Tetris Type & Optimizer & mean & Q1 & Q2 & Q3\\
+\hline
+Hard & Cross Entropy & $1633.607$ & $1357.170$ & $1606.565$ & $1938.71$\\
+Normal & Cross Entropy & $100059.463$ & $79357.440$ & $105999.500$ & $111047.500$\\
+Hard & CMA & $449.352$ & $201.850$ & $300.300$ & $529.350$\\
+Normal & CMA & $49760.161$ & $42528.740$ & $49915.700$ & $67764.729$\\
+\end{tabular}
+\caption{Experiment testing game Normal Tetris against Hard Tetris}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=1]{data/complexity/mean/PlotFile.pdf}
+\caption{Experiment testing game Normal Tetris against Hard Tetris}
+\end{figure}
+
 \comment{- Write stuff aboutGame complexity and the difference it can make}\\
 
 \comment{- The stuff about hard tetris in the comparison section should be here?

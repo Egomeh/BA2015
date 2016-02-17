@@ -5,7 +5,6 @@ Similar for all experiments is the 30 games played with the new mean of each gen
 The tables are formatted 
 \begin{table}[h]
 \centering
-\caption{Overview of the two table formats}
 \begin{tabular}{l r}
 Optimizer & CMA\\
 Number of Evaluations & -\\
@@ -33,6 +32,7 @@ Sigma & -\\
 Noise Type & -\\
 Noise & -
 \end{tabular}
+\caption{Overview of the two table formats}
 \end{table}
 
 \clearpage
@@ -42,7 +42,6 @@ Experiments to test if game complexity can be used for tuning the CMA and CE con
 
 \begin{table}[h]
 \centering
-\caption{Cross Entropy settings for testing game complexity}
 \begin{tabular}{l r}
 Optimizer & Cross Entropy\\
 Number of Evaluations & 8000\\
@@ -68,11 +67,11 @@ Sigma & 100\\
 Noise Type & No noise\\
 Noise & -
 \end{tabular}
+\caption{Cross Entropy settings for testing game complexity}
 \end{table}
 
 \begin{table}[h]
 \centering
-\caption{CMA settings for testing game complexity}
 \begin{tabular}{l r}
 Optimizer & CMA\\
 Number of Evaluations & 8000\\
@@ -98,8 +97,31 @@ Tetris Type & Normal\\
 Recombination Type & Superlinear\\
 Initial Sigma & 1
 \end{tabular}
+\caption{CMA settings for testing game complexity}
 \end{table}
 
+\clearpage
+
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{c c c r r r r}
+Tetris Type & Optimizer & mean & Q1 & Q2 & Q3\\
+\hline
+Hard & Cross Entropy & $1633.607$ & $1357.170$ & $1606.565$ & $1938.71$\\
+Normal & Cross Entropy & $100059.463$ & $79357.440$ & $105999.500$ & $111047.500$\\
+Hard & CMA & $449.352$ & $201.850$ & $300.300$ & $529.350$\\
+Normal & CMA & $49760.161$ & $42528.740$ & $49915.700$ & $67764.729$\\
+\end{tabular}
+\caption{Experiment testing game Normal Tetris against Hard Tetris}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=1]{data/complexity/mean/PlotFile.pdf}
+\caption{Experiment testing game Normal Tetris against Hard Tetris}
+\end{figure}
 
 
 \clearpage
@@ -167,7 +189,6 @@ In Cross Entropy for the Tetris problem, 10 \% Parent selection is used as stand
 The general testing parameters are as follows
 \begin{table}[h]
 \centering
-\caption{General setup for Population/Parent size}
 \begin{tabular}{l r}
 Optimizer & Cross Entropy\\
 Number of Evaluations & 8000\\
@@ -180,6 +201,7 @@ Sigma & 100\\
 Noise Type & Constant\\
 Noise & 4
 \end{tabular}
+\caption{General setup for Population/Parent size}
 \end{table}
 
 with the following population/Parent size
