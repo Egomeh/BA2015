@@ -37,7 +37,7 @@ Noise & -
 
 \clearpage
 
-\subsection{Game Complexity}
+\subsection{Game Complexity \label{AppendixGameComplexity}}
 Experiments to test if game complexity can be used for tuning the CMA and CE configurations.
 
 \begin{table}[h]
@@ -123,6 +123,59 @@ Normal & CMA & $49760.161$ & $42528.740$ & $49915.700$ & $67764.729$\\
 \caption{Experiment testing game Normal Tetris against Hard Tetris}
 \end{figure}
 
+\clearpage
+
+\subsection{Comparison - Comparison of featuresets}
+Experiments to test Bertsekas and Dellacherie featuresets in regards to achieved score. This will tell if a different featureset affects the algorithms performance. 
+
+\begin{table}[h]
+\centering
+\small
+\caption{Shark stock CMA and Verified Cross Entropy}
+\begin{tabular}{l r}
+Optimizer & CMA\\
+Number of Evaluations & 8000\\
+Number of Learning Games & 30\\
+Population size& 13\\
+Parent size & 6\\
+Games per Agent & 1\\
+Tetris Type & Hard\\
+\hline
+Recombination Type & Superlinear\\
+Initial Sigma & (what is stock)\\
+\quad & \quad
+\end{tabular}
+\quad
+\begin{tabular}{l r}
+Optimizer & Cross Entropy\\
+Number of Evaluations & 8000\\
+Number of Learning Games & 30\\
+Population size & 100\\
+Parent size & 10\\
+Games per Agent & 1\\
+Tetris Type & Hard\\
+\hline
+Sigma & 100\\
+Noise Type & Constant\\
+Noise & 4
+\end{tabular}
+\end{table}
+
+Used on the bertsekas and Dellacherie featuresets
+
+\begin{figure}[H]
+\includegraphics[scale=1]{plots/plotBertsekasCmaVsCEHardTetris}
+\caption{Comparison between CMA-ES and Cross Entropy 
+using hard Tetris and the Bertsekas featureset 
+\label{fig:featuresetCompareBertsekas}}
+\end{figure}
+
+\begin{figure}[H]
+\includegraphics[scale=1]{plots/plotDellCmaVsCEHardTetris}
+\caption{Comparison between CMA-ES and Cross Entropy 
+using hard Tetris and the Dellacherie featureset
+\label{fig:featuresetCompareDellacherie}}
+\end{figure}
 
 \clearpage
 
@@ -1353,45 +1406,6 @@ INSERT PLOTS HERE.
 
 \clearpage
 
-\subsection{Comparison - Comparison of featuresets}
-Experiments to test Bertsekas and Dellacherie featuresets in regards to achieved score. This will tell if a different featureset affects the algorithms performance. If the behaviour is the same, then the Tetris complexity problem
-
-\begin{table}[h]
-\centering
-\small
-\caption{Shark stock CMA and Verified Cross Entropy}
-\begin{tabular}{l r}
-Optimizer & CMA\\
-Number of Evaluations & 8000\\
-Number of Learning Games & 30\\
-Population size& 13\\
-Parent size & 6\\
-Games per Agent & 1\\
-Tetris Type & Hard\\
-\hline
-Recombination Type & Superlinear\\
-Initial Sigma & (what is stock)\\
-\quad & \quad
-\end{tabular}
-\quad
-\begin{tabular}{l r}
-Optimizer & Cross Entropy\\
-Number of Evaluations & 8000\\
-Number of Learning Games & 30\\
-Population size & 100\\
-Parent size & 10\\
-Games per Agent & 1\\
-Tetris Type & Hard\\
-\hline
-Sigma & 100\\
-Noise Type & Constant\\
-Noise & 4
-\end{tabular}
-\end{table}
-
-Used on the bertsekas and Dellacherie featuresets
-
-INSERT PLOTS HERE.
 
 \input{Appendix/appendixInitialSigma} - \comment{Insert in above section}
 
