@@ -116,9 +116,8 @@ $\sigma_0$ & mean & Q1 & Q2 & Q3\\
 \end{tabular}
 \caption{Results of CMA-ES with adjusted initial step-size \label{CMAInitialSigmaConfigTest}}
 \end{figure}
-
-\comment{Add the data-graphs to appendix}
-
+The full graphs of the results from this experiment can be seen in 
+appendix \ref{appendixCMAInitialSigma}.\\
 For the initial experiments using CMA-ES, 
 the only adjusted parameter is the initial 
 step-size $\sigma_0$. The configurations of step-sizes were 
@@ -142,7 +141,8 @@ confidence less then $5\%$ ($p < 0.05$), we cannot firmly reject the null hypoth
 and cannot conclude any significant difference in the population. From the experiments
 with the initial sigma setting, the immediate choice of $\sigma_0$ would be 0.5.
 The Wilcoxon test is applied to the data from the runs with $\sigma_0 \in \{0.5, 1\}$
-using R\footnote{\url{https://cran.r-project.org/}}.
+using R\footnote{\url{https://cran.r-project.org/}}. The data supplied
+to the wilcoxon test consists of the the mean scores from the last generation.
 This test gives $p=0.5619$, which means that we cannot reject that the two 
 populations differ, and the initial sigma is considered not to play a significant 
 for the CMA-ES applied to Tetris.
@@ -189,16 +189,26 @@ the sampling can be written as
 \individual &\sim \mean +  B \mathcal{N}\left(0, \sigma^2 D^2 \right)
 \end{align*}
 Where, with $l=2$, the lowest entry in the diagonal matrix $\sigma^2 D^2$
-is $4$.
+is $4$.\\
+\\
+To see if this setting makes sense, the CMA-ES was run with lower bounds as 
+$l \in \{0.5, 2.0, 4.0\}$ with the results shown in figure \ref{CMALowerBoundConfigTest}.
 
+\begin{figure}[H]
+\centering
+\begin{tabular}{r | r r r r r}
+$l$ & mean & Q1 & Q2 & Q3\\
+\hline
+0.5 & 42800.7 & 6780.8  & 36863.0 & 74722.5\\
+2.0 & 80733.4 & 62357.4 & 84349.0 & 108007.5\\
+4.0 & 61497.2 & 55621.7 & 64940.1 & 81991.6\\
+\end{tabular}
+\caption{Results of CMA-ES lower bounds \label{CMALowerBoundConfigTest}}
+\end{figure}
+The raw graphs for this experiment is present in appendix \ref{appendixCMALowerBound}.\\
+Evidently, the setting of a lower bound $l=2.0$ appears as the preferable choice, and this 
+setting adopted across all further experiments.
 
-
-\maybe{From this, it's assumed that the initial step-size, at least in this range,
-does not have a significant impact, and the best of these runs, $\sigma_0$ is chosen
-for first comparison.}
-\comment{- Write stuff about our practical experiences with lower bound and add the graphs to appendix}\\
-\comment{- Make sure to fully conclude that the lower bound doesn't matter and therefore we don't
-use this paramater in the upcoming experiments}
 
 \subsubsection{Experiment for finding the optimal settings}
 In this in section we are going to conduct a wide variety of experiments to determine
@@ -254,7 +264,7 @@ configuration for each Population-Parent size, regardless of recombination type.
 \begin{table}[H]
 \centering
 \small
-\begin{tabular}{c c c c r r r r}
+\begin{tabular}{r r l r r r r r}
 Population & Parent & Recombination & Games per Agent & Mean & Q1 & Q2 & Q3\\
 \hline
 $12$ & $6$  & SUPERLINEAR & 10 & $2472.293$ & $2194.049$ & $2430.780$ & $2709.040$\\

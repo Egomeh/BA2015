@@ -1,17 +1,47 @@
 \subsection{Previous work}
-\comment{Insert Bertcekas and Dellacherie featureset tables somewhere - need bertsekas still?}
 Over the time, numerous researchers has tried different feature 
 sets and applied various optimizers to find the best 
-possible Tetris controllers. The features used are typically
+possible Tetris controllers. Researches in the field
+of reinforcement learning have approached the task of learning Tetris
+in various ways. Some have implemented exact versions of the original game
+where the artificial Tetris player will have to interact with the 
+game much like a human player. In these games the state of the board is not limited
+to just the board configuration and the current piece, but also where in the 
+board the piece is located. Hence, these controllers does not model actions 
+as locations to drop the piece, but rather 'button presses' that controls the
+fall of the piece. Yet, from the literature we have read, the most commonly applied 
+type of controller is the one used in the MDPTetris platform. As mentioned earlier,
+to create an efficient controller one can adjust two settings, namely the featureset 
+and the associated weights. 
+The specifics of how to tune the weighting is a topic that is 
+explored along with finding the feature sets themselves. A common 
+feature set, the Dellacherie feature set (see figure \ref{table:dellfeat}),
+was originally tuned by hand with trial and error approach with a surprisingly 
+good result. Yet, the most common approach is to apply some optimization 
+algorithm to adjust the weighting.
+The features used are typically
 ones that attempt to mimic the board conditions that would
 normally catch the attention of a human player, such as
 how high the overall pile of pieces is and how many holes 
 the board has. In \citep{scherrer2009:b} table 1, a table 
 presents some feature sets used throughout various publications
-on the subject. In later works, many authors have had success
+on the subject. The feature sets applied in this thesis are 
+Dellacherie and the Bertsekas feature sets 
+(see figure \ref{table:dellfeat} and \ref{table:bertfeat}) due 
+to their recurring usage across various articles.
+Many authors have had success
 with applying evolutionary stochastic search methods for tuning 
 the weights of the feature sets towards
-efficient controllers. For the purpose of this thesis,
+efficient controllers. However, the goal of most research 
+is to outperform existing controllers and push the boundaries
+of performance when learning Tetris. This means that the objective of
+these researchers is often to craft feature sets that perceives the 
+board in a way that allows the agent to make the best possible decisions.
+Thus the focus in most works is combined on finding good feature sets and 
+finding good ways to optimize the weights of the set. In this thesis,
+our goal is not to find a controller that outperforms any existing one,
+but rather to investigate the learning properties of the optimization algorithms.
+For this purpose
 we are in particular addressing the
 Cross-Entropy method described in detail in \citep{cetut2014} and the
 Covariance Matrix Adaption Evolution Strategy (CMA-ES), described 
@@ -24,7 +54,7 @@ is the one described in \citep{szita:06} as the "Noisy Cross Entropy Method".\\
 \hline
 \textbf{Feature} & \textbf{Description}\\
 \hline
-Landing height & The height of the piece when it lands\\
+Landing height & The height of the last piece when it was placed\\
 \hline
 Eroded piece cells & Number of rows cleared in the last move
 times the number of bricks cleared from the last move\\
@@ -40,14 +70,31 @@ the board wells.\\
 \hline
 \end{tabular}
 \end{center}
-\caption{features of the Dellacherie controller \label{table:dellfeat}}
+\caption{features of the Dellacherie featureset \label{table:dellfeat}}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\begin{tabular}{| l | p{8cm} |}
+\hline
+\textbf{Feature} & \textbf{Description}\\
+\hline
+Max height & Height height of the highest occupied block\\
+\hline
+Column height & Height of each column\\
+\hline
+Height difference & The height difference between columns\\
+\hline
+\end{tabular}
+\end{center}
+\caption{features of the Dellacherie featureset \label{table:bertfeat}}
 \end{figure}
 
 
 Currently, many researchers have proposed numerous 
 feature sets and multiple 
 optimization methods have been explored. 
-A controller often referred to is the Dellacherie controller 
+The Dellacherie controller is very widely used across many resources
 \citep{fahey}. This controller was hand-tuned by trial and error,
 and did originally, on a regular non-simplified Tetris game, achieve an average of
 660 000 lines. The same feature set (see figure \ref{table:dellfeat}) is 
@@ -68,13 +115,3 @@ where we want to find a strategy which maximizes
 the average score. Most researchers utilize three 
 general approaches to create policies.
 
-\begin{itemize}
-\item Handwritten controllers
-\item Reinforcement learning approaches
-\item Optimization algorithms
-\end{itemize}
-
-But as seen in \citep{scherrer2009}, 
-a combination of the methods can yield good results, 
-where Thiery and Scherrer employed Dellacherie's 
-handwritten policy and used CE to optimize it.
