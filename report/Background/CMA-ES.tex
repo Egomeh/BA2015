@@ -305,7 +305,10 @@ $z_{k} \sim \mathcal{N}(0, I)$ & $y_{k} \sim B Dz_{k}$ & $x_{k} \sim m + \sigma 
 \end{center}
 \caption{The steps of the sampling process \label{fig:sampleing}}
 \end{figure}
-
+In the middle step, the CMA-ES algorithm differs in particular from Cross Entropy
+as the rotation matrix $B$ is applied and rotates the distribution shape. 
+In opposition to this, the Cross Entropy algorithm distribution is aligned with
+the coordinate system axises.
 
 \textbf{Evaluate each vector using $\fitnessFunction$ and recombine}\\
 As each vector is evaluated, they are ranked such that
@@ -381,6 +384,8 @@ evolution path, the covariance matrix can take a shape that
 makes samples more likely to appear in the direction of successive 
 movements of the mean.
 The evolution path for generation $g+1$ is updated as
+
+
 
 \begin{align}
 p_{c}^{(g+1)} &= \underbrace{\left( 1 - c_{c} \right) 
@@ -493,8 +498,6 @@ sampling the vectors in (\ref{eq:finalSample}) where it expands the variance
 of the distribution. When moving the mean in (\ref{eq:movemean}), the weighted 
 selection mass \textbf{scaled} with the step-size is added to the mean.
 
-\comment{PUT fig here}
-
 First we consider the evolution path of the step-size $p_\sigma$ which is
 updated a s follows.
 
@@ -571,8 +574,54 @@ In case \textbf{a} the steps are correlated and the idea is that a larger step-s
 would cause the mean to move towards a desired location faster. In case \textbf{b},
 the path is short and/or anti correlated. This means that the algorithm would benefit from
 shorter steps, and therefore decrease the step-size. In the final case \textbf{c}, the 
-steps appear perpendicular and the step-size appears reasonable.\\
-\\
+steps appear perpendicular and the step-size appears reasonable.
+\begin{figure}[H]
+\begin{center}
+\begin{tabular}{c c c}
+\begin{tikzpicture}[scale=0.5]
+\draw (0,0) rectangle (8,8);
+
+\draw[-{Triangle[angle=45:5pt 5]}]  (2.1179,1.9813) --  (3.1724,2.5788);
+\draw[-{Triangle[angle=45:5pt 5]}]   (3.1724,2.5788) -- (4.2972,2.4734) ;
+\draw[-{Triangle[angle=45:5pt 5]}] (4.2972,2.4734)  --  (5.0705,3.1061);
+\draw[-{Triangle[angle=45:5pt 5]}] (5.0705,3.1061) -- (5.0705,4.266)  ;
+\draw[-{Triangle[angle=45:5pt 5]}](5.0705,4.266)   -- (6.1601,4.969);
+\draw[-{Triangle[angle=45:5pt 5]}] (6.1601,4.969) --  (5.5626,7.1131);
+
+\draw[-{Triangle[angle=45:5pt 5, open]}]  (2.1179,1.9813) ->  (5.5626,7.1131);
+\end{tikzpicture} &
+\begin{tikzpicture}[scale=0.5]
+\draw (0,0) rectangle (8,8);
+
+\draw[-{Triangle[angle=45:5pt 5]}] (2.1179,1.9813) -- (2.6803,3.9496);
+\draw[-{Triangle[angle=45:5pt 5]}] (2.6803,3.9496) -- (1.0986,3.9145);
+\draw[-{Triangle[angle=45:5pt 5]}] (1.0986,3.9145) -- (0.7119,2.0867);
+\draw[-{Triangle[angle=45:5pt 5]}] (0.7119,2.0867) -- (2.3288,0.7511);
+\draw[-{Triangle[angle=45:5pt 5]}] (2.3288,0.7511) -- (3.8402,1.8758);
+\draw[-{Triangle[angle=45:5pt 5]}] (3.8402,1.8758) -- (3.2427,2.7194);
+
+\draw[-{Triangle[angle=45:5pt 5, open]}] (2.1179,1.9813)-> (3.2427,2.7194);
+\end{tikzpicture} &
+\begin{tikzpicture}[scale=0.5]
+\draw (0,0) rectangle (8,8);
+
+\draw[-{Triangle[angle=45:5pt 5]}] (2.1179,1.9813) -- (3.559,2.2976) ;
+\draw[-{Triangle[angle=45:5pt 5]}]  (3.559,2.2976)  --  (2.6452,3.6684);
+\draw[-{Triangle[angle=45:5pt 5]}]  (2.6452,3.6684) --  (4.6487,3.2115);
+\draw[-{Triangle[angle=45:5pt 5]}]  (4.6487,3.2115) --  (5.914,4.266) ;
+\draw[-{Triangle[angle=45:5pt 5]}]  (5.914,4.266)  -- (6.0195,5.918) ;
+\draw[-{Triangle[angle=45:5pt 5]}] (6.0195,5.918)  --  (4.5784,6.0938);
+
+\draw[-{Triangle[angle=45:5pt 5, open]}] (2.1179,1.9813) ->  (4.5784,6.0938);
+\end{tikzpicture}\\
+\textbf{a} Correlated steps &
+\textbf{b} Anti-correlated steps &
+\textbf{c} Uncorrelated steps
+\end{tabular}
+\end{center}
+\caption{Illustratio of evolution path cases \label{fig:evolutionPath}}
+\end{figure}
+
 Eventually, the step-size is updated by the following.
 \begin{align}
 \sigma^{(g+1)} &= \sigma^{(g)} \cdot exp \left( \frac{c_{\sigma}}{d_{\sigma}} \left( \frac{||p_\sigma^{(g+1)}||}{E|| \mathcal{N}(0, I) ||} - 1 \right) \right)
