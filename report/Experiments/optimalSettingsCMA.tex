@@ -131,8 +131,21 @@ is also referred to as a typical initial setting in \citep{boumaza2009}.
 Therefore, the conclusion remains that the initial step-size is not critical 
 for the experiment.\\
 
-\comment{- Make sure to fully conclude that the initial step-size doesn't matter and therefore we don't
-use this paramater in the upcoming experiments}
+To tell if the step-size is actually a significant parameter to adjust, results from 
+the two best performing configurations are compared using the Mann-Whitney-Wilcoxon test\footnote{\url{https://stat.ethz.ch/R-manual/R-patched/library/stats/html/wilcox.test.html}}.
+The Mann-Whitney-Wilcoxon test has the appealing property that it does not require any parameters
+besides the actual data to test, and it does not require the assumption that data originates 
+from a Gaussian distribution. The test accepts data from two populations, that may or may not 
+be drawn from the same underlying distribution and will test against the null hypothesis, 
+namely that the two populations have identical distribution. If the test concludes a 
+confidence less then $5\%$ ($p < 0.05$), we cannot firmly reject the null hypothesis, 
+and cannot conclude any significant difference in the population. From the experiments
+with the initial sigma setting, the immediate choice of $\sigma_0$ would be 0.5.
+The Wilcoxon test is applied to the data from the runs with $\sigma_0 \in \{0.5, 1\}$
+using R\footnote{\url{https://cran.r-project.org/}}.
+This test gives $p=0.5619$, which means that we cannot reject that the two 
+populations differ, and the initial sigma is considered not to play a significant 
+for the CMA-ES applied to Tetris.
 
 \subsubsection{Lower bound}
 

@@ -69,16 +69,16 @@ This serves the same purpose as in Cross Entropy (see page \pageref{CEObjective}
 \\
 
 \textbf{The mean and variance of the gaussian distribution} \\
-Here $\mean_{\generation}$ is the mean and  
-$C^{2}_{\generation}$ is the variance 
-of the gaussian distribution ($\mean_{\generation}$,
-$C^2_{\generation}$). 
+Here $\mean^{(g)}$ is the mean and  
+${C^{(g)}}^{2}$ is the variance 
+of the gaussian distribution ($\mean^{(g)}$,
+${C^{(g)}}^2$). 
 More specifically this gaussian distribution is defined as 
 \begin{align*}
-\mathcal{N}(\mean_{\generation},C^2_{\generation})
+\mathcal{N}(\mean_{\generation},\sigma C^2_{\generation})
 \end{align*}
 
-Where $\generation$ denotes the current iteration.\\
+Where $g$ denotes the current iteration/generation.\\
 
 
 \textbf{The number of vectors}\\
@@ -88,7 +88,7 @@ $\populationSize$ is the number of vectors sampled in each generation.
 \textbf{The number of offspring}\\
 $\offspringNumber$ is the number of vectors which are used to compute 
 the new mean very much like in Cross Entropy. However the CMA algorithm
-is not bound to weight each vector equally. It has the option to assign 
+is not bound to weight each vec tor equally. It has the option to assign 
 a weight to each vector and hence biasing towards the better solutions.
 \\
 
@@ -113,6 +113,71 @@ p_{c}, p_{\sigma} &\in \mathbb{R}^{\dimensions}\\
 C &\in \mathbb{R}^{\dimensions \times \dimensions}
 \end{align}
 
+Again, note that $\lambda$ has the meaning of $\populationSize$ from earlier, that
+is $\lambda$ is in this case the population size. $\mu$ however, is still the number
+of vectors that contribute to the updating of distribution parameters, namely the 
+parent size.\\
+\\
+In this algorithm, the distribution used is multivariate normal distribution defined
+as 
+\begin{align}
+\mathcal{N} \left( m,  \sigma^2 C \right)
+\end{align}
+This distribution describes the set of correlated real-valued vectors that
+clusters around the mean vector $m$ and has a covariance described by the
+matrix $C$. The covariance matrix describes the 'shape' of the space in which 
+the vectors are most likely to be sampled. For illustrative purposes,
+the shape of the sampling space is drawn as an ellipseoid.
+This ellipoid depicts a set of points that has equal denity 
+in the probability denisty function of $C$, and is hence refered to 
+as the ellipse of equal density.
+With a covariance matrix $C$
+the ellipsoid is defined as points that stisfies
+$\{x \in R^{\dimensions} | x^{T} C^{-1} x = 1\}$.
+When illustrating this, the step-size is set as $\sigma = 1$ for simplicity.\\
+\\
+The matrix $C^{-1}$ is decomposed as $C^{-1} = B D^{-2} B^T$, where $B$ is a rotation 
+matrix that rotates from the coordinate axises into the principal axises of $C$, and 
+$D^{-2}$ is the diagonal matrix 
+$\text{diag} \left( \frac{1}{d_{1}^2},\dots, \frac{1}{d_{\dimensions}^2} \right)$
+where $d_{i}$ is the $i$'th eigenvalue of $C$. Figure \ref{fig:ellipse} shows an example
+of how to determine if a point lies on the ellipsoid. In this example, the aim is to 
+determine if the point $x$ lies on the two-dimensional ellipsoid, hence checking if 
+$x^{T} C^{-1} x = 1 \Leftrightarrow x^{T} B D^{-2} B^T x = 1 $ holds. In figure 
+\ref{fig:ellipse}, $l$ is the length from the origin of the ellipse to the edge.
+Consider the operation
+\begin{align}
+B D^{-2} B^T x \label{eq:rotscal}
+\end{align}
+
+The order of operations are the following. 
+$B^{T}$ rotates $x$ from the principal axises of $C$
+into the coordinate axises. Then $D^{-2}$ scales the point by $\frac{1}{l^2}$ where
+$l$ is the length from the ellipsoid origin to the edge. Finally, $B$ rotates the point 
+back in the original direction. thus, (\ref{eq:rotscal}) has the same effect as
+\begin{align}
+\frac{1}{l^2} x
+\end{align}
+Hence, the entire operation is equivalent to
+\begin{align}
+x^{T} B D^{-2} B^T x &= x^{T} \frac{1}{l^2} x = \frac{1}{l^2} x^{T} x
+= \frac{1}{l^2} ||x||^2
+\end{align}
+This means that if $||x||^2 = l^2$ then $x$ lies on the ellipse.
+In the example of figure \ref{fig:ellipse}, $x$ is not 
+on the ellipse.
+
+
+\begin{figure}[H]
+\begin{center}
+
+\end{center}
+\begin{center}
+\ellipseFigure
+\end{center}
+\caption{Illustration of $\{x \in R^{\dimensions} | x^{T} C^{-1} x \stackrel{?}{=} 1\}$ \label{fig:ellipse}}
+\end{figure}
+
 \subsubsection{Loop}
 
 \textbf{Increment iteration counter}
@@ -125,21 +190,24 @@ Otherwise, stop.\\
 
 
 \textbf{Sample new generation}\\
-Sample new population of search points, for $k = 1, \dots, \populationSize$.
+Sample new population of search points, for $k = 1, \dots, \lambda$.
 The aim is to sample vectors in the following form
 \begin{align}
-\individual_{i} \sim \mathcal{N}(m, \sigma^2 C)
+\individual_{k} \sim \mathcal{N}(m, \sigma^2 C)
 \end{align}
 
 
 To generate the sample for the generation, the covariance matrix is first 
 decomposed using principal component analysis into
-
 \begin{align}
 C = B D^2 B^{T}
 \end{align}
 
-Where $B$ is am orthogonal basis of eigenvectors, and  $D^2$
+Where $B = \begin{bmatrix}
+b_1, & \dots, & b_\dimensions
+\end{bmatrix}$ 
+is am orthogonal basis of eigenvectors, and  
+$D = \text{diag}\left(d_1, \dots, d_\dimensions\right)$
 is a diagonal matrix that contains all eigenvalues of $C$.\\
 \\
 Intermediately, the vectors are sampled from a Gaussian distribution 
@@ -151,8 +219,6 @@ z_{k} &\sim \mathcal{N}(0, I)
 
 $z_k$ is then multiplied by a factor that causes the them to form 
 after the covariance matrix $C$. From Hansens tutorial, it's derived that
-
-
 \begin{align}
 C^{-1} &= B D^{-2} B^{T}\\
 C^{\frac{1}{2}} &= B D B^{T}
@@ -175,18 +241,74 @@ $B$ is purely a rotation matrix. Due to this, $B^{T} z_{k}$ only rotates
 $z_k$ yielding the same distribution. After this, the $BD$ is multiplied,
 which applies the scale such that each vector is scaled to match the
 variance in the principal axises of the covariance matrix, and $B$ 
-will rotate each sample such that the samples align with the principal axises
-of $C$.\\
+will rotate each sample such that it aligns with the principal axises
+of $C$. After this step, $y_{k}$ now resemble the vectors that rotated and scaled
+to match shape of the covariance matrix.\\
 
-The mean and step-size is applied.
+The mean and step-size $\sigma$ is applied.
 \begin{align}
 x_{k} &= m + \sigma y_{k} \sim \mathcal{N}(m, \sigma^2 C) \label{eq:finalSample}
 \end{align}
 
+
+
 Finally, the $x_{k}$ vector resemble a realization of the Gaussian distribution
-with mean $m$ and covariance matrix $C$.\\
+with mean $m$ and covariance matrix $C$ scaled by the step-size $\sigma$.
+Am illustration of the sampling process in two dimensions can be seen in figure \ref{fig:sampleing} where 
+\begin{align}
+\sigma = 1,\ B = \begin{bmatrix}
+{b_1}_x & {b_2}_x\\
+{b_1}_y & {b_2}_y
+\end{bmatrix},\ D = \begin{bmatrix}
+d_1 & 0\\
+0   & d_2
+\end{bmatrix}
+\end{align}
 
 
+\begin{figure}[H]
+\begin{center}
+\begin{tabular}{c c c}
+\begin{tikzpicture}[scale=0.5]
+\draw [->] (0,-5) -- (0,5);
+\draw [->] (-5,0) -- (5,0);
+\node at (0,0) {};
+\draw  (0,0) ellipse (2 and 2);
+\draw (0,0) -- (2,0);
+\draw [decorate,decoration={brace,amplitude=5,raise=2},yshift=0pt]
+(0,0) -- (2,0) node [black,midway,xshift=0,yshift=15] {1};
+\end{tikzpicture} &
+\begin{tikzpicture}[scale=0.5]
+\draw [->] (0,-5) -- (0,5);
+\draw [->] (-5,0) -- (5,0);
+\node at (0,0) {};
+\draw [rotate=45] (0,0) node (v1) {} ellipse (4 and 2);
+\draw [->] (0,0) --  (2,2);
+\draw [->] (0,0) -- (-1,1);
+\node at (-0.8,1.4) {\small $v_2$};
+\node at (2.3,2.3) {\small $v_1$};
+\node at (3,-2) {$v_1 = b_1 d_1$};
+\node at (3,-3) {$v_2 = b_2 d_2$};
+\end{tikzpicture} &
+\begin{tikzpicture}[scale=0.5]
+\draw [->] (0,-5) -- (0,5);
+\draw [->] (-5,0) -- (5,0);
+\node at (1,1) {};
+\draw [rotate=45] (1.5,0) node (v1) {} ellipse (4 and 2);
+\draw [->](1,1) -- (3,3);
+\draw [->] (1,1) -- (0,2);
+\draw [fill] (1,1) ellipse (0.1 and 0.1);
+\node at (2,1) {\small $m$};
+\end{tikzpicture}\\
+$z_{k} \sim \mathcal{N}(0, I)$ & $y_{k} \sim B Dz_{k}$ & $x_{k} \sim m + \sigma y_{k} \sim \mathcal{N}(m, \sigma^2 C)$
+\end{tabular}
+\end{center}
+\caption{The steps of the sampling process \label{fig:sampleing}}
+\end{figure}
+In the middle step, the CMA-ES algorithm differs in particular from Cross Entropy
+as the rotation matrix $B$ is applied and rotates the distribution shape. 
+In opposition to this, the Cross Entropy algorithm distribution is aligned with
+the coordinate system axises.
 
 \textbf{Evaluate each vector using $\fitnessFunction$ and recombine}\\
 As each vector is evaluated, they are ranked such that
@@ -213,7 +335,7 @@ w_i &= \frac{w_{i}'}{\sum^{\offspringNumber}_{j=1} w_j }
 \end{align}
 
 Where the $w_i'$ is used for a intermediate weighting value for the vectors.\\
-In the Shark library, three generic weighting types are implemented, each with
+In the Shark library, three built-in weighting types are implemented, each with
 a distinct intermediate weight.
 
 \begin{align}
@@ -228,22 +350,22 @@ the selection.
 
 The new mean is computed as
 \begin{align}
-m_{\generation+1} &= m_{\generation} + \sigma \langle y \rangle_{w} = \sum^{\offspringNumber}_{i = 1} w_{i}x_{i:\lambda} \label{eq:movemean}
+m^{(g+1)} &= m^{(g)} + \sigma \langle y \rangle_{w} = \sum^{\offspringNumber}_{i = 1} w_{i}x_{i:\lambda} \label{eq:movemean}
 \end{align}
 Such that the mean moves towards the 'center of mass' scaled by the step-size.
 The details of step-size $\sigma$ is covered later in this section,
 however in brief terms the step-size is meant to scale movements 
-of the mean.\\
+of the mean and the distribution area.\\
 \\
 In relation to the selection mechanism, the value $\mu_{eff}$ is introduced.
 This is defined as
 \begin{align}
-\mu_{eff} = \left( \sum_{i=1}^{\offspringNumber} w_i^2 \right)^{-1}
+\meff = \left( \sum_{i=1}^{\offspringNumber} w_i^2 \right)^{-1}
 \end{align}
-Hence $1 \leq \mu_{eff} \leq \mu$. As an example, for the equal recombination
-type, $\mu_{eff} = \left( \sum_{i=1}^{\offspringNumber} w_i^2 \right)^{-1} = 1^1 =1$
-In the tutorial by N. Hansen, it's mentioned that $\mu_{eff} \approx 
-\frac{\lambda}{4}$ indicates a good setting of $w_i$. The $\mu_{eff}$ is 
+Hence $1 \leq \meff \leq \mu$. As an example, for the equal recombination
+type, $\meff = \left( \sum_{i=1}^{\offspringNumber} w_i^2 \right)^{-1} = 1^{-1} =1$
+In the tutorial by N. Hansen, it's mentioned that $\meff \approx 
+\frac{\lambda}{4}$ indicates a good setting of $w_i$. The $\meff$ is 
 measure of how much of the parent mass is used, and serves as a normalization 
 factor in later equations.\\
 
@@ -251,15 +373,19 @@ factor in later equations.\\
 
 The idea of using the covariance matrix is to make new samples
 resemble the covariance of the previous well-performing vectors, as opposed 
-to the Cross Entropy algorithm that does not contain any information of
+to the Cross Entropy algorithm that does not maintain any information of
 previous samples.\\
 \\
 A evolution path of the movement of the means is introduced as $p_{c}$. This 
 is a vector that holds the direction in which the mean has been moved in 
-both the current generation, and in previous generations. Using the 
+both the current generation, and in previous generations in 
+a 'low-pass filter' like manner. Using the 
 evolution path, the covariance matrix can take a shape that 
-makes samples occurring in the direction of previous step more likely.
+makes samples more likely to appear in the direction of successive 
+movements of the mean.
 The evolution path for generation $g+1$ is updated as
+
+
 
 \begin{align}
 p_{c}^{(g+1)} &= \underbrace{\left( 1 - c_{c} \right) 
@@ -271,7 +397,7 @@ p_{c}^{(g)}}_{\makebox[0pt]{\text{previous steps}}}  +
 \langle y \rangle_{w} \label{eq:epathc}
 \end{align}
 In (\ref{eq:epathc}), the term $\left( 1 - c_{c} \right) p_{c}^{(g)}$ makes 
-the evolution path become influenced by earlier path steps. Thelearning rate
+the evolution path become influenced by earlier path steps. The learning rate
 $c_c \in [0;1] $ indicates how much of the previous path is taken into account.
 if $c_c = 0$, the previous path is not considered at all, and if $c_c = 1$ the path 
 will only consist of the previous step. According to the tutorial, this is set
@@ -291,8 +417,28 @@ evolution path is covered in \textit{Step-size control}.\\
 \\
 The normalization factor 
 $\sqrt{c_{c} \left( 2 - c_{c} \right) \offspringNumber_{\text{eff}}}$ is chosen such that
-$p^{g+1}_{c} \sim \mathcal{N}\left(0, C \right)$ if $p_c^{(g)} \sim \mathcal{N} 
+$p^{(g+1)}_{c} \sim \mathcal{N}\left(0, C \right)$ if $p_c^{(g)} \sim \mathcal{N} 
 \left(0, C\right)$\\
+To see that this holds, note that
+\begin{align}
+\langle y \rangle_{w} &= \frac{m^{(g+1)} - m^{(g)}}{\sigma}
+\sim \frac{1}{\sqrt{\meff}}  \mathcal{N}\left(0, C \right)
+\end{align}
+\\
+Thus, with the indicator function set aside
+\begin{align}
+p_{c}^{(g+1)} &\sim \left( 1 - c_{c} \right) 
+\mathcal{N}\left(0, C \right) + 
+\sqrt{c_{c} \left( 2 - c_{c} \right) \offspringNumber_{\text{eff}}}
+\frac{1}{\sqrt{\meff}}\mathcal{N}\left(0, C \right) \label{eq:nomalization_start}\\
+&\sim
+\mathcal{N}\left(0, \left( 1 - c_{c} \right)^2 C \right) + 
+\mathcal{N}\left(0, c_{c} \left( 2 - c_{c} \right)  C \right)\\
+&\sim
+\mathcal{N}\left(0, \left( 1 - c_{c} \right)^2 C + c_{c} \left( 2 - c_{c} \right)  C  \right)\\
+&\sim \mathcal{N}\left( 0, C \right) \label{eq:nomalization_end}
+\end{align}
+Hance, the evolution path ios updated unbiased udner random selection.
 \\
 The covariance matrix is updated as follows
 \begin{align}
@@ -352,8 +498,6 @@ sampling the vectors in (\ref{eq:finalSample}) where it expands the variance
 of the distribution. When moving the mean in (\ref{eq:movemean}), the weighted 
 selection mass \textbf{scaled} with the step-size is added to the mean.
 
-\comment{PUT fig here}
-
 First we consider the evolution path of the step-size $p_\sigma$ which is
 updated a s follows.
 
@@ -363,7 +507,7 @@ p_{\sigma}^{(g+1)} &=
 \makebox[0pt]{\text{{smoothing of previous steps}}}
 }
 + 
-\overbrace{\sqrt{c_{\sigma} \left( 2 - c_{\sigma} \right) \offspringNumber_{\text{eff}}}}
+\overbrace{\sqrt{c_{\sigma} \left( 2 - c_{\sigma} \right) \meff}}
 ^{
 \makebox[0pt]{\text{{normalization}}}
 } 
@@ -383,7 +527,7 @@ rotates the principal axises to align with the coordinate axises.
 $D^{-1}$ scales the axises into equal size, and finally, $B$ rotates the 
 axises back into the original direction. The transform $C^{-\frac{1}{2}}$
 has the effect of making the length of the $p_\sigma$ independent of 
-direction.\\
+direction as each dimension is normalized.\\
 \\
 The final effect is that
 \begin{align}
@@ -391,12 +535,11 @@ p_\sigma^{(g+1)} &\sim \mathcal{N}\left(0, I \right)\\
 \text{When }
 p_\sigma^{(g)} &\sim \mathcal{N} \left(0, I \right)
 \end{align}
-
-as
-
+With almost the same steps as (\ref{eq:nomalization_start}) through 
+(\ref{eq:nomalization_end}).
 \begin{align}
 p_\sigma^{(g+1)} &\sim (1 - c_\sigma) \mathcal{N}\left( 0, I \right) + \sqrt{c_\sigma 
-\left( 2-c_\sigma \right)\mu_{eff} {C^{(g)}}^{-\frac{1}{2}}} \frac{1}{\sqrt{\mu_{eff}}}
+\left( 2-c_\sigma \right)\meff } {C^{(g)}}^{-\frac{1}{2}} \frac{1}{\sqrt{\meff}}
 \mathcal{N} \left( 0, C^{(g)} \right)\\
 &\sim \mathcal{N} 
 \left( 
@@ -431,8 +574,54 @@ In case \textbf{a} the steps are correlated and the idea is that a larger step-s
 would cause the mean to move towards a desired location faster. In case \textbf{b},
 the path is short and/or anti correlated. This means that the algorithm would benefit from
 shorter steps, and therefore decrease the step-size. In the final case \textbf{c}, the 
-steps appear perpendicular and the step-size appears reasonable.\\
-\\
+steps appear perpendicular and the step-size appears reasonable.
+\begin{figure}[H]
+\begin{center}
+\begin{tabular}{c c c}
+\begin{tikzpicture}[scale=0.5]
+\draw (0,0) rectangle (8,8);
+
+\draw[-{Triangle[angle=45:5pt 5]}]  (2.1179,1.9813) --  (3.1724,2.5788);
+\draw[-{Triangle[angle=45:5pt 5]}]   (3.1724,2.5788) -- (4.2972,2.4734) ;
+\draw[-{Triangle[angle=45:5pt 5]}] (4.2972,2.4734)  --  (5.0705,3.1061);
+\draw[-{Triangle[angle=45:5pt 5]}] (5.0705,3.1061) -- (5.0705,4.266)  ;
+\draw[-{Triangle[angle=45:5pt 5]}](5.0705,4.266)   -- (6.1601,4.969);
+\draw[-{Triangle[angle=45:5pt 5]}] (6.1601,4.969) --  (5.5626,7.1131);
+
+\draw[-{Triangle[angle=45:5pt 5, open]}]  (2.1179,1.9813) ->  (5.5626,7.1131);
+\end{tikzpicture} &
+\begin{tikzpicture}[scale=0.5]
+\draw (0,0) rectangle (8,8);
+
+\draw[-{Triangle[angle=45:5pt 5]}] (2.1179,1.9813) -- (2.6803,3.9496);
+\draw[-{Triangle[angle=45:5pt 5]}] (2.6803,3.9496) -- (1.0986,3.9145);
+\draw[-{Triangle[angle=45:5pt 5]}] (1.0986,3.9145) -- (0.7119,2.0867);
+\draw[-{Triangle[angle=45:5pt 5]}] (0.7119,2.0867) -- (2.3288,0.7511);
+\draw[-{Triangle[angle=45:5pt 5]}] (2.3288,0.7511) -- (3.8402,1.8758);
+\draw[-{Triangle[angle=45:5pt 5]}] (3.8402,1.8758) -- (3.2427,2.7194);
+
+\draw[-{Triangle[angle=45:5pt 5, open]}] (2.1179,1.9813)-> (3.2427,2.7194);
+\end{tikzpicture} &
+\begin{tikzpicture}[scale=0.5]
+\draw (0,0) rectangle (8,8);
+
+\draw[-{Triangle[angle=45:5pt 5]}] (2.1179,1.9813) -- (3.559,2.2976) ;
+\draw[-{Triangle[angle=45:5pt 5]}]  (3.559,2.2976)  --  (2.6452,3.6684);
+\draw[-{Triangle[angle=45:5pt 5]}]  (2.6452,3.6684) --  (4.6487,3.2115);
+\draw[-{Triangle[angle=45:5pt 5]}]  (4.6487,3.2115) --  (5.914,4.266) ;
+\draw[-{Triangle[angle=45:5pt 5]}]  (5.914,4.266)  -- (6.0195,5.918) ;
+\draw[-{Triangle[angle=45:5pt 5]}] (6.0195,5.918)  --  (4.5784,6.0938);
+
+\draw[-{Triangle[angle=45:5pt 5, open]}] (2.1179,1.9813) ->  (4.5784,6.0938);
+\end{tikzpicture}\\
+\textbf{a} Correlated steps &
+\textbf{b} Anti-correlated steps &
+\textbf{c} Uncorrelated steps
+\end{tabular}
+\end{center}
+\caption{Illustratio of evolution path cases \label{fig:evolutionPath}}
+\end{figure}
+
 Eventually, the step-size is updated by the following.
 \begin{align}
 \sigma^{(g+1)} &= \sigma^{(g)} \cdot exp \left( \frac{c_{\sigma}}{d_{\sigma}} \left( \frac{||p_\sigma^{(g+1)}||}{E|| \mathcal{N}(0, I) ||} - 1 \right) \right)

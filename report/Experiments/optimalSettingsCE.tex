@@ -107,9 +107,11 @@ $200$ & $50\%$ & 1/3/5/7/10
 
 The experiments includes different games per agent of $\{1,3,5,7,10\}$. By increasing the number of games 
 played per agent, we are increasing the evaluation cost by a multiplication factor in exchange for a more 
-accurate evaluation of each agent. This is to avoid bad agents having a lucky game with an better than 
-average game, or the opposite, an good agent having a lesser than average game. However, we wish to find 
-the best performing configuration with the lowest cost and maximum benefit.\\
+accurate evaluation of each agent. This is to avoid misconceiving poor performing agents
+for good ones, as multiple evaluations will decrease the chance the agent having 
+'lucky games'. However, we wish to find 
+the best performing configuration with the lowest cost and maximum benefit, and evaluating multiple 
+times will increase the function cost.\\
 \\
 \textbf{Results}\\
 The total number of configuration experiments is 75, with 30 individual experiments each,

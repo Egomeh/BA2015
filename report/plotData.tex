@@ -263,3 +263,21 @@
 
 
 
+\def \ellipseFigure{
+\begin{tikzpicture}[scale=0.8]
+\draw  [rotate=45] (0,0) node (v1) {} ellipse (4 and 2);
+\draw (v1) -- (1,3);
+\draw [->] (v1) -- (1.5,4.5);
+\draw [decorate,decoration={brace,amplitude=15pt,mirror,raise=6pt},yshift=0pt]
+(0,0) -- (1,3) node [black,midway,xshift=1cm,yshift=-1.4] {\footnotesize
+$l$};
+\draw [decorate,decoration={brace,amplitude=15pt,raise=8pt},yshift=0pt]
+(0,0) -- (1.5,4.5) node [black,midway,xshift=-1.5cm,yshift=0.4cm] {\footnotesize
+$||x||$};
+\node at (2,4.5) {$x$};
+\node at (-0.3,-0.3) {(0,0)};
+\end{tikzpicture}
+}
+
+
+

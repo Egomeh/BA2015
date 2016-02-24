@@ -56,12 +56,16 @@ Thus, for the first iteration $\generation = 0$, a configuration could be:
 
 Where the subscript notes that the values occur in iteration 0.\\
 \\
-In each iteration, the algorithms sample $\lambda$ vectors and evaluate their fitness
+In each iteration, the algorithms sample $\populationSize$ vectors and evaluate their fitness
 against the objective function. When each of the solutions are evaluated,
 they are ordered according to their fitness:
 \begin{align*}
-\{\textbf{\individual }_{1}, \hdots, \textbf{\individual }_{\populationSize }\}\ \ \text{Such that}\ \ 
-f(\textbf{x}_1) \geq f(\textbf{\individual }_2), \hdots, f(\textbf{\individual }_{\populationSize  - 1}) \geq f(\textbf{\individual }_{\populationSize })
+\{\textbf{\individual }_{1}, \hdots, 
+\textbf{\individual }_{\populationSize }\}\ \ \text{Such that}\ \ 
+\fitnessFunction(\textbf{x}_1) \geq 
+\fitnessFunction(\textbf{\individual }_2), \hdots, 
+\fitnessFunction(\textbf{\individual }_{\populationSize  - 1}) \geq 
+\fitnessFunction(\textbf{\individual }_{\populationSize })
 \end{align*}
 
 The mean and standard deviation for the next iteration, that is $m_{t+1}$ and $M_{t+1}$

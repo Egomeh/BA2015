@@ -187,6 +187,7 @@ updated
 This is formally defined as:
 \begin{align*}
 {\varianceMatrix^2_{\generation +1}}_{k,k}:=\frac{\sum_{i}^{\offspringNumber}
-(\individual_{i} - \mean_{\generation +1})^T(\individual_{i} - \mean_{\generation +1})}{\offspringNumber} + \noise_{\generation + 1}\ ,\ \ k \in \{ 1,\dots,\dimensions \}
+({\individual_{i}}_k - \mean_{\generation +1})^2}{\offspringNumber} + 
+\noise_{\generation + 1}\ ,\ \ k \in \{ 1,\dots,\dimensions \}
 \end{align*}
 \\

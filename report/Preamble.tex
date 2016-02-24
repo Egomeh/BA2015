@@ -6,12 +6,6 @@
 \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
 
-%subfigures
-\usepackage{graphicx}
-\usepackage{caption}
-\usepackage{subcaption}
-\usepackage{geometry}
-
 \usepackage{a4wide}
 \usepackage{natbib}
 \usepackage{graphicx}
@@ -30,6 +24,9 @@
 
 \usepackage{tikz}
 \usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+% Failed attempt at providing legacy arrowheads:
+\tikzset{triangle 45/.tip={Triangle[angle=45:3pt]}}
 
 
 
