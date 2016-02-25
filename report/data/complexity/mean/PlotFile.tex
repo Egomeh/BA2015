@@ -1,0 +1,40 @@
+\documentclass[landscape,border=0pt]{standalone}
+\usepackage{graphicx,color,tikz,pgfplots}
+
+\begin{document}
+
+\begin{tabular}{@{}l@{}}
+\begin{tikzpicture}
+\begin{axis}[%
+	xmin=0,
+	xmax=8000,
+	ymin=0,
+	ymax=1000000,
+    xlabel={Agents evaluated},
+    ylabel={Mean Score},
+    ymode=log,
+    log basis y={10},
+    width=16cm,
+    height=12cm,
+    legend pos=south east,
+    %title={Meanscore of constant noise, population size 50 and parent size 25}
+    ]
+\addplot[color=blue,mark=none, very thin, each nth point=1, dashed]  
+ table [x=agents, y=meanScore, col sep=comma] {mean_ce_hard.txt};
+ \addlegendentry{Cross Entropy - Hard Tetris}
+\addplot[color=blue,mark=none, very thin, each nth point=1]  
+ table [x=agents, y=meanScore, col sep=comma] {mean_ce_normal.txt};
+ \addlegendentry{Cross Entropy - Normal Tetris}
+\addplot[color=red,mark=none, very thin, each nth point=1, dashed]  
+ table [x=agents, y=meanScore, col sep=comma] {mean_cma_hard.txt};
+ \addlegendentry{CMA - Hard Tetris}
+\addplot[color=red,mark=none, very thin, each nth point=1]  
+ table [x=agents, y=meanScore, col sep=comma] {mean_cma_normal.txt};
+ \addlegendentry{CMA - Normal Tetris}
+\end{axis}
+\end{tikzpicture}
+\end{tabular}
+
+
+
+\end{document}

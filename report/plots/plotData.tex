@@ -8,6 +8,8 @@
 \begin{axis}[%
 	xmin=0,
 	xmax=8000,
+	ymin=0,
+	ymax=1000000,
     xlabel={Agents evaluated},
     ylabel={stepsize},
     ymode=log,
@@ -38,6 +40,8 @@
 \begin{axis}[%
 	xmin=0,
 	xmax=8000,
+	ymin=0,
+	ymax=1000000,
     xlabel={Agents evaluated},
     ylabel={stepsize},
     ymode=log,
@@ -67,6 +71,8 @@
 \begin{axis}[%
 	xmin=0,
 	xmax=8000,
+	ymin=0,
+	ymax=1000000,
     xlabel={Agents evaluated},
     ylabel={stepsize},
     ymode=log,
@@ -263,4 +269,62 @@
 }
 
 
+\newcommand{\plotCMAInitialSigma}[2]
+{
+\begin{tikzpicture}
+\begin{axis}[%
+	xmin=0,
+	xmax=8000,
+	ymin=0,
+	ymax=1000000,
+    xlabel={},
+    ylabel={},
+    ymode=log,
+    log basis y={10},
+    width=8cm,
+    height=6cm,
+    legend pos=south east,
+    title={$\sigma_0 = #1$},
+    xticklabel = {
+    \pgfmathparse{\tick/1000}
+    \pgfmathprintnumber{\pgfmathresult}\,k
+}]
+\foreach \x in {0,1,2,3,4,5,6,7,8,9}
+{
+\addplot[color=black,mark=none, very thin]  
+ table [x=agents, y=score, col sep=comma, ] {../data/cma_initial_sigma/#2\x.txt};
+}
+\end{axis}
+\end{tikzpicture}
+}
+
+
+\newcommand{\plotCMALowerBound}[2]
+{
+\begin{tikzpicture}
+\begin{axis}[%
+	xmin=0,
+	xmax=8000,
+	ymin=0,
+	ymax=1000000,
+    xlabel={},
+    ylabel={},
+    ymode=log,
+    log basis y={10},
+    width=8cm,
+    height=6cm,
+    legend pos=south east,
+    title={$l = #1$},
+    xticklabel = {
+    \pgfmathparse{\tick/1000}
+    \pgfmathprintnumber{\pgfmathresult}\,k
+}]
+\foreach \x in {0,1,2,3,4,5,6,7,8,9}
+{
+\addplot[color=black,mark=none, very thin]  
+ table [x=agents, y=meanScore, col sep=comma, ] {../data/cma_lower_bound/#2\x.txt};
+}
+\end{axis}
+\end{tikzpicture}
+}
 

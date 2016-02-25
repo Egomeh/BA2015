@@ -4,7 +4,7 @@ In this thesis, the Cross-Entropy method and the Covariance Matrix Evolution
 Strategy are compared. Both of the methods fall into the category of 
 \textit{stochastic optimization}
 methods. These methods are useful for 
-optimization problems that have no gradient.
+optimization problems where the gradient is not available.
 The optimization functions aim to optimize 
 the parameter set $\textbf{\individual }$
 for the objective function $\fitnessFunction$.
@@ -12,11 +12,11 @@ for the objective function $\fitnessFunction$.
 \hat{\textbf{\individual }} &= 
 arg \  \underset{\textbf{\individual }}{max} \  
 \fitnessFunction (\textbf{\individual }) \ 
-\fitnessFunction : \mathbb{R}^{\dimensions } \rightarrow \mathbb{R}
+:\mathbb{R}^{\dimensions } \rightarrow \mathbb{R}
 \end{align*}
 
 In these methods, the optimizing algorithm uses a family of parametric distributions,
-and maintain a mean $\mean $ along with other parameters
+and maintains a mean $\mean $ along with other parameters
 to search the best possible solution for the objective function.  
 In the case studied in this thesis
 both the CMA-ES and Cross-entropy methods use a 
@@ -35,18 +35,18 @@ The algorithms work iteratively, such that the mean and variance
 of the distribution 
 is altered for each iteration $\generation $.
 The algorithms start by initializing the 
-parameters either at random or some fixed point. A common 
+parameters either at random or at some fixed point. A common 
 configuration is setting the mean to 
 all zeros and the standard deviation to the identity matrix.
 Thus, for the first iteration $\generation = 0$, a configuration could be:
 \begin{align*}
-\mean_{0} =
+\mean^{(0)} =
 \begin{bmatrix}
 0\\
 \vdots\\
 0
 \end{bmatrix},\ \ 
-\varianceMatrix _{0} = 
+\varianceMatrix^{(0)} = 
 \begin{bmatrix}
 1 & \hdots & 0\\
 \vdots & \ddots & \vdots\\
@@ -54,9 +54,10 @@ Thus, for the first iteration $\generation = 0$, a configuration could be:
 \end{bmatrix}
 \end{align*}
 
-Where the subscript notes that the values occur in iteration 0.\\
+The superscript $(0)$ notes that the values occur in iteration 0.\\
 \\
-In each iteration, the algorithms sample $\populationSize$ vectors and evaluate their fitness
+In each iteration, the algorithms sample $\populationSize$ candidate solutions 
+and evaluate their fitness
 against the objective function. When each of the solutions are evaluated,
 they are ordered according to their fitness:
 \begin{align*}
@@ -68,8 +69,9 @@ they are ordered according to their fitness:
 \fitnessFunction(\textbf{\individual }_{\populationSize })
 \end{align*}
 
-The mean and standard deviation for the next iteration, that is $m_{t+1}$ and $M_{t+1}$
-is then updated usually by considering the best of the ordered solutions. How exactly
+The mean and standard deviation for the next iteration, 
+that is $m^{(\generation+1)}$ and $M^{(\generation+1)}$, are
+then updated usually by considering the best of the ordered solutions. How exactly
 these parameters are updated is individual for each method and can be seen in the following
 sections.
 

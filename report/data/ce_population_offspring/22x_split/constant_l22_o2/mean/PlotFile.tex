@@ -1,0 +1,43 @@
+\documentclass[landscape,border=0pt]{standalone}
+\usepackage{graphicx,color,tikz,pgfplots}
+
+\begin{document}
+
+\begin{tabular}{@{}l@{}}
+\begin{tikzpicture}
+\begin{axis}[%
+	xmin=0,
+	xmax=80000,
+	ymin=0,
+	ymax=10000,
+    xlabel={Agents evaluated},
+    ylabel={Mean Score},
+    ymode=log,
+    log basis y={10},
+    width=16cm,
+    height=12cm,
+    legend pos=south east,
+    %title={Meanscore of constant noise, population size 22 and parent size 2}
+    ]
+\addplot[color=blue,mark=none, very thin, each nth point=1]  
+ table [x=agents, y=meanScore, col sep=comma, ] {mean_constantnoise_g1_l22_o2.txt};
+ \addlegendentry{1 game pr. agent}
+\addplot[color=red,mark=none, very thin, each nth point=1]  
+ table [x=agents, y=meanScore, col sep=comma, ] {mean_constantnoise_g3_l22_o2.txt};
+ \addlegendentry{3 game pr. agent}
+\addplot[color=green,mark=none, very thin, each nth point=1]  
+ table [x=agents, y=meanScore, col sep=comma, ] {mean_constantnoise_g5_l22_o2.txt};
+ \addlegendentry{5 game pr. agent}
+\addplot[color=black,mark=none, very thin, each nth point=1]  
+ table [x=agents, y=meanScore, col sep=comma, ] {mean_constantnoise_g7_l22_o2.txt};
+ \addlegendentry{7 game pr. agent}
+\addplot[color=purple,mark=none, very thin, each nth point=1]  
+ table [x=agents, y=meanScore, col sep=comma, ] {mean_constantnoise_g10_l22_o2.txt};
+ \addlegendentry{10 game pr. agent}
+\end{axis}
+\end{tikzpicture}
+\end{tabular}
+
+
+
+\end{document}
