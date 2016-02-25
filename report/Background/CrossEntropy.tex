@@ -15,26 +15,26 @@ objective function $\fitnessFunction \left( \individual \right)$.\\
 The Cross-Entropy method starts with an initial 
 mean $\mean$ which is an $n$-dimensional vector
 typically set to 0
-\begin{align*}
+\begin{align}
 \mean^{(0)} = \begin{pmatrix}
 0\\
 \vdots\\
 0
 \end{pmatrix} 
-\end{align*}
+\end{align}
 
 The second argument to the gaussian distribution is a 
 diaginal matrix which contains the variance for each 
 component
 
-\begin{align*}
+\begin{align}
 \varianceMatrix^{(0)} =
 \begin{bmatrix}
 \sigma_1^{2} & \hdots & 0\\
 \vdots & \ddots & \vdots\\
 0 & \hdots & \sigma_{\dimensions}^{2}
 \end{bmatrix}
-\end{align*}
+\end{align}
 The algorithm will in each generation sample a set of search points
 and rank these using the objective function.
 In each generation, $\populationSize$ vectors are sampled by 
@@ -84,11 +84,11 @@ function used to rank the value of a sampled vector.
 As described in the 'Optimizers' section, CE is a general stochastic 
 iterative algorithm that tries to solve an optimization problem of 
 the form \citep{thiery:09}:
-\begin{align*}
+\begin{align}
 \hat{\textbf{\individual }} &= 
 arg \  \underset{\textbf{\individual }}{max} \  
 \fitnessFunction (\textbf{\individual }) \ 
-\end{align*}
+\end{align}
 Where $x$ corresponds to a given vector, 
 and $\fitnessFunction$ is our actual objective function. 
 \\
@@ -100,9 +100,9 @@ the variance in each dimension along the diagonal, and zeros elsewhere.
 The parameters in the Gaussian distribution are ($\mean^{(\generation)}$,
 $\varianceMatrix^{(\generation)}$). 
 More specifically this Gaussian distribution is defined as 
-\begin{align*}
+\begin{align}
 \mathcal{N}(\mean^{(\generation)},\varianceMatrix^{(\generation)})
-\end{align*}
+\end{align}
 
 Where $\generation$ denotes the current iteration.\\
 
@@ -169,7 +169,7 @@ When updating the distribution parameters for the next iteration
 ($\mean_{\generation + 1}$,$\varianceMatrix^2_{\generation + 1}$), 
 the mean is updated by computing the centroid of the 
 $\offspringNumber$ highest ranking vectors. This is formally defined as:
-\begin{align*}
+\begin{align}
 \mean_{\generation +1}:=\frac{\sum_{i=1}^{\offspringNumber} \individual_{i}}{\offspringNumber}
 \ \ \ 
 \text{where}
@@ -177,7 +177,7 @@ $\offspringNumber$ highest ranking vectors. This is formally defined as:
 \fitnessFunction \left( \individual_{1} \right) \geq, \dots, 
 \geq \fitnessFunction \left( \individual_{\offspringNumber} \right) \geq, 
 \dots, \geq \fitnessFunction \left( \individual_{\populationSize} \right)
-\end{align*}
+\end{align}
 The diagonal matrix of variances $\varianceMatrix^2_{\generation + 1}$ is updated 
 to match the variance of the $\offspringNumber$ best
 vectors, such that the variance in dimension $k$ 
@@ -186,9 +186,9 @@ in dimension $k$. Hence, for $k \in \{ 1,\dots,\dimensions \}$,
 the $(k,k)$'th entry in the variance matrix is 
 updated 
 This is formally defined as:
-\begin{align*}
+\begin{align}
 {\varianceMatrix^2_{\generation +1}}_{k,k}:=\frac{\sum_{i}^{\offspringNumber}
 ({\individual_{i}}_k - \mean_{\generation +1})^2}{\offspringNumber} + 
 \noise_{\generation + 1}\ ,\ \ k \in \{ 1,\dots,\dimensions \}
-\end{align*}
+\end{align}
 \\

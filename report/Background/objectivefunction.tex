@@ -12,7 +12,7 @@ The rest of this section is devoted to present the properties of the
 general problem to be solved by the two algorithms, and how the 
 problem of optimizing Tetris fits within this model.
 
-\subsubsection{General problem}
+\subsubsection{General problem \label{ProblemFormulation}}
 
 The general problem that the Cross Entropy Method and CMA 
 tries to solve is often referred  to as a \textit{black box}
@@ -154,39 +154,39 @@ function described in section \ref{MDP}. This value function
 maps a feature set and a set of associated weights to a real value.
 The value from this function is used to \textit{rank} each possible action.
 this function is formally defined as
-\begin{align*}
+\begin{align}
 \valueFunction (\gameState ) &= 
 \sum_{i=1}^{\dimensions} \weight _{i}\feature _{i}(\gameState )
-\end{align*}
+\end{align}
 With this function, the $i$'th weight determines how
 much the $i$'th feature contribute to the decision making.
 In the case with figure \ref{fig:exampleBoard}, the features yield
 the following values
-\begin{align*}
+\begin{align}
 \feature_0 \left( \gameState \right) = 4\\
 \feature_1 \left( \gameState \right) = 3\\
 \feature_2 \left( \gameState \right) = 4
-\end{align*}
+\end{align}
 If all weight were set to $-1$, then the controllers perception 
 of the state would be
-\begin{align*}
+\begin{align}
 \valueFunction (\gameState ) &= 
 \weight_0 \feature_0 \left( \gameState \right) + 
 \weight_1 \feature_1 \left( \gameState \right) + 
 \weight_2 \feature_2 \left( \gameState \right)\\
 &= -4 -3 -4\\
 &= -13
-\end{align*}
+\end{align}
 When the controller simulates all possible actions, it will
 use the very same function on the state that each action transition 
 to and rank them in non-descending order. Thus, if the controller
 have the actions $\{\MDPAction_0,\dots,\MDPAction_n\}$ and action 
 $\MDPAction_i$ transitions to state $\gameState_i$, the controller will
 order all the actions such that
-\begin{align*}
+\begin{align}
 \valueFunction \left( \gameState_0 \right) \geq \dots \geq 
 \valueFunction \left( \gameState_n \right)
-\end{align*} 
+\end{align} 
 And then choose action $\MDPAction_0$. The policy of the agent 
 is then defined by the combination of feature set and the set of weights.\\
 \\

@@ -9,34 +9,34 @@ possible actions possible with the current piece. It will use the
 value function $\valueFunction$ of each state $\gameState_i$ and 
 choose the state with the highest value from the value function.
 Thus, if the states are ordered such that:
-\begin{align*}
+\begin{align}
 \valueFunction \left(  \gameState_1 \right) 
 > \dots 
 > \valueFunction \left( \gameState_\populationSize \right)
-\end{align*}
+\end{align}
 
 The agent then chooses the action that transitions from the current state 
 to state $\gameState_1$.\\
 Since the value function assess the state by the following:
-\begin{align*}
+\begin{align}
 \valueFunction (\gameState ) &= 
 \sum_{i=1}^{\dimensions} \weight _{i}\feature _{i}(\gameState )
-\end{align*}
+\end{align}
 
 Then scaling the input of the agent, the weight vector $\weight$, by a
 number $a \in \mathbb{R}, \ a > 0$ the assessment is changed by:
-\begin{align*}
+\begin{align}
 \sum_{i=1}^{\dimensions} a \weight _{i}\feature _{i}(\gameState ) &= 
 a\sum_{i=1}^{\dimensions} \weight _{i}\feature _{i}(\gameState )\\
 &= a \valueFunction \left( \gameState \right)
-\end{align*}
+\end{align}
 
 And the ordering remains:
-\begin{align*}
+\begin{align}
 a \valueFunction \left(  \gameState_1 \right) 
 > \dots 
 > a \valueFunction \left( \gameState_\populationSize \right)
-\end{align*}
+\end{align}
 
 Thus the order of the value functions of 
 each state does not change, and the same $\gameState_1$
@@ -52,4 +52,12 @@ in \citep{boumaza2009}, normalizing the samples will
 prevent CMA-ES from diverging in step size,
 and it can prevent loosing precision if the magnitude of weight 
 vector becomes larger than feasible for the used floating 
-point number and avoids size limitations.
+point number and avoids size limitations. However, brief experiments 
+with normalization of samples did not appear to have any effect 
+on either CMA-ES nor the Cross Entropy algorithm. Thus, albeit 
+being aware of the normalization option, this was not implemented
+in the actual experiments.
+
+
+
+

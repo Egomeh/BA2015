@@ -1,3 +1,56 @@
 \subsection{Implementation of Cross Entropy}
-\comment{- Write stuff here}\\
-\comment{- Make sure state that our implementation has been integrated in Shark}
+
+As we wish to compare the Cross Entropy algorithm 
+with the CMA-ES algorithm, we needed to have both algorithms
+in the same environment. We choose to use the Shark 
+library\footnote{\url{http://image.diku.dk/shark/}}
+as the framework for our experiments. Shark is a machine 
+learning library written in C++ and is shipped with various tools
+for formulating machine learning problems and a flexible 
+interface for applying algorithms for these. Another appealing
+feature of Shark is the already implemented CMA-ES algorithm.
+The Shark library does however not include an implementation of
+the Cross Entropy algorithm. As part of this thesis, we have contributed
+an implementation of the Cross Entropy algorithm to the Shark library.
+In Shark, there is a collection of algorithms grouped under the label
+'Direct Search' algorithms. These algorithms are designed to solve 
+problems like the one described in \ref{ProblemFormulation}. In this
+set of algorithm, the CMA-ES implementation exists. Our Cross Entropy
+algorithm is written to match the style of the CMA-ES code. As the algorithm
+works much in similar ways, the Cross Entropy vastly resembles the CMA-ES, 
+but with the core components of replaced.\\
+\\
+Our Cross Entropy has been accepted by the Shark development team and is 
+by now part of the official library, which can be found at 
+\url{https://github.com/Egomeh/Shark}, whereas the header of the 
+implementation can be found at 
+\url{https://github.com/Shark-ML/Shark/blob/master/include/shark/Algorithms/DirectSearch/CrossEntropyMethod.h}.\\
+\\
+The algorithm itself is modelled after the ones we've encountered 
+in the literature, in particular, a description of the algorithm is 
+present in \citep{thiery:09}. Thiery and Scherrer are the authers of the 
+MDPTetris platform used in our experiments, and the paper presents 
+results from their implementation of Cross Entropy. As the 
+software is shipped with a working implementation of Cross Entropy, written in C,
+this code has strongly influenced in our implementation as guidelines for
+the details of the implementation. The results from the paper is then further used
+to verify that our implementation of Cross Entropy is reasonable and working in 
+the like the ones we claim to resemble. The specifics of the validation process
+are described in detail in section \ref{varifyofce}. The paper only presents the
+graphs from their experiments, and single examples from the final iterations
+of their experiments. We tried to contact Bruno Scherrer in the hope that 
+the data might still be available, however, he wrote back that the data fro the
+original experiment is no longer stored. As a result of this, in our verification,
+observing similar graphs and a similar span in results has to suffice as 
+empirical evidence that our implementation work as desired. 
+The algorithm also need to be able to work as a general-purpose 
+search algorithm, such that it can be applied to problems of the same kind as 
+the CMA-ES in Shark. To make sure of this, the code that merged with the 
+Shark library includes a handful of unit tests. The tests chosen were some
+of that CMA-ES is tested with. In these tests, the algorithms are applied tosome 
+function, and if the found solution is better than a certain threshold, the 
+algorithm passes the test. The Cross Entropy algorithm managed to pass a portion 
+of those also solved by CNA-ES, albeit some with a more tolerant threshold.
+
+
+

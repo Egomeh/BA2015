@@ -8,12 +8,12 @@ optimization problems where the gradient is not available.
 The optimization functions aim to optimize 
 the parameter set $\textbf{\individual }$
 for the objective function $\fitnessFunction$.
-\begin{align*}
+\begin{align}
 \hat{\textbf{\individual }} &= 
 arg \  \underset{\textbf{\individual }}{max} \  
 \fitnessFunction (\textbf{\individual }) \ 
 :\mathbb{R}^{\dimensions } \rightarrow \mathbb{R}
-\end{align*}
+\end{align}
 
 In these methods, the optimizing algorithm uses a family of parametric distributions,
 and maintains a mean $\mean $ along with other parameters
@@ -39,7 +39,7 @@ parameters either at random or at some fixed point. A common
 configuration is setting the mean to 
 all zeros and the standard deviation to the identity matrix.
 Thus, for the first iteration $\generation = 0$, a configuration could be:
-\begin{align*}
+\begin{align}
 \mean^{(0)} =
 \begin{bmatrix}
 0\\
@@ -52,7 +52,7 @@ Thus, for the first iteration $\generation = 0$, a configuration could be:
 \vdots & \ddots & \vdots\\
 0 & \hdots & 1
 \end{bmatrix}
-\end{align*}
+\end{align}
 
 The superscript $(0)$ notes that the values occur in iteration 0.\\
 \\
@@ -60,14 +60,14 @@ In each iteration, the algorithms sample $\populationSize$ candidate solutions
 and evaluate their fitness
 against the objective function. When each of the solutions are evaluated,
 they are ordered according to their fitness:
-\begin{align*}
+\begin{align}
 \{\textbf{\individual }_{1}, \hdots, 
 \textbf{\individual }_{\populationSize }\}\ \ \text{Such that}\ \ 
 \fitnessFunction(\textbf{x}_1) \geq 
 \fitnessFunction(\textbf{\individual }_2), \hdots, 
 \fitnessFunction(\textbf{\individual }_{\populationSize  - 1}) \geq 
 \fitnessFunction(\textbf{\individual }_{\populationSize })
-\end{align*}
+\end{align}
 
 The mean and standard deviation for the next iteration, 
 that is $m^{(\generation+1)}$ and $M^{(\generation+1)}$, are
