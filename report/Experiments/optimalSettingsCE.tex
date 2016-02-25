@@ -7,6 +7,7 @@ Compared CMA, Cross Entropy has fewer customizable parameters, more specifically
 population-parent size and games played per agent.
 
 \subsubsection{Population and selection size}
+\comment{Due to added experiments, the second best is now 50/12 configurations, so explanation need altering}
 
 Other researchers run the Cross Entropy algorithm with population size of
 $\populationSize = 100$ and an offspring corresponding to 10\% of 
@@ -26,18 +27,23 @@ on page \pageref{CEConfigTest}.
 \begin{tabular}{r r | r r r r}
 $\populationSize$ & $\offspringNumber$ & mean & Q1 & Q2 & Q3\\
 \hline
-10 & $10\%$  & 704.6      & 7.2       & 48.3         & 430.3\\
-10 & $50\%$  & 9,272.5    & 149.6     & 7626.5       & 16,919.9\\
-22 & $10\%$  & 35,841.6   & 20,391.9  & 42,045.5     & 48,464.6\\
-22 & $50\%$  & 52,887.4   & 23,531.9  & 42,161.0     & 83,144.1\\
-50 & $10\%$  & 95,623.1   & 82,738.9  & 93,388.9     & 111,351.5\\
-50 & $50\%$  & 69,130.7   & 52,511.0  & 64,351.6     & 91,488.6\\
+12 & $10\%$  & 1585,3     & 93,0      & 113,5        & 220,7\\
+12 & $25\%$  & 30.496,9   & 15.222,1  & 20.264,2     & 39.019,8\\
+12 & $50\%$  & 39.824,2   & 26.457,0  & 33.663,4     & 49.743,7\\
+22 & $10\%$  & 35.841,6   & 20.391,9  & 42.045,5     & 48.464,6\\
+22 & $25\%$  & 80.884,9   & 56.042,5  & 71.900,2     & 78.653,4\\
+22 & $50\%$  & 52.887,4   & 23.531,9  & 42.161,0     & 83.144,1\\
+50 & $10\%$  & 95,623,1   & 82.738,9  & 93.388,9     & 111.351,5\\
+50 & $25\%$  & 110.525,0  & 103.128,1 & 111.195,5    & 121.974,4\\
+50 & $50\%$  & 69.130,7   & 52.511,0  & 64.351,6     & 91.488,6\\
 \hdashline
-100 & $10\%$ & 115,868.7  & 84,368.5  & 122,238.5    & 146,457.0\\
+100 & $10\%$ & 115.868,7  & 84.368,5  & 122.238,5    & 146.457,0\\
 \hdashline
-100 & $50\%$ & 22,910.4   & 4,037.7   & 14,353.7     & 47,215.9\\
-200 & $10\%$ & 85,181.7   & 45,201.5  & 96,803.1     & 117,578.0\\
-200 & $50\%$ & 946.4      & 585.0     & 802.5        & 1,267.7
+100 & $25\%$ & 70.011,1   & 58.008,0  & 69.588,2     & 80.432,7\\
+100 & $50\%$ & 22.910,4   & 4.037,7   & 14.353,7     & 47.215,9\\
+200 & $10\%$ & 85.181,7   & 45.201,5  & 96.803,1     & 117.578,0\\
+200 & $25\%$ & 32.894,6   & 8688,7    & 25.333,1     & 58.434,8\\
+200 & $50\%$ & 946,4      & 585,0     & 802,5        & 1.267,7
 \end{tabular}
 \caption{Cross Entropy configuration test, 
 see Appendix \ref{appendixCrossEntropyConfig} for the full plots 
@@ -69,7 +75,6 @@ extensively tested Cross Entropy configuration of $\populationSize = 100$ and $\
 \end{figure}
 
 \subsubsection{Games per agent \label{GamesPerAgentCESection}}
-
 Another parameter we can adjust is the number of 
 games played each agent plays per generation. By playing
 multiple games with each agent and using their 
@@ -143,7 +148,11 @@ $200$ & $50$ & 1 & $2950.767$ & $2564.118$ & $2841.065$ & $3377.189$\\
 \caption{Best configurations of all population sizes - Cross Entropy \label{CEBestConfigPlot}}
 \end{figure}
 
-From table \ref{CEBestConfigTable} and figure \ref{CEBestConfigPlot}, we can see that population size 50 with parent size 12 and 5 games per agent, population size 100 with parent size 25 and 3 games per agent, and, population size 200 with parent size 50 and 1 game per agent, performs almost identically.\\\\
+From table \ref{CEBestConfigTable} and figure \ref{CEBestConfigPlot}, we can see that population size 50 with parent size 12 and 5 games per agent, population size 100 with parent size 25 and 3 games per agent, and, population size 200 with parent size 50 and 1 game per agent, performs almost identically.\\
 
-\textbf{Discussion and analysis}
-\comment{pick best of three configurations and determine why}
+\textbf{Discussion and analysis}\\
+From the graph and the table depicting the quantiles, it appears that the configuration
+population size 200 with parent size 50 and 1 game per agent yields the best performance. 
+It achieves the highest score with the fastest convergence of all the candidate solution
+we have listed.\\
+Therefore, we will be using this configuration for the tuned comparison experiments.

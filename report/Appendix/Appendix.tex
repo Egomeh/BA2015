@@ -237,6 +237,7 @@ Noise & $max \left( 5 - \frac{t}{10}, 0 \right)$
 \clearpage
 
 \subsection{Population and selection size}
+\comment{Add plots and update quantile table}
 We want to investigate if there exists a better configuration than the 100/10 which was also previously used by other researchers.\\
 In Cross Entropy for the Tetris problem, 10 \% Parent selection is used as standard. However, we will also test 50 \% Parent selection is a configuration from CMA which we will also test.\\
 The general testing parameters are as follows
@@ -312,6 +313,36 @@ population & offspring & mean & Q1 & Q2 & Q3\\
 \end{tabular}
 \caption{Cross Entropy configuration test}
 \end{figure}
+
+
+The plots from the configuration of cross entropy.
+All plots shows the numbers of games played along the x-axis
+and the mean score of the centroid agent along the y-axis.
+
+\begin{tabular}{@{}l@{}l@{}}
+\includegraphics[scale=1]{plots/ce_ConstantNoise_l10_o1_all} &
+\includegraphics[scale=1]{plots/ce_ConstantNoise_l10_o5_all}
+\end{tabular}
+
+\begin{tabular}{@{}l@{}l@{}}
+\includegraphics[scale=1]{plots/ce_ConstantNoise_l22_o2_all}&
+\includegraphics[scale=1]{plots/ce_ConstantNoise_l22_o2_all}
+\end{tabular}
+
+\begin{tabular}{@{}l@{}l@{}}
+\includegraphics[scale=1]{plots/ce_ConstantNoise_l50_o5_all} &
+\includegraphics[scale=1]{plots/ce_ConstantNoise_l50_o25_all}
+\end{tabular}
+
+\begin{tabular}{@{}l@{}l@{}}
+\includegraphics[scale=1]{plots/ce_ConstantNoise_l100_o10_all} &
+\includegraphics[scale=1]{plots/ce_ConstantNoise_l100_o50_all}
+\end{tabular}
+
+\begin{tabular}{@{}l@{}l@{}}
+\includegraphics[scale=1]{plots/ce_ConstantNoise_l200_o20_all} &
+\includegraphics[scale=1]{plots/ce_ConstantNoise_l200_o100_all}
+\end{tabular}
 
 
 \clearpage
@@ -1482,6 +1513,11 @@ Noise & 4
 \end{table}
 
 INSERT PLOTS HERE.
+
+\begin{figure}[H]
+\includegraphics[scale=1]{plots/cmaCePlot}
+\caption{Initial comparison between CMA-ES and Cross Entropy \label{fig:CMA_VS_CE_00}}
+\end{figure}
 
 \clearpage
 

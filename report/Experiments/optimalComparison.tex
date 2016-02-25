@@ -1,3 +1,41 @@
 \subsubsection{Tuned comparison \label{tunedComparison}}
-\comment{DOASAS ASD}
+In this section we will conduct experiments comparing the optimized Cross Entropy against the
+optimized CMA obtained from the sections, \ref{GamesPerAgentCE} and \ref{OptimalSettingsCMA}.
+The chosen optimal settings for each of the algorithms is specified in the following tables
+\begin{table}[h]
+\centering
+\begin{tabular}{l r}
+Optimizer & CMA\\
+Number of Evaluations & 40000\\
+Number of Learning Games & 30\\
+Population size& 50\\
+Parent size & 25\\
+Games per Agent & 5\\
+Tetris Type & Normal\\
+\hline
+Recombination Type & LINEAR\\
+Initial Sigma & 0.5\\
+ & \\
+\end{tabular}
+\quad
+\begin{tabular}{l r}
+Optimizer & Cross Entropy\\
+Number of Evaluations & 40000\\
+Number of Learning Games & 30\\
+Population size & 200\\
+Parent size & 50\\
+Games per Agent & 1\\
+Tetris Type & Normal\\
+\hline
+Sigma & 100\\
+Noise Type & Constant\\
+Noise & 4
+\end{tabular}
+\caption{Optimized Cross Entropy and CMA for comparison experiments}
+\end{table}
+
+\textbf{Results}\\
+
+
+\textbf{Analysis and discussion}\\
 
