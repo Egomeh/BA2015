@@ -739,10 +739,10 @@ $200$ & $50$ & 1 & $2950.767$ & $2564.118$ & $2841.065$ & $3377.189$\\
 \caption{Best configurations of all population sizes - Cross Entropy}
 \end{figure}
 
-
+% initial sigma cma experiment
 \clearpage
 
-\subsection{Optimal settings for CMA - Initial Step-size}
+\subsection{Optimal settings for CMA - Initial Step-size \label{appendixCMAInitialSigma}}
 Experiments to find the best initial step-size for CMA.
 
 \begin{table}[h]
@@ -771,9 +771,23 @@ $\sigma_0$ & 0.1 & 0.2 & 0.5 & 0.8 & 1.0
 \end{tabular}
 \caption{Initial sigma configurations \label{InitialSigmaTest}}
 \end{table}
+This sections lists the raw graphs of the experiments that were
+to determine the effect of the initial sigma setting. 
 
-INSERT PLOTS HERE.\\
-\\
+\begin{tabular}{@{}l@{}l@{}}
+\includegraphics[scale=1]{plots/cma_initial_sigma_0_1} &
+\includegraphics[scale=1]{plots/cma_initial_sigma_0_2}
+\end{tabular}
+
+\begin{tabular}{@{}l@{}l@{}}
+\includegraphics[scale=1]{plots/cma_initial_sigma_0_5} &
+\includegraphics[scale=1]{plots/cma_initial_sigma_0_8}
+\end{tabular}
+
+\begin{tabular}{@{}l@{}l@{}}
+\includegraphics[scale=1]{plots/cma_initial_sigma_1_0} &
+\end{tabular}
+
 
 
 \begin{figure}[H]
@@ -789,6 +803,72 @@ $\sigma_0$ & mean & Q1 & Q2 & Q3\\
 \end{tabular}
 \caption{Results of CMA-ES with adjusted initial step-size \label{CMAInitialSigmaConfigTestAppendix}}
 \end{figure}
+
+
+% initial Lower bound
+\clearpage
+
+\subsection{Optimal settings for CMA - Lower bound \label{appendixCMALowerBound}}
+Experiments to find the best lower bound of $\sigma \lambda_n > l$ for CMA.
+
+\begin{table}[h]
+\centering
+\caption{Overview of the two table formats}
+\begin{tabular}{l r}
+Optimizer & CMA\\
+Number of Evaluations & 8000\\
+Number of Learning Games &30\\
+Population size& 13\\
+Parent size & 6\\
+Games per Agent & 1\\
+Tetris Type & Normal\\
+\hline
+Recombination Type & Superlinear\\
+Lower bound & See table \ref{appendixLowerBound}
+\end{tabular}
+\end{table}
+
+with the following lower bounds
+
+\begin{table}[H]
+\centering
+\begin{tabular}{c | c c c}
+$l$ & 0.5 & 2.0 & 4.0
+\end{tabular}
+\caption{Lower bound configurations \label{appendixLowerBound}}
+\end{table}
+This sections lists the raw graphs of the experiments that were
+to determine the effect of the initial sigma setting. 
+
+\begin{tabular}{@{}l@{}l@{}}
+\includegraphics[scale=1]{plots/cma_initial_sigma_0_1} &
+\includegraphics[scale=1]{plots/cma_initial_sigma_0_2}
+\end{tabular}
+
+\begin{tabular}{@{}l@{}l@{}}
+\includegraphics[scale=1]{plots/cma_initial_sigma_0_5} &
+\includegraphics[scale=1]{plots/cma_initial_sigma_0_8}
+\end{tabular}
+
+\begin{tabular}{@{}l@{}l@{}}
+\includegraphics[scale=1]{plots/cma_initial_sigma_1_0} &
+\end{tabular}
+
+\begin{figure}[H]
+\centering
+\begin{tabular}{r | r r r r r}
+$l$ & mean & Q1 & Q2 & Q3\\
+\hline
+0.5 & 42800.7 & 6780.8  & 36863.0 & 74722.5\\
+2.0 & 80733.4 & 62357.4 & 84349.0 & 108007.5\\
+4.0 & 61497.2 & 55621.7 & 64940.1 & 81991.6\\
+\end{tabular}
+\caption{Results of CMA-ES lower bounds \label{appendixCMALowerBoundConfigTest}}
+\end{figure}
+
+
+
+
 
 \clearpage
 
@@ -1406,7 +1486,7 @@ INSERT PLOTS HERE.
 \clearpage
 
 
-\input{Appendix/appendixInitialSigma}
+%\input{Appendix/appendixInitialSigma}
 
 \input{Appendix/appendixLowerBound}
 

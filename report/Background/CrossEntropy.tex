@@ -9,14 +9,14 @@ sample sample vectors for the objective function
 $\fitnessFunction$. The algorithm aims to 
 adjust the parameters of the distribution
 such that samples $\individual$ drawn from the distribution
-gives the best possible results whan aplied to the
+gives the best possible results when applied to the
 objective function $\fitnessFunction \left( \individual \right)$.\\
 \\
 The Cross-Entropy method starts with an initial 
 mean $\mean$ which is an $n$-dimensional vector
-typically set to 0:
+typically set to 0
 \begin{align*}
-\mean_0 = \begin{pmatrix}
+\mean^{(0)} = \begin{pmatrix}
 0\\
 \vdots\\
 0
@@ -25,10 +25,10 @@ typically set to 0:
 
 The second argument to the gaussian distribution is a 
 diaginal matrix which contains the variance for each 
-component.
+component
 
 \begin{align*}
-\varianceMatrix_0^{2} =
+\varianceMatrix^{(0)} =
 \begin{bmatrix}
 \sigma_1^{2} & \hdots & 0\\
 \vdots & \ddots & \vdots\\
@@ -58,18 +58,18 @@ The pseudo code and details of the algorithm can be seen in figure
 \begin{algorithmic}
 \State{\textbf{input}}
 \State{$\fitnessFunction$ : The function that estimates the performance of a vector $\individual$}
-\State{($\mean_0$, $\varianceMatrix^2_0$): The mean and variance of the initial distribution}
+\State{($\mean^{(0)}$, $\varianceMatrix^{(0)}$): The mean and variance of the initial distribution}
 \State{$\populationSize$ : The number of vectors sampled per generation/iteration}
 \State{$\offspringNumber$: The number of offspring selected for the new mean}
 \State{$\noise_{\generation}$: The noise added to each generation/iteration}
 \\
 
 \Loop
-\State{Generate $\populationSize$ vectors $\individual_{1}, \individual_{2}, \dots, \individual_{\populationSize}$ from $\mathcal{N}(\mean_{\generation}, \varianceMatrix^2_{\generation})$}
+\State{Generate $\populationSize$ vectors $\individual_{1}, \individual_{2}, \dots, \individual_{\populationSize}$ from $\mathcal{N}(\mean^{(\generation)}, \varianceMatrix^{(\generation)})$}
 \State{Evaluate each vector using $\fitnessFunction$}
 \State{Select the $\offspringNumber$ vectors with the highest evaluation}
-\State{Update $\mean_{\generation + 1}$ of the $\offspringNumber$ best vectors}
-\State{Update $\varianceMatrix^2_{\generation + 1}$ of the $\offspringNumber$ best vectors + $\noise_{\generation}$}
+\State{Update $\mean^{(\generation + 1)}$ based on the $\offspringNumber$ best vectors}
+\State{Update $\varianceMatrix^{(\generation + 1)}$ based on the $\offspringNumber$ best vectors + $\noise^{(\generation)}$}
 \EndLoop
 \end{algorithmic}
 \hrule
@@ -94,13 +94,14 @@ and $\fitnessFunction$ is our actual objective function.
 \\
 
 \textbf{The mean and variance of the gaussian distribution} \\
-Here $\mean_{\generation}$ is the mean and  
-$\varianceMatrix^2_{\generation}$ is the variance 
-of the gaussian distribution ($\mean_{\generation}$,
-$\varianceMatrix^2_{\generation}$). 
-More specifically this gaussian distribution is defined as 
+Here $\mean^{(\generation)}$ is the mean and  
+$\varianceMatrix^{(\generation)}$ is the covariance matrix, with 
+the variance in each dimension along the diagonal, and zeros elsewhere. 
+The parameters in the Gaussian distribution are ($\mean^{(\generation)}$,
+$\varianceMatrix^{(\generation)}$). 
+More specifically this Gaussian distribution is defined as 
 \begin{align*}
-\mathcal{N}(\mean_{\generation},\varianceMatrix^2_{\generation})
+\mathcal{N}(\mean^{(\generation)},\varianceMatrix^{(\generation)})
 \end{align*}
 
 Where $\generation$ denotes the current iteration.\\
@@ -126,7 +127,7 @@ is applied to the variance $\varianceMatrix^2$ in
 iteration/generation 
 $\generation$. In general, noise is used to prevent
 the algorithm from 
-getting narrowing down to a local optimum, but
+getting narrowing down to an undesired local optimum, but
 rather explore new solutions.
 The noise term can be any
 function of $\generation$. Among 
