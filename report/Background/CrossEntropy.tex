@@ -166,11 +166,11 @@ taking the $\individual_{i}$ vectors with the highest ranking.
 
 \textbf{Updating the distribution parameters}\\
 When updating the distribution parameters for the next iteration
-($\mean_{\generation + 1}$,$\varianceMatrix^2_{\generation + 1}$), 
+($\mean^{(\generation + 1)}$,$\varianceMatrix^{(\generation + 1)}$), 
 the mean is updated by computing the centroid of the 
 $\offspringNumber$ highest ranking vectors. This is formally defined as:
 \begin{align}
-\mean_{\generation +1}:=\frac{\sum_{i=1}^{\offspringNumber} \individual_{i}}{\offspringNumber}
+\mean^{(\generation +1)}:=\frac{\sum_{i=1}^{\offspringNumber} \individual_{i}}{\offspringNumber}
 \ \ \ 
 \text{where}
 \ \ \ 
@@ -187,8 +187,7 @@ the $(k,k)$'th entry in the variance matrix is
 updated 
 This is formally defined as:
 \begin{align}
-{\varianceMatrix^2_{\generation +1}}_{k,k}:=\frac{\sum_{i}^{\offspringNumber}
+{\varianceMatrix^{(\generation +1)}}_{k,k}:=\frac{\sum_{i}^{\offspringNumber}
 ({\individual_{i}}_k - \mean_{\generation +1})^2}{\offspringNumber} + 
 \noise_{\generation + 1}\ ,\ \ k \in \{ 1,\dots,\dimensions \}
 \end{align}
-\\
