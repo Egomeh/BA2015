@@ -7,8 +7,6 @@ Compared CMA, Cross Entropy has fewer customizable parameters, more specifically
 population-parent size and games played per agent.
 
 \subsubsection{Population and selection size}
-\comment{Due to added experiments, the second best is now 50/12 configurations, so explanation need altering}
-
 Other researchers run the Cross Entropy algorithm with population size of
 $\populationSize = 100$ and an offspring corresponding to 10\% of 
 the population size, resulting in $\offspringNumber = 10$. As it's not 
@@ -16,7 +14,7 @@ discussed why this exact setting is applied, various settings of the
 Cross-Entropy was executed to asses the performance of other configurations
 in our experiments.
 The experiments includes different population sizes 
-$\populationSize \in \{10, 22, 50, 100, 200\}$ and offspring 
+$\populationSize \in \{12, 22, 50, 100, 200\}$ and offspring 
 sizes of either $10\%$ and $50\%$ (since the CMA algorithm by default
 uses $50 \%$ selected vectors). 
 A summary of the experiments can be seen in figure \ref{CEConfigTest}
@@ -27,9 +25,9 @@ on page \pageref{CEConfigTest}.
 \begin{tabular}{r r | r r r r}
 $\populationSize$ & $\offspringNumber$ & mean & Q1 & Q2 & Q3\\
 \hline
-12 & $10\%$  & 1585,3     & 93,0      & 113,5        & 220,7\\
-12 & $25\%$  & 30.496,9   & 15.222,1  & 20.264,2     & 39.019,8\\
-12 & $50\%$  & 39.824,2   & 26.457,0  & 33.663,4     & 49.743,7\\
+13 & $10\%$  & 1585,3     & 93,0      & 113,5        & 220,7\\
+13 & $25\%$  & 30.496,9   & 15.222,1  & 20.264,2     & 39.019,8\\
+13 & $50\%$  & 39.824,2   & 26.457,0  & 33.663,4     & 49.743,7\\
 22 & $10\%$  & 35.841,6   & 20.391,9  & 42.045,5     & 48.464,6\\
 22 & $25\%$  & 80.884,9   & 56.042,5  & 71.900,2     & 78.653,4\\
 22 & $50\%$  & 52.887,4   & 23.531,9  & 42.161,0     & 83.144,1\\
@@ -54,12 +52,12 @@ The experiments with different population and parent sizes
 does not seem to support a choice for any other configuration 
 than the mostly commonly used 
 $\populationSize = 100$ and $\offspringNumber = 10$. \\
-However, with a configuration of $\populationSize = 50$ and $\offspringNumber = 5$ convergence
+However, with a configuration of $\populationSize = 50$ and $\offspringNumber = 12$ convergence
 is achieved faster (see figure \ref{fig:bestConfCE}). This means that the score limit is reached faster, which
 results in longer computation time, than the $\populationSize = 100$ and $\offspringNumber = 10$
 configuration. In other words, the $\populationSize = 100$ and $\offspringNumber = 10$ configuration 
 is therefore preferred since it takes shorter computation time and the end-result is similar compared
-to the $\populationSize = 50$ and $\offspringNumber = 5$ configuration, even though the latter 
+to the $\populationSize = 50$ and $\offspringNumber = 12$ configuration, even though the latter 
 configuration from our expriments converged faster. The experiments also apppears
 to suffer from a high noise, yet both the mean and the quantiles favor the 
 extensively tested Cross Entropy configuration of $\populationSize = 100$ and $\offspringNumber = 10$.
@@ -67,12 +65,13 @@ extensively tested Cross Entropy configuration of $\populationSize = 100$ and $\
 
 \begin{figure}[H]
 \begin{tabular}{@{}l@{}l@{}}
-\includegraphics[scale=1]{plots/ce_ConstantNoise_l50_o5_all} &
+\includegraphics[scale=0.4]{data/Population_and_selection_size/l50_o12/PlotFile.pdf} &
 \includegraphics[scale=1]{plots/ce_ConstantNoise_l100_o10_all}
 \end{tabular}
 \caption{The two best configurations of Cross Entropy 
 \label{fig:bestConfCE}}
 \end{figure}
+\comment{Change figure compile to either of the two plotted formats}
 
 \subsubsection{Games per agent \label{GamesPerAgentCESection}}
 Another parameter we can adjust is the number of 
@@ -91,9 +90,9 @@ testing.
 \begin{tabular}{c c c}
 Population Size & Parent size & Games per Agent\\
 \hline
-$12$ & $10\%$ & 1/3/5/7/10\\
-$12$ & $25\%$ & 1/3/5/7/10\\
-$12$ & $50\%$ & 1/3/5/7/10\\
+$13$ & $10\%$ & 1/3/5/7/10\\
+$13$ & $25\%$ & 1/3/5/7/10\\
+$13$ & $50\%$ & 1/3/5/7/10\\
 $22$ & $10\%$ & 1/3/5/7/10\\
 $22$ & $25\%$ & 1/3/5/7/10\\
 $22$ & $50\%$ & 1/3/5/7/10\\

@@ -1,0 +1,75 @@
+\documentclass[landscape,border=0pt]{standalone}
+\usepackage{graphicx,color,tikz,pgfplots}
+
+\begin{document}
+
+\begin{tabular}{@{}l@{}}
+\begin{tikzpicture}
+\begin{axis}[%
+	xmin=0,
+	xmax=8000,
+    xlabel={Agents evaluated},
+    ylabel={stepsize},
+    ymode=log,
+    log basis y={10},
+    width=16cm,
+    height=12cm,
+    legend pos=south east,
+    title={CMA with 30 evaluations}]
+\foreach \x in {0,1,2,3,4,5,6,7,8,9}
+{
+\addplot[color=black,mark=none, very thin]  
+ table [x=agents, y=meanScore, col sep=comma, ] {ce_ConstantNoise_l12_o1_\x.txt};
+}
+\end{axis}
+\end{tikzpicture}
+\end{tabular}
+
+
+
+\end{document}
+
+
+\begin{tabular}{@{}l@{}}
+\begin{tikzpicture}
+\begin{axis}[%
+	xmin=0,
+	xmax=8000,
+    xlabel={Agents evaluated},
+    ylabel={stepsize},
+    ymode=log,
+    log basis y={10},
+    width=16cm,
+    height=12cm,
+    legend pos=south east,
+    title={CMA with 30 evaluations}]
+\foreach \x in {0}
+{
+\addplot[color=black,mark=none, very thin]  
+ table [x=agents, y=score, col sep=comma, ] {outtest_\x.txt};
+}
+\end{axis}
+\end{tikzpicture}
+\end{tabular}
+
+\begin{tabular}{@{}l@{}}
+\begin{tikzpicture}
+\begin{axis}[%
+	xmin=0,
+	xmax=60000,
+    xlabel={Agents evaluated},
+    ylabel={stepsize},
+    ymode=log,
+    log basis y={10},
+    width=16cm,
+    height=12cm,
+    legend pos=south east,
+    title={CMA with 30 evaluations}]
+\foreach \x in {0,1,2,3,4,5,6,7}
+{
+\addplot[color=black,mark=none, very thin]  
+ table [x=agents, y=score, col sep=comma, ] {ce_ConstantNoise_l12_o1_\x.txt};
+}
+\end{axis}
+\end{tikzpicture}
+\end{tabular}
