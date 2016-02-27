@@ -102,6 +102,29 @@ Initial Sigma & 1
 
 \clearpage
 
+\begin{figure}
+	\centering
+	\captionsetup[subfigure]{justification=centering}
+    \begin{subfigure}[b]{0.49\textwidth}
+    	\caption{CMA - Hard Tetris}
+        \includegraphics[width=\textwidth]{data/complexity/cma_hard/PlotFile.pdf}
+    \end{subfigure} 
+    \begin{subfigure}[b]{0.49\textwidth}
+    	\caption{CMA - Normal Tetris}
+        \includegraphics[width=\textwidth]{data/complexity/cma_normal/PlotFile.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.49\textwidth}
+    	\caption{Cross Entropy - Hard Tetris}
+        \includegraphics[width=\textwidth]{data/complexity/ce_hard/PlotFile.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.49\textwidth}
+    	\caption{Cross Entropy - Normal Tetris}
+        \includegraphics[width=\textwidth]{data/complexity/ce_normal/PlotFile.pdf}
+    \end{subfigure}
+    
+    \caption{Complexity experiment results}
+\end{figure}
+
 
 \begin{table}[H]
 \centering
@@ -160,6 +183,8 @@ Noise Type & Constant\\
 Noise & 4
 \end{tabular}
 \end{table}
+
+\comment{Add individual plots}
 
 Used on the bertsekas and Dellacherie featuresets
 
@@ -233,10 +258,40 @@ Noise & $max \left( 5 - \frac{t}{10}, 0 \right)$
 \caption{Cross Entropy - Linear decreasing noise}
 \end{table}
 
+\clearpage
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=1]{plots/meansPlot}
+\end{center}
+\caption{Cross-Entropy mean performance}
+\end{figure}
+
+\clearpage
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.48]{plots/noNoisePlot}
+\end{center}
+\caption{No noise}
+\end{figure}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.48]{plots/constantNoisePlot}
+\end{center}
+\caption{Constant noise}
+\end{figure}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.48]{plots/linearNoisePlot}
+\end{center}
+\caption{Linear decreasing noise}
+\end{figure}
+
 
 \clearpage
 
 \subsection{Population and selection size}
+\comment{Update plots and quantile table}\\
 We want to investigate if there exists a better configuration than the 100/10 which was also previously used by other researchers.\\
 In Cross Entropy for the Tetris problem, 10 \% Parent selection is used as standard. However, we will also test 50 \% Parent selection is a configuration from CMA which we will also test.\\
 The general testing parameters are as follows
@@ -264,9 +319,9 @@ with the following population/Parent size
 \begin{tabular}{l l}
 Population size & Parent size\\
 \hline
-12 & 1\\
-12 & 3\\
-12 & 5\\
+13 & 1\\
+13 & 3\\
+13 & 5\\
 22 & 2\\
 22 & 5\\
 22 & 11\\
@@ -294,9 +349,9 @@ quantile table and two graphs over the mean plots of 10 \% and 50 \% Parent size
 \begin{tabular}{r r | r r r r}
 population & offspring & mean & Q1 & Q2 & Q3\\
 \hline
-12 & $10\%$  & 1585,3     & 93,0      & 113,5        & 220,7\\
-12 & $25\%$  & 30.496,9   & 15.222,1  & 20.264,2     & 39.019,8\\
-12 & $50\%$  & 39.824,2   & 26.457,0  & 33.663,4     & 49.743,7\\
+13 & $10\%$  & 1585,3     & 93,0      & 113,5        & 220,7\\
+13 & $25\%$  & 30.496,9   & 15.222,1  & 20.264,2     & 39.019,8\\
+13 & $50\%$  & 39.824,2   & 26.457,0  & 33.663,4     & 49.743,7\\
 22 & $10\%$  & 35.841,6   & 20.391,9  & 42.045,5     & 48.464,6\\
 22 & $25\%$  & 80.884,9   & 56.042,5  & 71.900,2     & 78.653,4\\
 22 & $50\%$  & 52.887,4   & 23.531,9  & 42.161,0     & 83.144,1\\
@@ -312,6 +367,36 @@ population & offspring & mean & Q1 & Q2 & Q3\\
 \end{tabular}
 \caption{Cross Entropy configuration test}
 \end{figure}
+
+
+The plots from the configuration of cross entropy.
+All plots shows the numbers of games played along the x-axis
+and the mean score of the centroid agent along the y-axis.
+
+\begin{tabular}{@{}l@{}l@{}}
+\includegraphics[scale=1]{plots/ce_ConstantNoise_l10_o1_all} &
+\includegraphics[scale=1]{plots/ce_ConstantNoise_l10_o5_all}
+\end{tabular}
+
+\begin{tabular}{@{}l@{}l@{}}
+\includegraphics[scale=1]{plots/ce_ConstantNoise_l22_o2_all}&
+\includegraphics[scale=1]{plots/ce_ConstantNoise_l22_o2_all}
+\end{tabular}
+
+\begin{tabular}{@{}l@{}l@{}}
+\includegraphics[scale=1]{plots/ce_ConstantNoise_l50_o5_all} &
+\includegraphics[scale=1]{plots/ce_ConstantNoise_l50_o25_all}
+\end{tabular}
+
+\begin{tabular}{@{}l@{}l@{}}
+\includegraphics[scale=1]{plots/ce_ConstantNoise_l100_o10_all} &
+\includegraphics[scale=1]{plots/ce_ConstantNoise_l100_o50_all}
+\end{tabular}
+
+\begin{tabular}{@{}l@{}l@{}}
+\includegraphics[scale=1]{plots/ce_ConstantNoise_l200_o20_all} &
+\includegraphics[scale=1]{plots/ce_ConstantNoise_l200_o100_all}
+\end{tabular}
 
 
 \clearpage
@@ -370,16 +455,16 @@ $200$ & $50\%$ & 1/3/5/7/10
 	\centering
 	\captionsetup[subfigure]{justification=centering}
     \begin{subfigure}[b]{0.49\textwidth}
-    	\caption{Population size 12, Parent size 1}
-        \includegraphics[width=\textwidth]{data/ce_population_offspring/12x_split/constant_l12_o1/mean/PlotFile.pdf}
+    	\caption{Population size 13, Parent size 1}
+        \includegraphics[width=\textwidth]{data/ce_population_offspring/13x_split/constant_l13_o1/mean/PlotFile.pdf}
     \end{subfigure} 
     \begin{subfigure}[b]{0.49\textwidth}
-    	\caption{Population size 12, Parent size 3}
-        \includegraphics[width=\textwidth]{data/ce_population_offspring/12x_split/constant_l12_o3/mean/PlotFile.pdf}
+    	\caption{Population size 13, Parent size 3}
+        \includegraphics[width=\textwidth]{data/ce_population_offspring/13x_split/constant_l13_o3/mean/PlotFile.pdf}
     \end{subfigure}
     \begin{subfigure}[b]{0.49\textwidth}
-    	\caption{Population size 12, Parent size 6}
-        \includegraphics[width=\textwidth]{data/ce_population_offspring/12x_split/constant_l12_o6/mean/PlotFile.pdf}
+    	\caption{Population size 13, Parent size 6}
+        \includegraphics[width=\textwidth]{data/ce_population_offspring/13x_split/constant_l13_o6/mean/PlotFile.pdf}
     \end{subfigure}
     \begin{subfigure}[b]{0.49\textwidth}
     	\caption{Population size 22, Parent size 2}
@@ -458,26 +543,27 @@ $200$ & $50\%$ & 1/3/5/7/10
 \begin{tabular}{c c c r r r r}
 Population & Parent & Games per Agent & mean & Q1 & Q2 & Q3\\
 \hline
-$12$ & $1$ & 1 & $57.818$ & $46.277$ & $58.650$ & $72.703$\\
-$12$ & $1$ & 3 & $356.373$ & $167.527$ & $271.933$ & $408.820$\\
-$12$ & $1$ & 5 & $673.571$ & $411.463$ & $563.983$ & $834.717$\\
-$12$ & $1$ & 7 & $942.772$ & $586.771$ & $819.434$ & $1249.562$\\
+$13$ & $1$ & 1 & $76.402$ & $46.143$ & $58.850$ & $87.786$\\
+$13$ & $1$ & 3 & $329.847$ & $180.787$ & $266.633$ & $418.630$\\
+$13$ & $1$ & 5 & $870.593$ & $648.593$ & $870.466$ & $1047.998$\\
+$13$ & $1$ & 7 & $951.487$ & $646.383$ & $915.418$ & $1130.101$\\
 \hdashline
-$12$ & $1$ & 10 & $1008.984$ & $724.373$ & $960.684$ & $1156.081$\\
+$13$ & $1$ & 10 & $1098.654$ & $834.683$ & $939.150$ & $1270.262$\\
 \hdashline
-$12$ & $3$ & 1 & - & - & - & -\\
-$12$ & $3$ & 3 & - & - & - & -\\
-$12$ & $3$ & 5 & - & - & - & -\\
+$13$ & $3$ & 1 & $681.930$ & $451.493$ & $615.583$ & $777.900$\\
+$13$ & $3$ & 3 & $1485.366$ & $1260.690$ & $1497.965$ & $1582.008$\\
+$13$ & $3$ & 5 & $1779.540$ & $1448.080$ & $1764.150$ & $2103.521$\\
+$13$ & $3$ & 7 & $1844.008$ & $1635.631$ & $1790.465$ & $2025.209$\\
 \hdashline
-$12$ & $3$ & 7 & - & - & - & -\\
+$13$ & $3$ & 10 & $1992.749$ & $1566.989$ & $1965.365$ & $2381.089$\\
 \hdashline
-$12$ & $3$ & 10 & - & - & - & -\\
-$12$ & $6$ & 1 & $510.686$ & $305.133$ & $421.067$ & $630.730$\\
-$12$ & $6$ & 3 & $1584.396$ & $1359.411$ & $1479.835$ & $1651.791$\\
-$12$ & $6$ & 5 & $1524.285$ & $1349.078$ & $1597.585$ & $1728.091$\\
-$12$ & $6$ & 7 & $1824.980$ & $1568.218$ & $1767.685$ & $2035.880$\\
+$13$ & $6$ & 1 & $814.019$ & $598.073$ & $736.783$ & $966.0269$\\
+$13$ & $6$ & 3 & $1595.290$ & $1219.319$ & $1504.700$ & $1870.699$\\
+$13$ & $6$ & 5 & $1981.514$ & $1695.181$ & $1927.700$ & $2151.810$\\
 \hdashline
-$12$ & $6$ & 10 & $2109.837$ & $1802.968$ & $2021.165$ & $2276.652$\\
+$13$ & $6$ & 7 & $2173.595$ & $1818.110$ & $2105.500$ & $2398.201$\\
+\hdashline
+$13$ & $6$ & 10 & $2129.880$ & $1825.599$ & $2058.970$ & $2391.860$\\
 \hdashline
 \end{tabular}
 \caption{population 12 - Cross Entropy}
@@ -619,17 +705,17 @@ $200$ & $100$ & 10 & $320.356$ & $287.023$ & $322.733$ & $350.773$\\
 \begin{tabular}{c c c r r r r}
 Population & Parent & Games per Agent & mean & Q1 & Q2 & Q3\\
 \hline
-$12$ & $1$ & 10 & $1008.984$ & $724.373$ & $960.684$ & $1156.081$\\
-$12$ & $3$ & 7 & - & - & - & -\\
-$12$ & $6$ & 10 & $2109.837$ & $1802.968$ & $2021.165$ & $2276.652$\\
+$13$ & $1$ & 10 & $1098.654$ & $834.683$ & $939.150$ & $1270.262$\\
+$13$ & $3$ & 10 & $1992.749$ & $1566.989$ & $1965.365$ & $2381.089$\\
+$13$ & $6$ & 7 & $2173.595$ & $1818.110$ & $2105.500$ & $2398.201$\\
 \end{tabular}
-\caption{population 12 - Cross Entropy}
+\caption{population 13 - Cross Entropy}
 \end{table}
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=1]{data/ce_population_offspring/bestofeach_population/12x/PlotFile.pdf}
-\caption{Best performing configurations for population size 12}
+\includegraphics[scale=1]{data/ce_population_offspring/bestofeach_population/13x/PlotFile.pdf}
+\caption{Best performing configurations for population size 13}
 \end{figure}
 
 \clearpage
@@ -724,7 +810,7 @@ $200$ & $100$ & 1 & $2589.020$ & $2391.080$ & $2594.285$ & $2798.470$\\
 \begin{tabular}{c c c r r r r}
 Population & Parent & Games per Agent & mean & Q1 & Q2 & Q3\\
 \hline
-$12$ & $6$ & 10 & $2109.837$ & $1802.968$ & $2021.165$ & $2276.652$\\
+$13$ & $6$ & 7 & $2173.595$ & $1818.110$ & $2105.500$ & $2398.201$\\
 $22$ & $5$ & 5 & $2371.793$ & $2013.168$ & $2412.815$ & $2708.931$\\
 $50$ & $12$ & 5 & $2749.991$ & $2605.171$ & $2702.400$ & $2835.960$\\
 $100$ & $25$ & 3 & $2776.560$ & $2397.691$ & $2742.950$ & $3027.541$\\
@@ -809,6 +895,7 @@ $\sigma_0$ & mean & Q1 & Q2 & Q3\\
 \clearpage
 
 \subsection{Optimal settings for CMA - Lower bound \label{appendixCMALowerBound}}
+\comment{Lower boud plots are wrong}\\
 Experiments to find the best lower bound of $\sigma \lambda_n > l$ for CMA.
 
 \begin{table}[h]
@@ -841,17 +928,9 @@ This sections lists the raw graphs of the experiments that were
 to determine the effect of the initial sigma setting. 
 
 \begin{tabular}{@{}l@{}l@{}}
-\includegraphics[scale=1]{plots/cma_initial_sigma_0_1} &
-\includegraphics[scale=1]{plots/cma_initial_sigma_0_2}
-\end{tabular}
-
-\begin{tabular}{@{}l@{}l@{}}
-\includegraphics[scale=1]{plots/cma_initial_sigma_0_5} &
-\includegraphics[scale=1]{plots/cma_initial_sigma_0_8}
-\end{tabular}
-
-\begin{tabular}{@{}l@{}l@{}}
-\includegraphics[scale=1]{plots/cma_initial_sigma_1_0} &
+\includegraphics[scale=1]{plots/cma_lower_bound_0_5} &
+\includegraphics[scale=1]{plots/cma_lower_bound_2_0}\\
+\includegraphics[scale=1]{plots/cma_lower_bound_4_0} &
 \end{tabular}
 
 \begin{figure}[H]
@@ -919,10 +998,6 @@ $100$ & $50$ & LINEAR/SUPERLINEAR & 1/3/5/7/10
 %\includegraphics[scale=0.5]{data/cma_population_offspring/12x_split/equal_l12_o1/mean/PlotFile.pdf}
 %\end{figure}
 
-\comment{When only testing 1 game pr agent, we observe that after 8000 agents it starts to decline in
- score, thus finding worse performing agents - some conclusion that cma with 1 game pr agent should be
-  run only for some time and not infinityly}
-\comment{as seen on ex. population 12, parent size 6, linear, if played with dynamic games, meaning 1 game up to 500 agent and then a higher games per agent afterwards, a fast convergence and high score is achieved.}
 
 \clearpage
 
@@ -1482,17 +1557,22 @@ Noise & 4
 \end{table}
 
 INSERT PLOTS HERE.
+\comment{add plots for non mean data}
+
+\begin{figure}[H]
+\includegraphics[scale=1]{plots/cmaCePlot}
+\caption{Initial comparison between CMA-ES and Cross Entropy \label{fig:CMA_VS_CE_00}}
+\end{figure}
 
 \clearpage
 
 
 %\input{Appendix/appendixInitialSigma}
 
-\input{Appendix/appendixLowerBound}
+%\input{Appendix/appendixLowerBound}
 
-\input{Appendix/appendixCEConfiguration} - \comment{Insert in above section}
+%\input{Appendix/appendixCEConfiguration} - \comment{Insert in above section}
 
-\clearpage
 
 \section{Cross Entropy Implementation - Shark library \label{app:crossEntropyCode}}
 

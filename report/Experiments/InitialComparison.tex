@@ -1,10 +1,10 @@
-\subsubsection{Initial comparison}
+\subsubsection{Initial comparison - Stock settings}
 For the initial comparison we use the Bertsekas featureset, since the same featureset
 was used for verifying the Cross Entropy implementation. Furthermore, others researchers
 has used the Bertsekas featureset as a benchmarking standpoint \citep{thiery:09} \&
 \citep{szita:06}.\\
 The goal of this comparison is to get an initial idea of how the Shark implementation of
-CMA compares to Cross Entropy.\\
+CMA compares to Cross Entropy with settings used by other researchers \citep{thiery:09}.\\
 
 \textbf{Results}
 
@@ -17,10 +17,10 @@ of $0.5$, we get the following results, seen in figure \ref{fig:CMA_VS_CE_00}.\\
 \end{figure}
 
 As figure \ref{fig:CMA_VS_CE_00} reveals that CMA converges faster,
-but reaches a local optimum at around 2,000 games played. Meanwhile CE has a 
-slower convergence but reaches a better mean score compared to CM at around 5,500
+but reaches a local optimum at around 2,000 games played. Meanwhile Cross Entropy has a 
+slower convergence but reaches a better mean score compared to CMA at around 5,500
 agents evaluated. In detail, CMA on average reaches a score of 50,000 rows, and
-CE reaches a score of 100,000.\\
+Cross Entropy reaches a score of 100,000.\\
 
 \comment{Add the raw graphs to appendix}
 
@@ -31,9 +31,9 @@ for CMA to outperform CE, due to its more sophisticated nature.
 One reason for this outcome could possibly be that
 CMA has a very little population size compared to Cross Entropy,
 which could be a decisive lack as the objective function is noisy with 
-a high variance. These results indicate a need to adjust the CMA
-configuration, to prevent the too fast convergance.
+a high variance.\\
 
+\comment{Remove rest of section because it is absolute from previous sections?}
 Among the possible adjustments are:\\
 \\
 \textit{Enlargment of population size}\\

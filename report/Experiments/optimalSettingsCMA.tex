@@ -210,7 +210,7 @@ Evidently, the setting of a lower bound $l=2.0$ appears as the preferable choice
 setting adopted across all further experiments.
 
 
-\subsubsection{Experiment for finding the optimal settings}
+\subsubsection{Experiment for finding the optimal settings \label{OptimalSettingsCMA}}
 In this in section we are going to conduct a wide variety of experiments to determine
 the best settings for CMA. More specifically we are going to find the best combination for
 population size, parent size and games per agent.\\
@@ -264,7 +264,7 @@ configuration for each Population-Parent size, regardless of recombination type.
 \begin{table}[H]
 \centering
 \small
-\begin{tabular}{r r l r r r r r}
+\begin{tabular}{c c l c r r r r}
 Population & Parent & Recombination & Games per Agent & Mean & Q1 & Q2 & Q3\\
 \hline
 $12$ & $6$  & SUPERLINEAR & 10 & $2472.293$ & $2194.049$ & $2430.780$ & $2709.040$\\
@@ -286,12 +286,10 @@ Linear recombination type, with population size 100, parent size 50 and 7 games 
 (black) yields a better score compared to Superlinear with population size 50, parent size 25 and 5 games per agent (green).
 However, green has a much faster convergence than black and almost reaches the same score.\\
 
-
 \textbf{Analysis and discussion}\\
 Because the green converges almost twice as fast as black, but reaches practically the same
-score, we opt to use the Superlinear with population size 50, parent size 25 and 5 games per agent for the comparison experiments.
-
-\comment{need more text in analysis and discussion - or is simple deduction ok?}
+score, we opt to use the Superlinear with population size 50, parent size 25 and 5 games per agent for the comparison experiments.\\
+Therefore, we will be using this configuration for the tuned comparison experiments.
 
 
 

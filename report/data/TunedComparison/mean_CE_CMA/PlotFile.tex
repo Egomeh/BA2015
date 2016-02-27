@@ -1,0 +1,31 @@
+\documentclass[landscape,border=0pt]{standalone}
+\usepackage{graphicx,color,tikz,pgfplots}
+
+\begin{document}
+
+\begin{tabular}{@{}l@{}}
+\begin{tikzpicture}
+\begin{axis}[%
+	xmin=0,
+	xmax=40000,
+	ymin=0,
+	ymax=1000000,
+    xlabel={Agents evaluated},
+    ylabel={Mean Score},
+    ymode=log,
+    log basis y={10},
+    width=16cm,
+    height=12cm,
+    legend pos=south east,
+    %title={Meanscore of constant noise, population size 13 and parent size 1}
+    ]
+\addplot[color=blue,mark=none, very thin, each nth point=1]  
+ table [x=agents, y=meanScore, col sep=comma, ] {mean_ConstantNoise_g1_l200_o50.txt};
+ \addlegendentry{Cross Entropy}
+\end{axis}
+\end{tikzpicture}
+\end{tabular}
+
+
+
+\end{document}
