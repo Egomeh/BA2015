@@ -1,18 +1,22 @@
 \subsection{Markov Decision Processes \label{MDP}}
 
 A Markov Decision Process (MDP) is a model for an automatic 
-decision making system. In the MDPTetris platform the agent
-that plays the simulated games makes decisions modeled
+decision making system. An MDP can be used to model the actions 
+of an agent in a game, in this case Tetris. 
+In the MDPTetris platform the agent
+that plays the simulated games makes decisions modelled
 after an MDP \citep{mdptetris}. The specifics of the 
-MDPTetrsi platform is covered in section \ref{sec:MDPTetris}.
+MDPTetris platform is covered in section \ref{sec:MDPTetris}.
 An MDP consists of a set of states $\MDPStates$,
 a set of actions $\MDPActions$ and a 
 \textit{state transition probability kernel} $\MDPTKernel$.
 The states in $\MDPStates$ denotes all the states of the game
-including the agent itself. In Tetris, the state is simply the
+including the agent itself. That is, every scenario
+the game can occur in, is within the set $\MDPStates$. 
+In Tetris, the state is simply the
 state of board in regards to which cells are
-occupied by pieces and which are not. The state also contains
-the current piece to be dropped by the controller.
+occupied by pieces and which are not and the 
+current piece about to be dropped.
 The actions in $\MDPActions$
 denotes all the actions that an agent may take. The $\MDPTKernel$ is
 a probability function that determines how likely it is for an action 
@@ -39,21 +43,30 @@ The optimal value function, that plays the game as well
 as possible is denoted $\MDPValueFunction^{*}$. Optimizing the 
 agent is a task that consists of determining a policy $\policy$ for which
 $\MDPValueFunction^{\policy}$ gets as close to $\MDPValueFunction^{*}$
-as possible. Finding the best policy for Tetris is a very computationally heavy 
+as possible. In the case of Tetris, the piece dropped is stochastically 
+chosen, and following the same policy during multiple games may not lead to the 
+same reward. Thus, when considering a stochastic problem the reward 
+from following a given policy is stochastic as well. This means that 
+we can only predict an expected consultative reward.
+Finding the best policy for Tetris is a very computationally heavy 
 task due to the enormous state space. Also, in the MDPTetris platform,
 the agent will not be aware of the entire game state exactly to its 
-size, but is rather use policies that are concerned with simplified
+size, but uses policies that are concerned with simplified
 features of the game (described in detail in later sections). 
 The methods in reinforcement learning provides various ways to
 search for good policies.
 One approach is 
 Dynamic Programming (DP). The idea behind DP is to, for each state,
-estimate the reward gained by the agent in for each possible action.
+estimate the reward gained by the agent for each possible action.
+Using DP to learn how well a policy performs when starting in a 
+given state, one would traverse the entire state set through every
+action and record how much reward each action is expected to 
+yield.
 Yet, the DP approach is in the case of Tetris infeasible as it 
 is a far too overwhelming task to comprehensively compute
 the full traversal of the games state space. 
 To give an intuition of this, consider
-an MDP illustrated in figure figure \ref{fig:hypotheticalMDPGame}.
+an MDP illustrated in figure \ref{fig:hypotheticalMDPGame}.
 The MDP models a hypothetical game with a set of sates 
 $\MDPStates = \{\MDPState_0, \MDPState_1, \MDPState_2, \MDPState_3,
 \MDPState_4\}$ where the agent is given a reward of $\MDPReward_n$
@@ -71,8 +84,8 @@ up in state $\MDPAction_0$ again and receive a reward of $\MDPReward_0$.
 In this case, it is viable to compute the optimal policy by traversing
 all states and compute the expected reward based on chosen actions.
 Thus, for a policy $\policy$ DP allows one to obtain exactly the expected 
-reward given to the agent when following $\policy$.
-\begin{figure}[H]
+reward given to the agent when following $\policy$.\\
+\begin{figure}
 \centering
 \begin{tikzpicture}[scale=0.7]
 \draw  (0,0) ellipse (1 and 1);
@@ -216,15 +229,19 @@ Programming approach.
 
 However, another and more viable solution is in this 
 case the \textit{Monte Carlo} methods \citep{Csaba}. 
-With the \textit{Monte Carlo} method, the goal is to learn
-the value of $\MDPValueFunction^{\policy}$, in our case, 
+With the \textit{Monte Carlo} method, the goal is just like with DP
+to learn
+the value of $\MDPValueFunction^{\policy}$. In our case, 
 we typically wish to estimate the value function from the starting 
-state of the game. Using the method, the episode is simulated 
+state of the game. Using the method, the episode/game is simulated 
 and the agent will interact with the environment with the given policy
 and finally exit with an estimate of $\MDPValueFunction^{\policy}$,
 in our case, the final score. Thus, using this method, we need not search 
 through the entire state set, and neither do we need to know all
 details of the game states the agent went through while playing.
+All we have to be concerned with is to, on a trial-and-error basis
+adjust the policy and use the simulations to reveal what adjustments 
+are beneficial.
 Hence, the \textit{Monte Carlo} approach fits the case of Tetris
 very well as we cannot afford to comprehensively  model the entire 
 state space, but only need assess the performance of a policy from the 

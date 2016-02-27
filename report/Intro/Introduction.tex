@@ -2,21 +2,33 @@
 
 This thesis will cover an experimental approach 
 to compare two optimization algorithms both considered 
-state-of-the-art search methods. The algorithms will be applied to 
+state-of-the-art search methods. The algorithms addressed
+are in particular known as the Cross Entropy method and 
+the Covariance Matrix Adaption Evolution Strategy (CMA-ES or CMA
+for short). The algorithms are characterized by each thriving
+in their ability to search in rough multidimensional 
+search spaces that only offers little possibility 
+for analytical approaches.
+The algorithms will be applied to 
 learning the game Tetris. Most often, when machine learning
 techniques are applied to problems such as games, conventional
 learning methods fall short due to both  very large number of 
 possible actions in the games and to highly unpredictable mappings 
 between actions and their long-term consequences. The games 
-are considered and episodic task where some agent is placed
-in the game environment and attempt to play the game as well
-as possible. The agent will make decisions on how to react 
-to the game while playing, and optimizing the agent is hence 
-find as good as possible policies for the agent. Yet, as mentioned,
+are considered episodic tasks where some agent is placed
+in the game environment and interacts with the game folowing some
+strategy that will hopefully result in a high score. 
+The agent will make decisions on how to react 
+to the game while playing, and optimizing the agent is hence a task of
+finding as good as possible policies for the agent to follow. Yet, as mentioned,
 deciding what makes a policy good can be very difficult in
-problems like games. Hence, the development of the policies 
-is based on reinforcement learning where the only feedback 
-on the policy is the score gained at the end of a game.
+problems like games. When applying reinforcement policies to learning
+the policies, conventional approaches typically do not suffice 
+due to infeasible computation times. We will cover how
+Tetris can be formulated in way that allows  the Cross Entropy method 
+and CMA-ES to search for policies, and we will experimentally 
+attempt to obtain an empirical perception of whether of the two algorithms
+are preferable in this scenario.
 
 \input{Intro/rl}
 

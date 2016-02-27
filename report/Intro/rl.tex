@@ -3,7 +3,7 @@
 In the field of Machine Learning, the sub field of reinforcement learning
 deals with training agents to behave in an environment through
 trial and error. The environment typically consists of a set of states
-between which an agent can transition through a set of actions.
+between which an agent can transition through via a set of actions.
 The reinforcement learning methods relates somewhat 
 to supervised and unsupervised learning models. In unsupervised 
 learning, the agents are never given a feedback on their actions
@@ -29,24 +29,30 @@ goal of the agent is to accumulate as much reward as possible
 before the episode ends. When the agent interacts 
 with the environment, it transitions between different states through 
 actions. To determine what action to take, the agent will use
-a function that the yields a reward given to the agent 
-if the action is taken. 
+a a policy that yields an expectation of how much reward is achieved
+if different actions are taken. 
 The goal is then to choose a policy, that when followed by the agent,
-gives the highest possible cumulative reward over time. 
+gives the highest possible cumulative reward at the end of a game/episode. 
 It's important to notice that the reward 
 for an action may be negative, and will in such case actively discourage 
 the agent for taking given actions.
 The environment, in which the agent appears, often 
 or at least for simplicity, has an exit state
 in which the agent is terminated, and the cumulative reward 
-is revealed. The action transitions may 
+is revealed. This is very much the case in games, where the goal 
+is often to either reach the final state as fast as possible,
+or to keep the game running for as long as possible.
+The action transitions may 
 not be deterministic and if they are not,
 it's required that the probabilities of transitions
-remain during the entire episode \citep{Carr}. If the state space 
+remain during the entire episode \citep{Carr}. Actions not being deterministic
+means that if an action is taken by the agent, the agent cannot 
+with certainty predict in which state it transitions to.
+If the state space 
 is large enough, it becomes infeasible to attempt to compute 
 the commutative reward when taking actions, as this would require
-a thorough search of a large space. Thus, in situations 
-with large state spaces, such as Tetris, one must choose 
+a thorough search of a far too large space. Thus, in situations 
+with large state spaces, as Tetris will turn out to be, one must choose 
 an approach for finding the best possible policies by other
 means than exhaustive search. The methods used in reinforcement learning 
 does specify how the agent should change its policy according to 
