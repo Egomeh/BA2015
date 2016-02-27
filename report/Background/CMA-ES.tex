@@ -45,7 +45,7 @@ $C$ is the covariance matrix usually set to $C=I$}
 \State{Set initial internal parameters}
 \\
 \Loop
-\State{Increment generation counter2}
+\State{Increment generation counter}
 \State{Sample new generation}
 \State{Evaluate each vector using $\fitnessFunction$ and recombine}
 \State{Covariance matrix adaption}
@@ -55,12 +55,6 @@ $C$ is the covariance matrix usually set to $C=I$}
 \hrule
 \caption{The pseudo code for the Cross-Entropy algorithm \label{fig:cmaCode}}
 \end{figure}
-
-Note here that the population size in this section is denoted as
-$\lambda$ as opposed to $\populationSize$. Also the iteration/generation 
-counter is referred to s $g$ rather than $\generation$. 
-This is to remain consistent 
-with the tutorial.
 
 \subsubsection{Input}
 
