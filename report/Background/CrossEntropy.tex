@@ -38,7 +38,7 @@ component
 The algorithm will in each generation sample a set of search points
 and rank these using the objective function.
 In each generation, $\populationSize$ vectors are sampled by 
-$\individual_{i} \sim \mathcal{N} \left(\mean, \varianceMatrix^{2} \right)
+$\individual_{i} \sim \mathcal{N} \left(\mean, \varianceMatrix \right)
 ,\ i \in \{1,\dots,\populationSize \}$. The vectors are all evaluated 
 against the fitness function and ordered such that $\fitnessFunction \left( \individual_{1} \right) \geq, \dots, \geq \fitnessFunction \left( \individual_{\populationSize} \right)$
 , and the $\offspringNumber$ best are chosen for updating the distribution 
@@ -113,17 +113,17 @@ $\populationSize$ is the number of vectors sampled in each generation.
 
 \textbf{The number of selected vectors / parents}\\
 $\offspringNumber$ is the number of vectors which are selected to compute 
-the new mean $\mean_{\generation + 1}$, and variance
-$\varianceMatrix^2_{\generation + 1}$, for next generation/iteration. 
+the new mean $\mean^{(\generation + 1)}$, and variance
+$\varianceMatrix^{(\generation + 1)}$, for next generation/iteration. 
 These offspring vectors gets selected 
 directly by taking the $\offspringNumber$ best ranked
 vectors.
 \\
 
 \textbf{The noise term}\\
-The noise factor, $\noise_{\generation}$, 
+The noise factor, $\noise^{(\generation)}$, 
 is the amount of noise which 
-is applied to the variance $\varianceMatrix^2$ in
+is applied to the variance $\varianceMatrix^{(\generation)}$ in
 iteration/generation 
 $\generation$. In general, noise is used to prevent
 the algorithm from 
@@ -133,14 +133,14 @@ The noise term can be any
 function of $\generation$. Among 
 the most described noise types are: no noise, constant noise 
 and linear decreasing noise \citep{szita:06}. 
-When using no noise, $\noise_{\generation}$ 
+When using no noise, $\noise^{(\generation)}$ 
 is simply set to zero. When using constant noise, 
 the same value is 
-added to the variance $\varianceMatrix^2$ 
+added to the variance $\varianceMatrix^{(\generation)}$ 
 in each iteration/generation. 
 When using linear decreasing noise, 
-$\noise_{\generation}$ is often set as
-$\noise_{\generation}=max(5- \generation /10,0)$.
+$\noise^{(\generation)}$ is often set as
+$\noise^{(\generation)}=max(5- \generation /10,0)$.
 \\
 
 \subsubsection{Loop}
@@ -149,7 +149,7 @@ $\noise_{\generation}=max(5- \generation /10,0)$.
 The first step of the loop is to generate the new generation 
 consisting of $\populationSize$ vectors. 
 These vectors are drawn from the distribution 
-$\individual_{i}\sim \mathcal{N}(\mean_{\generation},\varianceMatrix^2_{\generation})$.
+$\individual_{i}\sim \mathcal{N}(\mean^{(\generation)},\varianceMatrix^{(\generation)})$.
 \\
 
 \textbf{Evaluating the population}\\
