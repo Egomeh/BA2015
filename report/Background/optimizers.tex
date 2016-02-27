@@ -15,7 +15,10 @@ arg \  \underset{\textbf{\individual }}{max} \
 :\mathbb{R}^{\dimensions } \rightarrow \mathbb{R}
 \end{align}
 
-In these methods, the optimizing algorithm uses a family of parametric distributions,
+Often, the problem is depicted as a minimization problem which is quite
+the opposite in relation to Tetris where the goal is to gain as high score as possible.
+Therefore we depict the problem entirely as a optimization problem.
+In these optimization methods, the optimizing algorithm uses a family of parametric distributions,
 and maintains a mean $\mean $ along with other parameters
 to search the best possible solution for the objective function.  
 In the case studied in this thesis
@@ -59,7 +62,7 @@ The superscript of $(0)$ notes that the values occur in iteration 0.\\
 In each iteration, the algorithms sample $\populationSize$ candidate solutions 
 and evaluate their fitness
 against the objective function. When each of the solutions are evaluated,
-they are ordered according to their fitness:
+they are ordered according to their fitness
 \begin{align}
 \{\textbf{\individual }_{1}, \hdots, 
 \textbf{\individual }_{\populationSize }\}\ \ \text{Such that}\ \ 
@@ -68,6 +71,12 @@ they are ordered according to their fitness:
 \fitnessFunction(\textbf{\individual }_{\populationSize  - 1}) \geq 
 \fitnessFunction(\textbf{\individual }_{\populationSize })
 \end{align}
+This sorting is a rather essential part of the way the search parameters are
+updated. Both the Cross Entropy and CMA-ES algorithm use a fraction of the 
+best solutions that were drawn from it's Gaussian distribution. An essential 
+part of the selection is that the candidate solutions are not contributing
+directly according to their yield from the fitness function, but only from 
+how they are ranked relative to the other solutions. 
 
 The mean and standard deviation for the next iteration, 
 that is $m^{(\generation+1)}$ and $M^{(\generation+1)}$, are
