@@ -2,7 +2,7 @@
 for Cross Entropy \label{optimalsettingsce}}
 
 In this section we will determine the optimal settings for Cross Entropy through testing
-of various adjustable parameters.\\
+by various adjustable parameters.\\
 Compared CMA, Cross Entropy has fewer customizable parameters, more specifically 
 population-parent size and games played per agent.
 
@@ -14,9 +14,9 @@ discussed why this exact setting is applied, various settings of the
 Cross-Entropy was executed to asses the performance of other configurations
 in our experiments.
 The experiments includes different population sizes 
-$\populationSize \in \{12, 22, 50, 100, 200\}$ and offspring 
-sizes of either $10\%$ and $50\%$ (since the CMA algorithm by default
-uses $50 \%$ selected vectors). 
+$\populationSize \in \{13, 22, 50, 100, 200\}$ and offspring 
+sizes of either $10\%$, $25\%$ and $50\%$ (since the CMA algorithm by default
+uses $50 \%$ selected vectors for Linear and Super linear recombination, and $25\%$ for equal recombination). 
 A summary of the experiments can be seen in figure \ref{CEConfigTest}
 on page \pageref{CEConfigTest}.
 
@@ -44,7 +44,7 @@ $\populationSize$ & $\offspringNumber$ & mean & Q1 & Q2 & Q3\\
 200 & $50\%$ & 946,4      & 585,0     & 802,5        & 1.267,7
 \end{tabular}
 \caption{Cross Entropy configuration test, 
-see Appendix \ref{appendixCrossEntropyConfig} for the full plots 
+see Appendix \ref{appendix:PopulationAndSelectionSize} for the full plots 
 of the experiments.  \label{CEConfigTest}}
 \end{figure}
 
@@ -62,24 +62,22 @@ configuration from our expriments converged faster. The experiments also apppear
 to suffer from a high noise, yet both the mean and the quantiles favor the 
 extensively tested Cross Entropy configuration of $\populationSize = 100$ and $\offspringNumber = 10$.
 
-\begin{changebar}
-\cbcolor{blue}
+
 \begin{figure}[H]
 \begin{tabular}{@{}l@{}l@{}}
-\includegraphics[scale=1]{plots/ce_ConstantNoise_l50_o5_all} &
+\includegraphics[scale=0.4]{data/Population_and_selection_size/l50_o12/PlotFile.pdf} &
 \includegraphics[scale=1]{plots/ce_ConstantNoise_l100_o10_all}
 \end{tabular}
 \caption{The two best configurations of Cross Entropy 
 \label{fig:bestConfCE}}
 \end{figure}
-\end{changebar}
+\comment{Change figure compile to either of the two plotted formats}
 
 \subsubsection{Games per agent \label{GamesPerAgentCESection}}
 Another parameter we can adjust is the number of 
-games played each agent plays per generation. By playing
+games played by each agent plays per generation. By playing
 multiple games with each agent and using their 
-mean score to compute the next generation mean. This
-secures a higher chance of a better offspring generation,
+mean score to compute the next generation mean, ensures a higher chance of a better offspring generation,
 but at the cost of more games
 evaluated.\\
 Table \ref{GamesPerAgentCE} shows the different values of
@@ -100,8 +98,8 @@ $22$ & $50\%$ & 1/3/5/7/10\\
 $50$ & $10\%$ & 1/3/5/7/10\\
 $50$ & $25\%$ & 1/3/5/7/10\\
 $50$ & $50\%$ & 1/3/5/7/10\\
-$100$ & $10\%$  & 1/3/5/7/10\\
-$100$ & $25\%$  & 1/3/5/7/10\\
+$100$ & $10\%$ & 1/3/5/7/10\\
+$100$ & $25\%$ & 1/3/5/7/10\\
 $100$ & $50\%$ & 1/3/5/7/10\\
 $200$ & $10\%$ & 1/3/5/7/10\\
 $200$ & $25\%$ & 1/3/5/7/10\\
@@ -130,10 +128,10 @@ configuration for each Population-Parent size. Which is depicted in table \ref{C
 \begin{table}[H]
 \centering
 \small
-\begin{tabular}{r r r r r r r}
+\begin{tabular}{c c c r r r r}
 Population & Parent & Games per Agent & mean & Q1 & Q2 & Q3\\
 \hline
-$12$ & $6$ & 10 & $2109.837$ & $1802.968$ & $2021.165$ & $2276.652$\\
+$13$ & $6$ & 10 & $2109.837$ & $1802.968$ & $2021.165$ & $2276.652$\\
 $22$ & $5$ & 5 & $2371.793$ & $2013.168$ & $2412.815$ & $2708.931$\\
 $50$ & $12$ & 5 & $2749.991$ & $2605.171$ & $2702.400$ & $2835.960$\\
 $100$ & $25$ & 3 & $2776.560$ & $2397.691$ & $2742.950$ & $3027.541$\\
@@ -144,7 +142,7 @@ $200$ & $50$ & 1 & $2950.767$ & $2564.118$ & $2841.065$ & $3377.189$\\
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.8]{data/ce_population_offspring/bestofall_population/PlotFile.pdf}
+\includegraphics[scale=1]{data/ce_population_offspring/bestofall_population/PlotFile.pdf}
 \caption{Best configurations of all population sizes - Cross Entropy \label{CEBestConfigPlot}}
 \end{figure}
 
