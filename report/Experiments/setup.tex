@@ -4,7 +4,7 @@ When executing the experiments, various parameters each have
 an impact on the final result of the learning curve. Thus, the parameters
 are adjusted, first to match the experiments run by other researchers, 
 and later to conduct as fair as possible comparisons between 
-Cross-Entropy and CMA.\\
+Cross-Entropy and CMA-ES.\\
 \\
 % agents
 The amount of vectors sampled in each generation $\populationSize$
@@ -18,7 +18,7 @@ tuning this parameter is then
 to set $\populationSize$ high enough to ensure 
 exploration of good solutions, and yet 
 low enough to avoid unnecessary evaluations.\\
-In the implementation of CMA from \shark, 
+In the implementation of CMA-ES from \shark , 
 the algorithm  itself determines
 the value of $\populationSize$ according to the 
 size of the search space. 
@@ -36,8 +36,8 @@ further since the updated mean would be too close to the previous one to
 significantly make a difference. By setting the value too low,
 the risk of reaching a local optimum increases since the high-scoring agents
 might have reached their high performance by chance.\\
-The CMA itself manages setting $\offspringNumber$ and Cross-Entropy
-is set according to the problem. Most papers that uses Cross-Entropy for Tetris
+The CMA-ES itself manages setting $\offspringNumber$ and Cross-Entropy
+is set according to the problem. Most authors that uses Cross-Entropy for Tetris
 sets the offspring size to $10\%$ of population size, that is 
 $\offspringNumber = \lfloor 0.1 \cdot \populationSize \rfloor $.\\
 \\
@@ -49,7 +49,7 @@ mean of the score of these
 $\numberOfEvaluations$ games.
 We want this value low as possible, because as with the number of
 agents, $\populationSize$, The number of games, $\numberOfEvaluations$, 
-is another major factor in the runtime of the algorithm.
+is another major factor in the run-time of the algorithm.
 As Tetris is stochastic by nature, the score deviates a lot, 
 even when the
 same agent with the same policy plays multiple games. 
@@ -60,17 +60,17 @@ agents, yet, it also causes longer run times of the experiments.\\
 \\
 % Noise factor
 Specific to the Cross-Entropy method, 
-most papers report that the performance of the 
+most authors report that the performance of the 
 algorithm increases dramatically when the sampling 
 distribution is associated with
 a noise term. The different types of 
 noise are described in section \ref{CrossEntropy}.
 The noise term is adjusted in order to 
 prevent the algorithm from reaching a local optimum.
-The current research shows that noise terms of $\noise_\generation = 4$ and 
-$\noise_\generation = max \left( 5 - \generation / 10 \right)$ 
+The current research shows that noise terms of $\noise^{(\generation)} = 4$ and 
+$\noise^{(\generation)} = max \left( 5 - \generation / 10 \right)$ 
 \citep{thiery:09} produces the best results.
-The constant noise (such as $\noise_\generation = 4$) ensures that the algorithm
+The constant noise (such as $\noise^{(\generation)} = 4$) ensures that the algorithm
 never settles in a too small area from which it samples, and forces it to explore
 solutions that are further away from the mean. The further the 
 algorithm progresses, 
@@ -85,7 +85,7 @@ at hand. In the verification of the Cross-Entropy, the parameters are set
 to match those reported in similar papers (\cite{thiery:09}, \cite{szita:06}).
 In the comparison of the two algorithms, the parameters will be set such that 
 the Cross-Entropy operates under as 
-similar conditions as CMA, to ensure an unbiased 
+similar conditions as CMA-ES, to ensure an unbiased 
 comparison.
 
 

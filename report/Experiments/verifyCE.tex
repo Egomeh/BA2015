@@ -1,7 +1,7 @@
 \subsection{Verification of our implemented Cross Entropy \label{varifyofce}}
 
 Because the \shark library already contains an implementation of 
-CMA, but not an implementation of Cross Entropy, we extended the library 
+CMA-ES, but not an implementation of Cross Entropy, we extended the library 
 with our own implementation of the algorithm.\\
 In order to verify the correctness of the implementation, 
 we used the same experiments as used by 
@@ -19,13 +19,13 @@ an agent with the updated mean
 plays 30 games and the mean of these scores are recorded for the
 learning curve.\\
 During evaluation each agent plays one game, that is $\numberOfEvaluations = 1$.
-A minor derivation from the figures presented in \citep{thiery:09}, is 
+A minor derivation from the figures present in \citep{thiery:09}, is 
 the unit along the x-axis in the learning curve plots indicates 
 the iteration number. As the experiments in this two algorithms
 width variable population sizes are compared, the x-axis in all plots
-indicated the number of Tetris games played during the learning. In one 
+indicated the number of tetris games played during the learning. In one 
 generation $\populationSize$ agents each play $\numberOfEvaluations$ games and hence
-advance the x-axis by $\populationSize \numberOfEvaluations$.\\
+adavance the x-axis by $\populationSize \numberOfEvaluations$.\\
 
 \begin{figure}[H]
 \begin{center}
