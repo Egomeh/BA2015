@@ -29,7 +29,7 @@ project(ExampleProject)
 ## --------------------------------
 
 IF(WIN32)
-  MESSAGE(SEND_ERROR "FindGSL.cmake: gnu scientific library GSL not (yet) supported on WIN32")
+  #MESSAGE(SEND_ERROR "FindGSL.cmake: gnu scientific library GSL not (yet) supported on WIN32")
   
 ELSE(WIN32)
   IF(UNIX) 

@@ -328,3 +328,80 @@
 \end{tikzpicture}
 }
 
+
+
+
+% Plot for first comparison between CMA-ES and CE-Constant noise
+\def \TunedCEPlot
+{
+\begin{axis}[%
+	xmin=0,
+	xmax=40000,
+    xlabel={Number of agents evaluated},
+    ylabel={Mean score},
+    ymode=log,
+    log basis y={10},
+    width=16cm,
+    height=12cm,
+    legend pos=south east]
+\addplot[color=black,mark=none, dashed, thick] 
+    table [x=agents, y=meanScore, 
+           col sep=comma] {../data/TunedComparison/mean_CE_CMA/mean_cma_superlinear_g5_l50_o25.txt};
+\addplot[color=black,mark=none, thick] 
+    table [x=agents, y=meanScore, 
+           col sep=comma] {../data/TunedComparison/mean_CE_CMA/mean_ConstantNoise_g1_l200_o50.txt};
+\legend{CMA-ES ($\populationSize = 50\ \offspringNumber = 25$), Cross Entropy ($\populationSize = 200\ \offspringNumber = 50$) };
+\end{axis}
+}
+
+
+
+\newcommand{\plotCMATuned}
+{
+\begin{tikzpicture}
+\begin{axis}[%
+	xmin=0,
+	xmax=40000,
+	ymax=1000000,
+    ymin=1,
+    ymode=log,
+    log basis y={10},
+    width=8cm,
+    height=6cm,
+    legend pos=south east,
+	xlabel={Number of agents evaluated},
+    ylabel={Mean score}]
+\foreach \x in {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29}
+{
+\addplot[color=black,mark=none, very thin]  
+ table [x=agents, y=meanScore, col sep=comma] {../data/TunedComparison/CMA_Optimal_Bertsekas_NormalTetris/cma_superlinear_g5_l50_o25_\x.txt};
+}
+\end{axis}
+\end{tikzpicture}
+}
+
+\newcommand{\plotCETuned}
+{
+\begin{tikzpicture}
+\begin{axis}[%
+	xmin=0,
+	xmax=40000,
+	ymax=1000000,
+	ymin=1,
+    ymode=log,
+    log basis y={10},
+    width=8cm,
+    height=6cm,
+    legend pos=south east,
+	xlabel={Number of agents evaluated},
+    ylabel={Mean score}]
+\foreach \x in {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29}
+{
+\addplot[color=black,mark=none, very thin]  
+ table [x=agents, y=meanScore, col sep=comma] {../data/TunedComparison/CE_Optimal_Bertsekas_NormalTetris/ce_ConstantNoise_g1_l200_o50_\x.txt};
+}
+\end{axis}
+\end{tikzpicture}
+}
+
+
