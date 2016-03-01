@@ -11,7 +11,15 @@ We wish ensure that both algorithms, when competing in learning Tetris, both ope
 best settings. To satisfy this, a series of experiments with altering settings for each 
 algorithm was run to reveal how to set the parameters to get the best performance from 
 each algorithm. Finally, the optimal settings for each algorithm is applied to
-the same Tetris game configuration to decide if any significant difference appears.
+the same Tetris game configuration to decide if any significant difference appears.\\
+\\
+The experiments conducted in this section are all much in the same nature, and the 
+results are for each experiment presented mostly in the same fashion. When using some setting 
+of the game and the optimizers, the same experiment is executed multiple times, typically 
+10 or 30 times. This is because the sore of a Tetris controller and the overall 
+solution found by the optimization algorithms are influenced by some level of noise.
+Due to this noise, the reported performance of an optimization algorithm at a time
+is computed as the mean score of it's current solution evaluated 30 times.
 
 
 \input{Experiments/mdpTetris}

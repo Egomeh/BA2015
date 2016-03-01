@@ -1,12 +1,12 @@
 \section{Experiments}
 This appendix contains all of the included experiments from which we have derived our results. Each of the plots, depending on the number of experiments, will depict the mean scores of the experiments or the experiments themselves.\\
-With each experiment, a table detailing the parameter values will be included for others who would want to reproduce these experiments. Depending on the optimizer (weather it is Cross Entropy or CMA), the table will contain some custom rows, unique for the specific algorithm.\\
+With each experiment, a table detailing the parameter values will be included for others who would want to reproduce these experiments. Depending on the optimizer (weather it is Cross Entropy or CMA-ES), the table will contain some custom rows, unique for the specific algorithm.\\
 Similar for all experiments is the 30 games played with the new mean of each generation to generate the learning curve.\\
 The tables are formatted 
 \begin{table}[h]
 \centering
 \begin{tabular}{l r}
-Optimizer & CMA\\
+Optimizer & CMA-ES\\
 Number of Evaluations & -\\
 Number of Learning Games & -\\
 Population size& -\\
@@ -38,7 +38,7 @@ Noise & -
 \clearpage
 
 \subsection{Game Complexity \label{AppendixGameComplexity}}
-Experiments to test if game complexity can be used for tuning the CMA and CE configurations.
+Experiments to test if game complexity can be used for tuning the CMA-ES and CE configurations.
 
 \begin{table}[h]
 \centering
@@ -73,7 +73,7 @@ Noise & -
 \begin{table}[h]
 \centering
 \begin{tabular}{l r}
-Optimizer & CMA\\
+Optimizer & CMA-ES\\
 Number of Evaluations & 8000\\
 Number of Learning Games & 30\\
 Population size& 13\\
@@ -86,7 +86,7 @@ Initial Sigma & 1
 \end{tabular}
 \quad
 \begin{tabular}{l r}
-Optimizer & CMA\\
+Optimizer & CMA-ES\\
 Number of Evaluations & 8000\\
 Number of Learning Games & 30\\
 Population size& 13\\
@@ -97,7 +97,7 @@ Tetris Type & Normal\\
 Recombination Type & Superlinear\\
 Initial Sigma & 1
 \end{tabular}
-\caption{CMA settings for testing game complexity}
+\caption{CMA-ES settings for testing game complexity}
 \end{table}
 
 \clearpage
@@ -106,11 +106,11 @@ Initial Sigma & 1
 	\centering
 	\captionsetup[subfigure]{justification=centering}
     \begin{subfigure}[b]{0.49\textwidth}
-    	\caption{CMA - Hard Tetris}
+    	\caption{CMA-ES - Hard Tetris}
         \includegraphics[width=\textwidth]{data/complexity/cma_hard/PlotFile.pdf}
     \end{subfigure} 
     \begin{subfigure}[b]{0.49\textwidth}
-    	\caption{CMA - Normal Tetris}
+    	\caption{CMA-ES - Normal Tetris}
         \includegraphics[width=\textwidth]{data/complexity/cma_normal/PlotFile.pdf}
     \end{subfigure}
     \begin{subfigure}[b]{0.49\textwidth}
@@ -134,8 +134,8 @@ Tetris Type & Optimizer & mean & Q1 & Q2 & Q3\\
 \hline
 Hard & Cross Entropy & $1633.607$ & $1357.170$ & $1606.565$ & $1938.71$\\
 Normal & Cross Entropy & $100059.463$ & $79357.440$ & $105999.500$ & $111047.500$\\
-Hard & CMA & $449.352$ & $201.850$ & $300.300$ & $529.350$\\
-Normal & CMA & $49760.161$ & $42528.740$ & $49915.700$ & $67764.729$\\
+Hard & CMA-ES & $449.352$ & $201.850$ & $300.300$ & $529.350$\\
+Normal & CMA-ES & $49760.161$ & $42528.740$ & $49915.700$ & $67764.729$\\
 \end{tabular}
 \caption{Experiment testing game Normal Tetris against Hard Tetris}
 \end{table}
@@ -154,9 +154,9 @@ Experiments to test Bertsekas and Dellacherie featuresets in regards to achieved
 \begin{table}[h]
 \centering
 \small
-\caption{Shark stock CMA and Verified Cross Entropy}
+\caption{Shark stock CMA-ES and Verified Cross Entropy}
 \begin{tabular}{l r}
-Optimizer & CMA\\
+Optimizer & CMA-ES\\
 Number of Evaluations & 8000\\
 Number of Learning Games & 30\\
 Population size& 13\\
@@ -293,7 +293,7 @@ Noise & $max \left( 5 - \frac{t}{10}, 0 \right)$
 \subsection{Population and selection size \label{appendixCrossEntropyConfig}}
 \comment{Update plots and quantile table}\\
 We want to investigate if there exists a better configuration than the 100/10 which was also previously used by other researchers.\\
-In Cross Entropy for the Tetris problem, 10 \% Parent selection is used as standard. However, we will also test 50 \% Parent selection is a configuration from CMA which we will also test.\\
+In Cross Entropy for the Tetris problem, 10 \% Parent selection is used as standard. However, we will also test 50 \% Parent selection is a configuration from CMA-ES which we will also test.\\
 The general testing parameters are as follows
 \begin{table}[h]
 \centering
@@ -828,14 +828,14 @@ $200$ & $50$ & 1 & $2950.767$ & $2564.118$ & $2841.065$ & $3377.189$\\
 % initial sigma cma experiment
 \clearpage
 
-\subsection{Optimal settings for CMA - Initial Step-size \label{appendixCMAInitialSigma}}
-Experiments to find the best initial step-size for CMA.
+\subsection{Optimal settings for CMA-ES - Initial Step-size \label{appendixCMAInitialSigma}}
+Experiments to find the best initial step-size for CMA-ES.
 
 \begin{table}[h]
 \centering
 \caption{Overview of the two table formats}
 \begin{tabular}{l r}
-Optimizer & CMA\\
+Optimizer & CMA-ES\\
 Number of Evaluations & 8000\\
 Number of Learning Games &30\\
 Population size& 13\\

@@ -7,14 +7,14 @@ When applying the more% viable \textit{Monte Carlo} methods
 to assess the value function of a policy, the only 
 knowledge one gains is the actual value from the estimation 
 of the value function. Algorithms such as the Cross Entropy Method
-and CMA are both designed to solve exactly these types of problems.
+and CMA-ES are both designed to solve exactly these types of problems.
 The rest of this section is devoted to present the properties of the 
 general problem to be solved by the two algorithms, and how the 
 problem of optimizing Tetris fits within this model.
 
 \subsubsection{General problem \label{ProblemFormulation}}
 
-The general problem that the Cross Entropy Method and CMA 
+The general problem that the Cross Entropy Method and CMA-ES 
 tries to solve is often referred  to as a \textit{black box}
 scenario \citep{hansen2011}. The algorithms works to 
 attempt to optimize a function $\fitnessFunction$ that takes
@@ -45,7 +45,7 @@ the optimizer, which may only query the value of single vectors.
 \end{figure}
 The optimization algorithms may, due to the lacking information about the
 problem only act on a trial-and-error basis. As the goal of this
-thesis is to compare how the Cross entropy Method and CMA compares, 
+thesis is to compare how the Cross Entropy Method and CMA-ES compares, 
 it's important to determine the metric for cost in terms of 
 how many resources the algorithms consume versus performance.
 Typically, and also in our case, the cost is measured in terms 

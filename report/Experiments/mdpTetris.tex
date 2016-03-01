@@ -93,7 +93,7 @@ useful feedback. However, setting the value
 to $-1$, meaning that a "game-over" move yields $-\infty$ reward, 
 none of the experiments got stuck on only zero scores. An example
 of the layout of the feature file can be seen in figure \ref{fig:featfile}.
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
 \begin{lstlisting}
 0    <- Describes the reward function
@@ -106,10 +106,25 @@ of the layout of the feature file can be seen in figure \ref{fig:featfile}.
 \end{figure}
 
 \subsubsection{Game complexity \label{HardTetris}}
-In order to reduce the runtime of experiments, to allow us more experiments in the evaluations, we can increase the "difficulty" of Tetris, by adjusting either the board size and/or adjusting the frequency of certain pieces. This has also been described before by Amine Boumaza, \citep{boumaza2009}.\\
+Both from other researchers and fro the first experiments we executed it quickly became clear
+that the time consumption of the optimization algorithms cannot be neglected.
+Some papers suggests that running 10 executions of the Cross Entropy Method
+would take more than a month in total. These time estimates 
+originates from experiments that were not conducted in parallel,
+and on hardware from 2009, yet, the time consumption seemed to 
+be a considerable issue.
+In order to reduce the runtime of experiments, 
+to allow us more experiments in the evaluations, 
+we can increase the "difficulty" of Tetris, by 
+adjusting either the board size and/or adjusting the 
+frequency of certain pieces. This has also been described 
+before by Amine Boumaza, \citep{boumaza2009}.\\
 To increase the difficulty of the game,
 in our "Hard" Tetris, the s-block and z-block appear twice as often 
-as the other pieces.
+as the other pieces. As described by Boumaza, these pieces are the hardest to
+place and will usually cause the player to produces holes and other irregularities
+in the game board. Hence, the more frequent these pieces appear, the 
+shorter the expected duration of the game.
 
 \begin{figure}[H]
 \begin{center}
@@ -118,11 +133,30 @@ as the other pieces.
 \caption{Regular Tetris pieces \label{fig:TetrisPieces}}
 \end{figure}
 
-We want to test whether the game complexity has an impact on the performance of the algorithms,
-therefore we want to test the two algorithms with Bertsekas/Tsitsiklis featureset, using Normal Tetris and Hard Tetris.\\
+As using the harder version of Tetris, with the hard pieces appearing more frequent, shortens
+the expected duration of a game and  the time it takes for an optimization algorithm 
+to evaluate a search point, this configuration is indeed useful in searching for optimal parameters
+of each algorithm. In the experiments leading to the best configurations of the two 
+optimization algorithms, the harder version of Tetris is used. It is mentioned
+by Amine Boumaza that using the harder to place pieces more frequently is a good method
+for reducing the learning time, however, we have decided to conduct an experiment that explores
+how the optimization algorithms behave when the game difficulty is changed.
+We do expect that the learning curves develops much the same 
+for both the hard and normal game difficulty, however
+at lower cores for the harder setting.
+To test if the difficulty setting has a significant impact, we used the Bertsekas
+feature set (see table \ref{table:bertfeat}). And applied both the Cross entropy 
+Method and CMA-ES on the regular and hard configurations.\\
 
 \textbf{Results}\\
-In the following figure is depicted the mean results of 30 individual experiments using Cross Entropy and CMA, applied to both Hard Tetris and Normal Tetris. The general settings of the experiments can be seen in the appendix section, \ref{AppendixGameComplexity}.
+Table \ref{table:difficultyRes} renders the results of our experiments 
+with with the hard and normal Tetris variants. CMA-ES and the Cross Entropy Method 
+were each applied 30 times to both game configurations. Table \ref{table:difficultyRes}
+shows the means and quantiles of the scores gained in the last iteration.
+
+ the mean results of 30 individual experiments using 
+the Cross Entropy Method and CMA-ES, applied to both Hard Tetris and Normal Tetris. 
+The general settings of the experiments can be seen in the appendix section, \ref{AppendixGameComplexity}.
 
 \begin{table}[H]
 \centering
@@ -135,12 +169,12 @@ Normal & Cross Entropy & $100059.463$ & $79357.440$ & $105999.500$ & $111047.500
 Hard & CMA & $449.352$ & $201.850$ & $300.300$ & $529.350$\\
 Normal & CMA & $49760.161$ & $42528.740$ & $49915.700$ & $67764.729$\\
 \end{tabular}
-\caption{Experiment testing game Normal Tetris against Hard Tetris}
+\caption{Experiment testing game Normal Tetris against Hard Tetris \label{table:difficultyRes}}
 \end{table}
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=1]{data/complexity/mean/PlotFile.pdf}
+\includegraphics[scale=0.8]{data/complexity/mean/PlotFile.pdf}
 \caption{Experiment testing Normal Tetris against Hard Tetris}
 \end{figure}
 
@@ -172,7 +206,7 @@ using Hard Tetris.\\
 
 In the following figures the mean results of 30 runs of both CMA and Cross 
 Entropy is presented. The settings for Cross Entropy remains at constant noise
-with a noise term of $z_t = 4$ and an initial sigma of $\sigma_0 = 100.$, 
+with a noise term of $z^{(\generation)} = 4$ and an initial sigma of $\sigma_0 = 100.$, 
 and the CMA with $\sigma_0 = 1$.\\
 \\
 Figure \ref{fig:featuresetCompareBertsekas} shows the experiment with the 

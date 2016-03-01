@@ -1,10 +1,10 @@
-\subsubsection{Initial comparison - Stock settings}
+\subsubsection{Initial comparison - Default settings}
 For the initial comparison we use the Bertsekas featureset, since the same featureset
 was used for verifying the Cross Entropy implementation. Furthermore, others researchers
 has used the Bertsekas featureset as a benchmarking standpoint \citep{thiery:09} \&
 \citep{szita:06}.\\
 The goal of this comparison is to get an initial idea of how the Shark implementation of
-CMA compares to Cross Entropy with settings used by other researchers \citep{thiery:09}.\\
+CMA-ES compares to Cross Entropy with settings used by other researchers \citep{thiery:09}.\\
 
 \textbf{Results}
 
@@ -18,10 +18,10 @@ of $0.5$, we get the following results, seen in figure \ref{fig:CMA_VS_CE_00}.\\
 \caption{Initial comparison between CMA-ES and Cross Entropy \label{fig:CMA_VS_CE_00}}
 \end{figure}
 
-As figure \ref{fig:CMA_VS_CE_00} reveals that CMA converges faster,
+As figure \ref{fig:CMA_VS_CE_00} reveals that CMA-ES converges faster,
 but reaches a local optimum at around 2,000 games played. Meanwhile Cross Entropy has a 
-slower convergence but reaches a better mean score compared to CMA at around 5,500
-agents evaluated. In detail, CMA on average reaches a score of 50,000 rows, and
+slower convergence but reaches a better mean score compared to CMA-ES at around 5,500
+agents evaluated. In detail, CMA-ES on average reaches a score of 50,000 rows, and
 Cross Entropy reaches a score of 100,000.\\
 
 \comment{Add the raw graphs to appendix}
@@ -29,9 +29,9 @@ Cross Entropy reaches a score of 100,000.\\
 \textbf{Analysis and discussion}
 
 These results clearly defy our initial hypothesis as we predicted
-for CMA to outperform CE, due to its more sophisticated nature. 
+for CMA-ES to outperform CE, due to its more sophisticated nature. 
 One reason for this outcome could possibly be that
-CMA has a very little population size compared to Cross Entropy,
+CMA-ES has a very little population size compared to Cross Entropy,
 which could be a decisive lack as the objective function is noisy with 
 a high variance.\\
 
@@ -40,12 +40,12 @@ Among the possible adjustments are:\\
 \\
 \textit{Enlargment of population size}\\
 As the population size is quite small (only around 13)
-for this experiment, the CMA algorithm might not be able
+for this experiment, the CMA-ES algorithm might not be able
 extract enough information at each generation. As seen in 
 section \ref{optimalsettingsce}, CE looses performance as 
 thepopulation size is set too low. This might be a problem 
-that counts for CMA as well. In figure \ref{fig:CMA_VS_CE_00},
-the CMA algorithm has much the same shape as \\
+that counts for CMA-ES as well. In figure \ref{fig:CMA_VS_CE_00},
+the CMA-ES algorithm has much the same shape as \\
 \\
 \textit{Evaluate each agent multiple times}\\
 A posible source of poor performance could be 
@@ -57,7 +57,7 @@ determine it's ranking.\\
 \\
 \textit{Change the recombination type}\\
 As described in section \ref{CMAtheory}, 
-the CMA algorithm is not bound to update its 
+the CMA-ES is not bound to update its 
 new mean to just the centroid of the selected 
 vectors. Instead, it can weight better solutions
 more heavily when moving its mean. When doing so,
@@ -84,7 +84,7 @@ expand the maximum score reachable.\\
 \\
 Yet, to minimize the likelihood 
 that the featureset were the cause of the 
-poor performance of CMA, it seemed 
+poor performance of CMA-ES, it seemed 
 appropiate to conduct a similar comparison 
 using another featureset. 
 To speed up the process, the game difficulty were 

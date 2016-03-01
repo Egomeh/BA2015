@@ -48,7 +48,7 @@ Covariance Matrix Adaption Evolution Strategy (CMA-ES), described
 in \citep{hansen2011}. The particular Cross-Entropy method applied 
 is the one described in \citep{szita:06} as the "Noisy Cross Entropy Method".\\
 
-\begin{figure}[h!]
+\begin{table}[h!]
 \begin{center}
 \begin{tabular}{| l | p{8cm} |}
 \hline
@@ -63,7 +63,7 @@ Row transitions & Number of horizontal cell transitions\\
 \hline
 Column transitions & Number of vertical cell transitions \\
 \hline
-Holes & Number of empty cells covered by a full cell\\
+Holes & Number of empty cells surrounded by full cells\\
 \hline
 Board wells & Cumulative sum of cells to the depth of
 the board wells.\\
@@ -71,15 +71,17 @@ the board wells.\\
 \end{tabular}
 \end{center}
 \caption{features of the Dellacherie featureset \label{table:dellfeat}}
-\end{figure}
+\end{table}
 
-\begin{figure}[h!]
+\begin{table}[h!]
 \begin{center}
 \begin{tabular}{| l | p{8cm} |}
 \hline
 \textbf{Feature} & \textbf{Description}\\
 \hline
 Max height & Height height of the highest occupied block\\
+\hline
+Holes & Number of empty cells surrounded by full cells\\
 \hline
 Column height & Height of each column\\
 \hline
@@ -88,7 +90,7 @@ Height difference & The height difference between columns\\
 \end{tabular}
 \end{center}
 \caption{features of the Dellacherie featureset \label{table:bertfeat}}
-\end{figure}
+\end{table}
 
 
 Currently, many researchers have proposed numerous 

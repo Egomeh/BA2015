@@ -21,9 +21,9 @@ distribution parameters, while the CMA keeps track of
 some information from earlier 
 generations. This allows the CMA somewhat keep track of the evolution 
 of the sampled vectors.\\
-The CMA also differs from Cross Entropy in how it evaluates the influence 
+The CMA-ES also differs from Cross Entropy in how it evaluates the influence 
 of the parent vectors. As Cross Entropy weights all vectors equally when 
-moving the mean. The CMA, at least from the implementation in SHARK, 
+moving the mean. The CMA-ES, at least from the implementation in Shark, 
 has the option of taking a weighted combination of the offspring in order
 to bias towards the better vectors.
 
@@ -81,7 +81,7 @@ $\populationSize$ is the number of vectors sampled in each generation.
 
 \textbf{The number of offspring}\\
 $\offspringNumber$ is the number of vectors which are used to compute 
-the new mean very much like in Cross Entropy. However the CMA algorithm
+the new mean very much like in Cross Entropy. However the CMA-ES algorithm
 is not bound to weight each vec tor equally. It has the option to assign 
 a weight to each vector and hence biasing towards the better solutions.
 \\
