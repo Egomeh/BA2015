@@ -143,7 +143,7 @@
     \pgfmathparse{\tick/1000}
     \pgfmathprintnumber{\pgfmathresult}\,k
 }]
-\addplot[color=black,mark=none, dashed, thick] 
+\addplot[color=black,mark=none,dashed, thick] 
     table [x=agents, y=meanScore, 
            col sep=comma] {../data/ConstantNoise/mean.txt};
 \addplot[color=black,mark=none,thick] 
@@ -344,13 +344,15 @@
     width=16cm,
     height=12cm,
     legend pos=south east]
-\addplot[color=black,mark=none, dashed, thick] 
-    table [x=agents, y=meanScore, 
-           col sep=comma] {../data/TunedComparison/mean_CE_CMA/mean_cma_superlinear_g5_l50_o25.txt};
 \addplot[color=black,mark=none, thick] 
     table [x=agents, y=meanScore, 
+           col sep=comma] {../data/TunedComparison/mean_CE_CMA/mean_cma_superlinear_g5_l50_o25.txt};
+\addplot[color=black,mark=none,dashed, thick] 
+    table [x=agents, y=meanScore, 
            col sep=comma] {../data/TunedComparison/mean_CE_CMA/mean_ConstantNoise_g1_l200_o50.txt};
-\legend{CMA-ES ($\populationSize = 50\ \offspringNumber = 25$), Cross Entropy ($\populationSize = 200\ \offspringNumber = 50$) };
+\draw[dashed,red] (axis cs:12000,0.001) |- (axis cs:12000,64945) node [left] {$p=4.528 \cdot 10^{-11}$ \quad\quad};
+\draw[red,<-] (axis cs:39000,122488) -- (axis cs:35000,40000) node [left] {$p=0.1471$};
+\legend{CMA-ES ($\populationSize = 50\ \offspringNumber = 25\ \numberOfEvaluations = 5$), Cross Entropy ($\populationSize = 200\ \offspringNumber = 50\ \numberOfEvaluations = 1$) };
 \end{axis}
 }
 
@@ -403,5 +405,10 @@
 \end{axis}
 \end{tikzpicture}
 }
+
+
+
+
+
 
 
