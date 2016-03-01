@@ -1,13 +1,36 @@
 \section{Conclusion}
-\begin{enumerate}
-\item Conclude on initial comparison and tuned comparison (and normal distribution vs. covariance experiment comparison)
-\item outline - talk about dynamic games per agent (show graphs), using normal tetris for 
-tuning also
-\item sample agents using angles instead of distributions, this removes a dimension and allows for a lesser random/more through search.
-\end{enumerate}
 
-
-\comment{When only testing 1 game pr agent, we observe that after 8000 agents it starts to decline in
- score, thus finding worse performing agents - some conclusion that cma with 1 game pr agent should be
-  run only for some time and not infinityly}
-\comment{as seen on ex. population 12, parent size 6, linear, if played with dynamic games, meaning 1 game up to 500 agent and then a higher games per agent afterwards, a fast convergence and high score is achieved.}
+To reach our goal of gathering empirical evidence if either the Cross-entropy method
+and the CMA-ES differ in performance when applied to Tetris, we implemented the Cross
+entropy method in Shark and tested it against the pre-implemented version of CMA-ES
+already in the Shark library. The widely used MDPTetris software was used to emulate the
+Tetris games, and was used as the optimization problem for the optimization algorithms to solve.
+The Cross-entropy method searches by using a Gaussian 
+distribution, and is therefore in nature influenced by noise. Due to this, 
+the verification of the algorithm was carried out as a comparison with other 
+researchers works of the same algorithm applied to the same problem, namely Tetris.\\
+\\
+After confirming that the Cross-entropy method does produce similar results as 
+what we've seen in our reference papers, we conducted an initial comparison between the
+Cross-entropy method and CMA-ES. The initial experiments used the default settings for CMA-ES
+from Shark,
+and the settings for the Cross-entropy method were the ones claimed to be optimal by other 
+researchers. This initial experiment, revealed quite the opposite of our expectations 
+according to our hypothesis, which was that the CMA-ES would outperform the Cross-entropy method
+but at slower convergence. This experiment lead to the need of finding out whether the algorithms
+could perform better with other settings. To find the better settings, a more difficult version
+of Tetris was used to reduce the learning time of the algorithms. To thoroughly explore 
+the impact of the different adjustable parameters more than 6,000 individual runs of the 
+algorithms contributed to gain insight in how to best configure the two algorithms. These 
+optimal settings were applied in a final comparison experiment.\\
+\\
+The results from the final experiment showed that a result that aligns better with our
+hypothesis. The convergence of CMA-ES is heavily prolonged by the optimal settings
+but does eventually reach scores that climbs slightly beyond those produced by the
+Cross-entropy method. However, the final score of the two algorithms lies so close that
+we cannot firmly differentiate between the two, and hence, cannot conclude that either of the
+algorithms are better than the other. However, the results from our experiments 
+suggests that the Cross-entropy method reaches the 
+it's highest scores much faster than CMA-ES under optimal settings, thus in conclusion
+when learning Tetris using the MDPTetris platforms' approach the Cross-entropy method 
+stands out as the preferable choice for learning Tetris.

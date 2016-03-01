@@ -1555,8 +1555,14 @@ Noise & 4
 \end{tabular}
 \end{table}
 
-INSERT PLOTS HERE.
-\comment{add plots for non mean data}
+\begin{figure}[H]
+\begin{tabular}{@{}c@{}c@{}}
+Cross Entropy & CMA-ES\\
+\includegraphics[scale=1]{plots/cma_initial_sigma_0_5} &
+\includegraphics[scale=1]{plots/ce_ConstantNoise_l100_o10_all}
+\end{tabular}
+\caption{30 experiment with optimal settings Cross Entropy Method and CMA-ES \label{fig:appendix:initialNonmean}}
+\end{figure}
 
 \begin{figure}[H]
 \begin{center}
