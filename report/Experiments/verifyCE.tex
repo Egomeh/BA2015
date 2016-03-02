@@ -1,7 +1,12 @@
-\subsection{Verification of our implemented Cross Entropy \label{varifyofce}}
+\subsection{Verification of our implementation of  Cross-entropy method \label{varifyofce}}
 
-Because the \shark library already contains an implementation of 
-CMA-ES, but not an implementation of Cross Entropy, we extended the library 
+Because the \shark\ library already contains an implementation of 
+CMA-ES, but not an implementation of 
+\begin{changebar}
+\cbcolor{blue}
+the Cross-entropy method,
+\end{changebar}
+we extended the library 
 with our own implementation of the algorithm.\\
 In order to verify the correctness of the implementation, 
 we used the same experiments as used by 
@@ -9,7 +14,7 @@ Christophe Thiery and Bruno Scherrer \citep{thiery:09}.
 These experiments were used by Thiery and Scherrer to 
 verify their own Cross Entropy implementation with various types of noise correction. 
 Therefore, we will perform the same experiments to verify our 
-own contribution to the \shark library, by trying to achieve the same results.\\
+own contribution to the \shark\  library, by trying to achieve the same results.\\
 \\
 The setup is mirrored from the paper \citep{thiery:09}, 
 with 100 agents ($\populationSize = 100$) per iteration,
@@ -85,14 +90,23 @@ The mean performance of this noise type yielded a score of
 120,000$\pm36\%$ \\
 
 Based on the mean graphs and confidence interval compared to other papers, we can
-hereby verify that our implementation of Cross Entropy works as intended. Even though the
+hereby verify that our implementation of 
+\begin{changebar}
+\cbcolor{blue}
+Cross-entropy method
+\end{changebar}
+works as intended. Even though the
 experiments with linear decreasing noise in this case seems to outperform
 the constant noise, other runs with linear decreasing noise ended in a mean 
 performance of only 90,000$\pm36\%$. Yet, the constant noise is both from our
 own experiments, and described in other research, noted to be the most reliable
 noise type for reaching high scoring controllers \citep{scherrer2009}. 
 Due to this, the constant noise is used in the 
-benchmarking against CMA.\\
+benchmarking against 
+\begin{changebar}
+\cbcolor{blue}
+CMA-ES.
+\end{changebar}
 
 
 

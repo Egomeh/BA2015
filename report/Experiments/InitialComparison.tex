@@ -40,31 +40,40 @@ Cross Entropy reaches a score of 100,000.\\
 \textbf{Analysis and discussion}
 
 These results clearly defy our initial hypothesis as we predicted
-for CMA-ES to outperform CE, due to its more sophisticated nature. 
+for CMA-ES to outperform Cross-entropy method, due to its more sophisticated nature. 
 One reason for this outcome could possibly be that
 CMA-ES has a very little population size compared to Cross Entropy,
 which could be a decisive lack as the objective function is noisy with 
 a high variance.\\
 
-\comment{Remove rest of section because it is absolute from previous sections?}
-Among the possible adjustments are:\\
+\begin{changebar}
+To perform a comparison between the two algorithms on the same terms,
+we saw from earlier experiments that both algorithms benefits from 
+adjusted settings. Thus, another experiment is required, where both algorithms
+are adjust to have the best possible settings to ensure that both algorithms
+perform as well as possible. Among the adjusted parameters are the following.\\
 \\
 \textit{Enlargment of population size}\\
-As the population size is quite small (only around 13)
-for this experiment, the CMA-ES algorithm might not be able
-extract enough information at each generation. As seen in 
-section \ref{optimalsettingsce}, CE looses performance as 
-the population size is set too low. This might be a problem 
-that counts for CMA-ES as well. In figure \ref{fig:CMA_VS_CE_00},
-the CMA-ES algorithm has much the same shape as \\
+Our first experiment clearly shows that the CMA-ES
+is outperformed by the Cross-entropy method.
+The CMa-ES does by default only have a relatively small
+population size (around 13) compared to the Cross-entropy methods
+default (100). From the earlier experiments, we saw that 
+the Cross-entropy method does benefit from a higher populations size,
+and to CMA-ES, the higher population size appears critical
+to it's performance. Thus, the population size is increased for 
+both algorithm in our final experiment.\\
 \\
 \textit{Evaluate each agent multiple times}\\
-A posible source of poor performance could be 
-that the ranking of agents becomes very difficult
-due to high noise. To better verify the actual
-performance of an agent, it could be evaluated 
-multiple times and let the mean of the evaluations
-determine it's ranking.\\
+From our experiments, the Cross-entropy method does not
+seem to require evaluation each search point more than once
+and thus, the number of evaluations remains at 1 per
+search point. For the CMA-ES however, with a 
+ranking mechanism that strongly emphasizes 
+the best search points in a population, a firm
+ranking is important. Our experiments suggested that
+evaluation each search point 5 times appears to be optimal 
+for the CMA-ES.\\
 \\
 \textit{Change the recombination type}\\
 As described in section \ref{CMAtheory}, 
@@ -72,35 +81,24 @@ the CMA-ES is not bound to update its
 new mean to just the centroid of the selected 
 vectors. Instead, it can weight better solutions
 more heavily when moving its mean. When doing so,
-it risks biasing vectors that appear to be better 
+it risks biasing search points that appear to be better 
 but in reality, just by faulty ranking, should
-not be considered a good agent.\\
+not be considered a good agent. Our experiments 
+did however suggest that with 5 evaluations per search agent,
+the super linear recombination was the best option.\\
 \\
 None of the experiments seen so far has allowed a 
 consistent mean score of more 
-than 200,000. This brings concern into 
-consideration, that it might be the objective function
-that poses a natural limit on the score.
+than 200,000. This brings the concern 
+hat it might be the objective function
+that poses a natural limit on the score into consideration.
 In this case the objective function
 models playing Tetris with the Bertsekas featureset. 
 It is unkown to us
 whether it's possible to construct an agent 
 with a mean score of more than
 200,000 lines on average. 
-Yet, as our aim is not to find the best controller,
-untill both algorithms reaches the same upper limit 
-of scores theres is no need
-to alter the featureset just to
-expand the maximum score reachable.\\
-\\
-Yet, to minimize the likelihood 
-that the featureset were the cause of the 
-poor performance of CMA-ES, it seemed 
-appropiate to conduct a similar comparison 
-using another featureset. 
-To speed up the process, the game difficulty were 
-adujsted to casue agents to fail faster.
-The increased difficulty and alternate
-featureset is described in 
-further detail in section \ref{compoffeatureset}.
-
+Thus we cannot know if convergence 
+of the algorithms are caused by the feature set or limitations in the
+algorithms.
+\end{changebar}

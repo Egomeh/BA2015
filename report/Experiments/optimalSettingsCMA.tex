@@ -24,8 +24,13 @@ generation. Built into the CMA algorithm is three methods of recombination.
 \item LINEAR, The best of the offspring vectors has more influence. 
 \item SUPERLINEAR, The vectors are weighted with a logarithmic equation.
 \end{itemize}
+\begin{changebar}
 As default, CMA uses Super Linear recombination. However, Tetris is a problem
-with multiple local optimums in its solution space. This means, though a vector may be the best in its generation, it could be a nearby local optimum. Therefore, Super Linear recombination may not be the optimal recombination type for the Tetris problem.\\
+with multiple local optimums and heavy noise in its search space. 
+\end{changebar}
+This means, though a vector may be the best in its generation,
+it could be a nearby local optimum. Therefore,
+Super Linear recombination may not be the optimal recombination type for the Tetris problem.\\
 
 The recombination types are covered in section \ref{CMAtheory} on 
 page \pageref{eq:recomType}.
@@ -41,9 +46,11 @@ which does not have the features.\\
 Table \ref{CMAPopulationSelectionConfigTest} displays the values that we are going
 to test for the population and selection size.
 
+\begin{changebar}
+\cbcolor{blue}
 \begin{table}[h]
 \centering
-\begin{tabular}{c c}
+\begin{tabular}{r r}
 Population size, $\populationSize$ & Parent size, $\offspringNumber$\\
 \hline
 $12$ & $1$\\
@@ -59,8 +66,9 @@ $100$ & $10$\\
 $100$ & $25$\\
 $100$ & $50$
 \end{tabular}
-\caption{CMA configuration for population and parent size \label{CMAPopulationSelectionConfigTest}}
+\caption{CMA-ES configuration for population and parent size \label{CMAPopulationSelectionConfigTest}}
 \end{table}
+\end{changebar}
 
 The experiments includes different population $N \in \{12,22,50,100\}$ and offspring sizes of either
 10\%, 25\% and 50\%. We use 10\% because of the Cross Entropy recommended selection size, while

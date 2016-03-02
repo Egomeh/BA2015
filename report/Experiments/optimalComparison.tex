@@ -1,29 +1,29 @@
 \subsubsection{Tuned comparison - Optimized settings \label{tunedComparison}}
 In this section we will reveal the results of the experiments comparing 
-the optimized Cross Entropy Method 
+the optimized Cross-entropy Method 
 against the
 optimized CMA-ES obtained from the sections, \ref{GamesPerAgentCE} and \ref{OptimalSettingsCMA}.
 The chosen optimal settings for each of the algorithms is specified in the following tables
 \begin{table}[H]
 \centering
 \begin{tabular}{l r}
-Optimizer & CMA\\
-Number of Evaluations & 40000\\
-Number of Learning Games & 30\\
+Optimizer & CMA-ES\\
+Evaluations/agent & 40000\\
+Learning Games & 30\\
 Population size& 50\\
 Parent size & 25\\
 Games per Agent & 5\\
 Tetris Type & Normal\\
 \hline
-Recombination Type & LINEAR\\
+Recombination Type & SUPERLINEAR\\
 Initial Sigma & 0.5\\
 Lower bound & 2.0\\
 \end{tabular}
 \quad
 \begin{tabular}{l r}
 Optimizer & Cross Entropy\\
-Number of Evaluations & 40000\\
-Number of Learning Games & 30\\
+Evaluations/agent & 40000\\
+Learning Games & 30\\
 Population size & 200\\
 Parent size & 50\\
 Games per Agent & 1\\

@@ -150,7 +150,7 @@ Method and CMA-ES on the regular and hard configurations.\\
 
 \textbf{Results}\\
 Table \ref{table:difficultyRes} renders the results of our experiments 
-with with the hard and normal Tetris variants. CMA-ES and the Cross Entropy Method 
+with with the hard and normal Tetris variants. CMA-ES and the Cross-entropy method 
 were each applied 30 times to both game configurations. Table \ref{table:difficultyRes}
 shows the means and quantiles of the scores gained in the last iteration.
 
@@ -180,6 +180,12 @@ Normal & CMA & $49760.161$ & $42528.740$ & $49915.700$ & $67764.729$\\
 
 \textbf{Analysis and discussion}\\
 The results indicate that using Hard Tetris does not impact the general development of the algorithms, meaning we are able to use the harder Tetris for further experiments. From the graph it appears that the harder Tetris simply shifts the score compared to normal Tetris.
+\begin{changebar}
+\cbcolor{blue}
+Thus, as only the score seems to shift, but the relative performance between
+the two algorithms remain, we use this harder Tetris as a valid means of reducing the
+time consumption of the algorithms when experimenting with various parameters.
+\end{changebar}
 \\
 
 
@@ -197,10 +203,14 @@ featuresets in the same experiment, since the algorithms needs to be on equal te
 \\
 We want to test whether the featureset has an impact on the performance of the algorithms,
 therefore we want to test the two algorithms with both the Dellacherie and Bertsekas/Tsitsiklis featureset.\\
+\begin{changebar}
+\cbcolor{blue}
 From the game complexity section \ref{HardTetris}, we have verified that using Hard Tetris
-\citep{boumaza2009} does not have an impact on the development of the two algorithms.
+\citep{boumaza2009} does not have a severe impact on the relative 
+development between the two algorithms.
 Therefore, to prevent long runtimes, the games were simulated
-using Hard Tetris.\\
+using Hard Tetris.
+\end{changebar}\\
 
 \textbf{Results}
 
@@ -216,7 +226,9 @@ Tetris. Namely that CMA converges faster than Cross Entropy,
 but is eventually outperformed.
 
 \begin{figure}[H]
-\includegraphics[scale=1]{plots/plotBertsekasCmaVsCEHardTetris}
+\begin{center}
+\includegraphics[scale=0.8]{plots/plotBertsekasCmaVsCEHardTetris}
+\end{center}
 \caption{Comparison between CMA-ES and Cross Entropy 
 using hard Tetris and the Bertsekas featureset 
 \label{fig:featuresetCompareBertsekas}}
@@ -227,7 +239,9 @@ However, the convergence seems to occur earlier and with a higher score
 (figure \ref{fig:featuresetCompareDellacherie}).
 
 \begin{figure}[H]
-\includegraphics[scale=1]{plots/plotDellCmaVsCEHardTetris}
+\begin{center}
+\includegraphics[scale=0.8]{plots/plotDellCmaVsCEHardTetris}
+\end{center}
 \caption{Comparison between CMA-ES and Cross Entropy 
 using hard Tetris and the Dellacherie featureset
 \label{fig:featuresetCompareDellacherie}}
@@ -239,5 +253,11 @@ The experiment with different featuresets indicates that the behaviour
 is not heavily dependant on the featureset.
 It appears that changing the featureset simple shifts the score, but does not affect the development of the graphs.\\
 Therefore, we conclude that changing the featureset does not invalidate
-the comparison of the two optimization algorithms.
+the comparison of the two optimization algorithms. 
+\begin{changebar}
+\cbcolor{blue}
+This leads us to remain at
+using the Bertsekas feature set as this keeps the time consumption of the
+experiments lower.
+\end{changebar}
 
