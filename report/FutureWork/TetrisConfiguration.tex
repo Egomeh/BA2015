@@ -1,4 +1,20 @@
 \subsection{Tetris configuration}
 
-Section about better featuresets and normal tetris instead of hard tetris
-for finding the optimal settings.
+When finding the optimal settings for the Cross-entropy method (section \ref{optimalsettingsce})
+and CMA-ES (section \ref{optimalsettingscma}), we used a game complexity and feature set 
+setting which resulted in the fastest run-time. We had to run over 6,000 individual experiments
+in the process of finding the optimal settings, so with our limited time frame, we had
+to use fastest settings.\\
+If we did have a larger time frame, we would preferable have used normal Tetris instead
+of hard Tetris when finding the optimal settings. Even though our game complexity experiments
+(section \ref{HardTetris}) indicated that the difficulty of the game doesn't signify a difference, it would have been more correct to use normal Tetris for finding the optimal settings, since
+we use normal Tetris in the final comparison experiments. Though, it could possible be that the
+optimal setting for hard Tetris is the same optimal setting for normal Tetris.\\
+The same thing can be said about the feature sets. In the majority of our experiments, we
+use the Bertsekas feature set, even though that the Dellacherie feature set results in
+higher scores. But as our experiments from section \ref{compoffeatureset} revealed, the
+scores only seems to be shifting and therefore not creating a performance difference for
+the Cross-entropy method or CMA-ES algorithm. However, we would have preferred that we could have
+executed our final comparison experiments with the Dellacherie feature set, namely because
+it's possible to achieve higher scores with this feature set, compared to the Bertsekas feature
+set.
