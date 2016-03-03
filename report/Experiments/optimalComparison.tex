@@ -1,8 +1,8 @@
 \subsubsection{Tuned comparison - Optimized settings \label{tunedComparison}}
-In this section we will reveal the results of the experiments comparing 
-the optimized Cross-entropy Method 
+In this section we reveal the results of the experiments comparing 
+the optimized Cross-entropy method
 against the
-optimized CMA-ES obtained from the sections, \ref{GamesPerAgentCE} and \ref{OptimalSettingsCMA}.
+optimized CMA-ES obtained from the sections, \ref{optimalsettingsce} and \ref{optimalsettingscma}.
 The chosen optimal settings for each of the algorithms is specified in the following tables
 \begin{table}[H]
 \centering
@@ -33,10 +33,10 @@ Sigma & 100\\
 Noise Type & Constant\\
 Noise & 4
 \end{tabular}
-\caption{Optimized Cross Entropy and CMA for comparison experiments}
+\caption{Optimized Cross-entropy method and CMA-ES for comparison experiments}
 \end{table}
 The goal of this experiment is to derive a final conclusion
-on any performance difference between CMA-ES and Cross-entropy method.
+on any performance difference between CMA-ES and the Cross-entropy method.
 Thus this experiment is meant to clarify if any difference performance difference
 is present when the two optimization algorithms are applied to learning Tetris.\\
 
@@ -51,22 +51,24 @@ as in section \ref{sec:CMAInitialStepSize}. The plot in figure \ref{fig:TunedMea
 reveals that the Cross-entropy method converges much faster than CMA-ES, as it 
 appears to have reached stability after playing between 15,000 and 20,000 games. However,
 CMA-ES reaches similar scores only during the very last iterations, namely around 35,000 games.
-\begin{figure}
+\begin{figure}[H]
 \begin{tabular}{@{}c@{}c@{}}
 Cross Entropy & CMA-ES\\
 \includegraphics[scale=1]{plots/ce_tuned_all} &
 \includegraphics[scale=1]{plots/cma_tuned_all}
 \end{tabular}
-\caption{30 experiment with optimal settings Cross Entropy Method and CMA-ES \label{fig:tunedAll}}
+\caption{30 runs with the optimal settings for the Cross-entropy method and CMA-ES \label{fig:tunedAll}}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[scale=0.8]{plots/TunedPlot.pdf}
-\caption{Mean plot of optimal settings Cross Entropy Method and CMA-ES \label{fig:TunedMean}}
+\caption{Mean plot of the optimal settings experiments for the Cross-Entropy method and CMA-ES. 
+The marking of $p$ indicates likelihood that the two mean graphs are from the same 
+distribution.\label{fig:TunedMean}}
 \end{figure}
 
-\begin{table}
+\begin{table}[H]
 \centering
 \small
 \begin{tabular}{l r r r r}
@@ -107,7 +109,7 @@ as a cause of the optimal settings, which must be said to be a significant trade
 As described previously, we have carried out two tests using the Wilcoxon test, at two 
 points on the learning curves. The first point is when the algorithms have played 12,000 
 games and the second is at the final iteration after 40,000 games. The first point is chosen at a point 
-where the two learning curves appeared greatly different and where the Cross-entropy 
+where the two learning curves appeared greatly different and where the Cross-entropy method
 is starting to stabilize. This point is chosen to determine if we can firmly tell
 whether one algorithm learns faster than the other. Again, the null hypothesis of the
 test is that the two algorithms on average gains the same scores after playing 
@@ -121,7 +123,7 @@ Thus, with this experiment,
 we cannot draw the conclusion that either reaches the highest scores. 
 As the final score does not show a significant difference, the Cross-entropy method will 
 immediately emerge as the algorithm of choice for learning Tetris, at least in our case
-with the one-piece controller model, and using the Berserks feature set.
+with the one-piece controller model, and using the Bertsekas feature set.
 
 
 

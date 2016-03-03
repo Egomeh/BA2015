@@ -1,22 +1,22 @@
-\subsection{Emperical comparison between CMA-ES and the Cross Entropy Method}
+\subsection{Emperical comparison between CMA-ES and the Cross-entropy method}
 
-Both the Cross Entropy and CMA-ES are considered state-of-art
+Both the Cross-entropy method and CMA-ES are considered state-of-art
 search algorithms, and both have been documented to perform very well
-in various problems. The Cross Entropy algorithm has proven 
+in various problems. The Cross-entropy method has proven 
 suitable for solving various types of problems such as 
 combinatorial optimization problems like 'matrix cut problem'
 and the 'travelling salesman' \citep{cetut2014}. 
-The Cross Entropy is also in the same paper acknowledged for
+The Cross-entropy method is also in the same paper acknowledged for
 its ability to solve problems of numerical nature. In the 
-Cross entropy tutorial by Boer et al. they present 
-an example of the Cross Entropy method applied to 
+Cross-entropy method tutorial by Boer et al. they present 
+an example of the Cross-entropy method applied to 
 a K-means clustering in which it evidently performs very well.
 Near the conclusion of the tutorial the authors suggest the 
-Cross Entropy method for use in learning policies in Markov decision 
+Cross-entropy method for use in learning policies in Markov decision 
 processes, which is exactly field in with our experiments will apply the
 algorithm.\\
 \\
-Much like the Cross Entropy method, the CMA-ES is indeed considered
+Much like the Cross-entropy method, the CMA-ES is indeed considered
 a well performing algorithm for the type of problem we we use for benchmarking.
 The CMA-ES has been experimentally shown to be highly useful for optimizing multidimensional
 problems which may have multiple optima, which is indeed also a reality when 
@@ -30,7 +30,7 @@ the two algorithms are, to our knowledge at least, never compared directly. Usua
 the algorithms are used as a tool to tune the weighting of a feature set where the
 main emphasis lies on the construction of the feature set. Our contribution to 
 the research in the field is then a comparison between the two algorithms
-with heavy focus on the algorithm. Our goal is to experimentally investigate
+with heavy focus on the algorithms. Our goal is to experimentally investigate
 whether one algorithm is to favour over the other in learning Tetris.
 This will, regardless of the outcome, not decisively declare one algorithm 
 better than the other, but hopefully gain some empirical clues on whether 
@@ -39,7 +39,7 @@ When optimizing Tetris, the feature set is shown to have a paramount impact on
 how good an agent can become. To make sure that one algorithm is not randomly performing
 better when using a certain feature set, the experiments include a test with two different 
 feature sets to ensure that we do not bias the conclusion towards performance with a 
-single feature set. Further more, to truly get an unbiased comparison between the two 
+single feature set. Furthermore, to truly get an unbiased comparison between the two 
 algorithms, we conducted a series of experiments experiments with the purpose of finding
 the best setting for each of the algorithms. With these test we were able to 
 tell how to set up the final comparison experiment such that neither of the

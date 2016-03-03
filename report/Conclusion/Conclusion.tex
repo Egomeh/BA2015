@@ -1,9 +1,10 @@
 \section{Conclusion}
 
 To reach our goal of gathering empirical evidence if either the Cross-entropy method
-and the CMA-ES differ in performance when applied to Tetris, we implemented the Cross
-entropy method in Shark and tested it against the pre-implemented version of CMA-ES
-already in the Shark library. The widely used MDPTetris software was used to emulate the
+and the CMA-ES differ in performance when applied to Tetris, we implemented the Cross-entropy method in Shark and tested it against the pre-implemented version of CMA-ES
+already in the Shark library. Our implementation of the Cross-entropy 
+method is currently accepted by the Shark development team, and is now part of the code base.
+The widely used MDPTetris software was used to emulate the
 Tetris games, and was used as the optimization problem for the optimization algorithms to solve.
 The Cross-entropy method searches by using a Gaussian 
 distribution, and is therefore in nature influenced by noise. Due to this, 
@@ -34,3 +35,4 @@ suggests that the Cross-entropy method reaches the
 it's highest scores much faster than CMA-ES under optimal settings, thus in conclusion
 when learning Tetris using the MDPTetris platforms' approach the Cross-entropy method 
 stands out as the preferable choice for learning Tetris.
+

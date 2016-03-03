@@ -1,10 +1,10 @@
 \subsection{Optimal settings 
-for CMA \label{optimalsettingscma}}
+for CMA-ES \label{optimalsettingscma}}
 
-When finding the optimal settings for CMA we have a larger set of parameters we can adjust compared
-to Cross Entropy. Again, as the same with Cross Entropy, we can adjust the population/parent size and
+When finding the optimal settings for CMA-ES we have a larger set of parameters we can adjust compared
+to the Cross-entropy method. Again, as the same with the Cross-entropy method, we can adjust the population/parent size and
 games per agent. Furthermore we can adjust the initial step-size, lower bound and recombination type.\\
-The following sections will go into detail how these parameters affect the performance of CMA
+The following sections will go into detail how these parameters affect the performance of CMA-ES
 algorithm. In the last section we will perform experiments to determine the optimal settings.
 
 %In previous sections we focused on tuning Cross Entropy for the Tetris 
@@ -15,47 +15,41 @@ algorithm. In the last section we will perform experiments to determine the opti
 %limit as Cross Entropy.\\
 
 \subsubsection{Recombination type}
-Furthermore, CMA also has a unique formula for calculating the updated mean,
+CMA-ES has a unique formula for calculating the updated mean,
 called the 'Recombination type' \ref{CMAtheory}. Where the recombination type
 determines how much influence each of the offspring vectors has on the next
-generation. Built into the CMA algorithm is three methods of recombination. 
+generation. Built into the CMA-ES algorithm is three methods of recombination. 
 \begin{itemize}
 \item EQUAL, Each of the offspring vectors has equal influence in the generated mean.
 \item LINEAR, The best of the offspring vectors has more influence. 
 \item SUPERLINEAR, The vectors are weighted with a logarithmic equation.
 \end{itemize}
-\begin{changebar}
-As default, CMA uses Super Linear recombination. However, Tetris is a problem
-with multiple local optimums and heavy noise in its search space. 
-\end{changebar}
-This means, though a vector may be the best in its generation,
-it could be a nearby local optimum. Therefore,
-Super Linear recombination may not be the optimal recombination type for the Tetris problem.\\
+By default, CMA-ES uses Super Linear recombination. However, Tetris is a problem
+with multiple local optimums and heavy noise in its search space. This means, though a vector may be the best in its generation, it could be a nearby local optimum. Therefore, Super Linear recombination may not be the optimal recombination type for the Tetris problem.\\
 
 The recombination types are covered in section \ref{CMAtheory} on 
 page \pageref{eq:recomType}.
 
 
 \subsubsection{Population and selection size}
-By adjusting the population size to that similar of Cross Entropy, we are able
+By adjusting the population size to that similar of the Cross-entropy method, we are able
 to get a fair comparison between the two algorithms, given each generation will
 contain the same number of agents. By setting the population and parent size
 to the same values, we in effect test if the covariance matrix and the step-size
-control has a impact on the algorithm performance compared to Cross Entropy
+control has a impact on the algorithm performance compared to the Cross-entropy method
 which does not have the features.\\
 Table \ref{CMAPopulationSelectionConfigTest} displays the values that we are going
 to test for the population and selection size.
 
-\begin{changebar}
-\cbcolor{blue}
-\begin{table}[h]
+
+\begin{table}[H]
 \centering
 \begin{tabular}{r r}
 Population size, $\populationSize$ & Parent size, $\offspringNumber$\\
 \hline
-$12$ & $1$\\
-$12$ & $3$\\
-$12$ & $6$\\
+$13$ & $1$\\
+$13$ & $3$\\
+$13$ & $6$\\
 $22$ & $2$\\
 $22$ & $5$\\
 $22$ & $11$\\
@@ -68,29 +62,28 @@ $100$ & $50$
 \end{tabular}
 \caption{CMA-ES configuration for population and parent size \label{CMAPopulationSelectionConfigTest}}
 \end{table}
-\end{changebar}
 
 The experiments includes different population $N \in \{12,22,50,100\}$ and offspring sizes of either
-10\%, 25\% and 50\%. We use 10\% because of the Cross Entropy recommended selection size, while
+10\%, 25\% and 50\%. We use 10\% because of the Cross-entropy method recommended selection size, while
 we use 25\% because of CMA-ES's standard selection size for the EQUAL recombination type. 
 Furthermore we use 50\% because of CMA-ES's standard selection size for the LINEAR and SUPERLINEAR 
 recombination type.
 
 \subsubsection{Games per agent \label{CMAGamesPerAgentSection}}
-As with Cross Entropy we can also adjust the number of games each agent plays per generation.
-However, because of the recombination type for CMA, one game pr. agent may  be insufficient to assess the
-performance of an agent. The Linear and Super Liner recombination types will value the better agents higher.
+As with the Cross-entropy method we can also adjust the number of games each agent plays per generation.
+However, because of the recombination type for CMA-ES, one game pr. agent may  be insufficient to assess the
+performance of an agent. The Linear and Super Linear recombination types will value the better agents higher.
 Therefore, it may occur that some better-on-average agent encounter an unlucky game, achieving a lower score than
 it's actual potential allows. \\
 Thus, evaluating each agent multiple times and using the average score for recombination may allow for a more accurate assessment.\\
 
 The experiments includes different games per agent of $\{1,3,5,7,10\}$. We have chosen the same 
-values as with Cross Entropy to get comparable results (see section \ref{GamesPerAgentCESection}).
+values as with the Cross-entropy method to get comparable results (see section \ref{GamesPerAgentCESection}).
 
 \subsubsection{Initial step-size \label{sec:CMAInitialStepSize}}
-Initially, the covariance matrix of CMA in generation $\generation = 0$
+Initially, the covariance matrix of CMA-ES in generation $\generation = 0$
 is the identity matrix. The initial step-size, $\sigma_0$, will hence in 
-the first iteration scale the area in which the CMA algorithm searches.
+the first iteration scale the area in which the CMA-ES algorithm searches.
 As from section \ref{normalSamples}, it's known that the scale of the 
 solutions has no impact on the scores. Hence, it's assumed that the initial 
 step-size should not have any major impact on the results.
@@ -141,24 +134,24 @@ for the CMA-ES applied to Tetris.
 
 \subsubsection{Lower bound}
 
-As with the Cross Entropy method, to avoid early convergence
+As with the Cross-entropy method, to avoid early convergence
 at a too low local optimum, a 
 certain lower threshold for the variance should be applied when 
-sampling vectors for solutions. In the Cross Entropy method, a constant 
-noise term $z^{(\generation)} = 4$ i added to the variance for each component
-of the sampled vectors. When the $i$'th component in cross entropy is
+sampling vectors for solutions. In the Cross-entropy method, a constant 
+noise term $z^{(\generation)} = 4$ is added to the variance for each component
+of the sampled vectors. When the $i$'th component in the Cross-entropy method is
 sampled as follows
 \begin{align*}
 \individual_i &\sim \mathcal{N}\left(m, \sigma^{2}\right)\\
               &\sim \sigma \mathcal{N}\left(m, 1\right)
 \end{align*}
-Then $\sigma^{2} \geq 4$. To gain the same effect for the CMA, a lower bound 
+Then $\sigma^{2} \geq 4$. To gain the same effect for the CMA-ES, a lower bound 
 is applied to the step-size. Such a bound is implemented in the Shark library
-as the following, where the value of the lower bound is $l$.
+as the following, where the value of the lower bound is $l$
 \begin{align*}
 \sigma  \lambda_n \geq l
 \end{align*}
-Where $\lambda_n$ is the lowest eigenvalue in the covariance matrix. 
+Here $\lambda_n$ is the lowest eigenvalue in the covariance matrix. 
 When the vectors are sampled, the samples are scaled by the matrix $D$
 containing the eignvalues of the covariance matrix. 
 Hence, if $\sigma \lambda_n \geq l$, then the smallest scaling
@@ -170,10 +163,10 @@ as
 \end{align*}
 Where $D \mathcal{N}\left(0, I \right)$ corresponds to 
 $\mathcal{N}\left(0, D^2 \right)$ which, since $D$ is a diagonal
-matrix, is just the same type of sampling as in Cross Entropy. 
+matrix, is just the same type of sampling as with the Cross-entropy method. 
 The matrix $B$ will only rotate the the sampled vectors, and finally,
 $\sigma$ will perform an isotropic scaling. 
-To roughly resemble the constant noise configuration of Cross Entropy,
+To roughly resemble the constant noise configuration of the Cross-entropy method,
 when sampling vectors, the lowest variance may not drop below 4. 
 This is achieved by setting a lower bound $l=2$. If this applies,
 the sampling can be written as
@@ -204,7 +197,7 @@ setting adopted across all further experiments.
 
 \subsubsection{Experiment for finding the optimal settings \label{OptimalSettingsCMA}}
 In this in section we are going to conduct a wide variety of experiments to determine
-the best settings for CMA. More specifically we are going to find the best combination for
+the best settings for CMA-ES. More specifically we are going to find the best combination for
 population size, parent size and games per agent.\\
 Table \ref{SuperCMAExperiment} depict the different experiments we are
 going to carry out.
@@ -214,9 +207,9 @@ going to carry out.
 \begin{tabular}{c c l c}
 Population Size & Parent size & Recombination Type & Games per Agent\\
 \hline
-$12$ & $1$ & EQUAL/LINEAR/SUPERLINEAR & 1/3/5/7/10\\
-$12$ & $3$ & EQUAL & 1/3/5/7/10\\
-$12$ & $6$ & LINEAR/SUPERLINEAR & 1/3/5/7/10\\
+$13$ & $1$ & EQUAL/LINEAR/SUPERLINEAR & 1/3/5/7/10\\
+$13$ & $3$ & EQUAL & 1/3/5/7/10\\
+$13$ & $6$ & LINEAR/SUPERLINEAR & 1/3/5/7/10\\
 $22$ & $2$ & EQUAL/LINEAR/SUPERLINEAR & 1/3/5/7/10\\
 $22$ & $5$ & EQUAL & 1/3/5/7/10\\
 $22$ & $11$ & LINEAR/SUPERLINEAR & 1/3/5/7/10\\
@@ -227,18 +220,18 @@ $100$ & $10$ & EQUAL/LINEAR/SUPERLINEAR & 1/3/5/7/10\\
 $100$ & $25$ & EQUAL & 1/3/5/7/10\\
 $100$ & $50$ & LINEAR/SUPERLINEAR & 1/3/5/7/10
 \end{tabular}
-\caption{Full experiments overview \label{SuperCMAExperiment}}
+\caption{Full experiments overview for finding the optimal settings for CMA-ES\label{SuperCMAExperiment}}
 \end{table}
 
 The choice behind using the above population sizes is to use the same population sizes as
-when we tuned Cross Entropy (see section \ref{optimalsettingsce}). However, we use a population
-size of 12 instead of 10, because a population size of 12 is the stock setting for Shark CMA \citep{shark08}.\\
+when we tuned the Cross-entropy method (see section \ref{optimalsettingsce}). However, we use a population
+size of 12 instead of 10, because a population size of 12 is the stock setting for Shark CMA-ES \citep{shark08}.\\
 In regards to the parent size, they have been determined depending on the recombination type.
 We use all three different recombination types for the 10\% parent sizes to make these experiments
-correspond to the Cross Entropy settings (see section \ref{optimalsettingsce}). However, Shark CMA
+correspond to the Cross-entropy method settings (see section \ref{optimalsettingsce}). However, Shark CMA-ES
 has predetermined parent sizes for each recombination types, 25\% for EQUAL and 50\% for both
 LINEAR and SUPERLINEAR \citep{shark08}. For this reason we also conduct experiments for each population
-size to represent these Shark CMA preferred settings.
+size to represent these Shark CMA-ES preferred settings.
 Furthermore we also test different number of games per agent as for the reason presented in section \ref{CMAGamesPerAgentSection}.\\\\
 These experiments will be conducted using Hard Tetris (see section \ref{HardTetris}), in order
 to lower the computation time.\\
@@ -249,8 +242,8 @@ resulting in a total of 3.600 individual experiment runs. These results are all 
 appendix \ref{appendixCMAPopulationParent}.\\
 Below in table \ref{CMABestConfigTable} and figure \ref{CMABestConfigPlot}, the four best
 best resulting configurations are depicted. We chose these by first selecting the best 
-configuration of each Population-Parent size with each recombination type. This results in six
-configurations for each Population-Parent size, which we then compare to determine the best
+configuration of each Population-Parent size with each recombination type. This resulted in six
+configurations for each Population-Parent size, which we then compared to determine the best
 configuration for each Population-Parent size, regardless of recombination type. Which is depicted in table \ref{CMABestConfigTable} and figure \ref{CMABestConfigPlot}.
 
 \begin{table}[H]
@@ -259,7 +252,7 @@ configuration for each Population-Parent size, regardless of recombination type.
 \begin{tabular}{c c l c r r r r}
 Population & Parent & Recombination & Games per Agent & Mean & Q1 & Q2 & Q3\\
 \hline
-$12$ & $6$  & SUPERLINEAR & 10 & $2472.293$ & $2194.049$ & $2430.780$ & $2709.040$\\
+$13$ & $6$  & SUPERLINEAR & 10 & $2472.293$ & $2194.049$ & $2430.780$ & $2709.040$\\
 $22$ & $11$ & SUPERLINEAR & 10 & $2849.220$ & $2500.231$ & $2835.450$ & $3143.121$\\
 $50$ & $25$ & SUPERLINEAR & 5  & $3211.658$ & $2889.689$ & $3305.485$ & $3694.480$\\
 $100$ & $50$ & LINEAR     & 7  & $3322.076$ & $3160.098$ & $3289.370$ & $3537.850$

@@ -2,7 +2,7 @@
 
 On the topic of reinforcement learning, a widely used benchmark
 for learning algorithms are designing agents 
-for playing the classical game of Tetris. Tetris is an 
+for playing the classical video game of Tetris. Tetris is an 
 appealing benchmarking problem due to it's complexity. The 
 standard games plays on a board made from a grid that is
 10 cells wide and 20 cells tall. As the game progress, differently
@@ -24,8 +24,7 @@ complexity, a common approach
 in the literature is to use 
 \textit{one-piece controllers}\footnote{Agents and controllers
 both refer to artificial players.}, such as described in 
-\cite{scherrer2009:b}. These controllers agents that are aware
-of only 
+\cite{scherrer2009:b}. These controllers are only aware of
 the current board state and the currently falling piece.
 Hence, the policy of the agent is only to greedily choose
 the action that transitions to the most rewarding state
@@ -34,8 +33,8 @@ Assuming 4 possible rotations and 20 columns
 in which the piece may be dropped.}.
 Using these controllers, the search space is reduced 
 to only looking at the current board, and the possible 
-places to drop the piece. The 
-game used for the benchmark is a simplified version of Tetris,
+places to drop the piece. \\
+The game used for the benchmarking is a simplified version of Tetris,
 in which 
 controllers need only to decide in what column to drop the current
 piece, and what orientation the piece should have when dropped.

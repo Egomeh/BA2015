@@ -8,7 +8,7 @@ When the controller chooses an action, it will evaluate all the
 possible actions possible with the current piece. It will use the 
 value function $\valueFunction$ of each state $\gameState_i$ and 
 choose the state with the highest value from the value function.
-Thus, if the states are ordered such that:
+Thus, if the states are ordered such that
 \begin{align}
 \valueFunction \left(  \gameState_1 \right) 
 > \dots 
@@ -17,21 +17,21 @@ Thus, if the states are ordered such that:
 
 The agent then chooses the action that transitions from the current state 
 to state $\gameState_1$.\\
-Since the value function assess the state by the following:
+Since the value function assess the state by the following
 \begin{align}
 \valueFunction (\gameState ) &= 
 \sum_{i=1}^{\dimensions} \weight _{i}\feature _{i}(\gameState )
 \end{align}
 
 Then scaling the input of the agent, the weight vector $\weight$, by a
-number $a \in \mathbb{R}, \ a > 0$ the assessment is changed by:
+number $a \in \mathbb{R}, \ a > 0$ the assessment is changed by
 \begin{align}
 \sum_{i=1}^{\dimensions} a \weight _{i}\feature _{i}(\gameState ) &= 
 a\sum_{i=1}^{\dimensions} \weight _{i}\feature _{i}(\gameState )\\
 &= a \valueFunction \left( \gameState \right)
 \end{align}
 
-And the ordering remains:
+And the ordering remains
 \begin{align}
 a \valueFunction \left(  \gameState_1 \right) 
 > \dots 
@@ -54,7 +54,7 @@ and it can prevent loosing precision if the magnitude of weight
 vector becomes larger than feasible for the used floating 
 point number and avoids size limitations. However, brief experiments 
 with normalization of samples did not appear to have any effect 
-on either CMA-ES nor the Cross Entropy algorithm. Thus, albeit 
+on either CMA-ES nor the Cross-entropy method. Thus, albeit 
 being aware of the normalization option, this was not implemented
 in the actual experiments.
 

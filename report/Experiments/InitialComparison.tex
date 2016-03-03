@@ -1,21 +1,62 @@
 \subsubsection{Initial comparison - Default settings \label{sec:initialCompare}}
-For the initial comparison we use the Bertsekas featureset, since the same featureset
-was used for verifying the Cross Entropy implementation. Furthermore, others researchers
-has used the Bertsekas featureset as a benchmarking standpoint \citep{thiery:09} \&
-\citep{szita:06}.\\
-The goal of this comparison is to get an initial idea of how the Shark implementation of
-CMA-ES compares to Cross Entropy with settings used by other researchers \citep{thiery:09}.\\
+The initial comparison is meant to show how the CMA-ES performs against the Cross-entropy method
+under default settings. The default setting for CMA-ES are those set by default
+by Shark. The settings for the Cross-entropy method are those that are said to perform best
+and most
+consistently by other researchers.
+Hence, the goal of this comparison is to get an initial 
+idea of how the Shark implementation of
+CMA-ES compares to the Cross-entropy method with settings
+used by other researchers \citep{thiery:09}. Table \ref{tab:initialComparisonSettings}
+summarises the settings of each algorithm used in the initial experiment.
+\begin{table}[H]
+\centering
+\begin{tabular}{l r}
+Optimizer & CMA-ES\\
+Evaluations/agent & 8000\\
+Learning Games & 30\\
+Population size& 13\\
+Parent size & 6\\
+Games per Agent & 1\\
+Tetris Type & Normal\\
+\hline
+Recombination Type & SUPERLINEAR\\
+Initial Sigma & 0.5\\
+Lower bound & NONE\\
+\end{tabular}
+\quad
+\begin{tabular}{l r}
+Optimizer & Cross Entropy\\
+Evaluations/agent & 8000\\
+Learning Games & 30\\
+Population size & 100\\
+Parent size & 10\\
+Games per Agent & 1\\
+Tetris Type & Normal\\
+\hline
+Sigma & 100\\
+Noise Type & Constant\\
+Noise & 4
+\end{tabular}
+\caption{Optimized Cross-entropy method and CMA-ES for comparison experiments \label{tab:initialComparisonSettings}}
+\end{table}
+
 
 \textbf{Results}
 
-Using Cross Entropy with the constant noise setting and CMA with an initial step-size
-of $0.5$, we get the following results, seen in figure \ref{fig:CMA_VS_CE_00}.\\
+Figure \ref{fig:CMA_VS_CE_00} shows the mean learning curves of the two algorithms,
+and table \ref{table:initialResultTable} shows the results from the final iteration of each algorithm.
+As figure \ref{fig:CMA_VS_CE_00} reveals that CMA-ES converges faster,
+but reaches a local optimum at around 2,000 games played. Meanwhile the Cross-entropy method has a 
+slower convergence but reaches a better mean score compared to CMA-ES at around 5,500
+agents evaluated. In detail, CMA-ES on average reaches a score of 50,000 rows, and
+the Cross-entropy method reaches a score of 100,000.\\
 
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=0.8]{plots/cmaCePlot}
 \end{center}
-\caption{Initial comparison between CMA-ES and Cross Entropy \label{fig:CMA_VS_CE_00}}
+\caption{Initial comparison between CMA-ES and Cross-entropy method \label{fig:CMA_VS_CE_00}}
 \end{figure}
 
 \begin{table}[H]
@@ -25,24 +66,18 @@ of $0.5$, we get the following results, seen in figure \ref{fig:CMA_VS_CE_00}.\\
 Optimizer & Mean & Q1 & Q2 & Q3\\
 \hline
 CMA-ES  & $57783.0$ & $10269.9$ & $59774.5$ & $100384.1$\\
-Cross-entropy method & $116289.4$ & $85230.9$ & $125329.5$ & $138715.5$\\
+The Cross-entropy method & $116289.4$ & $85230.9$ & $125329.5$ & $138715.5$\\
 \end{tabular}
 \caption{Results from last iteration of the curves in figure \ref{fig:CMA_VS_CE_00}
 \label{table:initialResultTable}}
 \end{table}
-
-As figure \ref{fig:CMA_VS_CE_00} reveals that CMA-ES converges faster,
-but reaches a local optimum at around 2,000 games played. Meanwhile Cross Entropy has a 
-slower convergence but reaches a better mean score compared to CMA-ES at around 5,500
-agents evaluated. In detail, CMA-ES on average reaches a score of 50,000 rows, and
-Cross Entropy reaches a score of 100,000.\\
 
 \textbf{Analysis and discussion}
 
 These results clearly defy our initial hypothesis as we predicted
 for CMA-ES to outperform Cross-entropy method, due to its more sophisticated nature. 
 One reason for this outcome could possibly be that
-CMA-ES has a very little population size compared to Cross Entropy,
+CMA-ES has a very little population size compared to Cross-entropy method,
 which could be a decisive lack as the objective function is noisy with 
 a high variance.\\
 
@@ -56,7 +91,7 @@ perform as well as possible. Among the adjusted parameters are the following.\\
 \textit{Enlargment of population size}\\
 Our first experiment clearly shows that the CMA-ES
 is outperformed by the Cross-entropy method.
-The CMa-ES does by default only have a relatively small
+The CMA-ES does by default only have a relatively small
 population size (around 13) compared to the Cross-entropy methods
 default (100). From the earlier experiments, we saw that 
 the Cross-entropy method does benefit from a higher populations size,

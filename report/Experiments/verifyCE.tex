@@ -1,18 +1,13 @@
-\subsection{Verification of our implementation of  Cross-entropy method \label{varifyofce}}
+\subsection{Verification of our implemented of the Cross-entropy method \label{varifyofce}}
 
 Because the \shark\ library already contains an implementation of 
-CMA-ES, but not an implementation of 
-\begin{changebar}
-\cbcolor{blue}
-the Cross-entropy method,
-\end{changebar}
-we extended the library 
+CMA-ES, but not an implementation of the Cross-entropy method, we extended the library
 with our own implementation of the algorithm.\\
 In order to verify the correctness of the implementation, 
 we used the same experiments as used by 
 Christophe Thiery and Bruno Scherrer \citep{thiery:09}. 
 These experiments were used by Thiery and Scherrer to 
-verify their own Cross Entropy implementation with various types of noise correction. 
+verify their own Cross-entropy method implementation with various types of noise correction. 
 Therefore, we will perform the same experiments to verify our 
 own contribution to the \shark\  library, by trying to achieve the same results.\\
 \\
@@ -28,9 +23,9 @@ A minor derivation from the figures present in \citep{thiery:09}, is
 the unit along the x-axis in the learning curve plots indicates 
 the iteration number. As the experiments in this two algorithms
 width variable population sizes are compared, the x-axis in all plots
-indicated the number of tetris games played during the learning. In one 
+indicated the number of Tetris games played during the learning. In one 
 generation $\populationSize$ agents each play $\numberOfEvaluations$ games and hence
-adavance the x-axis by $\populationSize \numberOfEvaluations$.\\
+advance the x-axis by $\populationSize \numberOfEvaluations$.\\
 
 \begin{figure}[H]
 \begin{center}
@@ -65,10 +60,10 @@ Figure \ref{fig:ceNoNoise}, \ref{fig:ceCnstantNoise} and
 The goal of these experiments were to replicate the experiments 
 reported in \citep{thiery:09}. As the results seen from our experiments
 to a high degree resemble those reported by Thiery et. al, we conclude
-that our Cross Entropy implementation works similar to theirs.\\
+that our Cross-entropy method implementation works similar to theirs.\\
 \\
 When evaluating the score of the agent we also want to compute the confidence
-interval in verifying the implementation of Cross Entropy. The mean agent plays 30 games
+interval in verifying the implementation of the Cross-entropy method. The mean agent plays 30 games
 which leads to a confidence interval of $\pm36\%$ around the estimated mean,
 which is similar to the confidence intervals in \citep{scherrer2009}.\\
 By looking at the individual graphs for the different noise types 
@@ -90,23 +85,14 @@ The mean performance of this noise type yielded a score of
 120,000$\pm36\%$ \\
 
 Based on the mean graphs and confidence interval compared to other papers, we can
-hereby verify that our implementation of 
-\begin{changebar}
-\cbcolor{blue}
-Cross-entropy method
-\end{changebar}
-works as intended. Even though the
+hereby verify that our implementation of the Cross-entropy method works as intended. Even though the
 experiments with linear decreasing noise in this case seems to outperform
 the constant noise, other runs with linear decreasing noise ended in a mean 
 performance of only 90,000$\pm36\%$. Yet, the constant noise is both from our
 own experiments, and described in other research, noted to be the most reliable
 noise type for reaching high scoring controllers \citep{scherrer2009}. 
 Due to this, the constant noise is used in the 
-benchmarking against 
-\begin{changebar}
-\cbcolor{blue}
-CMA-ES.
-\end{changebar}
+benchmarking against CMA-ES.\\
 
 
 

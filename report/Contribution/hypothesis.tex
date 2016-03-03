@@ -2,27 +2,28 @@
 
 Prior to any execution of experiments it's assumed that, purely based 
 on a theoretical standpoint, that the CMA-ES algorithm will be able to 
-find better solutions than Cross Entropy. The assumption is based 
+find better solutions than the Cross-entropy method. The assumption is based 
 on the fact that CMA-ES is, to a higher degree, able to adjust to the 
-search space. Yet, as Cross Entropy is a simpler algorithm that needs 
-to adjust fewer parameters. Hence, another expectation is that the 
-Cross Entropy will converge faster than CMA-ES, but at lower scores.\\
+search space. Yet, as the Cross-entropy method is a simpler algorithm that needs 
+to adjust fewer parameters, hence another expectation is that the Cross-entropy
+method will converge faster than CMA-ES, but at lower scores.\\
 \\
 The CMA-ES does both have a higher number of adjustable parameters, but does also
-maintain information on prior iterations unlike the Cross Entropy algorithm.
+maintain information on prior iterations unlike the Cross-entropy method.
 Due to holding the information about prior iterations, it's perhaps a reasonable
 expectation that the algorithm will take longer to adjust properly to the
 problem. However, the CMA-ES does by default only have a little population size 
-compared to the Cross entropy. The default population size of the CMA-ES is
+compared to the Cross-entropy method. The default population size of the CMA-ES is
 typically either a forth or half of number of dimensions of the problem's search space.
 In our case with the MDPTetris, the number of features in a feature set never exceeds
-22, thus limiting the default population size very little compared to Cross Entropy's 
+22 for the feature sets that we use,
+thus limiting the default population size very little compared to the Cross-entropy method's 
 100. In the CMA-ES tutorial \citep{hansen2011}, the little population is said to
 work well for deterministic problems. Yet, as the scores in Tetris is heavily
 influenced by noise that is likely to cause faulty ranking of candidate solution,
 the small population size could prove to be a critical shortcoming.
 It is however expected that even after adjusting both algorithms to perform as 
-well as possible, the CMA-ES will prove to converge slower than Cross Entropy, but
+well as possible, the CMA-ES will prove to converge slower than the Cross-entropy method, but
 with better final results.\\
 \\
 As a final remark on the hypothesis, we must recognize that the experiments can 
@@ -33,6 +34,6 @@ focus of optimization. Often when improving the controllers, the common approach
 construct the feature sets such that the controller is aware of as many critical 
 details of the game as possible. Our focus lies on the optimization algorithms,
 and other research does indeed show that adjustments to these algorithms can 
-improve the solutions. In spite of this, we cannot prior to the experiments how much
+improve the solutions. In spite of this, we cannot prior to the experiments know how much
 the choice of algorithm impacts the results, and we may face the situation that 
 the algorithms only play a marginal role compared to the feature set.

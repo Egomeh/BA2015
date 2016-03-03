@@ -15,13 +15,13 @@ of the Tetris games using OpenGL.\\
 The core application of the source code is a function that allows evaluation of 
 a controller. This function accepts the configuration of the game one wishes to play,
 simulates game, and returns the number of lines cleared by the agent during the game.
-The configuration of the game i mostly done through reading data files that describes 
+The configuration of the game is mostly done through reading data files that describes 
 different qualities of the game. The feature set is read from a file where the file
 like the one seen in figure \ref{fig:featfile}. This file defines which features are to be 
 considered by the controller by indices. These indices each map to a feature function 
-implemented in the MDPTetris code. The that occur in the game are also read from a file,
+implemented in the MDPTetris code. The pieces that occur in the game are also read from a file,
 which in our case, is just a file that contains the 7 regular pieces from the ordinary game
-(see figure \ref{fig:TetrisPieces}). Later in the experiments however, a harder version of Tetris
+(see figure \ref{fig:TetrisPieces}). Later in the experiments however, a more difficult version of Tetris
 is discussed, which is harder due to more frequent occurrence of difficult to place pieces.
 To increase the likelihood of these pieces, the piece configuration file was altered to
 contain more of the difficult pieces, thus making them occur more often.\\
@@ -34,12 +34,12 @@ inherits from the abstract class
 abstract interface for an optimizer that can be applied to problems of finding 
 solutions of the type \lstinline$RealVector$ that models a real valued vector.
 The opbjective functions are in Shark implemented by writing a class that inherits 
-the \lstinline$SingleObjectiveFunction$ which is an interface for an objective function 
+the \lstinline$SingleObjectiveFunction$, which is an interface for an objective function 
 that accepts a single real valued vector and returns a real value indicating how well the supplied
 vector evaluates against the underlying function. In our code, we implemented the class names 
 \lstinline$MDPTetris$ that inherits the abstract \lstinline$SingleObjectiveFunction$ class.
 Thus, our implementation of the objective function offers an abstraction that, to Shark, masks
-the actual implementation and configuration of Tetris. The effect oif this abstraction is that 
+the actual implementation and configuration of Tetris. The effect of this abstraction is that 
 no code from Shark need to be aware of any details of the actual function, that is Tetris, 
 that is being optimized.\\
 \\
@@ -106,9 +106,9 @@ of the layout of the feature file can be seen in figure \ref{fig:featfile}.
 \end{figure}
 
 \subsubsection{Game complexity \label{HardTetris}}
-Both from other researchers and fro the first experiments we executed it quickly became clear
+Both from other researchers and from the first experiments we executed it quickly became clear
 that the time consumption of the optimization algorithms cannot be neglected.
-Some papers suggests that running 10 executions of the Cross Entropy Method
+Some papers suggests that running 10 executions of the Cross-entropy method
 would take more than a month in total. These time estimates 
 originates from experiments that were not conducted in parallel,
 and on hardware from 2009, yet, the time consumption seemed to 
@@ -152,10 +152,7 @@ Method and CMA-ES on the regular and hard configurations.\\
 Table \ref{table:difficultyRes} renders the results of our experiments 
 with with the hard and normal Tetris variants. CMA-ES and the Cross-entropy method 
 were each applied 30 times to both game configurations. Table \ref{table:difficultyRes}
-shows the means and quantiles of the scores gained in the last iteration.
-
- the mean results of 30 individual experiments using 
-the Cross Entropy Method and CMA-ES, applied to both Hard Tetris and Normal Tetris. 
+shows the means and quantiles of the scores gained in the last iteration.\\
 The general settings of the experiments can be seen in the appendix section, \ref{AppendixGameComplexity}.
 
 \begin{table}[H]
@@ -179,13 +176,15 @@ Normal & CMA & $49760.161$ & $42528.740$ & $49915.700$ & $67764.729$\\
 \end{figure}
 
 \textbf{Analysis and discussion}\\
-The results indicate that using Hard Tetris does not impact the general development of the algorithms, meaning we are able to use the harder Tetris for further experiments. From the graph it appears that the harder Tetris simply shifts the score compared to normal Tetris.
-\begin{changebar}
-\cbcolor{blue}
-Thus, as only the score seems to shift, but the relative performance between
-the two algorithms remain, we use this harder Tetris as a valid means of reducing the
-time consumption of the algorithms when experimenting with various parameters.
-\end{changebar}
+The results indicate that using Hard Tetris does not impact 
+the general development of the algorithms, meaning we are 
+able to use the harder Tetris for further experiments. 
+From the graph it appears that the harder Tetris simply 
+shifts the score compared to normal Tetris. However, we
+will not use Hard Tetris for our final comparison experiments, to ensure that
+the final conclusion is based on findings in the domain of the original problem. 
+Therefore, we will primarily use Hard Tetris as a faster method for configuring
+CMA-ES and the Cross-entropy method, especially when determining the optimal settings.
 \\
 
 
@@ -214,22 +213,21 @@ using Hard Tetris.
 
 \textbf{Results}
 
-In the following figures the mean results of 30 runs of both CMA and Cross 
-Entropy is presented. The settings for Cross Entropy remains at constant noise
+In the following figures the mean results of 30 runs of both CMA-ES and the Cross-entropy method is presented. The settings for the Cross-entropy method remains at constant noise
 with a noise term of $z^{(\generation)} = 4$ and an initial sigma of $\sigma_0 = 100.$, 
-and the CMA with $\sigma_0 = 1$.\\
+and the CMA-ES with $\sigma_0 = 1$.\\
 \\
 Figure \ref{fig:featuresetCompareBertsekas} shows the experiment with the 
 Bertsekas featureset. This shows that when running the algorithms with a
 harder game, the algorithms behave mostly the same as with regular 
-Tetris. Namely that CMA converges faster than Cross Entropy, 
+Tetris. Namely that CMA-ES converges faster than the Cross-entropy method, 
 but is eventually outperformed.
 
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=0.8]{plots/plotBertsekasCmaVsCEHardTetris}
 \end{center}
-\caption{Comparison between CMA-ES and Cross Entropy 
+\caption{Comparison between CMA-ES and the Cross-entropy method
 using hard Tetris and the Bertsekas featureset 
 \label{fig:featuresetCompareBertsekas}}
 \end{figure}
@@ -242,22 +240,18 @@ However, the convergence seems to occur earlier and with a higher score
 \begin{center}
 \includegraphics[scale=0.8]{plots/plotDellCmaVsCEHardTetris}
 \end{center}
-\caption{Comparison between CMA-ES and Cross Entropy 
-using hard Tetris and the Dellacherie featureset
+\caption{Comparison between CMA-ES and the Cross-entropy method 
+using hard Tetris and the Dellacherie feature set
 \label{fig:featuresetCompareDellacherie}}
 \end{figure}
 
-\textbf{Analysis and discussion}
-
+\textbf{Analysis and discussion}\\
 The experiment with different featuresets indicates that the behaviour 
 is not heavily dependant on the featureset.
-It appears that changing the featureset simple shifts the score, but does not affect the development of the graphs.\\
+It appears that changing the featureset simple shifts the score,
+but does not affect the development of the graphs.\\
 Therefore, we conclude that changing the featureset does not invalidate
-the comparison of the two optimization algorithms. 
-\begin{changebar}
-\cbcolor{blue}
-This leads us to remain at
-using the Bertsekas feature set as this keeps the time consumption of the
-experiments lower.
-\end{changebar}
-
+the comparison of the two optimization algorithms. This means, that there's
+no particular reason for using the Dellacherie feature set instead of the 
+Bertsekas feature set, because neither CMA-ES or the Cross-entropy method seems
+to benefit differently from the feature sets and the relative performance remains.

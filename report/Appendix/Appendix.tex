@@ -148,7 +148,7 @@ Normal & CMA-ES & $49760.161$ & $42528.740$ & $49915.700$ & $67764.729$\\
 
 \clearpage
 
-\subsection{Comparison - Comparison of featuresets}
+\subsection{Comparison of featuresets}
 Experiments to test Bertsekas and Dellacherie featuresets in regards to achieved score. This will tell if a different featureset affects the algorithms performance. 
 
 \begin{table}[h]
@@ -290,7 +290,7 @@ Noise & $max \left( 5 - \frac{t}{10}, 0 \right)$
 
 \clearpage
 
-\subsection{Population and selection size \label{appendixCrossEntropyConfig}}
+\subsection{The Cross-entropy method - Population and selection size \label{appendixCrossEntropyConfig}}
 \comment{Update plots and quantile table}\\
 We want to investigate if there exists a better configuration than the 100/10 which was also previously used by other researchers.\\
 In Cross Entropy for the Tetris problem, 10 \% Parent selection is used as standard. However, we will also test 50 \% Parent selection is a configuration from CMA-ES which we will also test.\\
@@ -337,9 +337,6 @@ Population size & Parent size\\
 \end{tabular}
 \caption{Population/Parent size \label{CEPopulationParentSize}}
 \end{table}
-
-INSERT PLOTS HERE.\\
-\\
 quantile table and two graphs over the mean plots of 10 \% and 50 \% Parent size
 
 \clearpage
@@ -894,7 +891,7 @@ $\sigma_0$ & mean & Q1 & Q2 & Q3\\
 % initial Lower bound
 \clearpage
 
-\subsection{Optimal settings for CMA - Lower bound \label{appendixCMALowerBound}}
+\subsection{Optimal settings for CMA-ES - Lower bound \label{appendixCMALowerBound}}
 Experiments to find the best lower bound of $\sigma \lambda_n > l$ for CMA.
 
 \begin{table}[h]
@@ -950,7 +947,7 @@ $l$ & mean & Q1 & Q2 & Q3\\
 
 \clearpage
 
-\subsection{Optimal settings for CMA - Experiment for finding the optimal settings \label{appendixCMAPopulationParent}}
+\subsection{Optimal settings for CMA-ES - Experiment for finding the optimal settings \label{appendixCMAPopulationParent}}
 Experiments finding the best configuration of population and parent size with recombination type. The parent size is dependent on the recombination type, therefore we tested these parameter together.
 \begin{table}[h]
 \centering
@@ -1520,12 +1517,12 @@ $100$ & $50$ & LINEAR & 7 & $3322.076$ & $3160.098$ & $3289.370$ & $3537.850$\\
 \clearpage
 
 \subsection{Comparison - Initial comparison}
-Comparison between the verified Cross Entropy and Shark (reference to shark) stock setting CMA.
+Comparison between the verified Cross-entropy method and Shark (reference to shark) stock settings CMA-ES.
 
 \begin{table}[h]
 \centering
 \small
-\caption{Shark stock CMA and Verified Cross Entropy}
+\caption{Shark stock CMA-ES and the verified Cross-entropy method}
 \begin{tabular}{l r}
 Optimizer & CMA\\
 Number of Evaluations & 8000\\
@@ -1568,7 +1565,7 @@ Cross Entropy & CMA-ES\\
 \begin{center}
 \includegraphics[scale=0.8]{plots/cmaCePlot}
 \end{center}
-\caption{Initial comparison between CMA-ES and Cross Entropy \label{fig:appendixCMA_VS_CE_00}}
+\caption{Initial comparison between CMA-ES and the Cross-entropy method \label{fig:appendixCMA_VS_CE_00}}
 \end{figure}
 
 \clearpage

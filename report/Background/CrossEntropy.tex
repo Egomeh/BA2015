@@ -1,18 +1,18 @@
-\subsection{CE (Cross Entropy) \label{CrossEntropy}}
-CE is described through many papers in 
+\subsection{Cross-entropy method \label{CrossEntropy}}
+The Cross-entropy method is described through many papers in 
 slightly different ways. This section
 describes the algorithm in a similar fashion 
 to \citep{thiery:09}.\\
 \\
-This method uses a Gaussian distribution to 
-sample sample vectors for the objective function
+The Cross-entropy method uses a Gaussian distribution to 
+sample vectors as search points for the objective function
 $\fitnessFunction$. The algorithm aims to 
 adjust the parameters of the distribution
 such that samples $\individual$ drawn from the distribution
 gives the best possible results when applied to the
 objective function $\fitnessFunction \left( \individual \right)$.\\
 \\
-The Cross-Entropy method starts with an initial 
+The Cross-entropy method starts with an initial 
 mean $\mean$ which is an $n$-dimensional vector
 typically set to 0
 \begin{align}
@@ -23,8 +23,8 @@ typically set to 0
 \end{pmatrix} 
 \end{align}
 
-The second argument to the gaussian distribution is a 
-diaginal matrix which contains the variance for each 
+The second argument to the Gaussian distribution is a 
+diagonal matrix which contains the variance for each 
 component
 
 \begin{align}
@@ -47,7 +47,7 @@ the variance in each dimension is set to the variance of the chosen vectors in e
 dimension.\\
 
 The pseudo code and details of the algorithm can be seen in figure
-\ref{fig:ceCode} on page \pageref{fig:ceCode}.
+\ref{fig:ceCode}.
 
 \begin{figure}[H]
 \hrule
@@ -58,22 +58,22 @@ The pseudo code and details of the algorithm can be seen in figure
 \begin{algorithmic}
 \State{\textbf{input}}
 \State{$\fitnessFunction$ : The function that estimates the performance of a vector $\individual$}
-\State{($\mean^{(0)}$, $\varianceMatrix^{(0)}$): The mean and variance of the initial distribution}
+\State{($\mean^{(0)}$, $\varianceMatrix^{(0)}$): The initial mean and variance of the Gaussian distribution}
 \State{$\populationSize$ : The number of vectors sampled per generation/iteration}
-\State{$\offspringNumber$: The number of offspring selected for the new mean}
+\State{$\offspringNumber$: The number of parents selected for the new mean}
 \State{$\noise^{(\generation)}$: The noise added to each generation/iteration}
 \\
 
 \Loop
 \State{Generate $\populationSize$ vectors $\individual_{1}, \individual_{2}, \dots, \individual_{\populationSize}$ from $\mathcal{N}(\mean^{(\generation)}, \varianceMatrix^{(\generation)})$}
 \State{Evaluate each vector using $\fitnessFunction$}
-\State{Select the $\offspringNumber$ vectors with the highest evaluation}
+\State{Select the $\offspringNumber$ search points with the highest evaluation}
 \State{Update $\mean^{(\generation + 1)}$ based on the $\offspringNumber$ best vectors}
 \State{Update $\varianceMatrix^{(\generation + 1)}$ based on the $\offspringNumber$ best vectors + $\noise^{(\generation)}$}
 \EndLoop
 \end{algorithmic}
 \hrule
-\caption{The pseudo code for the Cross-Entropy algorithm \label{fig:ceCode}}
+\caption{The pseudo code for the Cross-entropy method \label{fig:ceCode}}
 \end{figure}
 
 \subsubsection{Input}
@@ -81,7 +81,7 @@ The pseudo code and details of the algorithm can be seen in figure
 \textbf{The objective function \label{CEObjective}} \\
 The objective function $\fitnessFunction$ is a 
 function used to rank the value of a sampled vector.
-As described in the 'Optimizers' section, CE is a general stochastic 
+As described in the 'Optimizers' section, the Cross-entropy method is a general stochastic 
 iterative algorithm that tries to solve an optimization problem of 
 the form \citep{thiery:09}:
 \begin{align}
@@ -93,7 +93,7 @@ Where $x$ corresponds to a given vector,
 and $\fitnessFunction$ is our actual objective function. 
 \\
 
-\textbf{The mean and variance of the gaussian distribution} \\
+\textbf{The initial mean and variance of the Gaussian distribution} \\
 Here $\mean^{(\generation)}$ is the mean and  
 $\varianceMatrix^{(\generation)}$ is the covariance matrix, with 
 the variance in each dimension along the diagonal, and zeros elsewhere. 
@@ -111,7 +111,7 @@ Where $\generation$ denotes the current iteration.\\
 $\populationSize$ is the number of vectors sampled in each generation.
 \\
 
-\textbf{The number of selected vectors / parents}\\
+\textbf{The number of selected parents}\\
 $\offspringNumber$ is the number of vectors which are selected to compute 
 the new mean $\mean^{(\generation + 1)}$, and variance
 $\varianceMatrix^{(\generation + 1)}$, for next generation/iteration. 
@@ -127,7 +127,7 @@ is applied to the variance $\varianceMatrix^{(\generation)}$ in
 iteration/generation 
 $\generation$. In general, noise is used to prevent
 the algorithm from 
-getting narrowing down to an undesired local optimum, but
+narrowing down to an undesired local optimum, but
 rather explore new solutions.
 The noise term can be any
 function of $\generation$. Among 
@@ -168,7 +168,7 @@ taking the $\individual_{i}$ vectors with the highest ranking.
 When updating the distribution parameters for the next iteration
 ($\mean^{(\generation + 1)}$,$\varianceMatrix^{(\generation + 1)}$), 
 the mean is updated by computing the centroid of the 
-$\offspringNumber$ highest ranking vectors. This is formally defined as:
+$\offspringNumber$ highest ranking vectors. This is formally defined as
 \begin{align}
 \mean^{(\generation +1)}:=\frac{\sum_{i=1}^{\offspringNumber} \individual_{i}}{\offspringNumber}
 \ \ \ 
@@ -184,8 +184,8 @@ vectors, such that the variance in dimension $k$
 matches the variance of the $\offspringNumber$
 in dimension $k$. Hence, for $k \in \{ 1,\dots,\dimensions \}$,
 the $(k,k)$'th entry in the variance matrix is 
-updated 
-This is formally defined as:
+updated. 
+This is formally defined as
 \begin{align}
 {\varianceMatrix^{(\generation +1)}}_{k,k}:=\frac{\sum_{i}^{\offspringNumber}
 ({\individual_{i}}_k - \mean^{(\generation +1)})^2}{\offspringNumber} + 
