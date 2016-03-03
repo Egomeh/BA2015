@@ -1,21 +1,21 @@
 \subsection{Optimal settings 
-for Cross Entropy \label{optimalsettingsce}}
+for the Cross-entropy method \label{optimalsettingsce}}
 
 In this section we will determine the optimal settings for Cross Entropy through testing
 of various adjustable parameters.\\
-Compared CMA, Cross Entropy has fewer customizable parameters, more specifically 
-population-parent size and games played per agent.
+Compared to CMA-ES, the Cross-entropy method has fewer customizable parameters, more specifically 
+only population-parent size and games played per agent.
 
 \subsubsection{Population and selection size}
-Other researchers run the Cross Entropy algorithm with population size of
+Other researchers run the Cross-entropy method with population size of
 $\populationSize = 100$ and an offspring corresponding to 10\% of 
 the population size, resulting in $\offspringNumber = 10$. As it's not 
-discussed why this exact setting is applied, various settings of the 
-Cross-Entropy was executed to asses the performance of other configurations
+discussed why this exact setting is applied, various settings of the Cross-entropy method
+was executed to asses the performance of other configurations
 in our experiments.
 The experiments includes different population sizes 
 $\populationSize \in \{12, 22, 50, 100, 200\}$ and offspring 
-sizes of either $10\%$ and $50\%$ (since the CMA algorithm by default
+sizes of either $10\%$ and $50\%$ (since the CMA-ES algorithm by default
 uses $50 \%$ selected vectors). 
 A summary of the experiments can be seen in figure \ref{CEConfigTest}
 on page \pageref{CEConfigTest}.
@@ -43,7 +43,7 @@ $\populationSize$ & $\offspringNumber$ & mean & Q1 & Q2 & Q3\\
 200 & $25\%$ & 32.894,6   & 8688,7    & 25.333,1     & 58.434,8\\
 200 & $50\%$ & 946,4      & 585,0     & 802,5        & 1.267,7
 \end{tabular}
-\caption{Cross Entropy configuration test, 
+\caption{the Cross-entropy method configuration test, 
 see Appendix \ref{appendixCrossEntropyConfig} for the full plots 
 of the experiments.  \label{CEConfigTest}}
 \end{figure}
@@ -60,7 +60,7 @@ is therefore preferred since it takes shorter computation time and the end-resul
 to the $\populationSize = 50$ and $\offspringNumber = 12$ configuration, even though the latter 
 configuration from our expriments converged faster. The experiments also apppears
 to suffer from a high noise, yet both the mean and the quantiles favor the 
-extensively tested Cross Entropy configuration of $\populationSize = 100$ and $\offspringNumber = 10$.
+extensively tested the Cross-entropy method configuration of $\populationSize = 100$ and $\offspringNumber = 10$.
 
 \begin{changebar}
 \cbcolor{blue}
@@ -69,7 +69,7 @@ extensively tested Cross Entropy configuration of $\populationSize = 100$ and $\
 \includegraphics[scale=1]{plots/ce_ConstantNoise_l50_o12_all} &
 \includegraphics[scale=1]{plots/ce_ConstantNoise_l100_o10_all}
 \end{tabular}
-\caption{The two best configurations of Cross Entropy 
+\caption{The two best configurations of the Cross-entropy method 
 \label{fig:bestConfCE}}
 \end{figure}
 \end{changebar}
@@ -107,7 +107,7 @@ $200$ & $10\%$ & 1/3/5/7/10\\
 $200$ & $25\%$ & 1/3/5/7/10\\
 $200$ & $50\%$ & 1/3/5/7/10
 \end{tabular}
-\caption{Games per agent CE experiment setup\label{GamesPerAgentCE}}
+\caption{Games per agent of the Cross-entropy method experiment setup\label{GamesPerAgentCE}}
 \end{table}
 
 The experiments includes different games per agent of $\{1,3,5,7,10\}$. By increasing the number of games 
@@ -124,8 +124,8 @@ resulting in a total of 2.250 individual experiment runs. These results are all 
 appendix \ref{appendixCEPopulationParent}.\\
 Below in table \ref{CEBestConfigTable} and figure \ref{CEBestConfigPlot}, the five best
 best resulting configurations are depicted. We chose these by first selecting the best 
-configuration of each Population-Parent size. This results in three
-configurations for each Population-Parent size, which we then compare to determine the best
+configuration of each Population-Parent size. This resulted in three
+configurations for each Population-Parent size, which we then compared to determine the best
 configuration for each Population-Parent size. Which is depicted in table \ref{CEBestConfigTable} and figure \ref{CEBestConfigPlot}.
 \begin{table}[H]
 \centering
@@ -139,13 +139,13 @@ $50$ & $12$ & 5 & $2749.991$ & $2605.171$ & $2702.400$ & $2835.960$\\
 $100$ & $25$ & 3 & $2776.560$ & $2397.691$ & $2742.950$ & $3027.541$\\
 $200$ & $50$ & 1 & $2950.767$ & $2564.118$ & $2841.065$ & $3377.189$\\
 \end{tabular}
-\caption{Best configurations of all population sizes - Cross Entropy \label{CEBestConfigTable}}
+\caption{Best configurations of all population sizes - the Cross-entropy method \label{CEBestConfigTable}}
 \end{table}
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.8]{data/ce_population_offspring/bestofall_population/PlotFile.pdf}
-\caption{Best configurations of all population sizes - Cross Entropy \label{CEBestConfigPlot}}
+\caption{Best configurations of all population sizes - the Cross-entropy method \label{CEBestConfigPlot}}
 \end{figure}
 
 From table \ref{CEBestConfigTable} and figure \ref{CEBestConfigPlot}, we can see that population size 50 with parent size 12 and 5 games per agent, population size 100 with parent size 25 and 3 games per agent, and, population size 200 with parent size 50 and 1 game per agent, performs almost identically.\\
@@ -153,6 +153,6 @@ From table \ref{CEBestConfigTable} and figure \ref{CEBestConfigPlot}, we can see
 \textbf{Discussion and analysis}\\
 From the graph and the table depicting the quantiles, it appears that the configuration
 population size 200 with parent size 50 and 1 game per agent yields the best performance. 
-It achieves the highest score with the fastest convergence of all the candidate solution
+It achieves the highest score with the fastest convergence of all the candidate solutions
 we have listed.\\
 Therefore, we will be using this configuration for the tuned comparison experiments.

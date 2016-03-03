@@ -1,28 +1,28 @@
 \subsection{CMA-ES \label{CMAtheory}}
 
 
-This description is based on the tutorial written by Nikolaus Hansen
-\citep{hansen2011}. This section will not focus on the theoretical derivation
-of CMA, but rather how it deviates from Cross Entropy. 
-The CMA operates on a general level much like the Cross Entropy 
+This section is based on the tutorial written by Nikolaus Hansen
+\citep{hansen2011}. The section will not focus on the theoretical derivation
+of CMA-ES, but rather how it deviates from Cross Entropy. 
+The CMA-ES operates on a general level much like the Cross-entropy 
 method, but includes some features that increases the adaptability 
 of the algorithm.\\
 \\
-The CMA, like the Cross Entropy, uses a Gaussian distribution to
+The CMA-ES, like the Cross Entropy, uses a Gaussian distribution to
 search for good solutions to $\fitnessFunction$. Yet, for the 
-variance parameter, the CMA provides a full covariance matrix.
-As the Cross Entropy method only provides a diagonal matrix of scalers,
+variance parameter, the CMA-ES provides a full covariance matrix.
+As the Cross-entropy method only provides a diagonal matrix of scalers,
 it's restricted to only scaling the ellipsoid of equal density along
-the coordinate axes. The CMA however, with a full covariance matrix,
+the coordinate axes. The CMA-ES however, with a full covariance matrix,
 allows the ellipsoid to rotate arbitrarily in the search space.\\
 Another difference between the two algorithms is that 
-Cross Entropy only considers the next population when updating the
-distribution parameters, while the CMA keeps track of 
+Cross-entropy method only considers the next population when updating the
+distribution parameters, while the CMA-ES keeps track of 
 some information from earlier 
-generations. This allows the CMA somewhat keep track of the evolution 
+generations. This allows the CMA-ES somewhat keep track of the evolution 
 of the sampled vectors.\\
-The CMA-ES also differs from Cross Entropy in how it evaluates the influence 
-of the parent vectors. As Cross Entropy weights all vectors equally when 
+The CMA-ES also differs from the Cross-entropy method in how it evaluates the influence 
+of the parent vectors. As the Cross-entropy method weights all vectors equally when 
 moving the mean. The CMA-ES, at least from the implementation in Shark, 
 has the option of taking a weighted combination of the offspring in order
 to bias towards the better vectors.
@@ -62,12 +62,12 @@ $C$ is the covariance matrix usually set to $C=I$}
 This serves the same purpose as in Cross Entropy (see page \pageref{CEObjective}).
 \\
 
-\textbf{The mean and variance of the gaussian distribution} \\
+\textbf{The mean and variance of the Gaussian distribution} \\
 Here $\mean^{(g)}$ is the mean and  
 ${C^{(g)}}$ is the variance 
-of the gaussian distribution ($\mean^{(g)}$,
+of the Gaussian distribution ($\mean^{(g)}$,
 ${C^{(g)}}$). 
-More specifically this gaussian distribution is defined as 
+More specifically this Gaussian distribution is defined as 
 \begin{align}
 \mathcal{N}(\mean^{(\generation)},\sigma^2 C^{(\generation)})
 \end{align}
@@ -81,8 +81,8 @@ $\populationSize$ is the number of vectors sampled in each generation.
 
 \textbf{The number of offspring}\\
 $\offspringNumber$ is the number of vectors which are used to compute 
-the new mean very much like in Cross Entropy. However the CMA-ES algorithm
-is not bound to weight each vec tor equally. It has the option to assign 
+the new mean very much like in the Cross-entropy method. However the CMA-ES algorithm
+is not bound to weight each vector equally. It has the option to assign 
 a weight to each vector and hence biasing towards the better solutions.
 \\
 
@@ -121,17 +121,17 @@ This distribution describes the set of correlated real-valued vectors that
 clusters around the mean vector $m$ and has a covariance described by the
 matrix $C$. The covariance matrix describes the 'shape' of the space in which 
 the vectors are most likely to be sampled. For illustrative purposes,
-the shape of the sampling space is drawn as an ellipseoid.
-This ellipoid depicts a set of points that has equal denity 
-in the probability denisty function of $C$, and is hence refered to 
+the shape of the sampling space is drawn as an ellipsoid.
+This ellipsoid depicts a set of points that has equal density 
+in the probability density function of $C$, and is hence referred to 
 as the ellipse of equal density.
 With a covariance matrix $C$
-the ellipsoid is defined as points that stisfies
+the ellipsoid is defined as points that satisfies
 $\{x \in R^{\dimensions} | x^{T} C^{-1} x = 1\}$.
 When illustrating this, the step-size is set as $\sigma = 1$ for simplicity.\\
 \\
 The matrix $C^{-1}$ is decomposed as $C^{-1} = B D^{-2} B^T$, where $B$ is a rotation 
-matrix that rotates from the coordinate axises into the principal axises of $C$, and 
+matrix that rotates from the coordinate axes into the principal axes of $C$, and 
 $D^{-2}$ is the diagonal matrix 
 $\text{diag} \left( \frac{1}{d_{1}^2},\dots, \frac{1}{d_{\dimensions}^2} \right)$
 where $d_{i}$ is the $i$'th eigenvalue of $C$. Figure \ref{fig:ellipse} shows an example
@@ -176,7 +176,7 @@ on the ellipse.
 
 \textbf{Increment iteration counter}
 
-If the stopping criteria is not met
+If the stopping criteria is not met, then
 \begin{align}
 g &= g+1
 \end{align}
@@ -205,8 +205,8 @@ $D = \text{diag}\left(d_1, \dots, d_\dimensions\right)$
 is a diagonal matrix that contains all eigenvalues of $C$.\\
 \\
 Intermediately, the vectors are sampled from a Gaussian distribution 
-with zero mean and
-the identity matrix as variance.
+with a mean of zero and
+the identity matrix as variance
 \begin{align}
 z_{k} &\sim \mathcal{N}(0, I)
 \end{align}
@@ -248,7 +248,7 @@ x_{k} &= m + \sigma y_{k} \sim \mathcal{N}(m, \sigma^2 C) \label{eq:finalSample}
 
 Finally, the $x_{k}$ vector resemble a realization of the Gaussian distribution
 with mean $m$ and covariance matrix $C$ scaled by the step-size $\sigma$.
-Am illustration of the sampling process in two dimensions can be seen in figure \ref{fig:sampleing} where 
+Am illustration of the sampling process in two dimensions can be seen in figure \ref{fig:sampleing}, where 
 \begin{align}
 \sigma = 1,\ B = \begin{bmatrix}
 {b_1}_x & {b_2}_x\\
@@ -299,10 +299,10 @@ $z_{k} \sim \mathcal{N}(0, I)$ & $y_{k} \sim B Dz_{k}$ & $x_{k} \sim m + \sigma 
 \end{center}
 \caption{The steps of the sampling process \label{fig:sampleing}}
 \end{figure}
-In the middle step, the CMA-ES algorithm differs in particular from Cross Entropy
+In the middle step, the CMA-ES algorithm differs in particular from the Cross-entropy method
 as the rotation matrix $B$ is applied and rotates the distribution shape. 
-In opposition to this, the Cross Entropy algorithm distribution is aligned with
-the coordinate system axises.
+In opposition to this, the Cross-entropy method distribution is aligned with
+the coordinate system axises.\\
 
 \textbf{Evaluate each vector using $\fitnessFunction$ and recombine}\\
 As each vector is evaluated, they are ranked such that
@@ -367,7 +367,7 @@ factor in later equations.\\
 
 The idea of using the covariance matrix is to make new samples
 resemble the covariance of the previous well-performing vectors, as opposed 
-to the Cross Entropy algorithm that does not maintain any information of
+to the Cross-entropy method that does not maintain any information of
 previous samples.\\
 \\
 A evolution path of the movement of the means is introduced as $p_{c}$. This 
@@ -397,7 +397,7 @@ if $c_c = 0$, the previous path is not considered at all, and if $c_c = 1$ the p
 will only consist of the previous step. According to the tutorial, this is set
 $c_c = \frac{4 + \mu_{eff} / \dimensions}{\dimensions + 4 + 2 \mu_{eff} / \dimensions}$.\\
 \\
-Th indicator function $h_{\sigma}$ is discussed in detail in the tutorial \citep{hansen2011}.
+The indicator function $h_{\sigma}$ is discussed in detail in the tutorial \citep{hansen2011}.
 However, the main idea of this indicator function is.
 \begin{align}
 h_{\sigma}
@@ -432,7 +432,7 @@ p_{c}^{(g+1)} &\sim \left( 1 - c_{c} \right)
 \mathcal{N}\left(0, \left( 1 - c_{c} \right)^2 C + c_{c} \left( 2 - c_{c} \right)  C  \right)\\
 &\sim \mathcal{N}\left( 0, C \right) \label{eq:nomalization_end}
 \end{align}
-Hance, the evolution path ios updated unbiased udner random selection.
+Hence, the evolution path is updated unbiased under random selection.
 \\
 The covariance matrix is updated as follows
 \begin{align}
@@ -486,14 +486,14 @@ according to the covariance of the highest ranking vectors.
 \textbf{Step-size control}
 
 In the CMA-ES algorithm, the step-size $\sigma$ is used as an isotropic scale across
-each of the principal axis in the covariance matrix. Hence the stepsize is used as 
+each of the principal axes in the covariance matrix. Hence the stepsize is used as 
 an 'overall' scaling mechanism when drawing vectors. The step-size is used when 
 sampling the vectors in (\ref{eq:finalSample}) where it expands the variance 
 of the distribution. When moving the mean in (\ref{eq:movemean}), the weighted 
 selection mass \textbf{scaled} with the step-size is added to the mean.
 
 First we consider the evolution path of the step-size $p_\sigma$ which is
-updated a s follows.
+updated as follows.
 
 \begin{align}
 p_{\sigma}^{(g+1)} &= 
@@ -510,8 +510,8 @@ p_{\sigma}^{(g+1)} &=
 }
 \langle y \rangle_{w}
 \end{align}
-The first term is the smoothing step as seen before only using the learning rate 
-associated with the step-size evolution path but is similar to what is seen in
+The first term is the smoothing step as seen before, only using the learning rate 
+associated with the step-size evolution path, but is similar to what is seen in
 (\ref{eq:epathc}). The normalization constant is also very similar to the
 equivalent factor in (\ref{eq:epathc}).\\
 \\
@@ -616,7 +616,7 @@ steps appear perpendicular and the step-size appears reasonable.
 \caption{Illustratio of evolution path cases \label{fig:evolutionPath}}
 \end{figure}
 
-Eventually, the step-size is updated by the following.
+Eventually, the step-size is updated by the following
 \begin{align}
 \sigma^{(g+1)} &= \sigma^{(g)} \cdot exp \left( \frac{c_{\sigma}}{d_{\sigma}} \left( \frac{||p_\sigma^{(g+1)}||}{E|| \mathcal{N}(0, I) ||} - 1 \right) \right)
 \end{align}

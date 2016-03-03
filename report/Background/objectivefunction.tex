@@ -1,12 +1,12 @@
 \subsection{Optimization problem}
 
 In section \ref{MDP}, it's described that the problem of
-find a policy that allows an agent to play Tetris well
+finding a policy that allows an agent to play Tetris well,
 cannot be approached with pure analytical methods.
 When applying the more% viable \textit{Monte Carlo} methods
 to assess the value function of a policy, the only 
 knowledge one gains is the actual value from the estimation 
-of the value function. Algorithms such as the Cross Entropy Method
+of the value function. Algorithms such as the Cross-entropy method
 and CMA-ES are both designed to solve exactly these types of problems.
 The rest of this section is devoted to present the properties of the 
 general problem to be solved by the two algorithms, and how the 
@@ -14,11 +14,11 @@ problem of optimizing Tetris fits within this model.
 
 \subsubsection{General problem \label{ProblemFormulation}}
 
-The general problem that the Cross Entropy Method and CMA-ES 
+The general problem that the Cross-entropy method and CMA-ES 
 tries to solve is often referred  to as a \textit{black box}
 scenario \citep{hansen2011}. The algorithms works to 
 attempt to optimize a function $\fitnessFunction$ that takes
-a real-values vector and maps it to a real valued scalar.
+a real-valued vector and maps it to a real valued scalar.
 \begin{align*}
 \fitnessFunction : \mathbb{R}^{\dimensions} \rightarrow \mathbb{R}
 \end{align*}
@@ -44,8 +44,8 @@ the optimizer, which may only query the value of single vectors.
 \end{tikzpicture}
 \end{figure}
 The optimization algorithms may, due to the lacking information about the
-problem only act on a trial-and-error basis. As the goal of this
-thesis is to compare how the Cross Entropy Method and CMA-ES compares, 
+problem, only act on a trial-and-error basis. As the goal of this
+thesis is to compare how the Cross-entropy method and CMA-ES compares, 
 it's important to determine the metric for cost in terms of 
 how many resources the algorithms consume versus performance.
 Typically, and also in our case, the cost is measured in terms 
@@ -149,11 +149,11 @@ consider all possible locations to drop the piece. Each
 of the locations corresponds to an action in the MDP.
 To decide which action to take, a value function $\valueFunction$
 is used to assert the value of the state. Note that 
-this value function nit \textbf{not} the same as the value 
+this value function is \textbf{not} the same as the value 
 function described in section \ref{MDP}. This value function
 maps a feature set and a set of associated weights to a real value.
 The value from this function is used to \textit{rank} each possible action.
-this function is formally defined as
+This function is formally defined as
 \begin{align}
 \valueFunction (\gameState ) &= 
 \sum_{i=1}^{\dimensions} \weight _{i}\feature _{i}(\gameState )
@@ -187,7 +187,7 @@ order all the actions such that
 \valueFunction \left( \gameState_0 \right) \geq \dots \geq 
 \valueFunction \left( \gameState_n \right)
 \end{align} 
-And then choose action $\MDPAction_0$. The policy of the agent 
+and then choose action $\MDPAction_0$. The policy of the agent 
 is then defined by the combination of feature set and the set of weights.\\
 \\
 When applying an optimization algorithm to Tetris, the feature set is 

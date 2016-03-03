@@ -1,6 +1,6 @@
 \subsection{Optimizers \label{Optimizers}}
 
-In this thesis, the Cross-Entropy method and the Covariance Matrix Evolution 
+In this thesis, the Cross-entropy method and the Covariance Matrix Evolution 
 Strategy are compared. Both of the methods fall into the category of 
 \textit{stochastic optimization}
 methods. These methods are useful for 
@@ -22,7 +22,7 @@ In these optimization methods, the optimizing algorithm uses a family of paramet
 and maintains a mean $\mean $ along with other parameters
 to search the best possible solution for the objective function.  
 In the case studied in this thesis
-both the CMA-ES and Cross-entropy methods use a 
+both, the CMA-ES and Cross-entropy method use a 
 Gaussian distribution to sample solutions to the objective function.
 Hence, both of the functions aim to find a mean 
 $\mean $ and an $\dimensions \times \dimensions$ matrix 
@@ -41,7 +41,7 @@ The algorithms start by initializing the
 parameters either at random or at some fixed point. A common 
 configuration is setting the mean to 
 all zeros and the standard deviation to the identity matrix.
-Thus, for the first iteration $\generation = 0$, a configuration could be:
+Thus, for the first iteration $\generation = 0$, a configuration could be
 \begin{align}
 \mean^{(0)} =
 \begin{bmatrix}
@@ -72,7 +72,7 @@ they are ordered according to their fitness
 \fitnessFunction(\textbf{\individual }_{\populationSize })
 \end{align}
 This sorting is a rather essential part of the way the search parameters are
-updated. Both the Cross Entropy and CMA-ES algorithm use a fraction of the 
+updated. Both the Cross-entropy method and CMA-ES algorithm use a fraction of the 
 best solutions that were drawn from it's Gaussian distribution. An essential 
 part of the selection is that the candidate solutions are not contributing
 directly according to their yield from the fitness function, but only from 

@@ -1,13 +1,14 @@
 \subsection{Markov Decision Processes \label{MDP}}
 
 A Markov Decision Process (MDP) is a model for an automatic 
-decision making system. An MDP can be used to model the actions 
+decision making system. A MDP can be used to model the actions 
 of an agent in a game, in this case Tetris. 
 In the MDPTetris platform the agent
 that plays the simulated games makes decisions modelled
 after an MDP \citep{mdptetris}. The specifics of the 
-MDPTetris platform is covered in section \ref{sec:MDPTetris}.
-An MDP consists of a set of states $\MDPStates$,
+MDPTetris platform is covered in section \ref{sec:MDPTetris}.\\
+\\
+A MDP consists of a set of states $\MDPStates$,
 a set of actions $\MDPActions$ and a 
 \textit{state transition probability kernel} $\MDPTKernel$.
 The states in $\MDPStates$ denotes all the states of the game
@@ -20,7 +21,8 @@ current piece about to be dropped.
 The actions in $\MDPActions$
 denotes all the actions that an agent may take. The $\MDPTKernel$ is
 a probability function that determines how likely it is for an action 
-to transition to another given state. As an example, given 3 states 
+to transition to another given state.\\
+As an example, given 3 states 
 $\MDPState_0, \MDPState_1, \MDPState_2$, an action $\MDPAction_0$ and the 
 agent currently being in state $\MDPState_0$. Then $\MDPTKernel$
 might determine that taking action $\MDPAction_0$ transitions
@@ -29,7 +31,7 @@ with probability 0.8. \\
 The behaviour of the agent is defined by its policy $\policy$
 which is a function that maps states of the game into actions, formally
 defined as $\policy : \MDPStates \rightarrow \MDPActions$.
-The goal is to find the best possible policy which in the case
+The goal is to find the best possible policy, which in the case
 of Tetris, is the policy that leads to the highest average score
 in the game. The value of the policies are described as a 
 \textit{value function} 
@@ -39,8 +41,8 @@ of the game into an expected value, namely the score of the
 agent when starting in the given state and follows
 the policy $\policy$, formally defined as
 $\MDPValueFunction^{\policy} : \MDPStates \rightarrow \mathbb{R}$. 
-The optimal value function, that plays the game as well
-as possible is denoted $\MDPValueFunction^{*}$. Optimizing the 
+The optimal value function that plays the game as well
+as possible, is denoted $\MDPValueFunction^{*}$. Optimizing the 
 agent is a task that consists of determining a policy $\policy$ for which
 $\MDPValueFunction^{\policy}$ gets as close to $\MDPValueFunction^{*}$
 as possible. In the case of Tetris, the piece dropped is stochastically 
@@ -52,7 +54,8 @@ Finding the best policy for Tetris is a very computationally heavy
 task due to the enormous state space. Also, in the MDPTetris platform,
 the agent will not be aware of the entire game state exactly to its 
 size, but uses policies that are concerned with simplified
-features of the game (described in detail in later sections). 
+features of the game (described in detail in later sections).\\
+\\
 The methods in reinforcement learning provides various ways to
 search for good policies.
 One approach is 
@@ -134,11 +137,11 @@ reward given to the agent when following $\policy$.\\
 \caption{Example of a game formulated as an MDP \label{fig:hypotheticalMDPGame}}
 \end{figure}
 
-Tetris can be formulated very well as an MDP as well.
-When looking at Tetris as an MDP, the state consists
+Tetris can be formulated very well as a MDP as well.
+When looking at Tetris as a MDP, the state consists
 of the current board configuration and the currently falling piece.
 Figure \ref{fig:TetrisAsMDP} shows a visual presentation 
-of how the game state is formulated into an MDP state. The black
+of how the game state is formulated into a MDP state. The black
 blocks in the bottom of the board notes that these blocks are 
 occupied and the text 'I-block' indicates that the currently
 falling piece is an I-block.
@@ -150,13 +153,13 @@ is based on how many lines it clears. If the agent appears in a state
 where it clears lines, the reward is exactly how many lines are cleared.
 The reward is 0 in all other cases except for a state that ends the game.
 The game over state typically leads to a massively negative reward to 
-encourage the agent to play for as long as possible.
+encourage the agent to play for as long as possible.\\
 To get an intuition on why the exhaustive search through the Tetris 
-state space is not an option, consider how Tetris is formulated as an MDP.
+state space is not an option, consider how Tetris is formulated as a MDP.
 The state of the game is the configuration of the board combined with 
 the current pieces to be dropped. Figure \ref{fig:TetrisAsMDP} shows
-how the current board of the game can be considered as an MDP state. 
-In this case, I-piece can be oriented either vertical or horizontal. 
+how the current board of the game can be considered as a MDP state. 
+In this case, the I-piece can be oriented either vertical or horizontal. 
 In horizontal orientation, it can be dropped in 7 different columns,
 and in vertical orientation it can be dropped in all 10 different columns.
 When the piece is dropped, the next state of the game is the one 
@@ -236,8 +239,8 @@ we typically wish to estimate the value function from the starting
 state of the game. Using the method, the episode/game is simulated 
 and the agent will interact with the environment with the given policy
 and finally exit with an estimate of $\MDPValueFunction^{\policy}$,
-in our case, the final score. Thus, using this method, we need not search 
-through the entire state set, and neither do we need to know all
+in our case, the final score. Thus, using this method, we do not need search 
+through the entire state set, and neither do we have to know all
 details of the game states the agent went through while playing.
 All we have to be concerned with is to, on a trial-and-error basis
 adjust the policy and use the simulations to reveal what adjustments 

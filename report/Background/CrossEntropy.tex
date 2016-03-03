@@ -1,10 +1,10 @@
-\subsection{CE (Cross Entropy) \label{CrossEntropy}}
-CE is described through many papers in 
+\subsection{Cross-entropy method \label{CrossEntropy}}
+The Cross-entropy method is described through many papers in 
 slightly different ways. This section
 describes the algorithm in a similar fashion 
 to \citep{thiery:09}.\\
 \\
-This method uses a Gaussian distribution to 
+The Cross-entropy method uses a Gaussian distribution to 
 sample sample vectors for the objective function
 $\fitnessFunction$. The algorithm aims to 
 adjust the parameters of the distribution
@@ -12,7 +12,7 @@ such that samples $\individual$ drawn from the distribution
 gives the best possible results when applied to the
 objective function $\fitnessFunction \left( \individual \right)$.\\
 \\
-The Cross-Entropy method starts with an initial 
+The Cross-entropy method starts with an initial 
 mean $\mean$ which is an $n$-dimensional vector
 typically set to 0
 \begin{align}
@@ -23,8 +23,8 @@ typically set to 0
 \end{pmatrix} 
 \end{align}
 
-The second argument to the gaussian distribution is a 
-diaginal matrix which contains the variance for each 
+The second argument to the Gaussian distribution is a 
+diagonal matrix which contains the variance for each 
 component
 
 \begin{align}
@@ -168,7 +168,7 @@ taking the $\individual_{i}$ vectors with the highest ranking.
 When updating the distribution parameters for the next iteration
 ($\mean^{(\generation + 1)}$,$\varianceMatrix^{(\generation + 1)}$), 
 the mean is updated by computing the centroid of the 
-$\offspringNumber$ highest ranking vectors. This is formally defined as:
+$\offspringNumber$ highest ranking vectors. This is formally defined as
 \begin{align}
 \mean^{(\generation +1)}:=\frac{\sum_{i=1}^{\offspringNumber} \individual_{i}}{\offspringNumber}
 \ \ \ 
@@ -184,8 +184,8 @@ vectors, such that the variance in dimension $k$
 matches the variance of the $\offspringNumber$
 in dimension $k$. Hence, for $k \in \{ 1,\dots,\dimensions \}$,
 the $(k,k)$'th entry in the variance matrix is 
-updated 
-This is formally defined as:
+updated. 
+This is formally defined as
 \begin{align}
 {\varianceMatrix^{(\generation +1)}}_{k,k}:=\frac{\sum_{i}^{\offspringNumber}
 ({\individual_{i}}_k - \mean^{(\generation +1)})^2}{\offspringNumber} + 

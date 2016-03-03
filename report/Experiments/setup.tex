@@ -4,7 +4,7 @@ When executing the experiments, various parameters each have
 an impact on the final result of the learning curve. Thus, the parameters
 are adjusted, first to match the experiments run by other researchers, 
 and later to conduct as fair as possible comparisons between 
-Cross-Entropy and CMA-ES.\\
+the Cross-entropy method and CMA-ES.\\
 \\
 % agents
 The amount of vectors sampled in each generation $\populationSize$
@@ -22,7 +22,7 @@ In the implementation of CMA-ES from \shark ,
 the algorithm  itself determines
 the value of $\populationSize$ according to the 
 size of the search space. 
-Cross-Entropy however, does not seem to have a 
+The Cross-entropy method however, does not seem to have a 
 general rule for this parameter,
 so this value is manually adjusted to fit the 
 problem as well as possible.\\
@@ -36,8 +36,8 @@ further since the updated mean would be too close to the previous one to
 significantly make a difference. By setting the value too low,
 the risk of reaching a local optimum increases since the high-scoring agents
 might have reached their high performance by chance.\\
-The CMA-ES itself manages setting $\offspringNumber$ and Cross-Entropy
-is set according to the problem. Most authors that uses Cross-Entropy for Tetris
+The CMA-ES itself manages setting $\offspringNumber$ and the Cross-entropy method
+is set according to the problem. Most authors that uses the Cross-entropy method for Tetris
 sets the offspring size to $10\%$ of population size, that is 
 $\offspringNumber = \lfloor 0.1 \cdot \populationSize \rfloor $.\\
 \\
@@ -59,7 +59,7 @@ $\numberOfEvaluations$ high increases the likelihood of correctly choosing the b
 agents, yet, it also causes longer run times of the experiments.\\
 \\
 % Noise factor
-Specific to the Cross-Entropy method, 
+Specific to the Cross-entropy method, 
 most authors report that the performance of the 
 algorithm increases dramatically when the sampling 
 distribution is associated with
@@ -81,10 +81,10 @@ as the algorithm progresses.\\
 \\
 For the various experiments, these 
 parameters will be tuned for the specific purpose 
-at hand. In the verification of the Cross-Entropy, the parameters are set 
+at hand. In the verification of the Cross-entropy method, the parameters are set 
 to match those reported in similar papers (\cite{thiery:09}, \cite{szita:06}).
 In the comparison of the two algorithms, the parameters will be set such that 
-the Cross-Entropy operates under as 
+the Cross-entropy method operates under as 
 similar conditions as CMA-ES, to ensure an unbiased 
 comparison.
 

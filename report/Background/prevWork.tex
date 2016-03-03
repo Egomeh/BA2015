@@ -43,10 +43,10 @@ our goal is not to find a controller that outperforms any existing one,
 but rather to investigate the learning properties of the optimization algorithms.
 For this purpose
 we are in particular addressing the
-Cross-Entropy method described in detail in \citep{cetut2014} and the
+Cross-entropy method described in detail in \citep{cetut2014} and the
 Covariance Matrix Adaption Evolution Strategy (CMA-ES), described 
-in \citep{hansen2011}. The particular Cross-Entropy method applied 
-is the one described in \citep{szita:06} as the "Noisy Cross Entropy Method".\\
+in \citep{hansen2011}. The particular Cross-entropy method applied 
+is the one described in \citep{szita:06} as the "Noisy Cross-entropy Method".\\
 
 \begin{table}[h!]
 \begin{center}
@@ -99,17 +99,17 @@ optimization methods have been explored.
 The Dellacherie controller is very widely used across many resources
 \citep{fahey}. This controller was hand-tuned by trial and error,
 and did originally, on a regular non-simplified Tetris game, achieve an average of
-660 000 lines. The same feature set (see figure \ref{table:dellfeat}) is 
+660,000 lines. The same feature set (see figure \ref{table:dellfeat}) is 
 often incoorporated in later works when optimizing controllers. An earlier
 feature set is the set proposed by \citep{Bertsekas} referred to as Bertsekas and
-Tsitsiklis features. In 2006, Szita and L\H{o}rincz \citep{szita:06} applied the Cross-Entropy
+Tsitsiklis features. In 2006, Szita and L\H{o}rincz \citep{szita:06} applied the Cross-entropy
 method using the Bertsekas and Tsitsiklis features. They report that using no noise,
-their controller converged at 300 000 lines on average. 
+their controller converged at 300,000 lines on average. 
 The best result reported in \citep{szita:06}
 is when decreasing noise is applied, 
-in which the controller's score exceeded 800 000 lines. 
+in which the controller's score exceeded 800,000 lines. 
 However, in a later paper, using Dellacherie, 
 Bertsekas and two selfdefined features achieved 
-35.000.000 lines $\pm 20\%$  \citep{scherrer2009}.\\
+35,000,000 lines $\pm 20\%$  \citep{scherrer2009}.\\
 
 
