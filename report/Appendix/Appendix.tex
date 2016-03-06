@@ -1,6 +1,6 @@
 \section{Experiments}
 This appendix contains all of the included experiments from which we have derived our results. Each of the plots, depending on the number of experiments, will depict the mean scores of the experiments or the experiments themselves.\\
-With each experiment, a table detailing the parameter values will be included for others who would want to reproduce these experiments. Depending on the optimizer (weather it is Cross Entropy or CMA-ES), the table will contain some custom rows, unique for the specific algorithm.\\
+With each experiment, a table detailing the parameter values will be included for others who would want to reproduce these experiments. Depending on the optimizer (weather it is the Cross-entropy or CMA-ES), the table will contain some custom rows, unique for the specific algorithm.\\
 Similar for all experiments is the 30 games played with the new mean of each generation to generate the learning curve.\\
 The tables are formatted 
 \begin{table}[h]
@@ -38,7 +38,8 @@ Noise & -
 \clearpage
 
 \subsection{Game Complexity \label{AppendixGameComplexity}}
-Experiments to test if game complexity can be used for tuning the CMA-ES and CE configurations.
+Experiments to test if changing the game complexity (Normal og Hard Tetris) can be used for tuning the CMA-ES and the Cross-entropy method configurations in later experiments.\\
+
 
 \begin{table}[h]
 \centering
@@ -148,13 +149,12 @@ Normal & CMA-ES & $49760.161$ & $42528.740$ & $49915.700$ & $67764.729$\\
 
 \clearpage
 
-\subsection{Comparison of featuresets}
-Experiments to test Bertsekas and Dellacherie featuresets in regards to achieved score. This will tell if a different featureset affects the algorithms performance. 
+\subsection{Comparison of feature sets}
+Experiments to test Bertsekas and Dellacherie featuresets in regards to achieved score. This will tell if a different feature set affects the algorithms performance. 
 
 \begin{table}[h]
 \centering
 \small
-\caption{Shark stock CMA-ES and Verified Cross Entropy}
 \begin{tabular}{l r}
 Optimizer & CMA-ES\\
 Number of Evaluations & 8000\\
@@ -182,30 +182,31 @@ Sigma & 100\\
 Noise Type & Constant\\
 Noise & 4
 \end{tabular}
+\caption{Shark stock CMA-ES and Verified Cross Entropy}
 \end{table}
 
 \comment{Add individual plots}
 
-Used on the bertsekas and Dellacherie featuresets
+Used on the Bertsekas and Dellacherie feature sets
 
 \begin{figure}[H]
 \includegraphics[scale=1]{plots/plotBertsekasCmaVsCEHardTetris}
 \caption{Comparison between CMA-ES and Cross Entropy 
-using hard Tetris and the Bertsekas featureset }
+using hard Tetris and the Bertsekas feature set }
 %\label{fig:featuresetCompareBertsekas}}
 \end{figure}
 
 \begin{figure}[H]
 \includegraphics[scale=1]{plots/plotDellCmaVsCEHardTetris}
 \caption{Comparison between CMA-ES and Cross Entropy 
-using hard Tetris and the Dellacherie featureset}
+using hard Tetris and the Dellacherie feature set}
 %\label{fig:Dellacherie}}
 \end{figure}
 
 \clearpage
 
 \subsection{Verification of Cross Entropy}
-Using the same configuration as in "reference paper", we will reproduce the experiments to verify our implementation of Cross Entropy into the Shark Library.\\
+Using the same configurations as in the experiments performed by Thiery and Scherrer \citep{thiery:09}, we will reproduce the experiments to verify our implementation of the Cross-entropy method.\\
 \\
 \begin{table}[h!]
 \centering
@@ -293,7 +294,7 @@ Noise & $max \left( 5 - \frac{t}{10}, 0 \right)$
 \subsection{The Cross-entropy method - Population and selection size \label{appendixCrossEntropyConfig}}
 \comment{Update plots and quantile table}\\
 We want to investigate if there exists a better configuration than the 100/10 which was also previously used by other researchers.\\
-In Cross Entropy for the Tetris problem, 10 \% Parent selection is used as standard. However, we will also test 50 \% Parent selection is a configuration from CMA-ES which we will also test.\\
+The Cross-entropy method for the Tetris problem uses 10 \% Parent selection as standard. However, we will also test 25\% and 50\% Parent selection derived from configurations in CMA-ES.\\
 The general testing parameters are as follows
 \begin{table}[h]
 \centering
@@ -312,7 +313,7 @@ Noise & 4
 \caption{General setup for Population/Parent size}
 \end{table}
 
-with the following population/Parent size
+with the following Population/Parent size
 
 \begin{table}[h]
 \centering
@@ -398,12 +399,11 @@ and the mean score of the centroid agent along the y-axis.
 
 \clearpage
 
-\subsection{Optimal settings for Cross Entropy - Games per agent \label{appendixCEPopulationParent}}
-Experiment to determine the optimal number of games played per agent for best resulting score at lowest evaluation cost.
+\subsection{Optimal settings for the Cross-entropy method- Games per agent \label{appendixCEPopulationParent}}
+Experiments to determine the optimal number of games played per agent for best resulting score at lowest evaluation cost.
 
 \begin{table}[h]
 \centering
-\caption{General setup for Population/Parent size}
 \begin{tabular}{l r}
 Optimizer & Cross Entropy\\
 Number of Evaluations & 80000\\
@@ -416,6 +416,7 @@ Sigma & 100\\
 Noise Type & Constant\\
 Noise & 4
 \end{tabular}
+\caption{General setup for Population/Parent size}
 \end{table}
 
 with the following population/Parent size and number of games played per agent
@@ -826,11 +827,10 @@ $200$ & $50$ & 1 & $2950.767$ & $2564.118$ & $2841.065$ & $3377.189$\\
 \clearpage
 
 \subsection{Optimal settings for CMA-ES - Initial Step-size \label{appendixCMAInitialSigma}}
-Experiments to find the best initial step-size for CMA-ES.
+Experiments to find the best performing initial step-size for CMA-ES.
 
 \begin{table}[h]
 \centering
-\caption{Overview of the two table formats}
 \begin{tabular}{l r}
 Optimizer & CMA-ES\\
 Number of Evaluations & 8000\\
@@ -843,6 +843,7 @@ Tetris Type & Normal\\
 Recombination Type & Superlinear\\
 Initial Sigma & See table \ref{InitialSigmaTest}
 \end{tabular}
+\caption{General setup for initial step-size experiments}
 \end{table}
 
 with the following initial sigma
@@ -854,8 +855,6 @@ $\sigma_0$ & 0.1 & 0.2 & 0.5 & 0.8 & 1.0
 \end{tabular}
 \caption{Initial sigma configurations \label{InitialSigmaTest}}
 \end{table}
-This sections lists the raw graphs of the experiments that were
-to determine the effect of the initial sigma setting. 
 
 \begin{tabular}{@{}l@{}l@{}}
 \includegraphics[scale=1]{plots/cma_initial_sigma_0_1} &
@@ -884,7 +883,7 @@ $\sigma_0$ & mean & Q1 & Q2 & Q3\\
 0.8 & 37557.7 & 1422.8  & 15450.8 & 93719.4\\
 1.0 & 49537.9 & 31369.8 & 49537.4 & 58454.6
 \end{tabular}
-\caption{Results of CMA-ES with adjusted initial step-size \label{CMAInitialSigmaConfigTestAppendix}}
+\caption{Results of CMA-ES with various initial step-size \label{CMAInitialSigmaConfigTestAppendix}}
 \end{figure}
 
 
@@ -892,11 +891,10 @@ $\sigma_0$ & mean & Q1 & Q2 & Q3\\
 \clearpage
 
 \subsection{Optimal settings for CMA-ES - Lower bound \label{appendixCMALowerBound}}
-Experiments to find the best lower bound of $\sigma \lambda_n > l$ for CMA.
+Experiments to find the best performing lower bound of $\sigma \lambda_n > l$ for CMA-ES.
 
 \begin{table}[h]
 \centering
-\caption{Overview of the two table formats}
 \begin{tabular}{l r}
 Optimizer & CMA\\
 Number of Evaluations & 8000\\
@@ -909,6 +907,7 @@ Tetris Type & Normal\\
 Recombination Type & Superlinear\\
 Lower bound & See table \ref{appendixLowerBound}
 \end{tabular}
+\caption{General setup for lower bound experiments}
 \end{table}
 
 with the following lower bounds
@@ -948,7 +947,9 @@ $l$ & mean & Q1 & Q2 & Q3\\
 \clearpage
 
 \subsection{Optimal settings for CMA-ES - Experiment for finding the optimal settings \label{appendixCMAPopulationParent}}
-Experiments finding the best configuration of population and parent size with recombination type. The parent size is dependent on the recombination type, therefore we tested these parameter together.
+Experiments finding the best performing configuration of population and parent size with
+recombination type. The parent size is dependent on the recombination type, 
+therefore these parameters are tested together.
 \begin{table}[h]
 \centering
 \begin{tabular}{l r}
@@ -963,7 +964,7 @@ Tetris Type & Hard\\
 Recombination Type & See table \ref{SuperCMAExperiment}\\
 Initial Sigma & 1
 \end{tabular}
-\caption{CMA experiment parameters for testing games per agent}
+\caption{CMA-ES experiment parameters for testing games per agent}
 \end{table}
 
 \begin{table}[H]
@@ -971,9 +972,9 @@ Initial Sigma & 1
 \begin{tabular}{c c l c}
 Population Size & Parent size & Recombination Type & Games per Agent\\
 \hline
-$12$ & $1$ & EQUAL/LINEAR/SUPERLINEAR & 1/3/5/7/10\\
-$12$ & $3$ & EQUAL & 1/3/5/7/10\\
-$12$ & $6$ & LINEAR/SUPERLINEAR & 1/3/5/7/10\\
+$13$ & $1$ & EQUAL/LINEAR/SUPERLINEAR & 1/3/5/7/10\\
+$13$ & $3$ & EQUAL & 1/3/5/7/10\\
+$13$ & $6$ & LINEAR/SUPERLINEAR & 1/3/5/7/10\\
 $22$ & $2$ & EQUAL/LINEAR/SUPERLINEAR & 1/3/5/7/10\\
 $22$ & $5$ & EQUAL & 1/3/5/7/10\\
 $22$ & $11$ & LINEAR/SUPERLINEAR & 1/3/5/7/10\\
@@ -984,7 +985,7 @@ $100$ & $10$ & EQUAL/LINEAR/SUPERLINEAR & 1/3/5/7/10\\
 $100$ & $25$ & EQUAL & 1/3/5/7/10\\
 $100$ & $50$ & LINEAR/SUPERLINEAR & 1/3/5/7/10
 \end{tabular}
-\caption{Full experiments overview \label{SuperCMAExperimentAppendix}}
+\caption{Full experiments overview - more intuitive format \label{SuperCMAExperimentAppendix}}
 \end{table}
 
 
@@ -1001,27 +1002,27 @@ $100$ & $50$ & LINEAR/SUPERLINEAR & 1/3/5/7/10
 	\centering
 	\captionsetup[subfigure]{justification=centering}
     \begin{subfigure}[b]{0.49\textwidth}
-    	\caption{Population size 12, Parent size 1,\\EQUAL recombination}
+    	\caption{Population size 13, Parent size 1,\\EQUAL recombination}
         \includegraphics[width=\textwidth]{data/cma_population_offspring/12x_split/equal_l12_o1/mean/PlotFile.pdf}
     \end{subfigure} 
     \begin{subfigure}[b]{0.49\textwidth}
-    	\caption{Population size 12, Parent size 3,\\EQUAL recombination}
+    	\caption{Population size 13, Parent size 3,\\EQUAL recombination}
         \includegraphics[width=\textwidth]{data/cma_population_offspring/12x_split/equal_l12_o3/mean/PlotFile.pdf}
     \end{subfigure}
     \begin{subfigure}[b]{0.49\textwidth}
-    	\caption{Population size 12, Parent size 1,\\LINEAR recombination}
+    	\caption{Population size 13, Parent size 1,\\LINEAR recombination}
         \includegraphics[width=\textwidth]{data/cma_population_offspring/12x_split/linear_l12_o1/mean/PlotFile.pdf}
     \end{subfigure}
     \begin{subfigure}[b]{0.49\textwidth}
-    	\caption{Population size 12, Parent size 6,\\LINEAR recombination}
+    	\caption{Population size 13, Parent size 6,\\LINEAR recombination}
         \includegraphics[width=\textwidth]{data/cma_population_offspring/12x_split/linear_l12_o6/mean/PlotFile.pdf}
     \end{subfigure}
     \begin{subfigure}[b]{0.49\textwidth}
-    	\caption{Population size 12, Parent size 1,\\SUPERLINEAR recombination}
+    	\caption{Population size 13, Parent size 1,\\SUPERLINEAR recombination}
         \includegraphics[width=\textwidth]{data/cma_population_offspring/12x_split/superlinear_l12_o1/mean/PlotFile.pdf}
     \end{subfigure}
     \begin{subfigure}[b]{0.49\textwidth}
-    	\caption{Population size 12, Parent size 6,\\SUPERLINEAR recombination}
+    	\caption{Population size 13, Parent size 6,\\SUPERLINEAR recombination}
         \includegraphics[width=\textwidth]{data/cma_population_offspring/12x_split/superlinear_l12_o6/mean/PlotFile.pdf}
     \end{subfigure}
     
@@ -1402,20 +1403,20 @@ $100$ & $50$ & SUPERLINEAR & 10 & $3106.917$ & $2914.349$ & $3162.250$ & $3324.9
 \begin{tabular}{c c c c r r r r}
 Population & Parent & Recombination & Games per Agent & mean & Q1 & Q2 & Q3\\
 \hline
-$12$ & $1$ & EQUAL & 10 & $1134.339$ & $863.523$ & $1061.050$ & $1297.359$\\
-$12$ & $1$ & LINEAR & 10 & $1276.041$ & $1135.609$ & $1196.120$ & $1502.029$\\
-$12$ & $1$ & SUPERLINEAR & 10 & $1401.300$ & $1194.430$ & $1440.500$ & $1569.012$\\
-$12$ & $3$ & EQUAL & 10 & $1940.783$ & $1566.721$ & $1913.415$ & $2210.251$\\
-$12$ & $6$ & LINEAR & 10 & $2365.089$ & $2072.719$ & $2263.665$ & $2637.732$\\
-$12$ & $6$ & SUPERLINEAR & 10 & $2472.293$ & $2194.049$ & $2430.780$ & $2709.040$\\
+$13$ & $1$ & EQUAL & 10 & $1134.339$ & $863.523$ & $1061.050$ & $1297.359$\\
+$13$ & $1$ & LINEAR & 10 & $1276.041$ & $1135.609$ & $1196.120$ & $1502.029$\\
+$13$ & $1$ & SUPERLINEAR & 10 & $1401.300$ & $1194.430$ & $1440.500$ & $1569.012$\\
+$13$ & $3$ & EQUAL & 10 & $1940.783$ & $1566.721$ & $1913.415$ & $2210.251$\\
+$13$ & $6$ & LINEAR & 10 & $2365.089$ & $2072.719$ & $2263.665$ & $2637.732$\\
+$13$ & $6$ & SUPERLINEAR & 10 & $2472.293$ & $2194.049$ & $2430.780$ & $2709.040$\\
 \end{tabular}
-\caption{Best performing configurations for population size 12}
+\caption{Best performing configurations for population size 13}
 \end{table}
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=1]{data/cma_population_offspring/bestofeach_population/12x/PlotFile.pdf}
-\caption{Best performing configurations for population size 12}
+\caption{Best performing configurations for population size 13}
 \end{figure}
 
 \clearpage
@@ -1498,7 +1499,7 @@ $100$ & $50$ & SUPERLINEAR & 5 & $3304.119$ & $3004.140$ & $3226.235$ & $3679.35
 \begin{tabular}{c c c c r r r r}
 Population & Parent & Recombination & Games per Agent & mean & Q1 & Q2 & Q3\\
 \hline
-$12$ & $6$ & SUPERLINEAR & 10 & $2472.293$ & $2194.049$ & $2430.780$ & $2709.040$\\
+$13$ & $6$ & SUPERLINEAR & 10 & $2472.293$ & $2194.049$ & $2430.780$ & $2709.040$\\
 $22$ & $11$ & SUPERLINEAR & 10 & $2849.220$ & $2500.231$ & $2835.450$ & $3143.121$\\
 $50$ & $25$ & SUPERLINEAR & 5 & $3211.658$ & $2889.689$ & $3305.485$ & $3694.480$\\
 $100$ & $50$ & LINEAR & 7 & $3322.076$ & $3160.098$ & $3289.370$ & $3537.850$\\
@@ -1522,7 +1523,6 @@ Comparison between the verified Cross-entropy method and Shark (reference to sha
 \begin{table}[h]
 \centering
 \small
-\caption{Shark stock CMA-ES and the verified Cross-entropy method}
 \begin{tabular}{l r}
 Optimizer & CMA\\
 Number of Evaluations & 8000\\
@@ -1550,15 +1550,16 @@ Sigma & 100\\
 Noise Type & Constant\\
 Noise & 4
 \end{tabular}
+\caption{Shark stock CMA-ES and the verified Cross-entropy method}
 \end{table}
 
 \begin{figure}[H]
 \begin{tabular}{@{}c@{}c@{}}
-Cross Entropy & CMA-ES\\
+Cross-entropy method & CMA-ES\\
 \includegraphics[scale=1]{plots/cma_initial_sigma_0_5} &
 \includegraphics[scale=1]{plots/ce_ConstantNoise_l100_o10_all}
 \end{tabular}
-\caption{30 experiment with optimal settings Cross Entropy Method and CMA-ES \label{fig:appendix:initialNonmean}}
+\caption{30 experiment with optimal settings Cross-entropy method and CMA-ES \label{fig:appendix:initialNonmean}}
 \end{figure}
 
 \begin{figure}[H]
