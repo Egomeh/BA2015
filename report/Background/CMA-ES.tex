@@ -1,14 +1,13 @@
 \subsection{CMA-ES \label{CMAtheory}}
 
-
 This section is based on the tutorial written by Nikolaus Hansen
 \citep{hansen2011}. The section will not focus on the theoretical derivation
-of CMA-ES, but rather how it deviates from Cross Entropy. 
+of CMA-ES, but rather how it deviates from The Cross-entropy method. 
 The CMA-ES operates on a general level much like the Cross-entropy 
 method, but includes some features that increases the adaptability 
 of the algorithm.\\
 \\
-The CMA-ES, like the Cross Entropy, uses a Gaussian distribution to
+The CMA-ES, like the Cross-entropy method, uses a Gaussian distribution to
 search for good solutions to $\fitnessFunction$. Yet, for the 
 variance parameter, the CMA-ES provides a full covariance matrix.
 As the Cross-entropy method only provides a diagonal matrix of scalers,
@@ -16,7 +15,7 @@ it's restricted to only scaling the ellipsoid of equal density along
 the coordinate axes. The CMA-ES however, with a full covariance matrix,
 allows the ellipsoid to rotate arbitrarily in the search space.\\
 Another difference between the two algorithms is that 
-Cross-entropy method only considers the next population when updating the
+the Cross-entropy method only considers the next population when updating the
 distribution parameters, while the CMA-ES keeps track of 
 some information from earlier 
 generations. This allows the CMA-ES somewhat keep track of the evolution 
@@ -59,7 +58,7 @@ $C$ is the covariance matrix usually set to $C=I$}
 \subsubsection{Input}
 
 \textbf{The objective function} \\
-This serves the same purpose as in Cross Entropy (see page \pageref{CEObjective}).
+This serves the same purpose as in the Cross-entropy method (see page \pageref{CEObjective}).
 \\
 
 \textbf{The initial mean and variance of the Gaussian distribution} \\
@@ -200,7 +199,7 @@ C = B D^2 B^{T}
 Where $B = \begin{bmatrix}
 b_1, & \dots, & b_\dimensions
 \end{bmatrix}$ 
-is am orthogonal basis of eigenvectors, and  
+is an orthogonal basis of eigenvectors, and  
 $D = \text{diag}\left(d_1, \dots, d_\dimensions\right)$
 is a diagonal matrix that contains all eigenvalues of $C$.\\
 \\
@@ -248,7 +247,7 @@ x_{k} &= m + \sigma y_{k} \sim \mathcal{N}(m, \sigma^2 C) \label{eq:finalSample}
 
 Finally, the $x_{k}$ vector resemble a realization of the Gaussian distribution
 with mean $m$ and covariance matrix $C$ scaled by the step-size $\sigma$.
-Am illustration of the sampling process in two dimensions can be seen in figure \ref{fig:sampleing}, where 
+An illustration of the sampling process in two dimensions can be seen in figure \ref{fig:sampleing}, where 
 \begin{align}
 \sigma = 1,\ B = \begin{bmatrix}
 {b_1}_x & {b_2}_x\\
@@ -432,7 +431,7 @@ p_{c}^{(g+1)} &\sim \left( 1 - c_{c} \right)
 \mathcal{N}\left(0, \left( 1 - c_{c} \right)^2 C + c_{c} \left( 2 - c_{c} \right)  C  \right)\\
 &\sim \mathcal{N}\left( 0, C \right) \label{eq:nomalization_end}
 \end{align}
-Hence, the evolution path is updated unbiased under random selection.
+Hence, the evolution path is updated unbiasedly under random selection.
 \\
 The covariance matrix is updated as follows
 \begin{align}
@@ -489,7 +488,7 @@ according to the covariance of the highest ranking vectors.
 \textbf{Step-size control}
 
 In the CMA-ES algorithm, the step-size $\sigma$ is used as an isotropic scale across
-each of the principal axes in the covariance matrix. Hence the stepsize is used as 
+each of the principal axes in the covariance matrix. Hence the step-size is used as 
 an 'overall' scaling mechanism when drawing vectors. The step-size is used when 
 sampling the vectors in (\ref{eq:finalSample}) where it expands the variance 
 of the distribution. When moving the mean in (\ref{eq:movemean}), the weighted 
@@ -624,7 +623,7 @@ Eventually, the step-size is updated by the following
 \sigma^{(g+1)} &= \sigma^{(g)} \cdot exp \left( \frac{c_{\sigma}}{d_{\sigma}} \left( \frac{||p_\sigma^{(g+1)}||}{E|| \mathcal{N}(0, I) ||} - 1 \right) \right)
 \end{align}
 Where $0 \leq \frac{c_\sigma}{d_\sigma} \leq 1$ is a damping factor for step-size changes.
-This update of the step-size will scale the step-size unbiased in direction 
+This update will scale the step-size unbiasedly in the direction 
 according to the cases in 
 (\ref{case1}), (\ref{case2}) and (\ref{case3}).
 

@@ -4,8 +4,8 @@ describes the agent can very well be normalized such that the vector
 is a point that lies on the $\dimensions$-dimensional hypersphere.\\
 \\
 The reason for this lies in the nature of the evaluation function.
-When the controller chooses an action, it will evaluate all the 
-possible actions possible with the current piece. It will use the 
+When the controller chooses an action, it will evaluate all the
+actions possible with the current piece. It will use the 
 value function $\valueFunction$ of each state $\gameState_i$ and 
 choose the state with the highest value from the value function.
 Thus, if the states are ordered such that
@@ -49,7 +49,7 @@ exactly the same for each scale.\\
 \\
 This can be used in experiments for various reasons. As reported 
 in \citep{boumaza2009}, normalizing the samples will 
-prevent CMA-ES from diverging in step size,
+prevent CMA-ES from diverging in step-size,
 and it can prevent loosing precision if the magnitude of weight 
 vector becomes larger than feasible for the used floating 
 point number and avoids size limitations. However, brief experiments 
