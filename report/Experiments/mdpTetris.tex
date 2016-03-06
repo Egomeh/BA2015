@@ -1,7 +1,7 @@
 \subsection{MDP-Tetris \label{sec:MDPTetris}}
 
-As described earlier, the MDPTetris platform is used as the 
-platform for emulating Tetris controllers. The source code for the 
+As described earlier, the MDPTetris platform is used for emulating Tetris controllers. 
+The source code for the 
 platform is freely available at \url{http://mdptetris.gforge.inria.fr/doc/index.html}.
 The software implements the simplified version of Tetris as described in 
 section \ref{sec:learningTetris} and is written in C. The code depends on
@@ -14,9 +14,9 @@ of the Tetris games using OpenGL.\\
 \\
 The core application of the source code is a function that allows evaluation of 
 a controller. This function accepts the configuration of the game one wishes to play,
-simulates game, and returns the number of lines cleared by the agent during the game.
+simulates the game, and returns the number of lines cleared by the agent during the game.
 The configuration of the game is mostly done through reading data files that describes 
-different qualities of the game. The feature set is read from a file where the file
+different qualities of the game. The feature set is read from a file
 like the one seen in figure \ref{fig:featfile}. This file defines which features are to be 
 considered by the controller by indices. These indices each map to a feature function 
 implemented in the MDPTetris code. The pieces that occur in the game are also read from a file,
@@ -28,12 +28,12 @@ contain more of the difficult pieces, thus making them occur more often.\\
 \\
 To perform the actual optimization of the Tetris agents, the Shark library has been applied
 with it's implementation of CMA-ES and with our own implementation (now a part of Shark
-see appendix \ref{app:crossEntropyCode}). The two optimization algorithms in shark both 
+see appendix \ref{app:crossEntropyCode}). The two optimization algorithms in Shark both 
 inherits from the abstract class 
 \lstinline$AbstractSingleObjectiveOptimizer<RealVector>$. This superclass defines the
 abstract interface for an optimizer that can be applied to problems of finding 
 solutions of the type \lstinline$RealVector$ that models a real valued vector.
-The opbjective functions are in Shark implemented by writing a class that inherits 
+The objective functions in Shark are implemented by writing a class that inherits 
 the \lstinline$SingleObjectiveFunction$, which is an interface for an objective function 
 that accepts a single real valued vector and returns a real value indicating how well the supplied
 vector evaluates against the underlying function. In our code, we implemented the class names 
@@ -71,7 +71,7 @@ scale its search space accordingly.
 \end{figure}
 
 
-The source code of the MDP-Tetris source code 
+The source code of the MDPTetris source code 
 is accompanied with files that describe the
 various existing features, that is files that defines 
 the commonly used feature sets. As described, these files contains the identifiers of 
@@ -106,8 +106,8 @@ of the layout of the feature file can be seen in figure \ref{fig:featfile}.
 \end{figure}
 
 \subsubsection{Game complexity \label{HardTetris}}
-Both from other researchers and from the first experiments we executed it quickly became clear
-that the time consumption of the optimization algorithms cannot be neglected.
+Both from other researchers and from the first experiments we executed, 
+it quickly became clear that the time consumption of the optimization algorithms cannot be neglected.
 Some papers suggests that running 10 executions of the Cross-entropy method
 would take more than a month in total. These time estimates 
 originates from experiments that were not conducted in parallel,
@@ -122,7 +122,7 @@ before by Amine Boumaza, \citep{boumaza2009}.\\
 To increase the difficulty of the game,
 in our "Hard" Tetris, the s-block and z-block appear twice as often 
 as the other pieces. As described by Boumaza, these pieces are the hardest to
-place and will usually cause the player to produces holes and other irregularities
+place and will usually cause the player to produce holes and other irregularities
 in the game board. Hence, the more frequent these pieces appear, the 
 shorter the expected duration of the game.
 
@@ -143,7 +143,7 @@ for reducing the learning time, however, we have decided to conduct an experimen
 how the optimization algorithms behave when the game difficulty is changed.
 We do expect that the learning curves develops much the same 
 for both the hard and normal game difficulty, however
-at lower cores for the harder setting.
+at lower scores for the harder setting.
 To test if the difficulty setting has a significant impact, we used the Bertsekas
 feature set (see table \ref{table:bertfeat}). And applied both the Cross entropy 
 Method and CMA-ES on the regular and hard configurations.\\
@@ -188,20 +188,20 @@ CMA-ES and the Cross-entropy method, especially when determining the optimal set
 \\
 
 
-\subsubsection{Comparison of featuresets  \label{compoffeatureset}}
+\subsubsection{Comparison of feature sets  \label{compoffeatureset}}
 As described in section \ref{prevWork}, there are different kind of featuresets which
 impacts the performance of the agents. In our upcoming experiments, we are going to
-use both the Dellacherie and Bertsekas/Tsitsiklis featureset. For our initial comparison experiments
-we are going to use the Bertsekas/Tsitsiklis featureset, since other researchers report
-a lower score with the Bertsekas/Tsitsiklis featureset compared with the Dellacherie featureset
+use both the Dellacherie and Bertsekas/Tsitsiklis feature set. For our initial comparison experiments
+we are going to use the Bertsekas/Tsitsiklis feature set, since other researchers report
+a lower score with the Bertsekas/Tsitsiklis feature set compared with the Dellacherie feature set
 \citep{thiery:09}. Compared to the \citep{thiery:09} experiments, we don't want to maximize the
 final score, but rather maximize the score with the lowest possible number of 
 games evaluated.\\
 It's important to note that we are not going to conduct comparison experiments with different
 featuresets in the same experiment, since the algorithms needs to be on equal terms.\\
 \\
-We want to test whether the featureset has an impact on the performance of the algorithms,
-therefore we want to test the two algorithms with both the Dellacherie and Bertsekas/Tsitsiklis featureset.\\
+We want to test whether the feature set has an impact on the performance of the algorithms,
+therefore we want to test the two algorithms with both the Dellacherie and Bertsekas/Tsitsiklis feature set.\\
 \begin{changebar}
 \cbcolor{blue}
 From the game complexity section \ref{HardTetris}, we have verified that using Hard Tetris
@@ -214,12 +214,12 @@ using Hard Tetris.
 \textbf{Results}
 
 In the following figures the mean results of 30 runs of both CMA-ES and the Cross-entropy method is presented. The settings for the Cross-entropy method remains at constant noise
-with a noise term of $z^{(\generation)} = 4$ and an initial sigma of $\sigma_0 = 100.$, 
+with a noise term of $z^{(\generation)} = 4$ and an initial sigma of $\sigma_0 = 100$, 
 and the CMA-ES with $\sigma_0 = 1$.\\
 \\
 Figure \ref{fig:featuresetCompareBertsekas} shows the experiment with the 
-Bertsekas featureset. This shows that when running the algorithms with a
-harder game, the algorithms behave mostly the same as with regular 
+Bertsekas feature set. This shows that when running the algorithms with a
+harder game configuration, the algorithms behave mostly the same as with regular 
 Tetris. Namely that CMA-ES converges faster than the Cross-entropy method, 
 but is eventually outperformed.
 
@@ -232,7 +232,7 @@ using hard Tetris and the Bertsekas featureset
 \label{fig:featuresetCompareBertsekas}}
 \end{figure}
 
-When using the Dellacherie featureset a similar behaviour is observed.
+When using the Dellacherie feature set a similar behaviour is observed.
 However, the convergence seems to occur earlier and with a higher score
 (figure \ref{fig:featuresetCompareDellacherie}).
 
@@ -246,9 +246,9 @@ using hard Tetris and the Dellacherie feature set
 \end{figure}
 
 \textbf{Analysis and discussion}\\
-The experiment with different featuresets indicates that the behaviour 
-is not heavily dependant on the featureset.
-It appears that changing the featureset simple shifts the score,
+The experiment with different feature sets indicates that the behaviour 
+is not heavily dependant on the feature set.
+It appears that changing the feature set simple shifts the score,
 but does not affect the development of the graphs.\\
 Therefore, we conclude that changing the featureset does not invalidate
 the comparison of the two optimization algorithms. This means, that there's

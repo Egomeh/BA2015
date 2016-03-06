@@ -48,7 +48,7 @@ plays in each iteration. An agent's score is defined as the
 mean of the score of these 
 $\numberOfEvaluations$ games.
 We want this value low as possible, because as with the number of
-agents, $\populationSize$, The number of games, $\numberOfEvaluations$, 
+agents, $\populationSize$. The number of games, $\numberOfEvaluations$, 
 is another major factor in the run-time of the algorithm.
 As Tetris is stochastic by nature, the score deviates a lot, 
 even when the
@@ -74,7 +74,7 @@ The constant noise (such as $\noise^{(\generation)} = 4$) ensures that the algor
 never settles in a too small area from which it samples, and forces it to explore
 solutions that are further away from the mean. The further the 
 algorithm progresses, 
-the less noise is assumed needed, as the mean should approach a global optimum. to
+the less noise is assumed needed, as the mean should approach a global optimum. To
 address this, the linear decreasing noise 
 is applied as it will lower the noise term
 as the algorithm progresses.\\

@@ -5,21 +5,22 @@ In this section we will determine the optimal settings for \begin{changebar}
 \cbcolor{blue}
 the Cross-entropy method
 \end{changebar} through testing
-of various adjustable parameters.\\
+of the various adjustable parameters.\\
 Compared to CMA-ES, the Cross-entropy method has fewer customizable parameters, more specifically 
 only population-parent size and games played per agent.
 
 \subsubsection{Population and selection size}
 Other researchers run the Cross-entropy method with population size of
-$\populationSize = 100$ and an offspring corresponding to 10\% of 
+$\populationSize = 100$ and an offspring size corresponding to 10\% of 
 the population size, resulting in $\offspringNumber = 10$. As it's not 
 discussed why this exact setting is applied, various settings of the Cross-entropy method
 was executed to asses the performance of other configurations
 in our experiments.
 The experiments includes different population sizes 
-$\populationSize \in \{12, 22, 50, 100, 200\}$ and offspring 
-sizes of either $10\%$ and $50\%$ (since the CMA-ES algorithm by default
-uses $50 \%$ selected vectors). 
+$\populationSize \in \{13, 22, 50, 100, 200\}$ and offspring 
+sizes of either $10\%$, $25\%$ and $50\%$ (since the CMA-ES algorithm by default
+uses $50 \%$ selected vectors for Linear and Superlinear 
+recombination and $25\%$ for equal recombination). 
 A summary of the experiments can be seen in figure \ref{CEConfigTest}
 on page \pageref{CEConfigTest}.
 
@@ -79,7 +80,7 @@ extensively tested the Cross-entropy method configuration of $\populationSize = 
 
 \subsubsection{Games per agent \label{GamesPerAgentCESection}}
 Another parameter we can adjust is the number of 
-games played each agent plays per generation. By playing
+games played each agent per generation. By playing
 multiple games with each agent and using their 
 mean score to compute the next generation mean. This
 secures a higher chance of a better offspring generation,
