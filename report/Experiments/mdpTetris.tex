@@ -40,7 +40,7 @@ vector evaluates against the underlying function. In our code, we implemented th
 \lstinline$MDPTetris$ that inherits the abstract \lstinline$SingleObjectiveFunction$ class.
 Thus, our implementation of the objective function offers an abstraction that, to Shark, masks
 the actual implementation and configuration of Tetris. The effect of this abstraction is that 
-no code from Shark need to be aware of any details of the actual function, that is Tetris, 
+no code from Shark needs to be aware of any details of the actual function, that is Tetris, 
 that is being optimized.\\
 \\
 The \lstinline$MDPTetris$ objective function is adjustable in terms of Tetris board size, piece 
@@ -191,25 +191,22 @@ CMA-ES and the Cross-entropy method, especially when determining the optimal set
 \subsubsection{Comparison of feature sets  \label{compoffeatureset}}
 As described in section \ref{prevWork}, there are different kind of featuresets which
 impacts the performance of the agents. In our upcoming experiments, we are going to
-use both the Dellacherie and Bertsekas/Tsitsiklis feature set. For our initial comparison experiments
-we are going to use the Bertsekas/Tsitsiklis feature set, since other researchers report
-a lower score with the Bertsekas/Tsitsiklis feature set compared with the Dellacherie feature set
+use both the Dellacherie and Bertsekas feature set. For our initial comparison experiments
+we are going to use the Bertsekas feature set, since other researchers report
+a lower score with the Bertsekas feature set compared with the Dellacherie feature set
 \citep{thiery:09}. Compared to the \citep{thiery:09} experiments, we don't want to maximize the
 final score, but rather maximize the score with the lowest possible number of 
 games evaluated.\\
 It's important to note that we are not going to conduct comparison experiments with different
-featuresets in the same experiment, since the algorithms needs to be on equal terms.\\
+feature sets in the same experiment, since the algorithms needs to be on equal terms.\\
 \\
 We want to test whether the feature set has an impact on the performance of the algorithms,
-therefore we want to test the two algorithms with both the Dellacherie and Bertsekas/Tsitsiklis feature set.\\
-\begin{changebar}
-\cbcolor{blue}
+therefore we want to test the two algorithms with both the Dellacherie and Bertsekas feature set.\\
 From the game complexity section \ref{HardTetris}, we have verified that using Hard Tetris
 \citep{boumaza2009} does not have a severe impact on the relative 
 development between the two algorithms.
 Therefore, to prevent long runtimes, the games were simulated
-using Hard Tetris.
-\end{changebar}\\
+using Hard Tetris.\\
 
 \textbf{Results}
 

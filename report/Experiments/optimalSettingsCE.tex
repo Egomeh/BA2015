@@ -1,10 +1,9 @@
 \subsection{Optimal settings 
 for the Cross-entropy method \label{optimalsettingsce}}
 
-In this section we will determine the optimal settings for \begin{changebar}
+In this section we will determine the optimal settings for
 \cbcolor{blue}
-the Cross-entropy method
-\end{changebar} through testing
+the Cross-entropy method through testing
 of the various adjustable parameters.\\
 Compared to CMA-ES, the Cross-entropy method has fewer customizable parameters, more specifically 
 only population-parent size and games played per agent.
@@ -66,7 +65,6 @@ configuration from our expriments converged faster. The experiments also apppear
 to suffer from a high noise, yet both the mean and the quantiles favor the 
 extensively tested the Cross-entropy method configuration of $\populationSize = 100$ and $\offspringNumber = 10$.
 
-\begin{changebar}
 \cbcolor{blue}
 \begin{figure}[H]
 \begin{tabular}{@{}l@{}l@{}}
@@ -76,7 +74,6 @@ extensively tested the Cross-entropy method configuration of $\populationSize = 
 \caption{The two best configurations of the Cross-entropy method 
 \label{fig:bestConfCE}}
 \end{figure}
-\end{changebar}
 
 \subsubsection{Games per agent \label{GamesPerAgentCESection}}
 Another parameter we can adjust is the number of 
@@ -125,9 +122,7 @@ times will increase the function cost.\\
 \textbf{Results}\\
 The total number of configuration experiments is 75, with 30 individual experiments each,
 resulting in a total of
-\begin{changebar} 
 2,250
-\end{changebar} 
 individual experiment runs. These results are all included in 
 appendix \ref{appendixCEPopulationParent}.\\
 Below in table \ref{CEBestConfigTable} and figure \ref{CEBestConfigPlot}, the five best

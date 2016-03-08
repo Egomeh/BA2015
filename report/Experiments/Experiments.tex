@@ -1,8 +1,6 @@
 \section{Experiments}
-
-
-This section will walk through the experiments conducted in to answer the question 
-of either of the Cross-entropy method or the CMA-ES algorithm can be said to perform better
+This section will walk through the experiments conducted in order to answer the question 
+of whether the Cross-entropy method or the CMA-ES algorithm can be said to perform better
 than the other. The section will provide a discussion on how the experiments are carried out, mainly
 in terms of how the Tetris emulator is integrated with Shark and how the game settings were configured.
 Furthermore, the section covers an experiment that serves the purpose of indicating whether our implementation
@@ -20,7 +18,6 @@ of the game and the optimizers, the same experiment is executed multiple times, 
 solution found by the optimization algorithms are influenced by some level of noise.
 Due to this noise, the reported performance of an optimization algorithm at a time
 is computed as the mean score of it's current solution evaluated 30 times.
-\begin{changebar}
 \cbcolor{blue}
 The experiments will include some configuration of the Tetris emulator which are settings
 such as feature set (which in turn translates into dimensionality of the problem),
@@ -37,7 +34,7 @@ in the following sections, we typically present plots accompanied with tables
 that hold the scores of the algorithms. We have two kinds of plots, one contains all
 individual runs with a given configuration and the other shows the mean performance
 of all all the runs. The tables will show the mean and quantile scores of the experiments
-of a given configuration.\end{changebar}\\
+of a given configuration.\\
 \\
 In all papers used for reference we haven't seen any experiments with different population
 and parent sizes presented side-by-side. All the experiments we've seen
@@ -46,7 +43,7 @@ However, in our upcoming experiments
 CMA-ES and the Cross-entropy method are configured with different population and parent sizes, which means
 that we cannot compare the learning curves based on iterations/generations. Instead as described
 in section \ref{varifyofce}, using the  
-\textit{number of games played} as comparison reference, equal terms are secured for both algorithms 
+\textit{number of games evaluated} (the number games evaluated, number of agents evaluated and evaluations of the objective function, all refer to the same metric) as comparison reference, equal terms are secured for both algorithms 
 in regards to learning speed.
 Hence the x-axis represents the total number 
 of Tetris games evaluated, 

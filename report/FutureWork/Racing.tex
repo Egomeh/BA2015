@@ -1,6 +1,6 @@
 \subsection{Noise handling}
 
-Especially for the CMA-ES when using the superlinear recombination, the ranking of search
+Especially for the CMA-ES when using the Superlinear recombination, the ranking of search
 points is essential to the progression of the algorithm. As the score of the Tetris controllers
 is under strong influence of noise, the CMA-ES can easily rank the 
 candidate solutions wrongly. As controllers are conjectured and verified to
@@ -14,15 +14,15 @@ performed on each search point. In our final experiment, the CMA-ES evaluated ea
 5 times to better distinguish between good and poor performing search points. This did turn out
 to benefit the algorithm slightly, but at some cost. The high number of evaluations does not have a
 significant effect at early stages. We saw that learning rate is quite high in during the first 
-iterations but slowws down as score, and therefore noise, increases. A simple solution
-that we discussed  was to increase the number of evaluations based in iteration number.
+iterations but slows down as score, and therefore noise, increases. A simple solution
+that we discussed  was to increase the number of evaluations based on iteration number.
 A couple of ways to set 
 \begin{align}
 \numberOfEvaluations &=  max\left( 1, k \lfloor log_{2} \left( \generation \right)  \rfloor \right) &,\ k \in \mathbb{N}^+\\
 \numberOfEvaluations &=  max\left( 1, \lfloor \frac{\generation}{k} \rfloor \right) &,\ k \in \mathbb{N}^+
 \end{align}
 This way, the number of evaluations increase with the iteration number, and should approximately
-increase with the noise. this could help overcome the faulty ranking as noise gets higher.\\
+increase with the noise. This could help overcome the faulty ranking as noise gets higher.\\
 \\
 A more versatile solution to ensure good ranking is an approach described by
 Amine Boumaza called racing \citep{boumaza2011:b}. In racing, the goal is to 
