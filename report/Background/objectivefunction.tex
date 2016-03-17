@@ -1,8 +1,8 @@
 \subsection{Optimization problem}
 
 In section \ref{MDP}, it's described that the problem of
-finding a policy that allows an agent to play Tetris well
-cannot be approached with pure analytical methods.
+finding a well performing policy for playing Tetris
+cannot be approached purely with analytical methods.
 When applying the more viable \textit{Monte Carlo} methods
 to assess the value function of a policy, the only 
 knowledge one gains is the actual value from the estimation 
@@ -27,8 +27,8 @@ or the \textit{fitness function}. The name \textit{Objective function}
 refers to the fact that it's the objective of the algorithm to optimize
 the function, and \textit{fitness function} is derived from the
 idea that the function determines how \textit{fit} the input vector
-is. The term black \textit{black box} originates from the fact that 
-the one does know only few, if any, analytical properties of the function.
+is. The term \textit{black box} originates from the fact that 
+one does only know a few, if any analytical properties of the function.
 The gradient is either unknown or not useful, preventing a 
 proper gradient 
 descent approach. In summary, all details of the functions are unknown to 
@@ -179,7 +179,7 @@ of the state would be
 \end{align}
 When the controller simulates all possible actions, it will
 use the very same function on the state that each action transition 
-to and rank them in non-descending order. Thus, if the controller
+to and rank them in non-ascending order. Thus, if the controller
 have the actions $\{\MDPAction_0,\dots,\MDPAction_n\}$ and action 
 $\MDPAction_i$ transitions to state $\gameState_i$, the controller will
 order all the actions such that
@@ -196,7 +196,7 @@ policy as efficient as possible. This is done through the previously
 mentioned \textit{Monte Carlo} method, where the agent is simulated
 with a given policy from the starting state, and the final score is 
 used to determine the performance of the policy. The next sections 
-walks through how the optimizers each approach this task.
+elaborates how the optimizers each approach this task.
 
 \maybe{
 The \textit{black box} search can be applied very well

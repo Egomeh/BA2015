@@ -3,8 +3,7 @@
 A Markov Decision Process (MDP) is a model for an automatic 
 decision making system. A MDP can be used to model the actions 
 of an agent in a game, in this case Tetris. 
-In the MDPTetris platform the agent
-that plays the simulated games makes decisions modelled
+The decision making mechanics of the agent in MDPTetris are modelled
 after an MDP \citep{mdptetris}. The specifics of the 
 MDPTetris platform is covered in section \ref{sec:MDPTetris}.\\
 \\
@@ -20,8 +19,9 @@ occupied by pieces and which are not and the
 current piece about to be dropped.
 The actions in $\MDPActions$
 denotes all the actions that an agent may take. The $\MDPTKernel$ is
-a probability function that determines how likely it is for an action 
-to transition to another given state.\\
+a probability function that determines how likely it is for an action $\MDPAction$
+to cause a transition from a state $\MDPState$ to another state $\MDPState^\prime$, that is 
+$\MDPTKernel : \left( \MDPState, \MDPAction, \MDPState^\prime \right) \rightarrow [0;1]$.\\\\
 As an example, given 3 states 
 $\MDPState_0, \MDPState_1, \MDPState_2$, an action $\MDPAction_0$ and the 
 agent currently being in state $\MDPState_0$. Then $\MDPTKernel$
@@ -80,7 +80,7 @@ set of actions $\MDPActions = \{\MDPAction_0, \MDPAction_1,
 between states in the game. In the figure, each circle/node illustrates a 
 state, and the arrows shows the possible transitions between states.
 Next to the arrow the action that causes the transition is listed 
-along with the probability that if the action is committed, the particular 
+along with the probability, that if the action is committed, the particular 
 transition takes place. For example, if the agent is in state $\MDPState_0$
 and takes action $\MDPAction_0$, it will with probability 0.8 end
 up in state $\MDPAction_0$ again and receive a reward of $\MDPReward_0$.
@@ -146,7 +146,7 @@ blocks in the bottom of the board notes that these blocks are
 occupied and the text 'I-block' indicates that the currently
 falling piece is an I-block.
 The actions of the decision maker are hence partially deterministic.
-The agent/controller can fully decide where the piece falls. However,
+The agent can fully decide where the piece lands. However,
 part of the state is the next pieces to be dropped, which is
 randomly chosen from some distribution. The reward given to the agent
 is based on how many lines it clears. If the agent appears in a state 
@@ -230,13 +230,13 @@ Programming approach.
 \label{fig:TetrisAsMDP}}
 \end{figure}
 
-However, another and more viable solution is in this 
-case the \textit{Monte Carlo} methods \citep{Csaba}. 
+However, an alternative and more viable solution
+which also covers the task at hand would be the \textit{Monte Carlo} methods \citep{Csaba}. 
 With the \textit{Monte Carlo} method, the goal is just like with DP
 to learn
 the value of $\MDPValueFunction^{\policy}$. In our case, 
 we typically wish to estimate the value function from the starting 
-state of the game. Using the \textit{Monte Carlo} method, the episode/game is simulated 
+state of the game. Using the \textit{Monte Carlo} method, the playthrough is simulated 
 and the agent will interact with the environment with the given policy
 and finally exit with an estimate of $\MDPValueFunction^{\policy}$,
 in our case, the final score. Thus, using this \textit{Monte Carlo} method, we do not need search 

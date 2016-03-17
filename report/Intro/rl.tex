@@ -13,10 +13,14 @@ In this way, the agent will always, for any action, receive
 feedback of whether the committed action was desirable or not.\\
 Reinforcement learning appears somewhat similar to supervised learning.
 In reinforcement learning, the agent will commit actions in an environment
-and receive rewards based on those. The main difference between supervised
+and receive reward based on those. The reward is a metric that the agent 
+will attempt to accumulate
+as much of as possible. In the game of Tetris, this is a direct mapping to 
+the score achieved by the agent.
+ The main difference between supervised
 learning and reinforcement learning is that in reinforcement learning,
-the agents cannot necessarily tie a correctness 
-to a specific action as some action, albeit yielding reward,
+the agents cannot necessarily determine the correctness 
+of a specific action as some action, albeit yielding reward,
 may cause relative loss of reward in the future. An example of how this applies 
 to artificial agents is the game Tic Tac Toe. If supervised learning
 is applied, the playing agent will for each move in the game know
@@ -24,15 +28,16 @@ if the move was considered good or bad. In reinforcement learning however,
 the only feedback the agent will have is rewards that are given 
 when reaching certain states of the game. 
 Often in the case of games, the 
-time frame naturally falls into episodes in which the 
+time frame naturally falls into playthroughs in which the 
 goal of the agent is to accumulate as much reward as possible 
-before the episode ends. When the agent interacts 
+before the game ends. When the agent interacts 
 with the environment, it transitions between different states through 
 actions. To determine what action to take, the agent will use
-a a policy that yields an expectation of how much reward is achieved
-if different actions are taken. 
+a policy that determines what actions to take depending on circumstances.
+As the games are non-deterministic, one can find expectations
+of how much reward the agent can receive while following the policy. 
 The goal is then to choose a policy, and when followed by the agent,
-gives the highest possible cumulative reward at the end of a game/episode. 
+gives the highest possible cumulative reward at the end of a playthrough. 
 It's important to note that the reward 
 for an action may be negative, and will in such case actively discourage 
 the agent for taking given actions.

@@ -1,11 +1,5 @@
-\section{Nomenclature}
-
-\subsection{Abbriviations}
-CMA-ES, Covariance Matrix Adaption Evolution Strategy\\
-\\
-CE, Cross-Entropy
-
-\subsection{Symbols}
+\clearpage
+\section*{Symbols}
 
 $\mean$, the mean of a distribution.\\
 \\
@@ -19,15 +13,15 @@ however in \citep{hansen2011},
 $\mu$ and $\sigma$ is used for other 
 purposes, and therefore these symbols are reserved for this.\\
 \\
-$\populationSize$, number of agents generated per generation/iteration.\\
+$\populationSize$, number of search points sampled per generation.\\
 \\
 $\numberOfEvaluations$, number of games played by each agent for evaluation.\\
 \\
 $\offspringNumber$, number of the population samples included in the next generation.\\
 \\
-$\fitnessFunction$, the function that estimates the performance of an agent/sample point.\\
+$\fitnessFunction$, the function that estimates the performance of a search point.\\
 \\
-$\noise$, noise term added to the variance, specific to Cross-Entropy.\\
+$\noise$, noise term added to the variance, specific to the Cross-entropy method.\\
 \\
 $\generation$, counter indicating the current generation/iteration.\\
 \\
@@ -41,9 +35,10 @@ The function used for evaluating a Tetris game state.
 The function is composed of a linear combination of feature sets and their
 associated weights, accepts a game state, and yields a single real-value.\\
 \\
-$\gameState$, a state of the Tetris game board.\\
+$\MDPState$, a state of the Tetris game board.\\
 \\
-$\individual$, an individual vector from a generation/iteration. 
+$\individual$, an individual search point from a generation. 
 Represented with an $\dimensions$-dimensional vector.
 
+\clearpage
 

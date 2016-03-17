@@ -8,7 +8,7 @@ method, but includes some features that increases the adaptability
 of the algorithm.\\
 \\
 The CMA-ES, like the Cross-entropy method, uses a Gaussian distribution to
-search for good solutions to $\fitnessFunction$. Yet, for the 
+search for optimal solutions to $\fitnessFunction$. Yet, for the 
 variance parameter, the CMA-ES provides a full covariance matrix.
 As the Cross-entropy method only provides a diagonal matrix of scalers,
 it's restricted to only scaling the ellipsoid of equal density along
@@ -22,7 +22,7 @@ generations. This allows the CMA-ES somewhat keep track of the evolution
 of the sampled vectors.\\
 The CMA-ES also differs from the Cross-entropy method in how it evaluates the influence 
 of the parent vectors. As the Cross-entropy method weights all vectors equally when 
-moving the mean. The CMA-ES, at least from the implementation in Shark, 
+moving the mean. The CMA-ES implementation from Shark, 
 has the option of taking a weighted combination of the offspring in order
 to bias towards the better vectors.
 
@@ -106,12 +106,7 @@ p_{c}, p_{\sigma} &\in \mathbb{R}^{\dimensions}\\
 C &\in \mathbb{R}^{\dimensions \times \dimensions}
 \end{align}
 
-Again, note that $\lambda$ has the meaning of $\populationSize$ from earlier, that
-is $\lambda$ is in this case the population size. $\mu$ however, is still the number
-of vectors that contribute to the updating of distribution parameters, namely the 
-parent size.\\
-\\
-In this algorithm, the distribution used is multivariate normal distribution defined
+In CMA-ES, the distribution used is multivariate normal distribution defined
 as 
 \begin{align}
 \mathcal{N} \left( m,  \sigma^2 C \right)
@@ -318,7 +313,7 @@ where $y_1$ is the best ranked vector.
 \sum^{\offspringNumber}_{i = 1} w_{i} = 1, w_{i} > 0
 \end{align}
 
-$\langle y \rangle_{w}$ is a measure of a 'weighted center of mass',
+$\langle y \rangle_{w}$ is a measurement of a 'weighted center of mass',
 and is part of the selection mechanism. The idea is to allow the selected vectors
 to contribute differently to the update, and hence emphasize the higher 
 ranking vectors. The individual weights are as the following
@@ -327,7 +322,7 @@ ranking vectors. The individual weights are as the following
 w_i &= \frac{w_{i}'}{\sum^{\offspringNumber}_{j=1} w_j }
 \end{align}
 
-Where the $w_i'$ is used for a intermediate weighting value for the vectors.\\
+Where $w_i'$ is used for a intermediate weighting value for the vectors.\\
 In the Shark library, three built-in weighting types are implemented, each with
 a distinct intermediate weight.
 
@@ -337,7 +332,8 @@ a distinct intermediate weight.
 \text{Superlinear:} &\quad w_i' = ln \left( \offspringNumber + \frac{1}{2} \right)
 - ln \left( i \right)
 \end{align}
-Thus, with the equal, each vector contributes equally, and with the other two, the 
+Thus applying the equal weighting, each vector contributes equally, as for the other two types
+of weightings, the 
 higher ranking vectors has more influence on location of the 'center of mass' of 
 the selection.
 
@@ -350,13 +346,13 @@ The details of step-size $\sigma$ is covered later in this section,
 however in brief terms the step-size is meant to scale movements 
 of the mean and the distribution area.\\
 \\
-In relation to the selection mechanism, the value $\mu_{eff}$ is introduced.
-This is defined as
+In relation to the selection mechanism, the value $\meff$ is introduced,
+which is defined as
 \begin{align}
 \meff = \left( \sum_{i=1}^{\offspringNumber} w_i^2 \right)^{-1}
 \end{align}
 Hence $1 \leq \meff \leq \mu$. As an example, for the equal recombination
-type, $\meff = \left( \sum_{i=1}^{\offspringNumber} w_i^2 \right)^{-1} = 1^{-1} =1$
+type, $\meff = \left( \sum_{i=1}^{\offspringNumber} w_i^2 \right)^{-1} = 1^{-1} =1$.
 In the tutorial by N. Hansen, it's mentioned that $\meff \approx 
 \frac{\lambda}{4}$ indicates a good setting of $w_i$. The $\meff$ is 
 measure of how much of the parent mass is used, and serves as a normalization 
@@ -364,15 +360,15 @@ factor in later equations.\\
 
 \textbf{Covariance matrix adaption}
 
-The idea of using the covariance matrix is to make new samples
-resemble the covariance of the previous well-performing vectors, as opposed 
+The idea of using the covariance matrix is to make new samples which
+resemble the covariance of previous well-performing vectors, as opposed 
 to the Cross-entropy method that does not maintain any information of
 previous samples.\\
 \\
-A evolution path of the movement of the means is introduced as $p_{c}$. This 
+An evolution path of the movement of the means is introduced as $p_{c}$. This 
 is a vector that holds the direction in which the mean has been moved in 
 both the current generation, and in previous generations in 
-a 'low-pass filter' like manner. Using the 
+a 'low-pass filter' like fashion. Using the 
 evolution path, the covariance matrix can take a shape that 
 makes samples more likely to appear in the direction of successive 
 movements of the mean.
@@ -390,13 +386,13 @@ p_{c}^{(g)}}_{\makebox[0pt]{\text{previous steps}}}  +
 \langle y \rangle_{w} \label{eq:epathc}
 \end{align}
 In (\ref{eq:epathc}), the term $\left( 1 - c_{c} \right) p_{c}^{(g)}$ makes 
-the evolution path become influenced by earlier path steps. The learning rate
+the evolution path influenced by earlier path steps. The learning rate
 $c_c \in [0;1] $ indicates how much of the previous path is taken into account.
-if $c_c = 0$, the previous path is not considered at all, and if $c_c = 1$ the path 
-will only consist of the previous step. According to the tutorial, this is set
-$c_c = \frac{4 + \mu_{eff} / \dimensions}{\dimensions + 4 + 2 \mu_{eff} / \dimensions}$.\\
+If $c_c = 0$, the previous path is not considered at all, and if $c_c = 1$ the path 
+will only consist of the previous step. According to the tutorial this is set as
+$c_c = \frac{4 + \meff / \dimensions}{\dimensions + 4 + 2 \meff / \dimensions}$.\\
 \\
-The indicator function $h_{\sigma}$ is discussed in detail in the tutorial \citep{hansen2011}.
+The indicator function $h_{\sigma}$ is discussed in greater detail in the tutorial \citep{hansen2011}.
 However, the main idea of this indicator function is.
 \begin{align}
 h_{\sigma}
@@ -448,16 +444,16 @@ C^{(g+1)} &=
 \end{align}
 
 Again, the first term is the smoothing of the previous covariance matrices.
-the constants $c_1$ and $c_\mu$ are the learning rates for respectively the two
+The constants $c_1$ and $c_\mu$ are the learning rates for respectively the two
 different updates, and the sum of them must not exceed 1, $c_1 + c_\mu \leq 1$.\\
 \\
 The rank-one update is meant to form the covariance matrix in a way such that 
 it becomes more likely for the distribution to draw vectors in the direction of
-successive steps. The term 
+successive steps. Consider the following term
 \begin{align}
 c_{1} \left( p_{c}^{(g+1)} {p_{c}^{(g+1)}}^{T}\right)
 \end{align}
-is first of all factored by the leaning rate $c_1$. The matrix computed as 
+This is first of all factored by the leaning rate $c_1$. The matrix computed as 
 $p_{c}^{(g+1)} {p_{c}^{(g+1)}}^{T}$ is the outer product of the evolution path. 
 Remember here that the $p_{c}^{(g+1)}$ is the smoothed vector that indicates 
 the path in which the mean has been moved. Hence, the covariance will for this 
@@ -478,9 +474,9 @@ such that the covariance of the highest ranking vectors may contribute the most.
 The rank of the matrix in \ref{eq:rankmuupdate} is $min(\mu, \dimensions)$.\\
 \\
 As a result of this, when the covariance matrix is updated as in (\ref{eq:fullCMA})
-the next sample will be more likely to be realized somewhat like the previous 
-samples, somewhat in the direction in which the mean was moved and somewhat 
-according to the covariance of the highest ranking vectors.
+the next sample is more likely to be drawn partially like the previous 
+samples, the direction in which the mean was moved and 
+the covariance of the highest ranking vectors.
 \\
 
 
@@ -492,7 +488,7 @@ each of the principal axes in the covariance matrix. Hence the step-size is used
 an 'overall' scaling mechanism when drawing vectors. The step-size is used when 
 sampling the vectors in (\ref{eq:finalSample}) where it expands the variance 
 of the distribution. When moving the mean in (\ref{eq:movemean}), the weighted 
-selection mass \textbf{scaled} with the step-size is added to the mean.
+selection mass scaled with the step-size is added to the mean.
 
 First we consider the evolution path of the step-size $p_\sigma$ which is
 updated as follows.
@@ -513,7 +509,7 @@ p_{\sigma}^{(g+1)} &=
 \langle y \rangle_{w}
 \end{align}
 The first term is the smoothing step as seen before, only using the learning rate 
-associated with the step-size evolution path, but is similar to what is seen in
+associated with the step-size evolution path, but is similar to what is previously explained in
 (\ref{eq:epathc}). The normalization constant is also very similar to the
 equivalent factor in (\ref{eq:epathc}).\\
 \\
@@ -553,12 +549,11 @@ p_\sigma^{(g+1)} &\sim (1 - c_\sigma) \mathcal{N}\left( 0, I \right) + \sqrt{c_\
 
 Hence, under random selection, the evolution path $p_\sigma \sim \mathcal{N} 
 \left( 0, I \right)$.  The step-size is adapted by comparing the length
-if the evolution path $||p_\sigma||$ with the expected length of a vector 
+of the evolution path $||p_\sigma||$ with the expected length of a vector 
 drawn from $\mathcal{N} \left( 0, I \right)$, that is
-$\mathbb{E}||\mathcal{N}\left(0, I\right)||$. where 
-$\mathbb{E}||\mathcal{N}\left(0, I\right)|| \approx \sqrt{n} + \mathcal{O}\left(1/n\right)$
-The cases if this comparison are:
-
+$\mathbb{E}||\mathcal{N}\left(0, I\right)||$. This expected value is
+$\mathbb{E}||\mathcal{N}\left(0, I\right)|| \approx \sqrt{n} + \mathcal{O}\left(1/n\right)$.
+The cases of this comparison are
 \begin{align}
 \textbf{a: } ||p_\sigma^{(g+1)}|| &> \mathbb{E}||\mathcal{N}\left(0, I\right)|| 
 \label{case1}\\
@@ -566,7 +561,7 @@ The cases if this comparison are:
 \label{case2}\\
 \textbf{c: } ||p_\sigma^{(g+1)}|| &= \mathbb{E}||\mathcal{N}\left(0, I\right)||\label{case3}
 \end{align}
-In case \textbf{a} the steps are correlated and the idea is that a larger step-size
+In case \textbf{a}, the steps are correlated and the idea is that a larger step-size
 would cause the mean to move towards a desired location faster. In case \textbf{b},
 the path is short and/or anti correlated. This means that the algorithm would benefit from
 shorter steps, and therefore decrease the step-size. In the final case \textbf{c}, the 

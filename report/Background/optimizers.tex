@@ -1,6 +1,6 @@
 \subsection{Optimizers \label{Optimizers}}
 
-Both of the Cross-entropy method and CMA-ES fall into the category of 
+As mentioned earlier, both the Cross-entropy method and CMA-ES fall into the category of 
 \textit{stochastic optimization}
 methods. These methods are useful for 
 optimization problems where the gradient is not available.
@@ -18,12 +18,12 @@ Often, the problem is depicted as a minimization problem which is quite
 the opposite in relation to Tetris where the goal is to gain as high score as possible.
 Therefore we depict the problem entirely as a optimization problem.
 In these optimization methods, the optimizing algorithm uses a family of parametric distributions,
-and maintains a mean $\mean $ along with other parameters
+and maintains a set of parameters for the used distribution
 to search the best possible solution for the objective function.  
 In the case studied in this thesis
 both, the CMA-ES and Cross-entropy method use a 
 Gaussian distribution to sample solutions to the objective function.
-Hence, both of the functions aim to find a mean 
+Hence, both functions aim to find a mean 
 $\mean $ and an $\dimensions \times \dimensions$ matrix 
 $\varianceMatrix $\footnote{In \citep{hansen2011}, 
 $\sigma$ is used for step-size in CMA-ES, so $\varianceMatrix $ is instead introduced
@@ -31,7 +31,7 @@ as an arbitrary $\dimensions \times \dimensions$ matrix in its place.}, such tha
 a vector $\textbf{\individual }$ is sampled by 
 $\textbf{\individual } \sim \mathcal{N}\left( \mean, \varianceMatrix \right)$, 
 then $\fitnessFunction (\textbf{\individual })$ 
-is likely to yield preferable results.\\
+is likely to yield the desired results.\\
 \\
 The algorithms work iteratively, such that the mean and variance 
 of the distribution 
@@ -39,8 +39,8 @@ is altered for each iteration $\generation $.
 The algorithms start by initializing the 
 parameters either at random or at some fixed point. A common 
 configuration is setting the mean to 
-all zeros and the standard deviation to the identity matrix.
-Thus, for the first iteration $\generation = 0$, a configuration could be
+a zero-vector and the standard deviation to the identity matrix.
+Thus, for the first iteration $\generation = 0$, a configuration could be as follows
 \begin{align}
 \mean^{(0)} =
 \begin{bmatrix}
@@ -56,9 +56,9 @@ Thus, for the first iteration $\generation = 0$, a configuration could be
 \end{bmatrix}
 \end{align}
 
-The superscript of $(0)$ notes that the values occur in iteration/generation 0.\\
+The superscript of $(0)$ notes that the values occur in generation 0.\\
 \\
-In each iteration, the algorithms sample $\populationSize$ candidate solutions 
+In each generation, the algorithms sample $\populationSize$ search points
 and evaluate their fitness
 against the objective function. When each of the solutions are evaluated,
 they are ordered according to their fitness
@@ -70,17 +70,17 @@ they are ordered according to their fitness
 \fitnessFunction(\textbf{\individual }_{\populationSize  - 1}) \geq 
 \fitnessFunction(\textbf{\individual }_{\populationSize })
 \end{align}
-This sorting is a rather essential part of the way the search parameters are
+This sorting is a rather essential part of how the search parameters are
 updated. Both the Cross-entropy method and CMA-ES algorithm use a fraction of the 
-best solutions that were drawn from it's Gaussian distribution. An essential 
+best solutions, that were drawn from its Gaussian distribution. An essential 
 part of the selection is that the candidate solutions are not contributing
-directly according to their yield from the fitness function, but only from 
+directly according to their yield from the \textit{fitness function}, but rather
 how they are ranked relative to the other solutions. 
 
-The mean and standard deviation for the next iteration, 
-that is $m^{(\generation+1)}$ and $M^{(\generation+1)}$, are
+The mean and standard deviation for the next iteration,
+$m^{(\generation+1)}$ and $M^{(\generation+1)}$, are
 then updated usually by considering the best of the ordered solutions. How exactly
-these parameters are updated is individual for each method and can be seen in the following
-sections.
+these parameters are updated is individual for each method is elaborated further in the
+following sections.
 
 

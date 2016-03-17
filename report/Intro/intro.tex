@@ -2,7 +2,7 @@
 
 On the topic of reinforcement learning, a widely used benchmark
 for learning algorithms are designing agents 
-for playing the classical video game of Tetris. Tetris is an 
+to playing the classic video game of Tetris. Tetris is an 
 appealing benchmarking problem due to it's complexity. The 
 standard games plays on a board made from a grid that is
 10 cells wide and 20 cells tall. As the game progress, differently
@@ -32,7 +32,7 @@ from a single piece, which is typically less than 80 states\footnote{
 Assuming 4 possible rotations and 20 columns
 in which the piece may be dropped.}.
 Using these controllers, the search space is reduced 
-to only looking at the current board, and the possible 
+to only consider the current board, and the possible 
 places to drop the piece. \\
 The game used for the benchmarking is a simplified version of Tetris,
 in which 
@@ -62,9 +62,9 @@ feature. This means that the efficiency of the controller
 is determined by the features the controller is aware of
 and how heavily they are weighted. This allows
 the controller with $n$ features to be expressed as an 
-$n$ dimensional real-valued vector, with one dimension 
+$n$ dimensional real-valued vector $x \in \mathbb{R}^n$, with one dimension 
 per feature, and the value in that dimension the weight.
-An often referred to controller is the Dellacherie's controller, 
+A widely known controller from the literature is the Dellacherie's controller, 
 as described in \cite{scherrer2009}. This controller
 takes six features of the board into account, seen in table 
 \ref{table:dellfeat} on page \pageref{table:dellfeat}. In relation 

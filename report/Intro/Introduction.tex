@@ -1,28 +1,28 @@
 \section{Introduction \label{sec:intro}}
 
 This thesis will cover an experimental approach 
-to compare two stochastic optimization algorithms both considered 
-state-of-the-art search methods. The algorithms addressed
-are in particular known as the Cross-entropy method and 
+by comparing two stochastic optimization algorithms, both considered 
+state-of-the-art search methods. The algorithms in consideration
+are the Cross-entropy method and 
 the Covariance Matrix Adaption Evolution Strategy (CMA-ES
 for short). The algorithms are each characterized by their
 ability to search in rough multidimensional 
 search spaces that only offers little possibility 
 for analytical approaches.
-The algorithms will be applied to 
-learning the game Tetris. Most often, when machine learning
+The algorithms are applied to the task of learning to play Tetris. 
+Most often, when machine learning
 techniques are applied to problems such as games, conventional
 learning methods fall short due to both  very large number of 
 possible actions in the games and highly unpredictable mappings 
-between actions and their long-term consequences. The games 
-are considered as episodic tasks where some agent is placed
-in the game environment and interacts with the game following some
+between actions and their long-term consequences. The individual playthroughs
+in Tetris are considered episodic tasks, where some agent is placed
+in the game environment, and interacts with the game following some
 strategy that will hopefully result in a high score. 
 The agent will make decisions on how to react 
 to the game while playing, and optimizing the agent is hence a task of
-finding good (as possible) policies for the agent to follow. Yet, as mentioned,
-deciding what makes a policy good can be very difficult in
-problems like games. When applying reinforcement methods to learning
+finding well performing policies for the agent to follow. Yet, as mentioned,
+deciding what makes a policy good can be very difficult problems 
+with large state spaces like games. When applying reinforcement methods to learning
 the policies, conventional approaches typically do not suffice 
 due to infeasible computation times. We will cover how
 Tetris can be formulated in way that allows  the Cross-entropy method 
