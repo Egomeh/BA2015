@@ -1,9 +1,9 @@
 \subsection{Reinforcement learning \label{RL}}
 
-In the field of Machine Learning, the sub field of reinforcement learning
+In the field of machine learning, the subfield of reinforcement learning
 deals with training agents to behave in an environment through
-trial and error. The environment typically consists of a set of states
-between which an agent can transition through via a set of actions.
+trial and error. \comment{The environment typically consists of a set of states.
+As an action, an agent can transition to another state.}
 The reinforcement learning methods relates somewhat 
 to supervised and unsupervised learning models. In unsupervised 
 learning, the agents are never given a feedback on their actions
@@ -32,10 +32,10 @@ time frame naturally falls into playthroughs in which the
 goal of the agent is to accumulate as much reward as possible 
 before the game ends. When the agent interacts 
 with the environment, it transitions between different states through 
-actions. To determine what action to take, the agent will use
+actions. \comment{To determine what action to take, the agent will use
 a policy that determines what actions to take depending on circumstances.
 As the games are non-deterministic, one can find expectations
-of how much reward the agent can receive while following the policy. 
+of how much reward the agent can receive while following the policy.}
 The goal is then to choose a policy, and when followed by the agent,
 gives the highest possible cumulative reward at the end of a playthrough. 
 It's important to note that the reward 
@@ -47,10 +47,10 @@ in which the agent is terminated, and the cumulative reward
 is revealed. This is very much the case in games, where the goal 
 is often to either reach the final state as fast as possible,
 or to keep the game running for as long as possible.
-The action transitions may 
+\comment{The action transitions may 
 not be deterministic and if they are not,
 it's required that the probabilities of transitions
-remain during the entire episode \citep{Carr}. Actions not being deterministic
+remain during the entire episode \citep{Carr}.} Actions not being deterministic
 means that if an action is taken by the agent, the agent cannot 
 with certainty predict in which state it transitions to.
 If the state space 
@@ -60,7 +60,7 @@ a thorough search of a far too large space. Thus, in situations
 with large state spaces, as Tetris will turn out to be, one must choose 
 an approach for finding the best possible policies by other
 means than exhaustive search. The methods used in reinforcement learning 
-does specify how the agent should change its policy according to 
+specify how the agent should change its policy according to 
 results from earlier episodes, and the specific methods used in
 the context of Tetris is explained in further detail in later sections.
 
