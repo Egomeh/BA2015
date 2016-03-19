@@ -2,8 +2,8 @@
 
 In the field of machine learning, the subfield of reinforcement learning
 deals with training agents to behave in an environment through
-trial and error. \comment{The environment typically consists of a set of states.
-As an action, an agent can transition to another state.}
+trial and error. The environment typically consists of a set of states.
+The agent can trough a set of actions transition between states.
 The reinforcement learning methods relates somewhat 
 to supervised and unsupervised learning models. In unsupervised 
 learning, the agents are never given a feedback on their actions
@@ -20,7 +20,7 @@ the score achieved by the agent.
  The main difference between supervised
 learning and reinforcement learning is that in reinforcement learning,
 the agents cannot necessarily determine the correctness 
-of a specific action as some action, albeit yielding reward,
+of a specific action as some actions, albeit yielding reward,
 may cause relative loss of reward in the future. An example of how this applies 
 to artificial agents is the game Tic Tac Toe. If supervised learning
 is applied, the playing agent will for each move in the game know
@@ -32,11 +32,11 @@ time frame naturally falls into playthroughs in which the
 goal of the agent is to accumulate as much reward as possible 
 before the game ends. When the agent interacts 
 with the environment, it transitions between different states through 
-actions. \comment{To determine what action to take, the agent will use
-a policy that determines what actions to take depending on circumstances.
+actions. \comment{When deciding which action to carry out, the agent will use
+a policy that determines what actions to take depending on the circumstances.
 As the games are non-deterministic, one can find expectations
-of how much reward the agent can receive while following the policy.}
-The goal is then to choose a policy, and when followed by the agent,
+of how much reward the agent will receive while following the policy.}
+The goal is then to choose a policy, that when followed by the agent,
 gives the highest possible cumulative reward at the end of a playthrough. 
 It's important to note that the reward 
 for an action may be negative, and will in such case actively discourage 
@@ -47,12 +47,15 @@ in which the agent is terminated, and the cumulative reward
 is revealed. This is very much the case in games, where the goal 
 is often to either reach the final state as fast as possible,
 or to keep the game running for as long as possible.
-\comment{The action transitions may 
+The action transitions may 
 not be deterministic and if they are not,
 it's required that the probabilities of transitions
-remain during the entire episode \citep{Carr}.} Actions not being deterministic
+remain during the entire episode \citep{Carr}. In regards to Tetris, these probabilities of
+transitions would refer to the occurrence frequency of each piece, which must remain
+unchanged throughout the entire playtrough.
+The transition caused by an action not being deterministic
 means that if an action is taken by the agent, the agent cannot 
-with certainty predict in which state it transitions to.
+with certainty predict which state it reaches.
 If the state space 
 is large enough, it becomes infeasible to attempt to compute 
 the commutative reward when taking actions, as this would require
