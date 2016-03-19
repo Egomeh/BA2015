@@ -1,7 +1,7 @@
 \subsection{Learning Tetris \label{sec:learningTetris}}
 
-On the topic of reinforcement learning, a widely used benchmark
-for learning algorithms are designing agents 
+A widely used benchmark
+for reinforcement learning algorithms is designing agents 
 to playing the classic video game of Tetris. Tetris is an 
 appealing benchmarking problem due to it's complexity. The 
 standard games plays on a board made from a grid that is
@@ -9,7 +9,7 @@ standard games plays on a board made from a grid that is
 shaped pieces fall from the top of the board. 
 When a row on the board is fully occupied by pieces, the line
 is removed, all lines above it moved one line down and a score
-point is given to the player. If a cell above the 20 rows first is
+point is given to the player. If a cell above the 20 first rows is
 occupied, the game ends. The task of the player is to move
 and rotate the falling pieces in a way that yields the highest 
 score before the game ends.\\
@@ -23,7 +23,7 @@ that are stochastic. Because of this
 complexity, a common approach 
 in the literature is to use 
 \textit{one-piece controllers}\footnote{Agents and controllers
-both refer to artificial players.}, such as described in 
+both refer to artificial players.}, such as described by 
 \cite{scherrer2009:b}. These controllers are only aware of
 the current board state and the currently falling piece.
 Hence, the policy of the agent is only to greedily choose
@@ -53,7 +53,7 @@ during the fall, but is not restricted by the time limitations.
 This is however a common way of benchmarking Tetris playing agents
 \citep{scherrer2009}\\
 \\
-When the controllers decide which action to take, it will
+When the controller decides which action to take, it will
 simulate each of the possible actions and choose the one that
 leads to the most favourable board state. To evaluate the board 
 state, the controller uses a set of features that defines 
