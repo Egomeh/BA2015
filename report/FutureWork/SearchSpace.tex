@@ -49,11 +49,15 @@ Hence, the search space would be reduced by one dimension, and all unique soluti
 within $[0; 2 \pi]$ in all dimensions and all candidate solutions would be points on the $n$-dimensional
 hypersphere. The idea of this would be to prevent the CMA-ES to search too far off the origin of the
 coordinate axis, and instead focus on thoroughly exploring the more confined search space.
+How this reformulation of the problem impacts the performance of the algorithms is hard to predict.
+However, the more confined search space would likely not benefit the Cross-entropy method
+as much as with CMA-ES since our experiments shows that the Cross-Entropy method aleardy settles for 
+solutions with values that are relatively close to 0.
 The example is illustrated in figure \ref{fig:searchInAngles}
 
 \begin{figure}[H]
 \begin{center}
-\begin{tikzpicture}
+\begin{tikzpicture}[scale=0.8]
     \draw (-1,0) arc (180:360:1cm and 0.5cm);
     \draw[dashed] (-1,0) arc (180:0:1cm and 0.5cm);
     \draw (0,1) arc (90:270:0.5cm and 1cm);
