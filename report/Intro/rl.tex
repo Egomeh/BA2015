@@ -51,7 +51,7 @@ The action transitions may
 not be deterministic and if they are not,
 it's required that the probabilities of transitions
 remain during the entire episode \citep{Carr}. In regards to Tetris, these probabilities of
-transitions would refer to the occurrence frequency of each piece, which must remain
+transitions would refer to the frequency at which each piece occur, which must remain
 unchanged throughout the entire playtrough.
 The transition caused by an action not being deterministic
 means that if an action is taken by the agent, the agent cannot 
@@ -62,7 +62,8 @@ the commutative reward when taking actions, as this would require
 a thorough search of a far too large space. Thus, in situations 
 with large state spaces, as Tetris will turn out to be, one must choose 
 an approach for finding the best possible policies by other
-means than exhaustive search. The methods used in reinforcement learning 
+means than exhaustive search. 
+The methods used in reinforcement learning 
 specify how the agent should change its policy according to 
 results from earlier episodes, and the specific methods used in
 the context of Tetris is explained in further detail in later sections.
