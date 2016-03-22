@@ -18,7 +18,7 @@ iterations but slows down as score, and therefore noise, increases. A simple sol
 that we discussed  was to increase the number of evaluations based on iteration number.
 A couple of ways to set 
 \begin{align}
-\numberOfEvaluations &=  max\left( 1, k \lfloor log_{2} \left( \generation \right)  \rfloor \right) &,\ k \in \mathbb{N}^+\\
+\numberOfEvaluations &=  \max\left( 1, k \lfloor \log_{2} \left( \generation \right)  \rfloor \right) &,\ k \in \mathbb{N}^+\\
 \numberOfEvaluations &=  max\left( 1, \lfloor \frac{\generation}{k} \rfloor \right) &,\ k \in \mathbb{N}^+
 \end{align}
 This way, the number of evaluations increase with the iteration number, and should approximately

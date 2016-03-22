@@ -16,14 +16,27 @@ In this paper, we will explore how the two state-of-the-art
 optimization algorithms, Cross-Entropy and CMA-ES, differ when 
 applied to the task of playing Tetris.\\
 \\
-The SHARK library \citep{shark08} contains a
+The Shark library \citep{shark08} contains a
 working implementation of the CMA-ES 
 algorithm. However, the Cross-Entropy method 
-is not present in the SHARK library and thus, 
+is not present in the Shark library and thus, 
 a part of the thesis is to implement it ourselves according to 
 the other researchers work. To document the 
 soundness of the implemented CE method, 
 we will replicate the experiment in \citep{thiery:09} and 
 verify that we obtain the similar results.\\
 Then, we will benchmark CMA-ES and CE against each other 
-to determine if one yields better optimization results than the other.
+to determine if one yields better optimization results than the other.\\
+\\
+The experiments will be carried out on the simplified version of
+Tetris using the MDPTetris software found at \citep{mdptetris},
+which is the same simulator used by Scherrer et al. in \citep{scherrer2009:b} 
+among other authors in various papers.
+This software already have the well known feature sets
+implemented, so we will not ourselves extend any of the features.
+The source code of the Tetris simulator is used as-is, and is therefore 
+not altered prior to running the experiments. 
+For comparing the optimizers, the \shark -library will be used. 
+This library already contains an
+implementation of the CMA-ES optimizer, but lacks the 
+Cross-entropy method which we present an implementation of.
