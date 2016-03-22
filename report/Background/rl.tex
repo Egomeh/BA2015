@@ -2,16 +2,28 @@
 
 In the field of Machine Learning, the sub field of reinforcement learning
 deals with training agents to behave in an environment through
-trial and error. The environment typically consists of a set of states
-between which an agent can transition through a set of actions.
+trial and error.
+
+The environment typically consists of a set of states that cover all
+scenarios the agent can encounter. The agent then has a set of actions
+that it can use to make transitions between the states. 
 The reinforcement learning methods relates somewhat 
-to supervised and unsupervised learning models. In unsupervised 
-learning, the agents are never given a feedback on their actions
-and must attempt to derive some a pattern without decisive responses.
-In supervised leaning, the agent is trained from labelled data.
-In this way the agent will always, for any action, receive 
-feedback of whether the committed action was desirable or not.
-Reinforcement learning appears somewhat similar to supervised learning.
+to supervised models.
+
+In supervised learning, every decision is tied to a predefined value
+that defines how desirable the given action is. This way, in supervised learning,
+the agent will always at any point have very detailed feedback signals from it' actions.
+In the context of actions and state transitions, an agent that learns trough
+supervised learning will for every action taken know the absolute consequence
+immidiatly after commiting it.
+
+Reinforcement learning is in many ways similar to supervised learning. 
+The main difference between the two models is that agent does not receive 
+an imidiate response to its actions. Instead, the agent will recieve a reward
+when reaching certain states. The objective of the agent is then to
+accumulate as much reward das possible.
+
+Reinforcement learning appears similar to supervised learning in many ways.
 In reinforcement learning, the agent will commit actions in an environment
 and receive rewards based on those. The main difference between supervised
 learning and reinforcement learning is that in reinforcement learning,
@@ -23,6 +35,9 @@ is applied, the playing agent will for each move in the game know
 if the move was considered good or bad. In reinforcement learning however,
 the only feedback the agent will have is rewards that a given 
 to the agent when reaching certain states of the game. 
+
+
+
 Often in the case of games, the 
 time frame naturally falls into episodes in which the 
 goal of the agent is to accumulate as much reward as possible 
