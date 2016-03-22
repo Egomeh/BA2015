@@ -1,14 +1,14 @@
 \subsection{Reformulation of the search space}
 
-In a talk by Nikolaus Hansen, it was suggested that a source of poor performance 
+In a talk given by Nikolaus Hansen, it was suggested that a source of poor performance 
 for the CMA-ES is that the formulation of the problem is ill posed.
 He mentioned that if the CMA-ES fails to perform well at optimizing some problems, however a reformulation of the problem could in many cases benefit the CMA-ES. As with the 
 MDPTetris platform, the search points are sampled in $\mathbb{R}^n$ where 
 $n$ is the number of dimensions. As we saw in section \ref{normalSamples}, the length 
-of the sampled vector does not matter, but only the direction. Our experiments also shows that 
-the CMA-ES appears to move it's search far away from the origin of the coordinate axis,
+of the sampled vector does not matter, only the direction. Our experiments also shows that 
+the CMA-ES appears to move its search far away from the origin of the coordinate axis,
 which may not be necessary. To overcome this, one might instead choose to search in angles 
-of search vectors, and have all search points keep a length of 1. As an example, 
+of search vectors, and have all search points kept at length of 1. As an example, 
 consider a feature set of 3 features. Then a candidate solution has the form of
 \begin{align}
 x &= \begin{pmatrix}

@@ -94,8 +94,8 @@ The CMA-ES does by default only have a relatively small
 population size (around 13) compared to the Cross-entropy methods
 default (100). From the earlier experiments, we saw that 
 the Cross-entropy method does benefit from a higher populations size,
-and to CMA-ES, the higher population size appears critical
-to it's performance. Thus, the population size is increased for 
+and regarding the CMA-ES, higher population size appears critical
+to its performance. Thus, the population size is increased for 
 both algorithm in our final experiment.\\
 \\
 \textit{Evaluate each agent multiple times}\\
@@ -119,17 +119,17 @@ it risks biasing search points that appear to be better
 but in reality, just by faulty ranking, should
 not be considered a good agent. Our experiments 
 did however suggest that with 5 evaluations per search agent,
-the super linear recombination was the best option.\\
+the superlinear recombination was the best option.\\
 \\
 None of the experiments seen so far has allowed a 
 consistent mean score of more 
 than 200,000. This brings the concern 
-hat it might be the objective function
+that it might be the objective function
 that poses a natural limit on the score into consideration.
 In this case the objective function
 models playing Tetris with the Bertsekas feature set. 
 It is unknown to us
-whether it's possible to construct an agent 
+whether it is possible to construct an agent 
 with a mean score of more than
 200,000 lines on average. 
 Thus we cannot know if convergence 

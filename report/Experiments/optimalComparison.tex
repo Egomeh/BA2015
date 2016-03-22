@@ -91,14 +91,14 @@ methods's final score is on average around 115,000. With the optimal settings
 the Cross-entropy method scores an average around 150,000. Thus, the Cross-entropy 
 method does perform slightly better with our new-found settings.
 CMA-ES also suffers from much slower convergence 
-when using the optimized settings, but in return, it becomes able to compete with
+when using the optimized settings, but in return it becomes able to compete with
 the scores of the Cross-entropy method. The results seen when using the Cross-entropy
 method  might
 score slightly better with our found optimal settings, however these settings
 brings the cost of a much longer learning time. The optimized settings show
 an increment of the average score of around 35,000, this also causes convergence to
 take place much later. With the original settings, the Cross-entropy method converges 
-after around 7,000 games played, and with the optimal settings, the convergence 
+after around 7,000 games played, and with the optimal settings the convergence 
 occurs around 15,000-20,000 games played.
 CMA-ES benefits greatly from the new settings in terms of final score.
 With the default settings from Shark, the average final score of CMA-ES was around
@@ -106,7 +106,7 @@ With the default settings from Shark, the average final score of CMA-ES was arou
 The CMA-ES does however appear to have a much prolonged learning time
 as a cause of the optimal settings, which must be said to be a significant trade-off.\\
 \\
-As described previously, we have carried out two tests using the Wilcoxon test, at two 
+As described previously, we have carried out two tests using the Wilcoxon test at two 
 points on the learning curves. The first point is when the algorithms have played 12,000 
 games and the second is at the final iteration after 40,000 games. The first point is chosen at a point 
 where the two learning curves appeared greatly different and where the Cross-entropy method

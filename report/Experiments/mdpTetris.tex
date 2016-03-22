@@ -4,7 +4,7 @@ As described earlier, the MDPTetris platform is used for emulating Tetris contro
 The source code for the 
 platform is freely available at \url{http://mdptetris.gforge.inria.fr/doc/index.html}.
 The software implements the simplified version of Tetris as described in 
-section \ref{sec:learningTetris} and is written in C. The code depends on
+section \ref{sec:learningTetris} and is written in C. The source code depends on
 the GNU Scientific Library\footnote{\url{http://www.gnu.org/software/gsl/}} and
 the OpenGL Utility 
 Library GLUT/freeGLUT\footnote{\url{http://freeglut.sourceforge.net/}}.
@@ -22,12 +22,12 @@ considered by the controller by indices. These indices each map to a feature fun
 implemented in the MDPTetris code. The pieces that occur in the game are also read from a file,
 which in our case, is just a file that contains the 7 regular pieces from the ordinary game
 (see figure \ref{fig:TetrisPieces}). Later in the experiments however, a more difficult version of Tetris
-is discussed, which is harder due to more frequent occurrence of difficult to place pieces.
+is discussed, which is harder due to more frequent occurrence of pieces which are difficult to place.
 To increase the likelihood of these pieces, the piece configuration file was altered to
 contain more of the difficult pieces, thus making them occur more often.\\
 \\
 To perform the actual optimization of the Tetris agents, the Shark library has been applied
-with it's implementation of CMA-ES and with our own implementation (now a part of Shark
+with its implementation of CMA-ES and with our own implementation (now a part of Shark
 see appendix \ref{app:crossEntropyCode}). The two optimization algorithms in Shark both 
 inherits from the abstract class 
 \lstinline$AbstractSingleObjectiveOptimizer<RealVector>$. This superclass defines the
@@ -36,12 +36,11 @@ solutions of the type \lstinline$RealVector$ that models a real valued vector.
 The objective functions in Shark are implemented by writing a class that inherits 
 the \lstinline$SingleObjectiveFunction$, which is an interface for an objective function 
 that accepts a single real valued vector and returns a real value indicating how well the supplied
-vector evaluates against the underlying function. In our code, we implemented the class names 
+vector evaluates against the underlying function. In our source code, we implemented the class names 
 \lstinline$MDPTetris$ that inherits the abstract \lstinline$SingleObjectiveFunction$ class.
-Thus, our implementation of the objective function offers an abstraction that, to Shark, masks
+Thus, our implementation of the objective function offers an abstraction that to Shark, masks
 the actual implementation and configuration of Tetris. The effect of this abstraction is that 
-no code from Shark needs to be aware of any details of the actual function, that is Tetris, 
-that is being optimized.\\
+no source code from Shark needs to be aware of any details of the actual function, that is Tetris, being optimized.\\
 \\
 The \lstinline$MDPTetris$ objective function is adjustable in terms of Tetris board size, piece 
 configuration file and feature set. When loading the feature set, the dimensionality of 
@@ -83,7 +82,7 @@ Bertsekas feature set initially set to $0$. Setting the
 "game-over" evaluation to $0$ means that the agent will not 
 distinguish between regular moves and moves that results in losing
 the game. If this setting remains at 0, the agent will always consult the
-feature functions to rank it's moves, yet setting this value to $-1$
+feature functions to rank its moves, yet setting this value to $-1$
 the agent will always, regardless of feature functions, rank moves that ends
 the game the lowest.
 When running the experiments with this setting as $0$, a large portion
@@ -113,7 +112,7 @@ would take more than a month in total. These time estimates
 originates from experiments that were not conducted in parallel,
 and on hardware from 2009, yet, the time consumption seemed to 
 be a considerable issue.
-In order to reduce the runtime of experiments, 
+In order to reduce the runtime of experiments 
 to allow us more experiments in the evaluations, 
 we can increase the "difficulty" of Tetris, by 
 adjusting either the board size and/or adjusting the 
@@ -145,8 +144,8 @@ We do expect that the learning curves develops much the same
 for both the hard and normal game difficulty, however
 at lower scores for the harder setting.
 To test if the difficulty setting has a significant impact, we used the Bertsekas
-feature set (see table \ref{table:bertfeat}). And applied both the Cross entropy 
-Method and CMA-ES on the regular and hard configurations.\\
+feature set (see table \ref{table:bertfeat}) and applied both the Cross-entropy 
+Method and CMA-ES on the regular and hard configurations of Tetris.\\
 
 \textbf{Results}\\
 Table \ref{table:difficultyRes} renders the results of our experiments 
@@ -215,7 +214,7 @@ with a noise term of $z^{(\generation)} = 4$ and an initial sigma of $\sigma_0 =
 and the CMA-ES with $\sigma_0 = 1$.\\
 \\
 Figure \ref{fig:featuresetCompareBertsekas} shows the experiment with the 
-Bertsekas feature set. This shows that when running the algorithms with a
+Bertsekas feature set. Which shows that when running the algorithms with a
 harder game configuration, the algorithms behave mostly the same as with regular 
 Tetris. Namely that CMA-ES converges faster than the Cross-entropy method, 
 but is eventually outperformed.

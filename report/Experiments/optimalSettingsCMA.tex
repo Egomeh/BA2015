@@ -110,7 +110,7 @@ $\sigma_0 \in \{0.1, 0.2, 0.5, 0.8, 1.0\}$. As the table shows,
 the final mean score does not seem to change with the initial step-size.
 Furthermore, the adjustment of the step-sizes does not appear to 
 have a drastic impact on the mean scores. However, based on both mean score and
-quantiles, the best configuration seems to be $\sigma_0 = 0.5$. This is 
+quantiles, the best configuration seems to be $\sigma_0 = 0.5$. This 
 is also referred to as a typical initial setting in \citep{boumaza2009}.
 Therefore, the conclusion remains that the initial step-size is not critical 
 for the experiment.\\
@@ -122,7 +122,7 @@ besides the actual data to test, and it does not require the assumption that dat
 from a Gaussian distribution. The test accepts data from two populations, that may or may not 
 be drawn from the same underlying distribution and will test against the null hypothesis, 
 namely that the two populations have identical distribution. If the test concludes a 
-confidence less then $5\%$ ($p < 0.05$), we cannot firmly reject the null hypothesis, 
+confidence less then $5\%$ ($p < 0.05$), we cannot firmly reject the null hypothesis 
 and cannot conclude any significant difference in the population. From the experiments
 with the initial sigma setting, the immediate choice of $\sigma_0$ would be 0.5.
 The Wilcoxon test is applied to the data from the runs with $\sigma_0 \in \{0.5, 1\}$
@@ -162,11 +162,11 @@ as
 \underbrace{D \mathcal{N}\left(0, I \right)}_{\mathcal{N}\left(0, D^2 \right)}
 \end{align*}
 Where $D \mathcal{N}\left(0, I \right)$ corresponds to 
-$\mathcal{N}\left(0, D^2 \right)$ which, since $D$ is a diagonal
+$\mathcal{N}\left(0, D^2 \right)$ since $D$ is a diagonal
 matrix, is just the same type of sampling as with the Cross-entropy method. 
-The matrix $B$ will only rotate the the sampled vectors, and finally,
+The matrix $B$ will only rotate the the sampled vectors, and finally
 $\sigma$ will perform an isotropic scaling. 
-To roughly resemble the constant noise configuration of the Cross-entropy method,
+To roughly resemble the constant noise configuration of the Cross-entropy method
 when sampling vectors, the lowest variance may not drop below 4. 
 This is achieved by setting a lower bound $l=2$. If this applies,
 the sampling can be written as

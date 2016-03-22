@@ -9,7 +9,7 @@ the Cross-entropy method and CMA-ES.\\
 % agents
 The amount of vectors sampled in each generation $\populationSize$
 has a high impact on the algorithm performance. By setting $\populationSize$
-high, more policies are evaluated per iteration, and leads to a more thorough 
+high, more policies are evaluated per iteration which leads to a more thorough 
 exploration of the search space. Thus the higher $\populationSize$ increases the
 chances of finding a better mean for the next iteration.
 However, higher $\populationSize$ also results in the
@@ -42,21 +42,21 @@ sets the offspring size to $10\%$ of population size, that is
 $\offspringNumber = \lfloor 0.1 \cdot \populationSize \rfloor $.\\
 \\
 % Number of games per iteration
-The number of games, $\numberOfEvaluations$, 
+The number of games $\numberOfEvaluations$, 
 is the number of games  which each agent 
-plays in each iteration. An agent's score is defined as the 
+plays in each iteration. An agents score is defined as the 
 mean of the score of these 
 $\numberOfEvaluations$ games.
 We want this value low as possible, because as with the number of
-agents, $\populationSize$. The number of games, $\numberOfEvaluations$, 
+agents, $\populationSize$. The number of games $\numberOfEvaluations$, 
 is another major factor in the run-time of the algorithm.
-As Tetris is stochastic by nature, the score deviates a lot, 
+As Tetris is stochastic by nature the score deviates a lot, 
 even when the
 same agent with the same policy plays multiple games. 
 Hence, when assessing the true
 performance of a policy it's rarely enough to play just few games. Thus, setting 
 $\numberOfEvaluations$ high increases the likelihood of correctly choosing the best 
-agents, yet, it also causes longer run times of the experiments.\\
+agents, yet it also causes longer run times of the experiments.\\
 \\
 % Noise factor
 Specific to the Cross-entropy method, 
@@ -73,7 +73,7 @@ $\noise^{(\generation)} = max \left( 5 - \generation / 10 \right)$
 The constant noise (such as $\noise^{(\generation)} = 4$) ensures that the algorithm
 never settles in a too small area from which it samples, and forces it to explore
 solutions that are further away from the mean. The further the 
-algorithm progresses, 
+algorithm progresses 
 the less noise is assumed needed, as the mean should approach a global optimum. To
 address this, the linear decreasing noise 
 is applied as it will lower the noise term

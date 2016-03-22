@@ -8,14 +8,14 @@ as the framework for our experiments. Shark is a machine
 learning library written in C++ and is shipped with various tools
 for formulating machine learning problems and a flexible 
 interface for applying algorithms for these. Another appealing
-feature of Shark is the already implemented CMA-ES algorithm.
+feature of Shark is the existing implementation of the CMA-ES algorithm.
 The Shark library does however not include an implementation of
 the Cross-entropy method. As part of this thesis, we have contributed
 an implementation of the Cross-entropy method to the Shark library.
 In Shark, there is a collection of algorithms grouped under the label
 'Direct Search' algorithms. These algorithms are designed to solve 
-problems like the one described in \ref{ProblemFormulation}. In this
-set of algorithm, the CMA-ES implementation exists. Our Cross-entropy method 
+problems like the one described in \ref{ProblemFormulation}. It is within this set of algorithms that, 
+the CMA-ES implementation exists. Our Cross-entropy method 
 is written to match the style of the CMA-ES code. As the algorithm
 works much in similar ways, the Cross-entropy method vastly resembles the CMA-ES, 
 but with the core components of replaced.\\
@@ -31,7 +31,7 @@ in the literature, in particular, a description of the algorithm is
 present in \citep{thiery:09}. Thiery and Scherrer are the authors of the 
 MDPTetris platform used in our experiments, and the paper presents 
 results from their implementation of the Cross-entropy method. As the 
-software is shipped with a working implementation of the Cross-entropy method, written in C,
+software is shipped with a working implementation of the Cross-entropy method written in C,
 this code has strongly influenced in our implementation as guidelines for
 the details of the implementation. The results from the paper is then further used
 to verify that our implementation of the Cross-entropy method is reasonable and working in 
@@ -39,13 +39,13 @@ the like the ones we claim to resemble. The specifics of the validation process
 are described in detail in section \ref{varifyofce}. The paper only presents the
 graphs from their experiments, and single examples from the final iterations
 of their experiments. We tried to contact Bruno Scherrer in the hope that 
-the data might still be available, however, he replied that the data from the
+the data might still be available, however he replied that the data from the
 original experiment is no longer stored. As a result of this, in our verification,
 observing similar graphs and a similar span in results has to suffice as 
 empirical evidence that our implementation work as desired. 
 The algorithm also need to be able to work as a general-purpose 
 search algorithm, such that it can be applied to problems of the same kind as 
-the CMA-ES in Shark. To make sure of this, the code that merged with the 
+the CMA-ES in Shark. To ensure this, the source code that merged with the 
 Shark library includes a handful of unit tests. The tests chosen were some
 of that CMA-ES is tested with. In these tests, the algorithms are applied to some 
 function, and if the found solution is better than a certain threshold, the 

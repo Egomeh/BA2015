@@ -1,6 +1,6 @@
 \subsection{Previous work in learning Tetris\label{prevWork}}
 Over the time, numerous researchers has tried different feature 
-sets and applied various optimizers to find the best 
+sets and applied various optimizers in the search of the best 
 possible Tetris controllers. Researches in the field
 of reinforcement learning have approached the task of learning Tetris
 in various ways. Some have implemented exact versions of the original game
@@ -16,8 +16,8 @@ and the associated weights.
 The specifics of how to tune the weighting is a topic that is 
 explored along with finding the feature sets themselves. A common 
 feature set, the Dellacherie feature set (see figure \ref{table:dellfeat}),
-was originally tuned by hand with trial and error approach with a surprisingly 
-good result. Yet, the most common approach is to apply some optimization 
+was originally tuned by hand with trial and error approach with surprisingly 
+good results. Yet, the most common approach is to apply an optimization 
 algorithm to adjust the weighting.
 The features used are typically
 ones that attempt to mimic the board conditions that would
@@ -97,11 +97,11 @@ Currently, many researchers have proposed numerous
 feature sets and multiple 
 optimization methods have been explored. 
 The Dellacherie controller is very widely used across many resources
-\citep{fahey}. This controller was hand-tuned by trial and error,
-and did originally, on a regular non-simplified Tetris game, achieve an average of
+\citep{fahey}. This controller was hand-tuned by trial and error 
+and did originally achieve, on a regular non-simplified Tetris game, an average of
 660,000 lines. The same feature set (see figure \ref{table:dellfeat}) is 
 often incorporated in later works when optimizing controllers. An earlier
-feature set is the set proposed by \citep{Bertsekas} referred to as Bertsekas and
+feature set is the set proposed by \citep{Bertsekas} referred to as the Bertsekas and
 Tsitsiklis features. In 2006, Szita and L\H{o}rincz \citep{szita:06} applied the Cross-entropy
 method using the Bertsekas and Tsitsiklis features. They report that using no noise,
 their controller converged at 300,000 lines on average. 
