@@ -1,7 +1,7 @@
 \subsection{Previous work in learning Tetris\label{prevWork}}
 Over the time, numerous researchers has tried different feature 
 sets and applied various optimizers in the search of the best 
-possible Tetris controllers. Researches in the field
+possible policy. Researches in the field
 of reinforcement learning have approached the task of learning Tetris
 in various ways. Some have implemented exact versions of the original game
 where the artificial Tetris player will have to interact with the 
@@ -11,10 +11,10 @@ board the piece is located. Hence, these controllers does not model actions
 as locations to drop the piece, but rather 'button presses' that controls the
 fall of the piece. Yet, from the literature we have read, the most commonly applied 
 type of controller is the one used in the MDPTetris platform. As mentioned earlier,
-to create an efficient controller one can adjust two settings, namely the featureset 
+to create an efficient controller one can adjust two settings, namely the feature set 
 and the associated weights. 
-The specifics of how to tune the weighting is a topic that is 
-explored along with finding the feature sets themselves. A common 
+Usually, other reseachers deals with the combined task of both
+deciding the feature set and tuning the weights. A common 
 feature set, the Dellacherie feature set (see figure \ref{table:dellfeat}),
 was originally tuned by hand with trial and error approach with surprisingly 
 good results. Yet, the most common approach is to apply an optimization 
@@ -23,7 +23,7 @@ The features used are typically
 ones that attempt to mimic the board conditions that would
 normally catch the attention of a human player, such as
 how high the overall pile of pieces is and how many holes 
-the board has. In \citep{scherrer2009:b} table 1, a table 
+the board has. Table 1 \citep{scherrer2009:b}
 presents some feature sets used throughout various publications
 on the subject. The feature sets applied in this thesis are 
 Dellacherie and the Bertsekas feature sets 

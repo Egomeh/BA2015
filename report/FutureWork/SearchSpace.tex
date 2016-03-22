@@ -30,14 +30,14 @@ and the candidate solution $x$
 \begin{align}
 x &= 
 \begin{bmatrix}
-cos\left( \theta_0 \right) & sin\left( \theta_0 \right) & 0\\
--sin\left( \theta_0 \right) & cos\left( \theta_0 \right) & 0\\
+\cos\left( \theta_0 \right) & \sin\left( \theta_0 \right) & 0\\
+-\sin\left( \theta_0 \right) & \cos\left( \theta_0 \right) & 0\\
 0 & 0 & 1\\
 \end{bmatrix}
 \begin{bmatrix}
-cos\left( \theta_1 \right) & 0 & -sin\left( \theta_1 \right)\\
+\cos\left( \theta_1 \right) & 0 & -\sin\left( \theta_1 \right)\\
 0 & 1 & 0\\
-sin\left( \theta_1 \right) & 0 & cos\left( \theta_1 \right)
+\sin\left( \theta_1 \right) & 0 & \cos\left( \theta_1 \right)
 \end{bmatrix}
 \begin{pmatrix}
 1\\
@@ -51,7 +51,7 @@ hypersphere. The idea of this would be to prevent the CMA-ES to search too far o
 coordinate axis, and instead focus on thoroughly exploring the more confined search space.
 How this reformulation of the problem impacts the performance of the algorithms is hard to predict.
 However, the more confined search space would likely not benefit the Cross-entropy method
-as much as with CMA-ES since our experiments shows that the Cross-Entropy method aleardy settles for 
+as much as with CMA-ES since our experiments shows that the Cross-entropy method already settles for 
 solutions with values that are relatively close to 0.
 The example is illustrated in figure \ref{fig:searchInAngles}
 

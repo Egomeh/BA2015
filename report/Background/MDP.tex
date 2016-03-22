@@ -1,7 +1,7 @@
 \subsection{Markov Decision Processes \label{MDP}}
 
-A Markov Decision Process (MDP) is a model for an automatic 
-decision making system. A MDP can be used to model the actions 
+A Markov Decision Process (MDP) is a model for for the environment 
+in which an agent exists. A MDP can be used to model the actions 
 of an agent in a game, in this case Tetris. 
 The decision making mechanics of the agent in MDPTetris are modelled
 after an MDP \citep{mdptetris}. The specifics of the 
@@ -20,7 +20,7 @@ current piece about to be dropped.
 The actions in $\MDPActions$
 denotes all the actions that an agent may take. The $\MDPTKernel$ is
 a probability function that determines how likely it is for an action $\MDPAction$
-to cause a transition from a state $\MDPState$ to another state $\MDPState^\prime$, that is 
+to cause a transition from state $\MDPState$ to another state $\MDPState^\prime$, that is 
 $\MDPTKernel : \left( \MDPState, \MDPAction, \MDPState^\prime \right) \rightarrow [0;1]$.\\\\
 As an example, given 3 states 
 $\MDPState_0, \MDPState_1, \MDPState_2$, an action $\MDPAction_0$ and the 
@@ -86,7 +86,7 @@ and takes action $\MDPAction_0$, it will with probability 0.8 end
 up in state $\MDPAction_0$ again and receive a reward of $\MDPReward_0$.
 In this case, it is viable to compute the optimal policy by traversing
 all states and compute the expected reward based on chosen actions.
-Thus, for a policy $\policy$ DP allows one to obtain exactly the expected 
+Thus, for a policy $\policy$ dynamic programming allows one to obtain exactly the expected 
 reward given to the agent when following $\policy$.\\
 \begin{figure}
 \centering

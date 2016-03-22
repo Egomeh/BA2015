@@ -17,8 +17,8 @@ compared to the Cross-entropy method. The default population size of the CMA-ES 
 typically either a forth or half of number of dimensions of the problems search space.
 In our case with the MDPTetris, the number of features in a feature set never exceeds
 22,
-thus limiting the default population size very little compared to the Cross-entropy method's 
-100. In the CMA-ES tutorial \citep{hansen2011}, the little population is said to
+thus limiting the default population size for CMA-ES very little compared to the Cross-entropy methods commonly used 
+population size of 100. In the CMA-ES tutorial \citep{hansen2011}, the little population is said to
 work well for deterministic problems. Yet, as the scores in Tetris is heavily
 influenced by noise that is likely to cause faulty ranking of candidate solution,
 the small population size could prove to be a critical shortcoming.
