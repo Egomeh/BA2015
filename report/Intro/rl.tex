@@ -9,7 +9,7 @@ The reinforcement learning methods relates somewhat
 to supervised models.
 In supervised learning, every decision is tied to a predefined value
 that defines how desirable the given action is. This way, in supervised learning,
-the agent will always at any point have very detailed feedback signals from it' actions.
+the agent will always at any point have very detailed feedback signals from its actions.
 In the context of actions and state transitions, an agent that learns trough
 supervised learning will for every action taken know the absolute consequence
 immediately after committing it.
@@ -19,7 +19,7 @@ an immediate response to its actions. Instead, the agent will receive a reward
 when reaching certain states. The objective of the agent is then to
 accumulate as much reward as possible. This differs from supervised learning
 as the agent cannot know if reaching high amount of reward in the next state
-will cause negative consequences in the future. thus, the only decisive 
+will cause negative consequences in the future. Thus, the only decisive 
 feedback given to the agent about its overall performance is 
 how much cumulative reward it achieved at the end of a game.
 In the game of Tetris, the reward is a direct mapping to 
@@ -30,7 +30,8 @@ is applied, the playing agent will for each move in the game know
 if the move was considered desirable or not. 
 In reinforcement learning however, only feedback the agent receives
 is whether the games ended in a win, draw or a loose. Hence, the agent
-cannot rely on signals during the game to adjust it's strategy.
+cannot rely on signals during the game to adjust it's strategy.\\
+\\
 Often in the case of games, the 
 time frame naturally falls into playthroughs in which the 
 goal of the agent is to accumulate as much reward as possible 
@@ -38,7 +39,7 @@ before the game ends.
 When the agent interacts 
 with the environment, it uses a predefined set of actions
 that each alters the state of the environment. In the case of 
-Tic Tac Toe, the environment is the current state of the game, 
+Tic Tac Toe, the \comment{environment} is the current state of the game, 
 and actions are the options to place a marker
 on an empty space.
 When deciding which action to carry out, the agent will use
@@ -65,12 +66,12 @@ the action leads to, and in games this uncertainty is often present.
 In Tic Tac Toe, the action taken by the agent will always with certainty 
 lead to a known state, namely the board configuration where the marker is placed.
 However, in Tetris, part of the state is the piece that is currently falling.
-Thus, when the agent chooses a place to drop the piece, it does so deterministically
+Thus, when the agent chooses a place to drop the piece, it does so \comment{deterministically}
 but cannot itself decide what the next piece is. As there are 7 different piece
 types in Tetris, each action can lead to 7 other states, each with a predefined probability.
-It should also be noted that the probability for the individual transactions
+It should also be noted that these probabilities for the individual transitions
 must remain fixed across the entire playthrough of the game \citep{Carr}.
-to find the best policy, there are a number of methods to pick from,
+To find the best policy, there are a number of methods to pick from,
 and the most obvious is a full traversal of the entire state space.
 If one can afford to compute all rewards acquired from all possible 
 actions in all possible states, one can choose the policy 
