@@ -39,8 +39,9 @@ before the game ends.
 When the agent interacts 
 with the environment, it uses a predefined set of actions
 that each alters the state of the environment. In the case of 
-Tic Tac Toe, the \comment{environment} is the current state of the game, 
-and actions are the options to place a marker
+Tic Tac Toe, the environment is the current state of the game, 
+in terms of which markers are occupying spaces on the board.
+The actions are the options to place a marker
 on an empty space.
 When deciding which action to carry out, the agent will use
 a policy that maps the state of the environment to an action.
@@ -66,8 +67,9 @@ the action leads to, and in games this uncertainty is often present.
 In Tic Tac Toe, the action taken by the agent will always with certainty 
 lead to a known state, namely the board configuration where the marker is placed.
 However, in Tetris, part of the state is the piece that is currently falling.
-Thus, when the agent chooses a place to drop the piece, it does so \comment{deterministically}
-but cannot itself decide what the next piece is. As there are 7 different piece
+Thus, when the agent chooses a place to drop the piece, it has full control
+over where to drop it, however it cannot decide what the next piece is. 
+As there are 7 different piece
 types in Tetris, each action can lead to 7 other states, each with a predefined probability.
 It should also be noted that these probabilities for the individual transitions
 must remain fixed across the entire playthrough of the game \citep{Carr}.
