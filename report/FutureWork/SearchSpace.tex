@@ -2,7 +2,9 @@
 
 In a talk given by Nikolaus Hansen, it was suggested that a source of poor performance 
 for the CMA-ES is that the formulation of the problem is ill posed.
-He mentioned that if the CMA-ES fails to perform well at optimizing some problems, however a reformulation of the problem could in many cases benefit the CMA-ES. As with the 
+He mentioned that if the CMA-ES fails to perform well at optimizing some problems, poor 
+performance could origin from poor formulation of the underlying problem. 
+However, a reformulation of the problem could in many cases benefit the CMA-ES. As with the 
 MDPTetris platform, the search points are sampled in $\mathbb{R}^n$ where 
 $n$ is the number of dimensions. As we saw in section \ref{normalSamples}, the length 
 of the sampled vector does not matter, only the direction. Our experiments also shows that 

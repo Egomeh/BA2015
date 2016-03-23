@@ -30,7 +30,7 @@ To perform the actual optimization of the Tetris agents, the Shark library has b
 with its implementation of CMA-ES and with our own implementation (now a part of Shark
 see appendix \ref{app:crossEntropyCode}). The two optimization algorithms in Shark both 
 inherits from the abstract class 
-\lstinline$AbstractSingleObjectiveOptimizer<RealVector>$. This superclass defines the
+\texttt{\lstinline$AbstractSingleObjectiveOptimizer<RealVector>$}. This superclass defines the
 abstract interface for an optimizer that can be applied to problems of finding 
 solutions of the type \lstinline$RealVector$ that models a real valued vector.
 The objective functions in Shark are implemented by writing a class that inherits 
@@ -77,8 +77,8 @@ the commonly used feature sets. As described, these files contains the identifie
 each feature to use, as well as two numbers respectively describing 
 the agents reward function and how to evaluate a 'game over' state. 
 The number for the reward function has remained unchanged at $0$ 
-during all experiments. The "game-over" evaluation was for the
-Bertsekas feature set initially set to $0$. Setting the 
+during all experiments. The "game-over" evaluation, for the
+Bertsekas feature set, was initially set to $0$. Setting the 
 "game-over" evaluation to $0$ means that the agent will not 
 distinguish between regular moves and moves that results in losing
 the game. If this setting remains at 0, the agent will always consult the
@@ -201,10 +201,9 @@ feature sets in the same experiment, since the algorithms needs to be on equal t
 \\
 We want to test whether the feature set has an impact on the performance of the algorithms,
 therefore we want to test the two algorithms with both the Dellacherie and Bertsekas feature set.\\
-From the game complexity section \ref{HardTetris}, we have verified that using Hard Tetris
-\citep{boumaza2009} does not have a severe impact on the relative 
-development between the two algorithms.
-Therefore, to prevent long runtimes, the games were simulated
+\\
+As the results from \ref{HardTetris} suggests, we consider usage of Hard Tetris \citep{boumaza2009} a valid means of asserting the performance difference in the algorithms with altering parameters.
+Therefore, to prevent long runtimes, the following games were simulated
 using Hard Tetris.\\
 
 \textbf{Results}

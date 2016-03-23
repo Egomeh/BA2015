@@ -1,32 +1,32 @@
 \section{Experiments}
-This section will walk through the experiments conducted in order to answer the question 
-of whether the Cross-entropy method or the CMA-ES algorithm can be said to perform better
-than the other. The section will provide a discussion on how the experiments are carried out, mainly
+This section will walk through the experiments conducted in order to investigate the performance
+difference between the Cross-entropy method and the CMA-ES algorithm. The section will provide a discussion on how the experiments are carried out, mainly
 in terms of how the Tetris emulator is integrated with Shark and how the game settings were configured.
 Furthermore, the section covers an experiment that serves the purpose of indicating whether our implementation
 of the Cross-entropy method is similar to the ones in the literature. 
 We wish to ensure that both algorithms when competing in learning Tetris, both operate under the 
-best performing settings. To satisfy this, a series of experiments with altering settings for each 
-algorithm was conducted in the search of the parameter settings to get the best performance from 
-each algorithm. Finally, the optimal settings for each algorithm is applied to
+best performing settings. To satisfy this, we wish to obtain the parameter settings resulting in the 
+best performance
+for both algorithms. In order to find these settings, a series of experiments are conducted 
+in order to reveal under which circumstances each of the algorithms performs best.
+Finally, the optimal settings for each algorithm is applied to
 the same Tetris game configuration to decide if any significant difference appears.\\
 \\
 The experiments conducted in this section are all much in the same nature, and the 
 results for each experiment is presented mostly in the same fashion. When using some setting 
 of the game and the optimizers, the same experiment is executed multiple times, typically 
-10 or 30 times. This is because the score of a Tetris controller and the overall 
-solution found by the optimization algorithms are influenced by some level of noise.
-Due to this noise, the reported performance of an optimization algorithm at a time
-is computed as the mean score of it's current solution evaluated 30 times.
-\cbcolor{blue}
-The experiments will include some configuration of the Tetris emulator which are settings
-such as feature set (which in turn translates into dimensionality of the problem),
-piece types. Furthermore, the optimization algorithm is chosen and configured according to
+10 or 30 times, hence producing 10 or 30 complete learning curves of the algorithm at a given setting.
+These learning curved are often merged into one averaged learning curve used to assess the overall
+performance of the algorithm at the current setting. 
+The reason for executing the same experiment multiple times is a result of the noisy nature of the problem. Some experiments reaches highly variable learning curves and ends in very different results. In order to overcome this, the average of the multiple games are used as measure of the algorithms performance.
+In the individual curves for each experiment, the curve along the y-axis represents the mean score of 30 games at the current solution at a given time.
+The setup of an experiment includes a range of parameters. The Tetris emulator is adjusted my deciding the feature set and piece types. The feature set translates directly into dimensionality of the search space, where as piece types and frequency of these translates into the difficulty of the game.
+Furthermore, the optimization algorithm is chosen and configured according to
 the best performing settings determined in the optimization experiments. The
 configuration of the optimization algorithm includes setting such as population size
 $\populationSize$, parent size $\offspringNumber$ and how many times
 to evaluate an agent $\numberOfEvaluations$. The number of evaluations $\numberOfEvaluations$
-is how many times each search point/agent from the algorithms are evaluated against the 
+is how many times each agent from the algorithms are evaluated against the 
 Tetris emulator. For every iteration in the algorithm, the current solution is 
 evaluated against Tetris emulator 30 times, and the mean of those 30 games are used as
 a metric for the current state of learning at the given iteration. When results are presented 

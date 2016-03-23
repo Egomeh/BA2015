@@ -82,7 +82,7 @@ values as with the Cross-entropy method to get comparable results (see section \
 
 \subsubsection{Initial step-size \label{sec:CMAInitialStepSize}}
 Initially, the covariance matrix of CMA-ES in generation $\generation = 0$
-is the identity matrix. The initial step-size, $\sigma_0$, will hence in 
+is the identity matrix. The initial step-size $\sigma_0$, will hence in 
 the first iteration scale the area in which the CMA-ES algorithm searches.
 As from section \ref{normalSamples}, it's known that the scale of the 
 solutions has no impact on the scores. Hence, it's assumed that the initial 
@@ -240,10 +240,11 @@ The total number of configuration experiments is 120, with 30 individual experim
 resulting in a total of 3.600 individual experiment runs. These results are all included in 
 appendix \ref{appendixCMAPopulationParent}.\\
 Below in table \ref{CMABestConfigTable} and figure \ref{CMABestConfigPlot}, the four best
-best resulting configurations are depicted. We chose these by first selecting the best 
-configuration of each Population-Parent size with each recombination type. This resulted in six
-configurations for each Population-Parent size, which we then compared to determine the best
-configuration for each Population-Parent size, regardless of recombination type. Which is depicted in table \ref{CMABestConfigTable} and figure \ref{CMABestConfigPlot}.
+best resulting configurations are presented. We chose these by first selecting the best 
+configuration of each Population size setting. This resulted in six different
+configurations, which we then compared to determine the best
+configuration for each Population size setting, resulting in the final four configurations with
+highest scores.
 
 \begin{table}[H]
 \centering

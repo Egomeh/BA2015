@@ -17,8 +17,7 @@ need for more evaluations per iteration. The goal for
 tuning this parameter is then
 to set $\populationSize$ high enough to ensure 
 exploration of good solutions, and yet 
-low enough to avoid unnecessary evaluations.\\
-In the implementation of CMA-ES from \shark , 
+low enough to avoid unnecessary evaluations. In the implementation of CMA-ES from \shark , 
 the algorithm  itself determines
 the value of $\populationSize$ according to the 
 size of the search space. 
@@ -47,8 +46,8 @@ is the number of games  which each agent
 plays in each iteration. An agents score is defined as the 
 mean of the score of these 
 $\numberOfEvaluations$ games.
-We want this value low as possible, because as with the number of
-agents, $\populationSize$. The number of games $\numberOfEvaluations$, 
+We want this value as low as possible for the same reason as with the number of
+agents, $\populationSize$. Therefore, the number of games $\numberOfEvaluations$, 
 is another major factor in the run-time of the algorithm.
 As Tetris is stochastic by nature the score deviates a lot, 
 even when the
@@ -71,7 +70,7 @@ The current research shows that noise terms of $\noise^{(\generation)} = 4$ and
 $\noise^{(\generation)} = max \left( 5 - \generation / 10 \right)$ 
 \citep{thiery:09} produces the best results.
 The constant noise (such as $\noise^{(\generation)} = 4$) ensures that the algorithm
-never settles in a too small area from which it samples, and forces it to explore
+never settles in a undesired local optimum from which it samples, and forces it to explore
 solutions that are further away from the mean. The further the 
 algorithm progresses 
 the less noise is assumed needed, as the mean should approach a global optimum. To
