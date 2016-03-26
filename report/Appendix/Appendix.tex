@@ -1,6 +1,6 @@
 \section{Experiments}
-This appendix contains all of the included experiments from which we have derived our results. Each of the plots, depending on the number of experiments, will depict the mean scores of the experiments or the experiments themselves.\\
-With each experiment, a table detailing the parameter values will be included for others who would want to reproduce these experiments. Depending on the optimizer (weather it is the Cross-entropy or CMA-ES), the table will contain some custom rows, unique for the specific algorithm.\\
+This appendix contains all of the included experiments from which we have derived our results. Each of the plots, depending on the number of experiments, will depict the mean scores of the experiments or the experiments themselves.
+With each experiment, a table detailing the parameter values will be included for others who would want to reproduce these experiments. Depending on the optimizer (weather it is the Cross-entropy or CMA-ES), the table will contain some custom rows, unique for the specific algorithm.
 Similar for all experiments is the 30 games played with the new mean of each generation to generate the learning curve.\\
 The tables are formatted 
 \begin{table}[h]
@@ -38,7 +38,7 @@ Noise & -
 \clearpage
 
 \subsection{Game Complexity \label{AppendixGameComplexity}}
-Experiments to test if changing the game complexity (Normal og Hard Tetris) can be used for tuning the CMA-ES and the Cross-entropy method configurations in later experiments.\\
+Experiments to test if changing the game complexity (Normal/Hard Tetris) can be used for tuning the CMA-ES and the Cross-entropy method configurations in later experiments.\\
 
 
 \begin{table}[h]
@@ -138,19 +138,19 @@ Normal & Cross Entropy & $100059.463$ & $79357.440$ & $105999.500$ & $111047.500
 Hard & CMA-ES & $449.352$ & $201.850$ & $300.300$ & $529.350$\\
 Normal & CMA-ES & $49760.161$ & $42528.740$ & $49915.700$ & $67764.729$\\
 \end{tabular}
-\caption{Experiment testing game Normal Tetris against Hard Tetris}
+\caption{Quantile table of the complexity experiment results}
 \end{table}
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=1]{data/complexity/mean/PlotFile.pdf}
-\caption{Experiment testing game Normal Tetris against Hard Tetris}
+\caption{Mean plots of the complexity experiment}
 \end{figure}
 
 \clearpage
 
 \subsection{Comparison of feature sets}
-Experiments to test Bertsekas and Dellacherie featuresets in regards to achieved score. This will tell if a different feature set affects the algorithms performance. 
+Experiments to test the Bertsekas and Dellacherie feature sets in regards to achieved score. This will tell if a different feature set affects the algorithms performance. 
 
 \begin{table}[h]
 \centering
@@ -182,7 +182,7 @@ Sigma & 100\\
 Noise Type & Constant\\
 Noise & 4
 \end{tabular}
-\caption{Shark stock CMA-ES and Verified Cross Entropy}
+\caption{Shark default CMA-ES and the Cross-entropy method}
 \end{table}
 
 %\comment{Add individual plots}
@@ -191,14 +191,14 @@ Used on the Bertsekas and Dellacherie feature sets
 
 \begin{figure}[H]
 \includegraphics[scale=1]{plots/plotBertsekasCmaVsCEHardTetris}
-\caption{Comparison between CMA-ES and Cross Entropy 
-using hard Tetris and the Bertsekas feature set }
+\caption{Comparison between CMA-ES and the Cross-entropy method
+using hard Tetris and the Bertsekas feature set}
 %\label{fig:featuresetCompareBertsekas}}
 \end{figure}
 
 \begin{figure}[H]
 \includegraphics[scale=1]{plots/plotDellCmaVsCEHardTetris}
-\caption{Comparison between CMA-ES and Cross Entropy 
+\caption{Comparison between CMA-ES and the Cross-entropy method
 using hard Tetris and the Dellacherie feature set}
 %\label{fig:Dellacherie}}
 \end{figure}
@@ -222,7 +222,7 @@ Sigma & 100\\
 Noise Type & No noise\\
 Noise & -
 \end{tabular}
-\caption{Cross Entropy - No noise}
+\caption{The Cross-entropy method - No noise}
 \end{table}
 
 \begin{table}[h!]
@@ -239,7 +239,7 @@ Sigma & 100\\
 Noise Type & Constant\\
 Noise & 4
 \end{tabular}
-\caption{Cross Entropy - Constant noise}
+\caption{The Cross-entropy method - Constant noise}
 \end{table}
 
 \begin{table}[h!]
@@ -256,7 +256,7 @@ Sigma & 100\\
 Noise Type & Linear decreasing\\
 Noise & $max \left( 5 - \frac{t}{10}, 0 \right)$
 \end{tabular}
-\caption{Cross Entropy - Linear decreasing noise}
+\caption{The Cross-entropy method - Linear decreasing noise}
 \end{table}
 
 \clearpage
@@ -265,7 +265,7 @@ Noise & $max \left( 5 - \frac{t}{10}, 0 \right)$
 \begin{center}
 \includegraphics[scale=1]{plots/meansPlot}
 \end{center}
-\caption{Cross-Entropy mean performance}
+\caption{The Cross-entropy method - mean performance of each configuration}
 \end{figure}
 
 \clearpage
@@ -273,19 +273,19 @@ Noise & $max \left( 5 - \frac{t}{10}, 0 \right)$
 \begin{center}
 \includegraphics[scale=0.48]{plots/noNoisePlot}
 \end{center}
-\caption{No noise}
+\caption{The Cross-entropy method - No noise}
 \end{figure}
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=0.48]{plots/constantNoisePlot}
 \end{center}
-\caption{Constant noise}
+\caption{The Cross-entropy method - Constant noise}
 \end{figure}
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=0.48]{plots/linearNoisePlot}
 \end{center}
-\caption{Linear decreasing noise}
+\caption{The Cross-entropy method - Linear decreasing noise}
 \end{figure}
 
 
@@ -293,8 +293,9 @@ Noise & $max \left( 5 - \frac{t}{10}, 0 \right)$
 
 \subsection{The Cross-entropy method - Population and selection size \label{appendixCrossEntropyConfig}}
 %\comment{Update plots and quantile table}\\
-We want to investigate if there exists a better configuration than the 100/10 which was also previously used by other researchers.\\
-The Cross-entropy method for the Tetris problem uses 10 \% Parent selection as standard. However, we will also test 25\% and 50\% Parent selection derived from configurations in CMA-ES.\\
+We want to investigate if there exists a better configuration than the 100/10 which was also previously used by other researchers.
+The Cross-entropy method for the Tetris problem uses 10 \% Parent selection as standard. However, we will also test 25\% and 50\% Parent selection derived from configurations in CMA-ES. (This corresponds to the Parent selection for each of the three recombination types)\\
+\\
 The general testing parameters are as follows
 \begin{table}[h]
 \centering
@@ -310,7 +311,7 @@ Sigma & 100\\
 Noise Type & Constant\\
 Noise & 4
 \end{tabular}
-\caption{General setup for Population/Parent size}
+\caption{General setup for Population/Parent size experiments for the Cross-entropy method}
 \end{table}
 
 with the following Population/Parent size
@@ -338,14 +339,14 @@ Population size & Parent size\\
 \end{tabular}
 \caption{Population/Parent size \label{CEPopulationParentSize}}
 \end{table}
-quantile table and two graphs over the mean plots of 10 \%, 25 \% and 50 \% Parent size
 
 \clearpage
+Quantile table of of the results with 10 \%, 25 \% and 50 \% Parent size
 
 \begin{figure}[H]
 \centering
 \begin{tabular}{r r | r r r r}
-population & offspring & mean & Q1 & Q2 & Q3\\
+Population & Parent size & mean & Q1 & Q2 & Q3\\
 \hline
 13 & $10\%$  & 1585,3     & 93,0      & 113,5        & 220,7\\
 13 & $25\%$  & 30.496,9   & 15.222,1  & 20.264,2     & 39.019,8\\
@@ -363,12 +364,12 @@ population & offspring & mean & Q1 & Q2 & Q3\\
 200 & $25\%$ & 32.894,6   & 8688,7    & 25.333,1     & 58.434,8\\
 200 & $50\%$ & 946,4      & 585,0     & 802,5        & 1.267,7
 \end{tabular}
-\caption{Cross Entropy configuration test}
+\caption{The Cross-entropy configuration test results - Quantile table}
 \end{figure}
 
 
-The plots from the configuration of cross entropy.
-All plots shows the numbers of games played along the x-axis
+The plots from the configuration experiment of the Cross-entropy method.
+All plots depicts the numbers of games played along the x-axis
 and the mean score of the centroid agent along the y-axis.
 
 \begin{tabular}{@{}l@{}l@{}}
@@ -404,8 +405,10 @@ and the mean score of the centroid agent along the y-axis.
 
 \clearpage
 
-\subsection{Optimal settings for the Cross-entropy method- Games per agent \label{appendixCEPopulationParent}}
-Experiments to determine the optimal number of games played per agent for best resulting score at lowest evaluation cost.
+\subsection{Optimal settings for the Cross-entropy method - Games per agent \label{appendixCEPopulationParent}}
+Experiments to determine the optimal number of games played per agent for best resulting
+score at lowest evaluation cost. These experiments will utilize hard Tetris as game configuration, 
+which was experimentally proven to be usable.
 
 \begin{table}[h]
 \centering
@@ -421,7 +424,7 @@ Sigma & 100\\
 Noise Type & Constant\\
 Noise & 4
 \end{tabular}
-\caption{General setup for Population/Parent size}
+\caption{General setup for experiments with games per agent}
 \end{table}
 
 with the following population/Parent size and number of games played per agent
@@ -448,7 +451,7 @@ $200$ & $10\%$ & 1/3/5/7/10\\
 $200$ & $25\%$ & 1/3/5/7/10\\
 $200$ & $50\%$ & 1/3/5/7/10
 \end{tabular}
-\caption{Games per agent CE experiment setup}
+\caption{Games per agent configurations for the Cross-entropy method experiments}
 %\label{GamesPerAgentCE}}
 \end{table}
 
@@ -482,7 +485,7 @@ $200$ & $50\%$ & 1/3/5/7/10
         \includegraphics[width=\textwidth]{data/ce_population_offspring/22x_split/constant_l22_o11/mean/PlotFile.pdf}
     \end{subfigure}
     
-    \caption{Mean results for population size 12 and 22 with parent sizes $10 \% , 25 \%$ and $50 \%$}
+    \caption{Mean results for Population size 13 and 22 with parent sizes $10 \% , 25 \%$ and $50 \%$}
 \end{figure}
 
 \clearpage
@@ -515,7 +518,7 @@ $200$ & $50\%$ & 1/3/5/7/10
         \includegraphics[width=\textwidth]{data/ce_population_offspring/100x_split/constant_l100_o50/mean/PlotFile.pdf}
     \end{subfigure}
     
-    \caption{Mean results for population size 50 and 100 with parent sizes $10 \% , 25 \%$ and $50 \%$}
+    \caption{Mean results for Population size 50 and 100 with parent sizes $10 \% , 25 \%$ and $50 \%$}
 \end{figure}
 
 \clearpage
@@ -535,7 +538,7 @@ $200$ & $50\%$ & 1/3/5/7/10
         \includegraphics[width=\textwidth]{data/ce_population_offspring/200x_split/constant_l200_o100/mean/PlotFile.pdf}
     \end{subfigure}
     
-    \caption{Mean results for population size 200 with parent sizes $10 \% , 25 \%$ and $50 \%$}
+    \caption{Mean results for Population size 200 with parent sizes $10 \% , 25 \%$ and $50 \%$}
 \end{figure}
 
 \clearpage
@@ -569,7 +572,7 @@ $13$ & $6$ & 7 & $2173.595$ & $1818.110$ & $2105.500$ & $2398.201$\\
 $13$ & $6$ & 10 & $2129.880$ & $1825.599$ & $2058.970$ & $2391.860$\\
 \hdashline
 \end{tabular}
-\caption{population 12 - Cross Entropy}
+\caption{Population 12 - The Cross-entropy method}
 \end{table}
 
 \begin{table}[H]
@@ -600,7 +603,7 @@ $22$ & $11$ & 7 & $2463.227$ & $2091.090$ & $2384.230$ & $2702.740$\\
 \hdashline
 $22$ & $11$ & 10 & $2282.032$ & $1957.148$ & $2257.285$ & $2565.950$\\
 \end{tabular}
-\caption{population 22 - Cross Entropy}
+\caption{Population 22 - The Cross-entropy method}
 \end{table}
 
 
@@ -632,7 +635,7 @@ $50$ & $25$ & 5 & $2485.564$ & $2226.889$ & $2419.080$ & $2747.609$\\
 $50$ & $25$ & 7 & $2396.309$ & $2180.099$ & $2306.165$ & $2605.832$\\
 $50$ & $25$ & 10 & $2332.305$ & $2019.738$ & $2268.415$ & $2561.252$\\
 \end{tabular}
-\caption{population 50 - Cross Entropy}
+\caption{Population 50 - The Cross-entropy method}
 \end{table}
 
 
@@ -665,7 +668,7 @@ $100$ & $50$ & 5 & $2351.742$ & $2213.480$ & $2410.500$ & $2532.500$\\
 $100$ & $50$ & 7 & $2232.970$ & $2035.291$ & $2296.430$ & $2466.811$\\
 $100$ & $50$ & 10 & $1320.906$ & $1088.809$ & $1231.050$ & $1618.431$\\
 \end{tabular}
-\caption{population 100 - Cross Entropy}
+\caption{Population 100 - The Cross-entropy method}
 \end{table}
 
 
@@ -697,7 +700,7 @@ $200$ & $100$ & 5 & $1235.709$ & $837.947$ & $1195.730$ & $1478.081$\\
 $200$ & $100$ & 7 & $451.171$ & $377.813$ & $421.150$ & $498.470$\\
 $200$ & $100$ & 10 & $320.356$ & $287.023$ & $322.733$ & $350.773$\\
 \end{tabular}
-\caption{population 200 - Cross Entropy}
+\caption{Population 200 - The Cross-entropy method}
 \end{table}
 
 \clearpage
@@ -712,13 +715,13 @@ $13$ & $1$ & 10 & $1098.654$ & $834.683$ & $939.150$ & $1270.262$\\
 $13$ & $3$ & 10 & $1992.749$ & $1566.989$ & $1965.365$ & $2381.089$\\
 $13$ & $6$ & 7 & $2173.595$ & $1818.110$ & $2105.500$ & $2398.201$\\
 \end{tabular}
-\caption{population 13 - Cross Entropy}
+\caption{Population 13 - The Cross-entropy method}
 \end{table}
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=1]{data/ce_population_offspring/bestofeach_population/13x/PlotFile.pdf}
-\caption{Best performing configurations for population size 13}
+\caption{Best performing configurations for Population size 13}
 \end{figure}
 
 \clearpage
@@ -733,13 +736,13 @@ $22$ & $2$ & 7 & $1843.644$ & $1575.732$ & $1860.815$ & $2112.678$\\
 $22$ & $5$ & 5 & $2371.793$ & $2013.168$ & $2412.815$ & $2708.931$\\
 $22$ & $11$ & 7 & $2463.227$ & $2091.090$ & $2384.230$ & $2702.740$\\
 \end{tabular}
-\caption{population 22 - Cross Entropy}
+\caption{Population 22 - The Cross-entropy method}
 \end{table}
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=1]{data/ce_population_offspring/bestofeach_population/22x/PlotFile.pdf}
-\caption{Best performing configurations for population size 22}
+\caption{Best performing configurations for Population size 22}
 \end{figure}
 
 \clearpage
@@ -754,13 +757,13 @@ $50$ & $5$ & 3 & $2524.279$ & $2195.189$ & $2501.985$ & $2848.859$\\
 $50$ & $12$ & 5 & $2749.991$ & $2605.171$ & $2702.400$ & $2835.960$\\
 $50$ & $25$ & 3 & $2572.860$ & $2308.748$ & $2615.185$ & $2861.858$\\
 \end{tabular}
-\caption{population 50 - Cross Entropy}
+\caption{Population 50 - The Cross-entropy method}
 \end{table}
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=1]{data/ce_population_offspring/bestofeach_population/50x/PlotFile.pdf}
-\caption{Best performing configurations for population size 50}
+\caption{Best performing configurations for Population size 50}
 \end{figure}
 
 \clearpage
@@ -775,13 +778,13 @@ $100$ & $10$ & 10 & $2880.385$ & $2636.640$ & $2828.880$ & $3108.429$\\
 $100$ & $25$ & 3 & $2776.560$ & $2397.691$ & $2742.950$ & $3027.541$\\
 $100$ & $50$ & 3 & $2622.402$ & $2318.410$ & $2714.500$ & $2905.521$\\
 \end{tabular}
-\caption{population 100 - Cross Entropy}
+\caption{Population 100 - The Cross-entropy method}
 \end{table}
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=1]{data/ce_population_offspring/bestofeach_population/100x/PlotFile.pdf}
-\caption{Best performing configurations for population size 100}
+\caption{Best performing configurations for Population size 100}
 \end{figure}
 
 \clearpage
@@ -796,13 +799,13 @@ $200$ & $20$ & 1 & $2880.572$ & $2596.999$ & $2764.400$ & $3184.290$\\
 $200$ & $50$ & 1 & $2950.767$ & $2564.118$ & $2841.065$ & $3377.189$\\
 $200$ & $100$ & 1 & $2589.020$ & $2391.080$ & $2594.285$ & $2798.470$\\
 \end{tabular}
-\caption{population 200 - Cross Entropy}
+\caption{Population 200 - The Cross-entropy method}
 \end{table}
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=1]{data/ce_population_offspring/bestofeach_population/200x/PlotFile.pdf}
-\caption{Best performing configurations for population size 200}
+\caption{Best performing configurations for Population size 200}
 \end{figure}
 
 \clearpage
@@ -825,14 +828,13 @@ $200$ & $50$ & 1 & $2950.767$ & $2564.118$ & $2841.065$ & $3377.189$\\
 \begin{figure}[H]
 \centering
 \includegraphics[scale=1]{data/ce_population_offspring/bestofall_population/PlotFile.pdf}
-\caption{Best configurations of all population sizes - Cross Entropy}
+\caption{Best configurations of all Population sizes - The Cross-entropy method}
 \end{figure}
 
-% initial sigma cma experiment
 \clearpage
 
 \subsection{Optimal settings for CMA-ES - Initial Step-size \label{appendixCMAInitialSigma}}
-Experiments to find the best performing initial step-size for CMA-ES.
+Experiments to find the best performing initial Step-size for CMA-ES.
 
 \begin{table}[h]
 \centering
@@ -888,7 +890,7 @@ $\sigma_0$ & mean & Q1 & Q2 & Q3\\
 0.8 & 37557.7 & 1422.8  & 15450.8 & 93719.4\\
 1.0 & 49537.9 & 31369.8 & 49537.4 & 58454.6
 \end{tabular}
-\caption{Results of CMA-ES with various initial step-size \label{CMAInitialSigmaConfigTestAppendix}}
+\caption{Qualtile table with results of CMA-ES experiments regarding initial Step-size \label{CMAInitialSigmaConfigTestAppendix}}
 \end{figure}
 
 
@@ -952,7 +954,7 @@ $l$ & mean & Q1 & Q2 & Q3\\
 \clearpage
 
 \subsection{Optimal settings for CMA-ES - Experiment for finding the optimal settings \label{appendixCMAPopulationParent}}
-Experiments finding the best performing configuration of population and parent size with
+Experiments finding the best performing configuration of Population/Parent size with
 recombination type. The parent size is dependent on the recombination type, 
 therefore these parameters are tested together.
 \begin{table}[h]
@@ -972,6 +974,13 @@ Initial Sigma & 1
 \caption{CMA-ES experiment parameters for testing games per agent}
 \end{table}
 
+From the CMA-ES documentation tutorial \citep{hansen2011}, the Recombination Type dictates the Parent size.
+However, we are also testing the Cross-entropy method Parent size for directly comparable
+results. The Cross-entropy method uses $10 \% $ Parent size, therefore we will test all 
+three Recombination types with this Parent size. This is in addition to the CMA-ES
+documented $25 \% $ Parent size with equal Recombination and $50 \% $ Parent size for 
+linear and superlinear recombination.
+
 \begin{table}[H]
 \centering
 \begin{tabular}{c c l c}
@@ -990,7 +999,7 @@ $100$ & $10$ & EQUAL/LINEAR/SUPERLINEAR & 1/3/5/7/10\\
 $100$ & $25$ & EQUAL & 1/3/5/7/10\\
 $100$ & $50$ & LINEAR/SUPERLINEAR & 1/3/5/7/10
 \end{tabular}
-\caption{Full experiments overview - more intuitive format \label{SuperCMAExperimentAppendix}}
+\caption{Experiments overview with Parent size and according Recombination type and games per agent\label{SuperCMAExperimentAppendix}}
 \end{table}
 
 
@@ -1031,7 +1040,7 @@ $100$ & $50$ & LINEAR/SUPERLINEAR & 1/3/5/7/10
         \includegraphics[width=\textwidth]{data/cma_population_offspring/12x_split/superlinear_l12_o6/mean/PlotFile.pdf}
     \end{subfigure}
     
-    \caption{Mean results for population size 12 with variating recombination}
+    \caption{Mean results for Population size 13 with variating Recombination type}
 \end{figure}
 
 \begin{figure}
@@ -1068,7 +1077,7 @@ $100$ & $50$ & LINEAR/SUPERLINEAR & 1/3/5/7/10
         \includegraphics[width=\textwidth]{data/cma_population_offspring/22x_split/superlinear_l22_o11/mean/PlotFile.pdf}
     \end{subfigure}
     
-    \caption{Mean results for population size 22 with variating recombination}
+    \caption{Mean results for Population size 22 with variating Recombination type}
 \end{figure}
 
 \begin{figure}
@@ -1105,7 +1114,7 @@ $100$ & $50$ & LINEAR/SUPERLINEAR & 1/3/5/7/10
         \includegraphics[width=\textwidth]{data/cma_population_offspring/50x_split/superlinear_l50_o25/mean/PlotFile.pdf}
     \end{subfigure}
     
-    \caption{Mean results for population size 50 with variating recombination}
+    \caption{Mean results for Population size 50 with variating Recombination type}
 \end{figure}
 
 \begin{figure}
@@ -1142,40 +1151,41 @@ $100$ & $50$ & LINEAR/SUPERLINEAR & 1/3/5/7/10
         \includegraphics[width=\textwidth]{data/cma_population_offspring/100x_split/superlinear_l100_o50/mean/PlotFile.pdf}
     \end{subfigure}
     
-    \caption{Mean results for population size 100 with variating recombination}
+    \caption{Mean results for Population size 100 with variating Recombination type}
 \end{figure}
 
 \clearpage
 
+\comment{Will be swapped}
 \begin{table}[H]
 \centering
 \small
 \begin{tabular}{c c c c r r r r}
 Population & Parent & Recombination & Games per Agent & mean & Q1 & Q2 & Q3\\
 \hline
-$12$ & $1$ & EQUAL & 1 & $86.998$ & $53.557$ & $63.417$ & $111.313$\\
-$12$ & $1$ & EQUAL & 3 & $458.616$ & $256.637$ & $349.033$ & $576.899$\\
-$12$ & $1$ & EQUAL & 5 & $1089.245$ & $850.220$ & $1104.535$ & $1299.039$\\
-$12$ & $1$ & EQUAL & 7 & $1081.248$ & $918.049$ & $1089.400$ & $1248.619$\\
+$13$ & $1$ & EQUAL & 1 & $86.998$ & $53.557$ & $63.417$ & $111.313$\\
+$13$ & $1$ & EQUAL & 3 & $458.616$ & $256.637$ & $349.033$ & $576.899$\\
+$13$ & $1$ & EQUAL & 5 & $1089.245$ & $850.220$ & $1104.535$ & $1299.039$\\
+$13$ & $1$ & EQUAL & 7 & $1081.248$ & $918.049$ & $1089.400$ & $1248.619$\\
 \hdashline
-$12$ & $1$ & EQUAL & 10 & $1134.339$ & $863.523$ & $1061.050$ & $1297.359$\\
+$13$ & $1$ & EQUAL & 10 & $1134.339$ & $863.523$ & $1061.050$ & $1297.359$\\
 \hdashline
-$12$ & $1$ & LINEAR & 1 & $76.228$ & $45.587$ & $53.917$ & $74.353$\\
-$12$ & $1$ & LINEAR & 3 & $717.883$ & $380.890$ & $556.950$ & $878.597$\\
-$12$ & $1$ & LINEAR & 5 & $720.393$ & $503.130$ & $708.484$ & $893.517$\\
-$12$ & $1$ & LINEAR & 7 & $1043.547$ & $732.367$ & $969.217$ & $1234.040$\\
+$13$ & $1$ & LINEAR & 1 & $76.228$ & $45.587$ & $53.917$ & $74.353$\\
+$13$ & $1$ & LINEAR & 3 & $717.883$ & $380.890$ & $556.950$ & $878.597$\\
+$13$ & $1$ & LINEAR & 5 & $720.393$ & $503.130$ & $708.484$ & $893.517$\\
+$13$ & $1$ & LINEAR & 7 & $1043.547$ & $732.367$ & $969.217$ & $1234.040$\\
 \hdashline
-$12$ & $1$ & LINEAR & 10 & $1276.041$ & $1135.609$ & $1196.120$ & $1502.029$\\
+$13$ & $1$ & LINEAR & 10 & $1276.041$ & $1135.609$ & $1196.120$ & $1502.029$\\
 \hdashline
-$12$ & $1$ & SUPERLINEAR & 1 & $64.211$ & $45.687$ & $64.483$ & $78.090$\\
-$12$ & $1$ & SUPERLINEAR & 3 & $646.760$ & $429.043$ & $661.817$ & $860.470$\\
-$12$ & $1$ & SUPERLINEAR & 5 & $925.410$ & $726.360$ & $948.300$ & $1158.021$\\
-$12$ & $1$ & SUPERLINEAR & 7 & $1034.002$ & $792.567$ & $924.350$ & $1269.131$\\
+$13$ & $1$ & SUPERLINEAR & 1 & $64.211$ & $45.687$ & $64.483$ & $78.090$\\
+$13$ & $1$ & SUPERLINEAR & 3 & $646.760$ & $429.043$ & $661.817$ & $860.470$\\
+$13$ & $1$ & SUPERLINEAR & 5 & $925.410$ & $726.360$ & $948.300$ & $1158.021$\\
+$13$ & $1$ & SUPERLINEAR & 7 & $1034.002$ & $792.567$ & $924.350$ & $1269.131$\\
 \hdashline
-$12$ & $1$ & SUPERLINEAR & 10 & $1401.300$ & $1194.430$ & $1440.500$ & $1569.012$\\
+$13$ & $1$ & SUPERLINEAR & 10 & $1401.300$ & $1194.430$ & $1440.500$ & $1569.012$\\
 \hdashline
 \end{tabular}
-\caption{Population size 12, Parent size 1 - "Cross Entropy"-inspired configuration}
+\caption{Population size 13, Parent size 1 - "The Cross-entropy method"-inspired configuration}
 \end{table}
 
 \begin{table}[H]
@@ -1206,7 +1216,7 @@ $12$ & $6$ & SUPERLINEAR & 7 & $2402.888$ & $2055.329$ & $2387.700$ & $2635.870$
 $12$ & $6$ & SUPERLINEAR & 10 & $2472.293$ & $2194.049$ & $2430.780$ & $2709.040$\\
 \hdashline
 \end{tabular}
-\caption{Population size 12, Parent size 3/6 - CMA configuration}
+\caption{Population size 13, Parent size 3/6 - CMA-ES configuration}
 \end{table}
 
 
@@ -1238,7 +1248,7 @@ $22$ & $2$ & SUPERLINEAR & 7 & $1783.623$ & $1603.389$ & $1720.335$ & $1937.749$
 \hdashline
 $22$ & $2$ & SUPERLINEAR & 10 & $1859.642$ & $1636.870$ & $1915.650$ & $2208.830$\\
 \end{tabular}
-\caption{Population size 22, Parent size 2 - "Cross Entropy"-inspired configuration}
+\caption{Population size 22, Parent size 2 - "The Cross-entropy method"-inspired configuration}
 \end{table}
 
 
@@ -1270,7 +1280,7 @@ $22$ & $11$ & SUPERLINEAR & 7 & $2661.638$ & $2411.232$ & $2575.030$ & $2945.200
 $22$ & $11$ & SUPERLINEAR & 10 & $2849.220$ & $2500.231$ & $2835.450$ & $3143.121$\\
 \hdashline
 \end{tabular}
-\caption{Population size 22, Parent size 5/11 - CMA configuration}
+\caption{Population size 22, Parent size 5/11 - CMA-ES configuration}
 \end{table}
 
 
@@ -1302,7 +1312,7 @@ $50$ & $5$ & SUPERLINEAR & 7 & $2647.412$ & $2448.010$ & $2745.400$ & $3058.870$
 $50$ & $5$ & SUPERLINEAR & 10 & $2757.388$ & $2357.062$ & $2886.950$ & $3187.282$\\
 \hdashline
 \end{tabular}
-\caption{Population size 50, Parent size 5 - "Cross Entropy"-inspired configuration}
+\caption{Population size 50, Parent size 5 - "The Cross-entropy method"-inspired configuration}
 \end{table}
 
 \begin{table}[H]
@@ -1333,7 +1343,7 @@ $50$ & $25$ & SUPERLINEAR & 5 & $3211.658$ & $2889.689$ & $3305.485$ & $3694.480
 $50$ & $25$ & SUPERLINEAR & 7 & $3147.611$ & $2799.510$ & $3123.550$ & $3457.999$\\
 $50$ & $25$ & SUPERLINEAR & 10 & $3265.516$ & $2928.771$ & $3162.250$ & $3389.121$\\
 \end{tabular}
-\caption{Population size 50, Parent size 12/25 - CMA configuration}
+\caption{Population size 50, Parent size 12/25 - CMA-ES configuration}
 \end{table}
 
 
@@ -1365,7 +1375,7 @@ $100$ & $10$ & SUPERLINEAR & 5 & $3009.495$ & $2816.660$ & $2989.900$ & $3189.31
 $100$ & $10$ & SUPERLINEAR & 7 & $2935.614$ & $2540.342$ & $2887.085$ & $3232.508$\\
 $100$ & $10$ & SUPERLINEAR & 10 & $2941.535$ & $2705.290$ & $2893.580$ & $3153.510$\\
 \end{tabular}
-\caption{Population size 100, Parent size 10 - "Cross Entropy"-inspired configuration}
+\caption{Population size 100, Parent size 10 - "The Cross-entropy method"-inspired configuration}
 \end{table}
 
 
@@ -1397,7 +1407,7 @@ $100$ & $50$ & SUPERLINEAR & 5 & $3304.119$ & $3004.140$ & $3226.235$ & $3679.35
 $100$ & $50$ & SUPERLINEAR & 7 & $3072.331$ & $2682.300$ & $2964.850$ & $3403.132$\\
 $100$ & $50$ & SUPERLINEAR & 10 & $3106.917$ & $2914.349$ & $3162.250$ & $3324.970$\\
 \end{tabular}
-\caption{Population size 100, Parent size 25/50 - CMA configuration}
+\caption{Population size 100, Parent size 25/50 - CMA-ES configuration}
 \end{table}
 
 \clearpage
@@ -1415,13 +1425,13 @@ $13$ & $3$ & EQUAL & 10 & $1940.783$ & $1566.721$ & $1913.415$ & $2210.251$\\
 $13$ & $6$ & LINEAR & 10 & $2365.089$ & $2072.719$ & $2263.665$ & $2637.732$\\
 $13$ & $6$ & SUPERLINEAR & 10 & $2472.293$ & $2194.049$ & $2430.780$ & $2709.040$\\
 \end{tabular}
-\caption{Best performing configurations for population size 13}
+\caption{Best performing configurations for Population size 13}
 \end{table}
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=1]{data/cma_population_offspring/bestofeach_population/12x/PlotFile.pdf}
-\caption{Best performing configurations for population size 13}
+\caption{Best performing configurations for Population size 13}
 \end{figure}
 
 \clearpage
@@ -1439,13 +1449,13 @@ $22$ & $5$ & EQUAL & 10 & $2462.409$ & $2277.180$ & $2418.100$ & $2600.411$\\
 $22$ & $11$ & LINEAR & 7 & $2763.353$ & $2597.450$ & $2705.080$ & $3000.242$\\
 $22$ & $11$ & SUPERLINEAR & 10 & $2849.220$ & $2500.231$ & $2835.450$ & $3143.121$\\
 \end{tabular}
-\caption{Best performing configurations for population size 22}
+\caption{Best performing configurations for Population size 22}
 \end{table}
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=1]{data/cma_population_offspring/bestofeach_population/22x/PlotFile.pdf}
-\caption{Best performing configurations for population size 22}
+\caption{Best performing configurations for Population size 22}
 \end{figure}
 
 \clearpage
@@ -1463,13 +1473,13 @@ $50$ & $12$ & EQUAL & 10 & $2957.794$ & $2636.478$ & $2843.380$ & $3222.420$\\
 $50$ & $25$ & LINEAR & 10 & $3167.873$ & $2941.590$ & $3130.385$ & $3415.520$\\
 $50$ & $25$ & SUPERLINEAR & 5 & $3211.658$ & $2889.689$ & $3305.485$ & $3694.480$\\
 \end{tabular}
-\caption{Best performing configurations for population size 50}
+\caption{Best performing configurations for Population size 50}
 \end{table}
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=1]{data/cma_population_offspring/bestofeach_population/50x/PlotFile.pdf}
-\caption{Best performing configurations for population size 50}
+\caption{Best performing configurations for Population size 50}
 \end{figure}
 
 \clearpage
@@ -1487,13 +1497,13 @@ $100$ & $25$ & EQUAL & 3 & $3244.544$ & $2924.488$ & $3270.885$ & $3525.671$\\
 $100$ & $50$ & LINEAR & 7 & $3322.076$ & $3160.098$ & $3289.370$ & $3537.850$\\
 $100$ & $50$ & SUPERLINEAR & 5 & $3304.119$ & $3004.140$ & $3226.235$ & $3679.359$\\
 \end{tabular}
-\caption{Best performing configurations for population size 100}
+\caption{Best performing configurations for Population size 100}
 \end{table}
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=1]{data/cma_population_offspring/bestofeach_population/100x/PlotFile.pdf}
-\caption{Best performing configurations for population size 100}
+\caption{Best performing configurations for Population size 100}
 \end{figure}
 
 \clearpage 
@@ -1509,13 +1519,13 @@ $22$ & $11$ & SUPERLINEAR & 10 & $2849.220$ & $2500.231$ & $2835.450$ & $3143.12
 $50$ & $25$ & SUPERLINEAR & 5 & $3211.658$ & $2889.689$ & $3305.485$ & $3694.480$\\
 $100$ & $50$ & LINEAR & 7 & $3322.076$ & $3160.098$ & $3289.370$ & $3537.850$\\
 \end{tabular}
-\caption{Best performing configurations of all population sizes}
+\caption{Best performing configurations of all Population sizes}
 \end{table}
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=1]{data/cma_population_offspring/bestofall_population/PlotFile.pdf}
-\caption{Best performing configurations of all population sizes}
+\caption{Best performing configurations of all Population sizes}
 \end{figure}
 
 
@@ -1523,7 +1533,7 @@ $100$ & $50$ & LINEAR & 7 & $3322.076$ & $3160.098$ & $3289.370$ & $3537.850$\\
 \clearpage
 
 \subsection{Comparison - Initial comparison}
-Comparison between the verified Cross-entropy method and Shark (reference to shark) stock settings CMA-ES.
+Comparison between the verified Cross-entropy method and Shark \citep{shark08} default settings CMA-ES.
 
 \begin{table}[h]
 \centering
@@ -1555,16 +1565,16 @@ Sigma & 100\\
 Noise Type & Constant\\
 Noise & 4
 \end{tabular}
-\caption{Shark stock CMA-ES and the verified Cross-entropy method}
+\caption{Shark default settings CMA-ES and the verified Cross-entropy method}
 \end{table}
 
 \begin{figure}[H]
 \begin{tabular}{@{}c@{}c@{}}
-Cross-entropy method & CMA-ES\\
+CMA-ES & The Cross-entropy method\\
 \includegraphics[scale=1]{plots/cma_initial_sigma_0_5} &
 \includegraphics[scale=1]{plots/ce_ConstantNoise_l100_o10_all}
 \end{tabular}
-\caption{30 experiment with optimal settings Cross-entropy method and CMA-ES \label{fig:appendix:initialNonmean}}
+\caption{10 experiments with default settings Cross-entropy method (From papers) and CMA-ES (From Shark) \label{fig:appendix:initialNonmean}}
 \end{figure}
 
 \begin{figure}[H]
@@ -1576,6 +1586,74 @@ Cross-entropy method & CMA-ES\\
 
 \clearpage
 
+\subsection{Comparison - Optimized settings}
+Final comparison experiment using the optimized settings determined experimentally 
+in the sections \ref{optimalsettingsce} for the Cross-entropy method 
+and \ref{optimalsettingscma} for CMA-ES.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{l r}
+Optimizer & CMA-ES\\
+Evaluations/agent & 40000\\
+Learning Games & 30\\
+Population size& 50\\
+Parent size & 25\\
+Games per Agent & 5\\
+Tetris Type & Normal\\
+\hline
+Recombination Type & SUPERLINEAR\\
+Initial Sigma & 0.5\\
+Lower bound & 2.0\\
+\end{tabular}
+\quad
+\begin{tabular}{l r}
+Optimizer & Cross Entropy\\
+Evaluations/agent & 40000\\
+Learning Games & 30\\
+Population size & 200\\
+Parent size & 50\\
+Games per Agent & 1\\
+Tetris Type & Normal\\
+\hline
+Sigma & 100\\
+Noise Type & Constant\\
+Noise & 4
+\end{tabular}
+\caption{Optimized Cross-entropy method and CMA-ES configuration for comparison experiment}
+\end{table}
+
+\begin{figure}[H]
+\begin{tabular}{@{}c@{}c@{}}
+The Cross-entropy method & CMA-ES\\
+\includegraphics[scale=1]{plots/ce_tuned_all} &
+\includegraphics[scale=1]{plots/cma_tuned_all}
+\end{tabular}
+\caption{30 runs with the optimal settings for the Cross-entropy method and CMA-ES}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.8]{plots/TunedPlot.pdf}
+\caption{Mean plot of the optimal settings experiments for the Cross-Entropy method and CMA-ES. 
+The marking of $p$ indicates likelihood that the two mean graphs are from the same 
+distribution \label{fig:TunedMeanAppendix}}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{l r r r r}
+Optimizer & Mean & Q1 & Q2 & Q3\\
+\hline
+CMA-ES  & $163681.7$ & $145141.0$ & $157779.0$ & $184278.0$\\
+Cross-entropy method & $152488.7$ & $133287.9$ & $153799.5$ & $166625.0$\\
+\end{tabular}
+\caption{Results from last iteration of the curves in figure \ref{fig:TunedMeanAppendix}}
+\end{table}
+
+
+\clearpage
 
 %\input{Appendix/appendixInitialSigma}
 
