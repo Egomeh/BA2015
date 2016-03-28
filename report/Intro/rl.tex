@@ -1,7 +1,7 @@
 \subsection{Reinforcement learning \label{RL}}
 
 In the field of machine learning, the subfield of reinforcement learning
-deals with training agents to behave in an environment through
+deals with training agents in how to behave in an environment through
 trial and error. The environment typically consists of a set of states that cover all
 scenarios the agent can encounter. The agent then has a set of actions
 that it can use to make transitions between the states. 
@@ -10,7 +10,7 @@ to supervised models.
 In supervised learning, every decision is tied to a predefined value
 that defines how desirable the given action is. This way, in supervised learning,
 the agent will always at any point have very detailed feedback signals from its actions.
-In the context of actions and state transitions, an agent that learns trough
+In the context of actions and state transitions, an agent that learns through
 supervised learning will for every action taken know the absolute consequence
 immediately after committing it.
 Reinforcement learning is in many ways similar to supervised learning. 
@@ -28,9 +28,9 @@ An example of how this two learning models apply to the simple game of
 Tic Tac Toe. If supervised learning
 is applied, the playing agent will for each move in the game know
 if the move was considered desirable or not. 
-In reinforcement learning however, only feedback the agent receives
+In reinforcement learning however, the only feedback the agent receives
 is whether the games ended in a win, draw or a loose. Hence, the agent
-cannot rely on signals during the game to adjust it's strategy.\\
+cannot rely on signals during the game to adjust its strategy.\\
 \\
 Often in the case of games, the 
 time frame naturally falls into playthroughs in which the 
@@ -51,14 +51,14 @@ The goal of the agent is then to choose a policy that maps states to actions
 in a way that
 gives the highest possible cumulative reward at the end of a playthrough. 
 Rewards in states can be negative and cause a 'penalty' to the agent if it reaches
-such state. However, in the case of Tetris the agent cannot loose score,
+such state. However, in the case of Tetris the agent cannot lose score,
 and will therefore never be penalized.
 Games often have a terminal state at which the game ends, which is 
 also the case for Tetris and Tic Tac Toe. It's easy to see how the
 Tic Tac Toe cannot last forever as it has 9 spaces, and for each turn in the game,
 a space is occupied. However, the reason for why Tetris cannot play forever
 lies within the fact that there exists a sequence of pieces that will
-with certainty cause the player to loose, and if the player plays for 
+with certainty cause the player to lose, and if the player plays for 
 long enough, this sequence will eventually occur. Thus, the agent must
 attempt to acquire as much reward as possible before reaching the terminal 
 state. 
