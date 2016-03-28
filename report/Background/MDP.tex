@@ -1,17 +1,18 @@
 \subsection{Markov Decision Processes \label{MDP}}
 
 A Markov Decision Process (MDP) is a model for for the environment 
-in which an agent exists. A MDP can be used to model the actions 
+in which an agent exists. A MDP can be used to model the decision making
 of an agent in a game, in this case Tetris. 
-The decision making mechanics of the agent in MDPTetris are modelled
-after an MDP \citep{mdptetris}. The specifics of the 
+The decision making mechanics of the agent in MDPTetris are modeled
+after a MDP \citep{mdptetris}. The specifics of the 
 MDPTetris platform is covered in section \ref{sec:MDPTetris}.\\
 \\
 A MDP consists of a set of states $\MDPStates$,
 a set of actions $\MDPActions$ and a 
 \textit{state transition probability kernel} $\MDPTKernel$.
-The states in $\MDPStates$ denotes all the states of the game
-including the agent itself. That is, every scenario
+The states in $\MDPStates$ denotes all the states of the game, 
+which are all the possible scenarios that exists in the
+game. The states also include the agent itself. That is, every scenario
 the game can occur in, is within the set $\MDPStates$. 
 In Tetris, the state is simply the
 state of board in regards to which cells are
@@ -28,7 +29,7 @@ agent currently being in state $\MDPState_0$. Then $\MDPTKernel$
 might determine that taking action $\MDPAction_0$ transitions
 to $\MDPState_1$ with probability 0.2 and to state $\MDPState_2$
 with probability 0.8. \\
-The behaviour of the agent is defined by its policy $\policy$
+The behavior of the agent is defined by its policy $\policy$
 which is a function that maps states of the game into actions, formally
 defined as $\policy : \MDPStates \rightarrow \MDPActions$.
 The goal is to find the best possible policy, which in the case
@@ -49,7 +50,7 @@ as possible. In the case of Tetris, the piece dropped is stochastically
 chosen, and following the same policy during multiple games may not lead to the 
 same reward. Thus, when considering a stochastic problem the reward 
 from following a given policy is stochastic as well. This means that 
-we can only predict an expected accumulative reward.
+we can only predict an expected cumulative reward.
 Finding the best policy for Tetris is a very computationally heavy 
 task due to the enormous state space. Also, in the MDPTetris platform,
 the agent will not be aware of the entire game state exactly to its 
@@ -151,9 +152,7 @@ part of the state is the next pieces to be dropped, which is
 randomly chosen from some distribution. The reward given to the agent
 is based on how many lines it clears. If the agent appears in a state 
 where it clears lines, the reward is exactly how many lines are cleared.
-The reward is 0 in all other cases except for a state that ends the game.
-The game over state typically leads to a massively negative reward to 
-encourage the agent to play for as long as possible.\\
+The reward is 0 in all other cases.
 To get an intuition on why the exhaustive search through the Tetris 
 state space is not an option, consider how Tetris is formulated as a MDP.
 The state of the game is the configuration of the board combined with 
@@ -247,7 +246,7 @@ adjust the policy and use the simulations to reveal what adjustments
 are beneficial.
 Hence, the \textit{Monte Carlo} approach fits the case of Tetris
 very well as we cannot afford to comprehensively  model the entire 
-state space, but only need assess the performance of a policy from the 
+state space, but only need to assess the performance of a policy from the 
 starting state of the game.
 How the feedback from the simulation is used to obtain better policies
 is discussed in detail in the section 

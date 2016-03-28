@@ -68,8 +68,9 @@ in section \ref{MDP}, the controller is only aware of a reduced
 feature set $\featureset = \{\feature_0,\dots,\feature_\dimensions\}$.
 These features map a game state $\gameState$ to a real value:
 $\feature : \MDPStates \rightarrow \mathbb{R}$. The value of the 
-feature represents how significant the feature appears in the current
-state. As an example, consider the a simplified feature set 
+feature represents how significant the feature appears in the agents 
+perception of the board configuration. 
+As an example, consider the a simplified feature set 
 $\{\feature_0,\feature_1,\feature_2\}$ were the features are defined 
 as in the following table.
 
@@ -94,7 +95,7 @@ $\feature_2$ & Height of the highest occupied cell.\\
 \end{center}
 
 Figure \ref{fig:exampleBoard} shows a Tetris board in a very reduced size
-to illustrate how these feature functions perceive the board.
+to illustrate how these feature functions are used to perceive the board.
 The well is shown as a dashed line, and the holes in the board 
 are marked with $\times$.
 
