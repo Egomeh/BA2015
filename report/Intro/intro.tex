@@ -8,8 +8,8 @@ standard games plays on a board made from a grid that is
 10 cells wide and 20 cells tall. As the game progress, differently
 shaped pieces fall from the top of the board. 
 When a row on the board is fully occupied by pieces, the line
-is removed, all lines above it moved one line down and a score
-point is given to the player. If a cell above the 20 first rows is
+is removed, all lines above it moved one line down and players
+score counter is incremented by one. If a cell above the 20 first rows is
 occupied, the game ends. The task of the player is to move
 and rotate the falling pieces in a way that yields the highest 
 score before the game ends.\\
@@ -31,7 +31,7 @@ the action that transitions to the most rewarding state
 from a single piece, which is typically less than 80 states\footnote{
 Assuming 4 possible rotations and 20 columns
 in which the piece may be dropped.}.
-Using these controllers, the search space is reduced 
+Using these controllers, the intermediate search space is reduced 
 to only consider the current board, and the possible 
 places to drop the piece. 
 The game used for the benchmarking is a simplified version of Tetris,
@@ -55,7 +55,7 @@ This is however a common way of benchmarking Tetris playing agents
 \\
 When the controller decides which action to take, it will
 simulate each of the possible actions and choose the one that
-leads to the most favourable board state. To evaluate the board 
+leads to the most favorable board state. To evaluate the board 
 state, the controller uses a set of features that defines 
 various qualities of the board, and associate a weight to each 
 feature. This means that the efficiency of the controller 

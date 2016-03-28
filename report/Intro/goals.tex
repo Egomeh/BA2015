@@ -1,16 +1,18 @@
 \subsection{Goals of the thesis}
 
 Both the Cross-entropy method and the CMA-ES have been used 
-for learning Tetris with \textit{one piece controllers}, but as 
-mentioned, to our knowledge, only little effort has been put into 
+for learning Tetris with \textit{one piece controllers}, 
+%but as mentioned, 
+yet to our knowledge, only little effort has been put into 
 comparing the two algorithms. This thesis will explore
 how the two methods compare against each other under similar
-conditions. Therefore, we will use a set of features among those
+conditions. Therefore, we will use a set of features for the 
+Tetris controllers among those
 commonly used, and compare how the two optimizing algorithms 
 differ. The goal however is not to find a controller that 
 outperforms existing controllers, but only to investigate 
 how the Cross-entropy method and CMA-ES differs when learning Tetris
-with similar controllers.\\
+with similar configurations.\\
 \\
 In this thesis, we will explore how the two state-of-the-art
 optimization algorithms, Cross-entropy method and CMA-ES, differ when 
@@ -18,9 +20,10 @@ applied to the task of playing Tetris.\\
 \\
 The Shark library \citep{shark08} contains a
 working implementation of the CMA-ES 
-algorithm. As mentioned earlier, the Cross-entropy method 
+algorithm. The Cross-entropy method 
 is not present in the Shark library and thus, 
-a part of the thesis is to implement it ourselves according to 
+a part of the thesis is to implement it ourselves to resemble
+the implementation in
 the work of other researchers. To document the 
 soundness of the implemented Cross-entropy method, 
 we will replicate the experiment in \citep{thiery:09} and 
