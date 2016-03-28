@@ -3,11 +3,11 @@
 
 $\mean$, the mean of a distribution.\\
 \\
-$\varianceMatrix$, the matix used as 
-second argument to the gaussian distribution, 
+$\varianceMatrix$, the matrix used as 
+second argument to the Gaussian distribution, 
 which describes the shape of the distribution. 
-Usually, when a sample from a gaussian distribution 
-is drawn, it's written as: 
+Usually, when a sample from a Gaussian distribution 
+is drawn, it is written as: 
 $x \sim \mathcal{N} \left( \mu, \sigma^{2} \right)$, 
 however in \citep{hansen2011},
 $\mu$ and $\sigma$ are used for other 
@@ -23,9 +23,9 @@ $\fitnessFunction$, the function that estimates the performance of a search poin
 \\
 $\noise$, noise term added to the variance, specific to the Cross-entropy method.\\
 \\
-$\generation$, counter indicating the current generation/iteration.\\
+$\generation$, counter indicating the current generation.\\
 \\
-$\weight$, the weight configuration of a Tetris playing agent($\dimensions $-dimensional vector).\\
+$\weight$, the weight configuration of a Tetris playing agent ($\dimensions $-dimensional vector).\\
 \\
 $\feature$, a feature of the Tetris game state. This is a function that maps a 
 feature of the Tetris board to a real value.\\
@@ -33,7 +33,7 @@ feature of the Tetris board to a real value.\\
 $\valueFunction$, a linear combination of feature functions and weight. 
 The function used for evaluating a Tetris game state. 
 The function is composed of a linear combination of feature sets and their
-associated weights, accepts a game state, and yields a single real-value.\\
+associated weights. It accepts a game state and yields a single real-value.\\
 \\
 $\MDPState$, a state of the Tetris game board, meaning the
 configuration of pieces located the board.\\
