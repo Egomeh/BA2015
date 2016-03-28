@@ -1,7 +1,8 @@
 \section{Introduction \label{sec:intro}}
 
 This thesis will cover an experimental approach 
-in comparing two state-of-the-art stochastic optimization algorithms search methods for learning Tetris. 
+in comparing two state-of-the-art stochastic search
+algorithms in the context of learning Tetris. 
 The algorithms in consideration
 are the Cross-entropy method and 
 the Covariance Matrix Adaption Evolution Strategy (CMA-ES
@@ -16,13 +17,13 @@ learning methods fall short due to both  very large number of
 possible actions in the games and highly unpredictable mappings 
 between actions and their long-term consequences. The individual playthroughs
 in Tetris are considered episodic tasks, where some agent is placed
-in the game environment, and interacts with the game following some
+in the game environment and interacts with the game following some
 strategy that will hopefully result in a high score. 
 The agent will make decisions on how to react 
 to the game while playing, and optimizing the agent is hence a task of
 finding well performing policies for the agent to follow. Yet, as mentioned,
 deciding what makes a policy good can be very difficult problems 
-with large state spaces like games. When applying reinforcement methods to learning
+with large state spaces like in games. When applying reinforcement learning methods to learning
 the policies, conventional full graph traversal approaches typically do not suffice 
 due to infeasible computation times. We will cover how
 Tetris can be formulated in way that allows  the Cross-entropy method 
