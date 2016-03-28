@@ -294,7 +294,7 @@ Noise & $max \left( 5 - \frac{t}{10}, 0 \right)$
 \subsection{The Cross-entropy method - Population and selection size \label{appendixCrossEntropyConfig}}
 %\comment{Update plots and quantile table}\\
 We want to investigate if there exists a better configuration than the 100/10 which was also previously used by other researchers.
-The Cross-entropy method for the Tetris problem uses 10 \% Parent selection as standard. However, we will also test 25\% and 50\% Parent selection derived from configurations in CMA-ES. (This corresponds to the Parent selection for each of the three recombination types)\\
+The Cross-entropy method for the Tetris problem uses 10 \% Parent selection as standard. However, we will also test 25\% and 50\% Parent selection derived from configurations in CMA-ES. (This corresponds to the Parent selection for each of the three Recombination types)\\
 \\
 The general testing parameters are as follows
 \begin{table}[h]
@@ -323,7 +323,7 @@ Population size & Parent size\\
 \hline
 13 & 1\\
 13 & 3\\
-13 & 5\\
+13 & 6\\
 22 & 2\\
 22 & 5\\
 22 & 11\\
@@ -427,7 +427,7 @@ Noise & 4
 \caption{General setup for experiments with games per agent}
 \end{table}
 
-with the following population/Parent size and number of games played per agent
+with the following Population/Parent size and number of games played per agent
 
 
 \begin{table}[H]
