@@ -139,8 +139,8 @@ B D^{-2} B^T x \label{eq:rotscal}
 \end{align}
 
 The order of operations are the following. 
-$B^{T}$ rotates $x$ from the principal axises of $C$
-into the coordinate axises. Then $D^{-2}$ scales the point by $\frac{1}{l^2}$ where
+$B^{T}$ rotates $x$ from the principal axes of $C$
+into the coordinate axes. Then $D^{-2}$ scales the point by $\frac{1}{l^2}$ where
 $l$ is the length from the ellipsoid origin to the edge. Finally, $B$ rotates the point 
 back in the original direction. thus, (\ref{eq:rotscal}) has the same effect as
 \begin{align}
@@ -228,8 +228,8 @@ $B$ is the orthogonal basis of vectors of unit length, which means that
 $B$ is purely a rotation matrix. Due to this, $B^{T} z_{k}$ only rotates
 $z_k$ yielding the same distribution. After this, the $BD$ is multiplied,
 which applies the scale such that each vector is scaled to match the
-variance in the principal axises of the covariance matrix, and $B$ 
-will rotate each sample such that it aligns with the principal axises
+variance in the principal axes of the covariance matrix, and $B$ 
+will rotate each sample such that it aligns with the principal axes
 of $C$. After this step, $y_{k}$ now resemble the vectors that rotated and scaled
 to match shape of the covariance matrix.\\
 
@@ -296,7 +296,7 @@ $z_{k} \sim \mathcal{N}(0, I)$ & $y_{k} \sim B Dz_{k}$ & $x_{k} \sim m + \sigma 
 In the middle step, the CMA-ES algorithm differs in particular from the Cross-entropy method
 as the rotation matrix $B$ is applied and rotates the distribution shape. 
 In opposition to this, the Cross-entropy method distribution is aligned with
-the coordinate system axises.\\
+the coordinate system axes.\\
 
 \textbf{Evaluate each vector using $\fitnessFunction$ and recombine}\\
 As each vector is evaluated, they are ranked such that
@@ -515,9 +515,9 @@ equivalent factor in (\ref{eq:epathc}).\\
 \\
 A newly introduced factor is the $C^{-\frac{1}{2}}$ with the decomposition
 $C^{-\frac{1}{2}} = B D^{-1} B^{T}$ which has the following effects. $B^{T}$
-rotates the principal axises to align with the coordinate axises. 
-$D^{-1}$ scales the axises into equal size, and finally, $B$ rotates the 
-axises back into the original direction. The transform $C^{-\frac{1}{2}}$
+rotates the principal axes to align with the coordinate axes. 
+$D^{-1}$ scales the axes into equal size, and finally, $B$ rotates the 
+axes back into the original direction. The transform $C^{-\frac{1}{2}}$
 has the effect of making the length of the $p_\sigma$ independent of 
 direction as each dimension is normalized.\\
 \\
@@ -610,7 +610,7 @@ steps appear perpendicular and the step-size appears reasonable.
 \textbf{c} Uncorrelated steps
 \end{tabular}
 \end{center}
-\caption{Illustratio of evolution path cases \label{fig:evolutionPath}}
+\caption{Illustration of evolution path cases \label{fig:evolutionPath}}
 \end{figure}
 
 Eventually, the step-size is updated by the following

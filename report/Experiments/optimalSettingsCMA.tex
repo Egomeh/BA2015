@@ -25,7 +25,7 @@ generation. Built into the CMA-ES algorithm is three methods of recombination.
 \item Superlinear
 \end{itemize}
 By default, CMA-ES uses superlinear recombination. However, Tetris is a problem
-with multiple local optimums and heavy noise in its search space. This means, though a vector may be the best in its generation, it could be a nearby local optimum. Therefore, superlinear recombination may not be the optimal recombination type for the Tetris problem.\\
+with multiple local optima and heavy noise in its search space. This means, though a vector may be the best in its generation, it could be a nearby local optimum. Therefore, superlinear recombination may not be the optimal recombination type for the Tetris problem.\\
 
 The recombination types are covered in section \ref{CMAtheory} on 
 page \pageref{eq:recomType}.
@@ -153,7 +153,7 @@ as the following, where the value of the lower bound is $l$
 \end{align*}
 Here $\lambda_n$ is the lowest eigenvalue in the covariance matrix. 
 When the vectors are sampled, the samples are scaled by the matrix $D$
-containing the eignvalues of the covariance matrix. 
+containing the eigenvalues of the covariance matrix. 
 Hence, if $\sigma \lambda_n \geq l$, then the smallest scaling
 that takes place is at least $l$. As the vectors can be written 
 as
