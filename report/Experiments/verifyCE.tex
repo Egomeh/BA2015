@@ -29,14 +29,6 @@ advance the x-axis by $\populationSize \numberOfEvaluations$.\\
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale=0.8]{plots/meansPlot}
-\end{center}
-\caption{Cross-Entropy mean performance \label{fig:cemean}}
-\end{figure}
-
-\clearpage
-\begin{figure}[H]
-\begin{center}
 \includegraphics[scale=0.48]{plots/noNoisePlot}
 \end{center}
 \caption{No noise \label{fig:ceNoNoise}}
@@ -53,6 +45,14 @@ advance the x-axis by $\populationSize \numberOfEvaluations$.\\
 \end{center}
 \caption{Linear decreasing noise \label{fig:ceLinNoise}}
 \end{figure}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.8]{plots/meansPlot}
+\end{center}
+\caption{Cross-Entropy mean performance \label{fig:cemean}}
+\end{figure}
+
 
 Figure \ref{fig:ceNoNoise}, \ref{fig:ceCnstantNoise} and
 \ref{fig:ceLinNoise} shows 10 runs of each noise type. Figure
@@ -82,7 +82,7 @@ with a score between
 Most of the executions of this noise type settles around 200,000.
 However, a single execution settled at a score of only around 5,000.
 The mean performance of this noise type yielded a score of
-120,000$\pm36\%$ \\
+120,000$\pm36\%$ \\\\
 
 Based on the mean graphs and confidence interval compared to other papers, we can
 hereby verify that our implementation of the Cross-entropy method works as intended. Even though the
@@ -92,7 +92,6 @@ performance of only 90,000$\pm36\%$. Yet, the constant noise is both from our
 own experiments and described in other papers, noted to be the most reliable
 noise type for reaching high scoring controllers \citep{scherrer2009}. 
 Due to this, the constant noise is used in the 
-benchmarking against CMA-ES.\\
-
+benchmarking against CMA-ES.
 
 
