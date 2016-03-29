@@ -19,7 +19,7 @@ that we discussed  was to increase the number of evaluations based on iteration 
 A couple of ways to set 
 \begin{align}
 \numberOfEvaluations &=  \max\left( 1, k \lfloor \log_{2} \left( \generation \right)  \rfloor \right) &,\ k \in \mathbb{N}^+\\
-\numberOfEvaluations &=  \max\left( 1, \lfloor \frac{\generation}{k} \rfloor \right) &,\ k \in \mathbb{N}^+
+\numberOfEvaluations &=  \max\left( 1, \left \lfloor{ \frac{\generation}{k} }\right \rfloor \right) &,\ k \in \mathbb{N}^+
 \end{align}
 This way, the number of evaluations increase with the iteration number, and should approximately
 increase with the noise. This could help overcome the faulty ranking as noise gets higher.\\

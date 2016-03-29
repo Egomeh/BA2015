@@ -3,14 +3,28 @@
 This thesis will cover an experimental approach 
 in comparing two state-of-the-art stochastic search
 algorithms in the context of learning Tetris. 
-The algorithms in consideration
+Tetris is a classical game that has easy rules, but
+is hard to master. In the game, the player is presented with
+a board onto which differently shaped pieces fall. 
+A horizontal line on the board is removed if all space between
+the left and right edge of the board on this line are occupied with pieces.
+The game is lost once the pile of pieces reach the top of the board,
+and the task of the player is then to arrange the pieces such that
+the pile stays as small as possible. 
+The algorithms in consideration learning Tetris
 are the Cross-entropy method and 
 the Covariance Matrix Adaption Evolution Strategy (CMA-ES
 for short). The algorithms are each characterized by their
 ability to search in rough multidimensional 
 search spaces that offers little possibility 
 for analytical approaches.
-The algorithms are applied to the task of learning to play Tetris. 
+Using a game such as Tetris for benchmarking machine learning
+algorithms is quite common. The games have the appealing property 
+that they are easy to interact with, usually have simple rules and 
+goals but are very hard to play well. Games also often carry
+a very decisive feedback on performance, often as a single number that 
+indicates the score of the player. Thus games often present a system 
+that is hard to approach analytically, but can easily be interacted with.
 Most often, when machine learning
 techniques are applied to problems such as games, conventional
 learning methods fall short due to both  very large number of 

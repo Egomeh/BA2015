@@ -59,9 +59,9 @@ The pseudo code and details of the algorithm can be seen in figure
 \State{\textbf{input}}
 \State{$\fitnessFunction$ : The function that estimates the performance of a vector $\individual$}
 \State{($\mean^{(0)}$, $\varianceMatrix^{(0)}$): The initial mean and variance of the Gaussian distribution}
-\State{$\populationSize$ : The number of vectors sampled per generation/iteration}
+\State{$\populationSize$ : The number of vectors sampled per generation}
 \State{$\offspringNumber$: The number of parents selected for the new mean}
-\State{$\noise^{(\generation)}$: The noise added to each generation/iteration}
+\State{$\noise^{(\generation)}$: The noise added to each generation}
 \\
 
 \Loop
@@ -101,7 +101,7 @@ The Gaussian distribution is defined as
 \mathcal{N}(\mean^{(\generation)},\varianceMatrix^{(\generation)})
 \end{align}
 
-Where $\generation$ denotes the current iteration.\\
+Where $\generation$ denotes the current generation.\\
 
 
 \textbf{The number of vectors}\\
@@ -121,7 +121,7 @@ vectors.
 The noise factor, $\noise^{(\generation)}$, 
 is the amount of noise which 
 is applied to the variance $\varianceMatrix^{(\generation)}$ in
-iteration/generation 
+generation 
 $\generation$. In general, noise is used to prevent
 the algorithm from 
 narrowing down to an undesired local optimum, but
@@ -134,7 +134,7 @@ When using no noise, $\noise^{(\generation)}$
 is simply set to zero. When using constant noise, 
 the same value is 
 added to the variance $\varianceMatrix^{(\generation)}$ 
-in each iteration/generation. 
+in each generation. 
 When using linear decreasing noise, 
 $\noise^{(\generation)}$ is often set as
 $\noise^{(\generation)}=max(5- \generation /10,0)$.
@@ -162,7 +162,7 @@ taking the $\individual_{i}$ vectors with the highest ranking.
 \\
 
 \textbf{Updating the distribution parameters}\\
-When updating the distribution parameters for the next iteration
+When updating the distribution parameters for the next generation
 ($\mean^{(\generation + 1)}$,$\varianceMatrix^{(\generation + 1)}$), 
 the mean is updated by computing the centroid of the 
 $\offspringNumber$ highest ranking vectors. This is formally defined as
