@@ -329,8 +329,8 @@ a distinct intermediate weight.
 \begin{align}
 \text{Equal}: &\quad w_i' = 1 \label{eq:recomType}\\
 \text{Linear}: &\quad  w_i' = \offspringNumber - i\\
-\text{Superlinear:} &\quad w_i' = ln \left( \offspringNumber + \frac{1}{2} \right)
-- ln \left( i \right)
+\text{Superlinear:} &\quad w_i' = \ln \left( \offspringNumber + \frac{1}{2} \right)
+- \ln \left( i \right)
 \end{align}
 Thus applying the equal weighting, each vector contributes equally, as for the other two types
 of weightings, the 
@@ -615,7 +615,7 @@ steps appear perpendicular and the step-size appears reasonable.
 
 Eventually, the step-size is updated by the following
 \begin{align}
-\sigma^{(g+1)} &= \sigma^{(g)} \cdot exp \left( \frac{c_{\sigma}}{d_{\sigma}} \left( \frac{||p_\sigma^{(g+1)}||}{E|| \mathcal{N}(0, I) ||} - 1 \right) \right)
+\sigma^{(g+1)} &= \sigma^{(g)} \cdot \exp \left( \frac{c_{\sigma}}{d_{\sigma}} \left( \frac{||p_\sigma^{(g+1)}||}{E|| \mathcal{N}(0, I) ||} - 1 \right) \right)
 \end{align}
 Where $0 \leq \frac{c_\sigma}{d_\sigma} \leq 1$ is a damping factor for step-size changes.
 This update will scale the step-size unbiasedly in the direction 

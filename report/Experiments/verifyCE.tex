@@ -5,13 +5,13 @@ CMA-ES, but not an implementation of the Cross-entropy method, we extended the l
 with our own implementation of the algorithm.
 In order to verify the correctness of the implementation, 
 we used the same experiments as used by 
-Christophe Thiery and Bruno Scherrer \citep{thiery:09}. 
+Christophe Thiery and Bruno Scherrer \citep{scherrer2009}. 
 These experiments were used by Thiery and Scherrer to 
 verify their own Cross-entropy method implementation with various types of noise correction. 
 Therefore, we will perform the same experiments to verify our 
 own contribution to the \shark\  library, by trying to achieve the same results.\\
 \\
-The setup is mirrored from the paper \citep{thiery:09}, 
+The setup is mirrored from the paper \citep{scherrer2009}, 
 with 100 agents ($\populationSize = 100$) per iteration,
 and using the $\offspringNumber = 10$ best vectors
 for the update step. After each iteration, 
@@ -19,7 +19,7 @@ an agent with the updated mean
 plays 30 games and the mean of these scores are recorded for the
 learning curve.
 During evaluation each agent plays one game, that is $\numberOfEvaluations = 1$.
-A minor derivation from the figures present in \citep{thiery:09}, is 
+A minor derivation from the figures present in \citep{scherrer2009}, is 
 the unit along the x-axis in the learning curve plots indicates 
 the iteration number. When the experiments with the two algorithms
 with variable population sizes are compared, the x-axis in all plots
@@ -58,7 +58,7 @@ Figure \ref{fig:ceNoNoise}, \ref{fig:ceCnstantNoise} and
 \ref{fig:ceLinNoise} shows 10 runs of each noise type. Figure
 \ref{fig:cemean} shows the mean graph for each of the noise types.
 The goal of these experiments were to replicate the experiments 
-reported in \citep{thiery:09}. As the results seen from our experiments
+reported in \citep{scherrer2009}. As the results seen from our experiments
 to a high degree resemble those reported by Thiery et. al, we conclude
 that our Cross-entropy method implementation works similar to theirs.\\
 \\

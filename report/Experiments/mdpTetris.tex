@@ -188,12 +188,12 @@ CMA-ES and the Cross-entropy method, especially when determining the optimal set
 
 
 \subsubsection{Comparison of feature sets  \label{compoffeatureset}}
-As described in section \ref{prevWork}, there are different kind of featuresets which
+As described in section \ref{prevWork}, there are different kind of feature sets which
 impacts the performance of the agents. In our upcoming experiments, we are going to
 use both the Dellacherie and Bertsekas feature set. For our initial comparison experiments
 we are going to use the Bertsekas feature set, since other researchers report
 a lower score with the Bertsekas feature set compared with the Dellacherie feature set
-\citep{thiery:09}. Compared to the \citep{thiery:09} experiments, we don't want to maximize the
+\citep{scherrer2009}. Compared to the \citep{scherrer2009} experiments, we don't want to maximize the
 final score, but rather maximize the score with the lowest possible number of 
 games evaluated.\\
 It's important to note that we are not going to conduct comparison experiments with different
@@ -223,7 +223,7 @@ but is eventually outperformed.
 \includegraphics[scale=0.8]{plots/plotBertsekasCmaVsCEHardTetris}
 \end{center}
 \caption{Comparison between CMA-ES and the Cross-entropy method
-using hard Tetris and the Bertsekas featureset 
+using hard Tetris and the Bertsekas feature set 
 \label{fig:featuresetCompareBertsekas}}
 \end{figure}
 
@@ -245,7 +245,7 @@ The experiment with different feature sets indicates that the behaviour
 is not heavily dependant on the feature set.
 It appears that changing the feature set simple shifts the score,
 but does not affect the development of the graphs.\\
-Therefore, we conclude that changing the featureset does not invalidate
+Therefore, we conclude that changing the feature set does not invalidate
 the comparison of the two optimization algorithms. This means, that there's
 no particular reason for using the Dellacherie feature set instead of the 
 Bertsekas feature set, because neither CMA-ES or the Cross-entropy method seems

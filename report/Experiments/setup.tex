@@ -68,7 +68,7 @@ The noise term is adjusted in order to
 prevent the algorithm from reaching a local optimum.
 The current research shows that noise terms of $\noise^{(\generation)} = 4$ and 
 $\noise^{(\generation)} = max \left( 5 - \generation / 10 \right)$ 
-\citep{thiery:09} produces the best results.
+\citep{scherrer2009} produces the best results.
 The constant noise (such as $\noise^{(\generation)} = 4$) ensures that the algorithm
 never settles in a undesired local optimum from which it samples, and forces it to explore
 solutions that are further away from the mean. The further the 
@@ -81,7 +81,7 @@ as the algorithm progresses.\\
 For the various experiments, these 
 parameters will be tuned for the specific purpose 
 at hand. In the verification of the Cross-entropy method, the parameters are set 
-to match those reported in similar papers (\cite{thiery:09}, \cite{szita:06}).
+to match those reported in similar papers (\cite{scherrer2009}, \cite{szita:06}).
 In the comparison of the two algorithms, the parameters will be set such that 
 the Cross-entropy method operates under as 
 similar conditions as CMA-ES, to ensure an unbiased

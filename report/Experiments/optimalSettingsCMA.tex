@@ -24,8 +24,8 @@ generation. Built into the CMA-ES algorithm is three methods of recombination.
 \item Linear
 \item Superlinear
 \end{itemize}
-By default, CMA-ES uses Superlinear recombination. However, Tetris is a problem
-with multiple local optimums and heavy noise in its search space. This means, though a vector may be the best in its generation, it could be a nearby local optimum. Therefore, Superlinear recombination may not be the optimal recombination type for the Tetris problem.\\
+By default, CMA-ES uses superlinear recombination. However, Tetris is a problem
+with multiple local optimums and heavy noise in its search space. This means, though a vector may be the best in its generation, it could be a nearby local optimum. Therefore, superlinear recombination may not be the optimal recombination type for the Tetris problem.\\
 
 The recombination types are covered in section \ref{CMAtheory} on 
 page \pageref{eq:recomType}.
@@ -65,14 +65,14 @@ $100$ & $50$
 
 The experiments includes different population $N \in \{13,22,50,100\}$ and offspring sizes of either
 10\%, 25\% and 50\%. We use 10\% because of the Cross-entropy method recommended selection size, while
-we use 25\% because of CMA-ES' standard selection size for the Equal recombination type. 
-Furthermore we use 50\% because of CMA-ES' standard selection size for the Linear and Superlinear 
+we use 25\% because of CMA-ES' standard selection size for the equal recombination type. 
+Furthermore we use 50\% because of CMA-ES' standard selection size for the linear and superlinear 
 recombination type.
 
 \subsubsection{Games per agent \label{CMAGamesPerAgentSection}}
 As with the Cross-entropy method we can also adjust the number of games each agent plays per generation.
 However, because of the recombination type for CMA-ES, one game pr. agent may  be insufficient to assess the
-performance of an agent. The Linear and Superlinear recombination types will value the better agents higher.
+performance of an agent. The linear and superlinear recombination types will value the better agents higher.
 Therefore, it may occur that some better-on-average agent encounter an unlucky game, achieving a lower score than
 it's actual potential allows. \\
 Thus, evaluating each agent multiple times and using the average score for recombination may allow for a more accurate assessment.\\
@@ -228,8 +228,8 @@ when we tuned the Cross-entropy method (see section \ref{optimalsettingsce}).\\
 In regards to the parent size, they have been determined depending on the recombination type.
 We use all three different recombination types for the 10\% parent sizes to make these experiments
 correspond to the Cross-entropy method settings (see section \ref{optimalsettingsce}). However, Shark CMA-ES
-has predetermined parent sizes for each recombination types, 25\% for Equal and 50\% for both
-Linear and Superlinear \citep{shark08}. For this reason we also conduct experiments for each population
+has predetermined parent sizes for each recombination types, 25\% for equal and 50\% for both
+linear and superlinear \citep{shark08}. For this reason we also conduct experiments for each population
 size to represent these Shark CMA-ES preferred settings.
 Furthermore we also test different number of games per agent as for the reason presented in section \ref{CMAGamesPerAgentSection}.\\\\
 These experiments will be conducted using Hard Tetris (see section \ref{HardTetris}), in order
@@ -267,13 +267,13 @@ $100$ & $50$ & LINEAR & 7 & $3322.076$ & $3160.098$ & $3289.370$ & $3537.850$\\
 \end{figure}
 
 From table \ref{CMABestConfigTable} and figure \ref{CMABestConfigPlot}, we can see that
-Linear recombination type, with population size 100, parent size 50 and 7 games per agent
-(black) yields a better score compared to Superlinear with population size 50, parent size 25 and 5 games per agent (green).
+linear recombination type, with population size 100, parent size 50 and 7 games per agent
+(black) yields a better score compared to superlinear with population size 50, parent size 25 and 5 games per agent (green).
 However, green has a much faster convergence than black and almost reaches the same score.\\
 
 \textbf{Analysis and discussion}\\
 Because the green converges almost twice as fast as black, but reaches practically the same
-score, we opt to use the Superlinear with population size 50, parent size 25 and 5 games per agent for the comparison experiments.\\
+score, we opt to use the superlinear with population size 50, parent size 25 and 5 games per agent for the comparison experiments.\\
 Therefore, we will be using this configuration for the tuned comparison experiments.
 
 
