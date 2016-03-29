@@ -1,3 +1,4 @@
+\clearpage
 \subsection{CMA-ES \label{CMAtheory}}
 
 This section is based on the tutorial written by Nikolaus Hansen
@@ -47,7 +48,7 @@ $C$ is the covariance matrix usually set to $C=I$}
 \State{Increment generation counter}
 \State{Sample new generation}
 \State{Evaluate each vector using $\fitnessFunction$ and recombine}
-\State{Covariance matrix adaption}
+\State{Covariance matrix adaptation}
 \State{Step-size control}
 \EndLoop
 \end{algorithmic}
@@ -55,6 +56,7 @@ $C$ is the covariance matrix usually set to $C=I$}
 \caption{The pseudo code for the CMA-ES \label{fig:cmaCode}}
 \end{figure}
 
+\clearpage
 \subsubsection{Input}
 
 \textbf{The objective function} \\
@@ -166,6 +168,7 @@ on the ellipse.
 \caption{Illustration of $\{x \in R^{\dimensions} | x^{T} C^{-1} x \stackrel{?}{=} 1\}$ \label{fig:ellipse}}
 \end{figure}
 
+\clearpage
 \subsubsection{Loop}
 
 \textbf{Increment iteration counter}
@@ -358,7 +361,7 @@ In the tutorial by N. Hansen, it's mentioned that $\meff \approx
 measure of how much of the parent mass is used, and serves as a normalization 
 factor in later equations.\\
 
-\textbf{Covariance matrix adaption}
+\textbf{Covariance matrix adaptation}
 
 The idea of using the covariance matrix is to make new samples which
 resemble the covariance of previous well-performing vectors, as opposed 

@@ -7,13 +7,7 @@ games per agent. Furthermore we can adjust the initial step-size, lower bound an
 The following sections will go into detail how these parameters affect the performance of CMA-ES
 algorithm. In the last section we will perform experiments to determine the optimal settings.
 
-%In previous sections we focused on tuning Cross Entropy for the Tetris 
-%problem. Whereas we deliberately chose not to tune CMA due to its implementation 
-%into the Shark library \citep{shark08}. However, experiments with the "out of 
-%the box" CMA from Shark, with default settings vs the tuned Cross Entropy
-%resulted in CMA reaching convergence very fast but not achieving the same point
-%limit as Cross Entropy.\\
-
+\newpage
 \subsubsection{Recombination type}
 CMA-ES has a unique formula for calculating the updated mean,
 called the 'Recombination type'. Where the recombination type
@@ -271,6 +265,7 @@ linear recombination type, with population size 100, parent size 50 and 7 games 
 (black) yields a better score compared to superlinear with population size 50, parent size 25 and 5 games per agent (green).
 However, green has a much faster convergence than black and almost reaches the same score.\\
 
+\newpage
 \textbf{Analysis and discussion}\\
 Because the green converges almost twice as fast as black, but reaches practically the same
 score, we opt to use the superlinear with population size 50, parent size 25 and 5 games per agent for the comparison experiments.\\
