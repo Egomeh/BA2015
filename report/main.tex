@@ -44,7 +44,25 @@ fast as the CMA-ES.
 \end{abstract}
 
 \begin{abstract}
-Dansk Version
+Vi foretager en sammenligning af Cross-entropy metoden 
+og Covariance Matrix Adaptation Evolution Strategy (CMA-ES) 
+til at træne en agent med kunstig intilligens til at spille 
+det klassiske computerspil Tetris. 
+Adskillige forskere har tidligere undersøgt metoder til at skabe 
+kunstig intilligens til Tetris-agenter men disse har primært fokuseret på at 
+forbedre modellen for den kunstige intilligens frem 
+for den metode som agenten trænes på. 
+En typisk tilgang er at konstruere en konfigurerbar kontrolmekanisme som kan
+interagere med en Tetris simulator,
+og derefter anvende en optimeringsalgoritme fra Machine learning feltet til at indstille 
+parametrene til den bedst mulige konfiguration. 
+Ved hjælp af den udbrædte MDPTetris \citep{mdptetris} platform, 
+sammenlignes Cross entropy metoden imod CMA-ES under de samme forhold 
+for at nå en emperisk forståelse af hvordan de to metoder hver i sær
+yder når de er anvendt til at lære at spille Tetris. 
+Resultatet af vores undersøgelser viser at Cross entropy metoden er det foretrukne valg. 
+Tilsyneladende opnår de to metoder sammenlignlige resultater men Cross entropy metoden 
+opnår disse næsten dobbelt så hurtigt som CMA-ES.
 \end{abstract}
 
 \input{symbolSection}
