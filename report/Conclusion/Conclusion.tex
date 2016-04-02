@@ -1,8 +1,8 @@
 \section{Conclusion}
 
-To reach our goal of gathering empirical evidence if either the Cross-entropy method
-and the CMA-ES differ in performance when applied to Tetris, we implemented the Cross-entropy method in Shark and tested it against the pre-implemented version of CMA-ES
-already in the Shark library. Our implementation of the Cross-entropy 
+To reach our goal of gathering empirical evidence to determine if either the Cross-entropy method
+or the CMA-ES differ in performance when applied to Tetris, we implemented the Cross-entropy method into the Shark library and tested it against the pre-implemented version of the CMA-ES
+algorithm. Our implementation of the Cross-entropy 
 method has been accepted by the Shark development team, and is now part of the code base.
 The widely used MDPTetris software was used to emulate the
 Tetris games, and was used as the optimization problem for the optimization algorithms to solve.
@@ -13,7 +13,7 @@ researchers works of the same algorithm applied to the same problem, namely Tetr
 \\
 After confirming that the Cross-entropy method does produce similar results as 
 what we've seen in our reference papers, we conducted an initial comparison between the
-Cross-entropy method and CMA-ES. The initial experiments used the default settings for CMA-ES
+Cross-entropy method and the CMA-ES. The initial experiments used the default settings for CMA-ES
 from Shark,
 and the settings for the Cross-entropy method were the ones claimed to be optimal by other 
 researchers. This initial experiment, revealed quite the opposite of our expectations 
@@ -32,7 +32,7 @@ Cross-entropy method. However, the final score of the two algorithms lies so clo
 we cannot firmly differentiate between the two, and hence, cannot conclude that either of the
 algorithms are better than the other. However, the results from our experiments 
 suggests that the Cross-entropy method reaches its 
-highest scores much faster than CMA-ES under optimal settings, thus in conclusion
+highest scores much faster than the CMA-ES under optimal settings, thus in conclusion
 when learning Tetris using the MDPTetris platforms' approach the Cross-entropy method 
-stands out as the preferable choice for learning Tetris.
+stands out as the preferable choice.
 
