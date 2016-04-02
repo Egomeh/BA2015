@@ -115,11 +115,11 @@ Initial Sigma & 1
         \includegraphics[width=\textwidth]{data/complexity/cma_normal/PlotFile.pdf}
     \end{subfigure}
     \begin{subfigure}[b]{0.49\textwidth}
-    	\caption{Cross Entropy - Hard Tetris}
+    	\caption{Cross-entropy method - Hard Tetris}
         \includegraphics[width=\textwidth]{data/complexity/ce_hard/PlotFile.pdf}
     \end{subfigure}
     \begin{subfigure}[b]{0.49\textwidth}
-    	\caption{Cross Entropy - Normal Tetris}
+    	\caption{Cross-entropy method - Normal Tetris}
         \includegraphics[width=\textwidth]{data/complexity/ce_normal/PlotFile.pdf}
     \end{subfigure}
     
@@ -348,9 +348,9 @@ Quantile table of of the results with 10 \%, 25 \% and 50 \% Parent size
 \begin{tabular}{r r | r r r r}
 Population & Parent size & mean & Q1 & Q2 & Q3\\
 \hline
-13 & $10\%$  & 1585,3     & 93,0      & 113,5        & 220,7\\
-13 & $25\%$  & 30.496,9   & 15.222,1  & 20.264,2     & 39.019,8\\
-13 & $50\%$  & 39.824,2   & 26.457,0  & 33.663,4     & 49.743,7\\
+13 & $10\%$  & 348,5      & 17,7      & 54,5         & 131,2\\
+13 & $25\%$  & 26.942.7   & 6.647,1   & 11.343,9     & 34.104,2\\
+13 & $50\%$  & 37.311,9   & 25.830,6  & 39.089,1     & 48.742,7\\
 22 & $10\%$  & 35.841,6   & 20.391,9  & 42.045,5     & 48.464,6\\
 22 & $25\%$  & 80.884,9   & 56.042,5  & 71.900,2     & 78.653,4\\
 22 & $50\%$  & 52.887,4   & 23.531,9  & 42.161,0     & 83.144,1\\
@@ -371,6 +371,9 @@ Population & Parent size & mean & Q1 & Q2 & Q3\\
 The plots from the configuration experiment of the Cross-entropy method.
 All plots depicts the numbers of games played along the x-axis
 and the mean score of the centroid agent along the y-axis.
+
+\clearpage
+\comment{PLOTS not correct here}
 
 \begin{tabular}{@{}l@{}l@{}}
 \includegraphics[scale=1]{plots/ce_ConstantNoise_l10_o1_all} &
