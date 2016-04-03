@@ -17,22 +17,17 @@
 %\maketitle
 
 \thispagestyle{empty}
-\tableofcontents
-\thispagestyle{empty}
-
-\clearpage
-
-\thispagestyle{empty}
 \begin{abstract}
 We conduct a comparison between 
 the Cross-entropy method and the Covariance Matrix Adaptation
 Evolution Strategy (CMA-ES) for training 
 an agent to play the classic video game Tetris. Many researchers have 
-previously explored methods for constructing artificial Tetris
-agents, but mostly focusing on outperforming competing controllers.
-A common approach is to construct a configurable controller
-and apply some optimization algorithm from the field of machine learning
-to set the parameters for the best possible configuration. Using the 
+previously explored the underlying model for artificial intelligence 
+in Tetris, yet, have not in depth investigated the difference 
+between methods for training these.
+A common approach is to construct a configurable controller that 
+can interact with a Tetris emulator. To evolve the controller's performance, 
+some search algorithm from the field of machine learning is applied to adjust the configuration and hence the strategy of the controller. Using the 
 commonly used MDPTetris \citep{mdptetris} platform, the Cross-entropy
 method is benchmarked against the CMA-ES algorithm under the same
 conditions to reach an empirical understanding of how the two algorithms
@@ -40,30 +35,45 @@ compare when applied to Tetris. The results from our experiments
 suggests that the Cross-entropy method is the preferable choice
 between the two. They appear to reach similar scores, 
 but the Cross-entropy method converges almost twice as
-fast as the CMA-ES.
-\end{abstract}
+fast as the CMA-ES.\\
+\\
 
-\begin{abstract}
-Vi foretager en sammenligning af Cross-entropy metoden 
+\begin{center}
+\textbf{Resumé}
+\end{center}
+\ \ \  Vi foretager en sammenligning af Cross-entropy metoden 
 og Covariance Matrix Adaptation Evolution Strategy (CMA-ES) 
-til at træne en agent med kunstig intilligens til at spille 
+til at træne en kunstig intelligens til at spille 
 det klassiske computerspil Tetris. 
 Adskillige forskere har tidligere undersøgt metoder til at skabe 
-kunstig intilligens til Tetris-agenter men disse har primært fokuseret på at 
-forbedre modellen for den kunstige intilligens frem 
-for den metode som agenten trænes på. 
-En typisk tilgang er at konstruere en konfigurerbar kontrolmekanisme som kan
-interagere med en Tetris simulator,
-og derefter anvende en optimeringsalgoritme fra Machine learning feltet til at indstille 
+kunstig intelligens til at spille Tetris, men disse har primært fokuseret på at 
+forbedre modellen for den kunstige intelligens fremfor metoden som den trænes på. 
+En typisk tilgang er at konstruere en konfigurerbar styreenhed som
+interagerer med en Tetris simulator.
+Derefter anvendes en optimeringsalgoritme fra machine learning feltet for at indstille 
 parametrene til den bedst mulige konfiguration. 
-Ved hjælp af den udbrædte MDPTetris \citep{mdptetris} platform, 
-sammenlignes Cross entropy metoden imod CMA-ES under de samme forhold 
-for at nå en emperisk forståelse af hvordan de to metoder hver i sær
-yder når de er anvendt til at lære at spille Tetris. 
-Resultatet af vores undersøgelser viser at Cross entropy metoden er det foretrukne valg. 
-Tilsyneladende opnår de to metoder sammenlignlige resultater men Cross entropy metoden 
-opnår disse næsten dobbelt så hurtigt som CMA-ES.
+Ved hjælp af den udbredte MDPTetris \citep{mdptetris} platform, 
+sammenlignes Cross-entropy metoden med CMA-ES under de samme forhold 
+for at nå en empirisk forståelse af, hvordan de to metoder hver især
+præsterer, når de anvendes i læring af at spille Tetris. 
+Resultatet af vores undersøgelser viser at Cross-entropy metoden er det foretrukne valg. 
+Tilsyneladende opnår de to metoder lignende pointtal men Cross-entropy metoden 
+konvergerer næsten dobbelt så hurtigt som CMA-ES.
+
 \end{abstract}
+
+
+
+
+\clearpage
+
+\thispagestyle{empty}
+\tableofcontents
+\thispagestyle{empty}
+
+\clearpage
+
+
 
 \input{symbolSection}
 
