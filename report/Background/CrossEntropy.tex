@@ -184,7 +184,7 @@ the $(k,k)$'th entry in the variance matrix is
 updated. 
 This is formally defined as
 \begin{align}
-{\varianceMatrix^{(\generation +1)}}_{k,k}:=\frac{\sum_{i}^{\offspringNumber}
-({\individual_{i}}_k - \mean^{(\generation +1)})^2}{\offspringNumber} + 
+{\varianceMatrix_{k,k}^{(\generation +1)}}:=\frac{\sum_{i}^{\offspringNumber}
+\left({\individual_{i_k}} - \mean_{k}^{(\generation +1)}\right)^2}{\offspringNumber} + 
 \noise^{(\generation + 1)}\ ,\ \ k \in \{ 1,\dots,\dimensions \}
 \end{align}
